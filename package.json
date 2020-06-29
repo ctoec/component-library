@@ -7,6 +7,11 @@
     "type": "git",
     "url": "git+https://github.com/ctoec/component-library.git"
   },
+  "scripts": {
+    "test": "react-scripts test",
+    "storybook": "start-storybook -p 9009 -s public",
+    "build-storybook": "build-storybook -s public"
+  },
   "keywords": [
     "component",
     "library",
@@ -17,39 +22,42 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "@types/classnames": "^2.2.10",
     "@types/jest": "^24.0.0",
+    "@types/lodash": "^4.14.157",
     "@types/node": "^12.0.0",
-    "@types/react": "^16.9.0",
-    "@types/react-dom": "^16.9.0",
+    "@types/react": "^16.9.41",
+    "@types/react-dates": "^17.1.12",
+    "@types/react-dom": "^16.9.8",
+    "@types/react-router-dom": "^5.1.5",
+    "@types/storybook__react": "^5.2.1",
+    "lodash": "^4.17.15",
     "react": "^16.13.1",
+    "react-dates": "^21.8.0",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "typescript": "~3.7.2",
     "uswds": "^2.7.1"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "storybook": "start-storybook -p 9009 -s public",
-    "build-storybook": "build-storybook -s public"
-  },
   "eslintConfig": {
     "extends": "react-app"
   },
   "devDependencies": {
+    "@storybook/addon-a11y": "^5.3.19",
     "@storybook/addon-actions": "^5.3.19",
     "@storybook/addon-knobs": "^5.3.19",
     "@storybook/addon-links": "^5.3.19",
     "@storybook/addons": "^5.3.19",
     "@storybook/preset-create-react-app": "^3.1.2",
     "@storybook/react": "^5.3.19",
+    "classnames": "^2.2.6",
     "css-loader": "^3.6.0",
     "node-sass": "^4.14.1",
+    "require-context.macro": "^1.2.2",
     "sass-loader": "^8.0.2",
     "sass-resources-loader": "^2.0.3",
+    "storybook-react-router": "^1.0.8",
     "style-loader": "^1.2.1"
   }
 }
