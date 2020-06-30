@@ -1,3 +1,5 @@
 .npm
 .npmrc
 .config/
+
+.node_modules
