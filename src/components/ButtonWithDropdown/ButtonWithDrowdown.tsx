@@ -27,6 +27,7 @@ const ButtonWithDrowdown: React.FC<ButtonWithDrowdownProps> = ({
 	className,
 	optionsProps,
 }) => {
+	// TODO: aria popup role kind of stuff probably
 	const { ref, isComponentVisible, setIsComponentVisible } = useHideOnLostFocus<HTMLDivElement>();
 
 	return (
