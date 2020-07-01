@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useReducer, PropsWithChildren } from 'react';
-import { FormReducer, formReducer, updateData, InputField } from '../../utils/forms/form';
+import { FormReducer, formReducer, updateData, InputField } from './utilities';
 import { HTMLChoiceElement } from '..';
 
 export type GenericFormContextType<TData, TFieldData, TAdditionalInformation> = {
@@ -7,8 +7,8 @@ export type GenericFormContextType<TData, TFieldData, TAdditionalInformation> = 
 	updateData: (
 		_: (__: any, ___: any) => TFieldData
 	) => <T extends {}>(
-		event: React.ChangeEvent<HTMLChoiceElement | HTMLTextAreaElement> | InputField<T>
-	) => void;
+			event: React.ChangeEvent<HTMLChoiceElement | HTMLTextAreaElement> | InputField<T>
+		) => void;
 	additionalInformation: TAdditionalInformation;
 };
 
@@ -17,14 +17,14 @@ export type FormContextType = {
 	updateData: (
 		_: (__: any, ___: any) => any
 	) => <T extends {}>(
-		event: React.ChangeEvent<HTMLChoiceElement | HTMLTextAreaElement> | InputField<T>
-	) => void;
+			event: React.ChangeEvent<HTMLChoiceElement | HTMLTextAreaElement> | InputField<T>
+		) => void;
 	additionalInformation: any;
 };
 
 export const FormContext = createContext<FormContextType>({
 	data: undefined,
-	updateData: () => () => {},
+	updateData: () => () => { },
 	additionalInformation: {},
 });
 
