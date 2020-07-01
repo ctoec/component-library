@@ -1,6 +1,6 @@
 import React from 'react';
 import { FormContext, GenericFormContextType } from './Form';
-import useContext from '../../utils/useContext';
+import { _useContext as useContext } from './utilities';
 
 type FormInsetComponentProps<TData> = {
 	containingData: TData;

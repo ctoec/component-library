@@ -70,7 +70,7 @@ export class ColumnHeader extends React.Component<ColumnHeaderProps> {
 								{ 'oec-table__sort-controls--descending': sorted && sortOrder === 'descending' }
 							)}
 						>
-							<DownArrowCircle title="Sort" />
+							<DownArrowCircle />
 						</div>
 					</button>
 				)}

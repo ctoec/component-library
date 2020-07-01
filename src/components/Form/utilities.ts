@@ -3,7 +3,7 @@
 import produce from 'immer';
 import { set } from 'lodash';
 import { HTMLChoiceElement } from '../../components';
-import { Dispatch } from 'react';
+import { Dispatch, useContext, Context } from 'react';
 
 /**
  * Helper type for including name field on non-native select/input
@@ -127,4 +127,13 @@ export function toFormString(val: any): string[] | undefined {
 		return ['' + val];
 	}
 	return [];
+}
+
+/**
+ * Utility for allowing generics in type parameter on context types
+ * @param context
+ */
+export function _useContext<S>(context: Context<any>) {
+	const processedContext = useContext(context);
+	return processedContext as S;
 }

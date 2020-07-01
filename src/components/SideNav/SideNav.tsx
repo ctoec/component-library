@@ -13,6 +13,7 @@ export const SideNav = ({ items, externalActiveItemIndex, noActiveItemContent }:
 
 	useEffect(() => {
 		setActiveItemIndex(
+			// eslint-disable-next-line eqeqeq
 			externalActiveItemIndex != undefined && !isNaN(externalActiveItemIndex)
 				? externalActiveItemIndex
 				: undefined
