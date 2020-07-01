@@ -10,7 +10,8 @@
 	"scripts": {
 		"test": "react-scripts test",
 		"storybook": "start-storybook -p 9009 -s public",
-		"build-storybook": "build-storybook -s public"
+		"build-storybook": "build-storybook -s public",
+		"build": "rm -rf dist && NODE_ENV=production babel src/components --out-dir dist --copy-files --ignore __tests__,spec.js,test.js,__snapshots__"
 	},
 	"keywords": [
 		"component",
