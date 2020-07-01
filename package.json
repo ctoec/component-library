@@ -12,7 +12,7 @@
 		"test": "react-scripts test",
 		"storybook": "start-storybook -p 9009 -s public",
 		"build-storybook": "build-storybook -s public",
-		"build": "rm -rf dist && NODE_ENV=production babel src/components --out-dir dist --copy-files --ignore __tests__,spec.js,test.js,__snapshots__"
+		"build": "rm -rf dist && NODE_ENV=production babel src --extensions .ts,.tsx --out-dir dist --copy-files --ignore **/*.stories.tsx,**/*.test.tsx"
 	},
 	"keywords": [
 		"component",
@@ -22,6 +22,7 @@
 	],
 	"babel": {
 		"presets": [
+			"@babel/preset-typescript",
 			"@babel/preset-react"
 		]
 	},
