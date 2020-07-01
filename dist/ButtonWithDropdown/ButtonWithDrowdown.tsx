@@ -3,16 +3,6 @@ import cx from 'classnames';
 import { Link } from 'react-router-dom';
 import useHideOnLostFocus from '../../hooks/useHideOnLostFocus';
 import { Button, ButtonProps } from '../Button/Button';
-import styles from './ButtonWithDropdown.module.scss';
-
-const {
-	container,
-	'container--button-unstyled': buttonUnstyled,
-	hidden,
-	option,
-	dropdown,
-	'with-dropdown': withDropdown,
-} = styles;
 
 type ButtonOptionProps = {
 	text: string;
@@ -37,16 +27,17 @@ const ButtonWithDrowdown: React.FC<ButtonWithDrowdownProps> = ({
 	className,
 	optionsProps,
 }) => {
+	// TODO: aria popup role kind of stuff probably
 	const { ref, isComponentVisible, setIsComponentVisible } = useHideOnLostFocus<HTMLDivElement>();
 
 	return (
 		<div
 			id={id}
 			ref={ref}
-			className={cx(container, { [buttonUnstyled]: appearance === 'unstyled' }, className)}
+			className={cx('button-container', { 'container--button-unstyled': appearance === 'unstyled' }, className)}
 		>
 			<Button
-				className={withDropdown}
+				className="with-dropdown"
 				appearance={appearance}
 				text={
 					<>
@@ -60,14 +51,14 @@ const ButtonWithDrowdown: React.FC<ButtonWithDrowdownProps> = ({
 			<div
 				className={cx(
 					optionsProps && optionsProps.className,
-					{ [hidden]: !isComponentVisible },
-					dropdown
+					{ hidden: !isComponentVisible },
+					'dropdown'
 				)}
 			>
 				{options.map((_option) => (
 					<Link
 						key={_option.value}
-						className={option}
+						className="option"
 						onClick={() => setIsComponentVisible((hide) => !hide)}
 						to={_option.value}
 					>

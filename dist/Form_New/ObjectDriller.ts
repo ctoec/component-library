@@ -6,8 +6,8 @@ type TObjectDrillerInternal<T> = {
 
 export type TObjectDriller<T> = (T extends (infer R)[]
 	? {
-			find(func: (_: R) => boolean): TObjectDriller<NonNullable<R>>;
-	  }
+		find(func: (_: R) => boolean): TObjectDriller<NonNullable<R>>;
+	}
 	: {}) &
 	TObjectDrillerInternal<T>;
 
@@ -32,6 +32,7 @@ export class ObjectDriller<T> {
 	 * @param field A field on the data object
 	 */
 	at<K extends keyof T>(field: K): TObjectDriller<NonNullable<T[K]>> {
+		// eslint-disable-next-line eqeqeq
 		if (this.value == undefined) {
 			// checks null or undefined
 			if (typeof field === 'number') {
@@ -51,6 +52,7 @@ export class ObjectDriller<T> {
 
 	find<K extends keyof T>(func: (_: T[K]) => boolean): TObjectDriller<NonNullable<T[K]>> {
 		// Instantiate the array if it does not exist
+		// eslint-disable-next-line eqeqeq
 		if (this.arrayValue == undefined) {
 			// checks null or undefined
 			this.arrayValue = ([] as unknown) as T[K][];
