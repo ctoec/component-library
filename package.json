@@ -1,6 +1,6 @@
 {
 	"name": "@ctoec/component-library",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"description": "React Component Library for OEC branded web applications",
 	"homepage": "https://github.com/ctoec/component-library#readme",
 	"repository": {
@@ -8,14 +8,14 @@
 		"url": "git+https://github.com/ctoec/component-library.git"
 	},
 	"main": "dist/components/index.ts",
-	"types": "dist/index.d.ts",
+	"types": "dist/components/index.d.ts",
 	"scripts": {
 		"test": "react-scripts test",
 		"storybook": "start-storybook -p 9009 -s public",
 		"build-storybook": "build-storybook -s public",
-		"build": "npm run build:types && npm run build:js",
+		"build": "rm -rf dist && NODE_ENV=production npm run build:types && npm run build:js",
 		"build:types": "tsc --emitDeclarationOnly",
-		"build:js": "rm -rf dist && NODE_ENV=production && babel src --out-dir dist --extensions \".ts,.tsx\" --ignore **/*.stories.tsx,**/*.test.tsx,.storybook --copy-files --source-maps inline"
+		"build:js": "babel src --out-dir dist --extensions \".ts,.tsx\" --source-maps inline  --copy-files --ignore \"**/*.stories.tsx,**/*.test.tsx,.storybook\""
 	},
 	"keywords": [
 		"component",
@@ -25,8 +25,13 @@
 	],
 	"babel": {
 		"presets": [
+			"@babel/env",
 			"@babel/preset-typescript",
 			"@babel/preset-react"
+		],
+		"plugins": [
+			"@babel/proposal-class-properties",
+			"@babel/proposal-object-rest-spread"
 		]
 	},
 	"browserslist": {
