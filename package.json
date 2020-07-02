@@ -7,12 +7,15 @@
 		"type": "git",
 		"url": "git+https://github.com/ctoec/component-library.git"
 	},
-	"main": "dist/index.ts",
+	"main": "dist/components/index.ts",
+	"types": "dist/index.d.ts",
 	"scripts": {
 		"test": "react-scripts test",
 		"storybook": "start-storybook -p 9009 -s public",
 		"build-storybook": "build-storybook -s public",
-		"build": "rm -rf dist && NODE_ENV=production babel src --extensions .ts,.tsx --out-dir dist --ignore **/*.stories.tsx,**/*.test.tsx,.storybook --copy-files"
+		"build": "npm run build:types && npm run build:js",
+		"build:types": "tsc --emitDeclarationOnly",
+		"build:js": "rm -rf dist && NODE_ENV=production && babel src --out-dir dist --extensions \".ts,.tsx\" --ignore **/*.stories.tsx,**/*.test.tsx,.storybook --copy-files --source-maps inline"
 	},
 	"keywords": [
 		"component",
