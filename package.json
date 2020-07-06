@@ -7,7 +7,7 @@
 		"type": "git",
 		"url": "git+https://github.com/ctoec/component-library.git"
 	},
-	"main": "dist/components/index.ts",
+	"main": "dist/components/index.js",
 	"types": "dist/components/index.d.ts",
 	"scripts": {
 		"test": "react-scripts test",
