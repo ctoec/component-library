@@ -1,0 +1,30 @@
+version: '3.2'
+
+services:
+  development:
+    image: node:12
+    stdin_open: true
+    volumes:
+      - .:/home/node/app:cached
+    working_dir: /home/node/app
+    ports:
+      - 9009:9009
+    entrypoint:
+      - yarn
+      - storybook
+    environment:
+      HOST: '0.0.0.0'
+  example:
+    image: node:12
+    stdin_open: true
+    volumes:
+      - ./example:/home/node/app:cached
+    working_dir: /home/node/app
+    ports:
+      - 5000:3000
+    entrypoint:
+      - yarn
+      - start
+    environment:
+      HOST: '0.0.0.0'
+      SASS_PATH: 'node_modules:src'

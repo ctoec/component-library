@@ -1,9 +1,9 @@
 import React from 'react';
-import { ReactComponent as Error } from '../../../node_modules/uswds/dist/img/alerts/error.svg';
-import { ReactComponent as Info } from '../../../node_modules/uswds/dist/img/alerts/info.svg';
-import { ReactComponent as Success } from '../../../node_modules/uswds/dist/img/alerts/success.svg';
+import { ReactComponent as Error } from 'uswds/dist/img/alerts/error.svg';
+import { ReactComponent as Info } from 'uswds/dist/img/alerts/info.svg';
+import { ReactComponent as Success } from 'uswds/dist/img/alerts/success.svg';
 import { ReactComponent as AngleArrowDown } from '../../assets/images/angleArrowDown.svg';
-import { ReactComponent as ArrowDown } from '../../../node_modules/uswds/dist/img/arrow-down.svg';
+import { ReactComponent as ArrowDown } from 'uswds/dist/img/arrow-down.svg';
 import cx from 'classnames';
 
 export type Icon = 'attentionNeeded' | 'complete' | 'incomplete' | 'arrowDown' | 'angleArrowDown';
