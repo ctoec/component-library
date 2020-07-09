@@ -4,7 +4,6 @@ import { DayPickerSingleDateController } from 'react-dates';
 import { FieldSet, TextInput, FormStatusProps, Button } from '..';
 import { ReactComponent as CalendarIcon } from '../../assets/images/calendar.svg';
 
-
 type DateInputProps = {
 	onChange: (newDate: Date | undefined) => void;
 	id: string;
@@ -30,6 +29,8 @@ export const DateInput: React.FC<DateInputProps> = ({
 		className: 'oec-date-input__input',
 		disabled: disabled,
 		inline: true,
+		// Pass an undefined message to make text input show correct outline color, but not a redundant message
+		status: status ? { ...status, message: undefined } : undefined,
 	};
 
 	const [calendarOpen, setCalendarOpen] = useState<boolean>(false);
@@ -65,74 +66,76 @@ export const DateInput: React.FC<DateInputProps> = ({
 			status={status}
 			optional={optional}
 		>
-			<TextInput
-				value={month}
-				onChange={event => {
-					const newMonth = event.target.value;
-					setMonth(newMonth)
-				}}
-				id={`${id}-month`}
-				label="Month"
-				inputProps={{ maxLength: 2, min: 1, max: 12, type: 'number' }}
-				{...commonDateInputProps}
-			/>
-			<TextInput
-				value={day}
-				onChange={event => {
-					const newDay = event.target.value;
-					setDay(newDay)
-				}}
-				id={`${id}-day`}
-				label="Day"
-				inputProps={{ maxLength: 2, min: 1, max: 31, type: 'number' }}
-				{...commonDateInputProps}
-			/>
-			<TextInput
-				value={year}
-				onChange={event => {
-					const newYear = event.target.value;
-					setYear(newYear)
-				}}
-				id={`${id}-year`}
-				label="Year"
-				inputProps={{ minLength: 0, maxLength: 4, min: 1900, max: 2200, type: 'number' }}
-				{...commonDateInputProps}
-			/>
-			<div className="oec-calendar-dropdown oec-date-input__calendar-dropdown">
-				<Button
-					text={<CalendarIcon className="oec-calendar-toggle__icon" />}
-					onClick={() => {
-						setCalendarOpen(!calendarOpen);
+			<div className="">
+				<TextInput
+					value={month}
+					onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+						const newMonth = event.target.value;
+						setMonth(newMonth)
 					}}
-					title={`${calendarOpen ? 'close' : 'open'} calendar`}
-					className="oec-calendar-toggle oec-calendar-dropdown__toggle"
+					id={`${id}-month`}
+					label="Month"
+					inputProps={{ maxLength: 2, min: 1, max: 12, type: 'number' }}
+					{...commonDateInputProps}
 				/>
-				<div
-					className="oec-calendar-dropdown__calendar position-absolute z-top"
-					hidden={!calendarOpen}
-				>
-					<DayPickerSingleDateController
-						// Key forces re-render, which helps deal with bugs in this library-- see scss file
-						key={JSON.stringify({ date, calendarOpen })}
-						date={moment(date)}
-						onDateChange={(newDate) => {
-							setDate(newDate?.toDate())
+				<TextInput
+					value={day}
+					onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+						const newDay = event.target.value;
+						setDay(newDay)
+					}}
+					id={`${id}-day`}
+					label="Day"
+					inputProps={{ maxLength: 2, min: 1, max: 31, type: 'number' }}
+					{...commonDateInputProps}
+				/>
+				<TextInput
+					value={year}
+					onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+						const newYear = event.target.value;
+						setYear(newYear)
+					}}
+					id={`${id}-year`}
+					label="Year"
+					inputProps={{ minLength: 0, maxLength: 4, min: 1900, max: 2200, type: 'number' }}
+					{...commonDateInputProps}
+				/>
+				<div className="oec-calendar-dropdown oec-date-input__calendar-dropdown">
+					<Button
+						text={<CalendarIcon className="oec-calendar-toggle__icon" />}
+						onClick={() => {
+							setCalendarOpen(!calendarOpen);
 						}}
-						focused={calendarOpen}
-						// Annoyingly this does not do anything for keyboard users
-						onFocusChange={(f) => setCalendarOpen(f.focused || false)}
-						onBlur={() => setCalendarOpen(false)}
-						// TODO: IMPLEMENT ON TAB ONCE TYPES FOR THIS LIBRARY ARE UPDATED :/
-						// onTab={() => {}}
-						onOutsideClick={(e) => {
-							const clickOnCalendarOrButton = e.target.closest(`#${id} .oec-calendar-dropdown`);
-							// If a user clicks the button again, the button will handle closing it, and this would fire first and cause problems
-							if (!clickOnCalendarOrButton) {
-								setCalendarOpen(false);
-							}
-						}}
-						initialVisibleMonth={() => moment(date) || moment()}
+						title={`${calendarOpen ? 'close' : 'open'} calendar`}
+						className="oec-calendar-toggle oec-calendar-dropdown__toggle"
 					/>
+					<div
+						className="oec-calendar-dropdown__calendar position-absolute z-top"
+						hidden={!calendarOpen}
+					>
+						<DayPickerSingleDateController
+							// Key forces re-render, which helps deal with bugs in this library-- see scss file
+							key={JSON.stringify({ date, calendarOpen })}
+							date={moment(date)}
+							onDateChange={(newDate) => {
+								setDate(newDate?.toDate())
+							}}
+							focused={calendarOpen}
+							// Annoyingly this does not do anything for keyboard users
+							onFocusChange={(f) => setCalendarOpen(f.focused || false)}
+							onBlur={() => setCalendarOpen(false)}
+							// TODO: IMPLEMENT ON TAB ONCE TYPES FOR THIS LIBRARY ARE UPDATED :/
+							// onTab={() => {}}
+							onOutsideClick={(e) => {
+								const clickOnCalendarOrButton = e.target.closest(`#${id} .oec-calendar-dropdown`);
+								// If a user clicks the button again, the button will handle closing it, and this would fire first and cause problems
+								if (!clickOnCalendarOrButton) {
+									setCalendarOpen(false);
+								}
+							}}
+							initialVisibleMonth={() => moment(date) || moment()}
+						/>
+					</div>
 				</div>
 			</div>
 		</FieldSet>

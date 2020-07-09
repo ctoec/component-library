@@ -112,7 +112,8 @@ export function TextInput({
 			);
 			break;
 		case 'inline-input':
-			// TODO: maybe this is unnecessary because of TextWithIcon component
+			// For when the input needs additional context in addition to its label
+			// i.e. "[input box] number of children"
 			inputElement = (
 				<>
 					{beforeContent && (
