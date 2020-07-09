@@ -11,7 +11,10 @@ type InternalTextInputProps = {
 	name?: string;
 	label: string | JSX.Element;
 	id: string;
-	defaultValue?: string;
+	// If you want a controlled component, pass it the value
+	// Otherwise just pass a defaultValue or nothing
+	value?: string | number;
+	defaultValue?: string | number;
 	disabled?: boolean;
 	status?: FormStatusProps;
 	small?: boolean;
@@ -53,6 +56,7 @@ export function TextInput({
 	onChange: inputOnChange,
 	onBlur,
 	id,
+	value,
 	defaultValue,
 	disabled,
 	status,
@@ -70,17 +74,22 @@ export function TextInput({
 	| TextInlineInputHTMLInputElementProps
 	| TextInputHTMLTextAreaElementProps) {
 
-	const [value, updateValue] = useState(defaultValue);
+	const [_value, updateValue] = useState(defaultValue);
 	const onChange = (e: any) => {
 		inputOnChange(e)
-		updateValue(e.target.value)
+		if (!value) {
+			// If there isn't a value, then this component should manage its own value
+			updateValue(e.target.value)
+		}
 	}
 
 	const commonProps = {
 		id,
 		name,
 		disabled,
-		value,
+		defaultValue,
+		// Use the value if one is passed in; otherwise this manages its own state
+		value: value || _value,
 		'aria-describedby': status ? status.id : undefined,
 		'aria-invalid': status && status.type === 'error',
 		// Using aria-required to avoid default Chrome behavior
@@ -103,6 +112,7 @@ export function TextInput({
 			);
 			break;
 		case 'inline-input':
+			// TODO: maybe this is unnecessary because of TextWithIcon component
 			inputElement = (
 				<>
 					{beforeContent && (

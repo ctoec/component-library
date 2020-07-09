@@ -34,22 +34,23 @@ export const DateInput: React.FC<DateInputProps> = ({
 
 	const [calendarOpen, setCalendarOpen] = useState<boolean>(false);
 	const [date, setDate] = useState<Date | undefined>(inputDate);
-	const [month, setMonth] = useState(moment(date).format('MM'))
-	const [day, setDay] = useState(moment(date).format('DD'))
-	const [year, setYear] = useState(moment(date).format('YYYY'))
+	const [month, setMonth] = useState<number | string>(moment(date).format('MM'))
+	const [day, setDay] = useState<number | string>(moment(date).format('DD'))
+	const [year, setYear] = useState<number | string>(moment(date).format('YYYY'))
 
 	useEffect(() => {
-		const newDate = moment(`${month}/${day}/${year}`);
+		const newDate = moment(`${year}-${month}-${day}`, 'YYYY-MM-DD');
 		if (newDate.isValid()) {
-			setDate(moment(`${month}/${day}/${year}`).toDate());
+			setDate(newDate.toDate());
 		}
 	}, [month, day, year])
 
 	useEffect(() => {
 		const newMoment = moment(date)
-		setMonth(newMoment.format('MM'))
-		setDay(newMoment.format('DD'))
-		setYear(newMoment.format('YYYY'))
+		// Coerce each of these to be an integer to ditch extra 0s added by moment formatting
+		setMonth(+newMoment.format('MM'))
+		setDay(+newMoment.format('DD'))
+		setYear(+newMoment.format('YYYY'))
 		onChange(date)
 	}, [date, onChange])
 
@@ -65,7 +66,7 @@ export const DateInput: React.FC<DateInputProps> = ({
 			optional={optional}
 		>
 			<TextInput
-				defaultValue={month}
+				value={month}
 				onChange={event => {
 					const newMonth = event.target.value;
 					setMonth(newMonth)
@@ -76,7 +77,7 @@ export const DateInput: React.FC<DateInputProps> = ({
 				{...commonDateInputProps}
 			/>
 			<TextInput
-				defaultValue={day}
+				value={day}
 				onChange={event => {
 					const newDay = event.target.value;
 					setDay(newDay)
@@ -87,7 +88,7 @@ export const DateInput: React.FC<DateInputProps> = ({
 				{...commonDateInputProps}
 			/>
 			<TextInput
-				defaultValue={year}
+				value={year}
 				onChange={event => {
 					const newYear = event.target.value;
 					setYear(newYear)
