@@ -35,8 +35,8 @@ export const DateInput: React.FC<DateInputProps> = ({
 
 	const [calendarOpen, setCalendarOpen] = useState<boolean>(false);
 	const [date, setDate] = useState<Date | undefined>(inputDate);
-	const [month, setMonth] = useState<number | string>(moment(date).format('MM'))
-	const [day, setDay] = useState<number | string>(moment(date).format('DD'))
+	const [month, setMonth] = useState<number | string>(moment(date).format('M'))
+	const [day, setDay] = useState<number | string>(moment(date).format('D'))
 	const [year, setYear] = useState<number | string>(moment(date).format('YYYY'))
 
 	useEffect(() => {
@@ -48,10 +48,9 @@ export const DateInput: React.FC<DateInputProps> = ({
 
 	useEffect(() => {
 		const newMoment = moment(date)
-		// Coerce each of these to be an integer to ditch extra 0s added by moment formatting
-		setMonth(+newMoment.format('MM'))
-		setDay(+newMoment.format('DD'))
-		setYear(+newMoment.format('YYYY'))
+		setMonth(newMoment.format('M'))
+		setDay(newMoment.format('D'))
+		setYear(newMoment.format('YYYY'))
 		onChange(date)
 	}, [date, onChange])
 
@@ -60,7 +59,7 @@ export const DateInput: React.FC<DateInputProps> = ({
 			legend={label}
 			id={id}
 			showLegend={true}
-			hint={`For example: ${moment().format('MM DD YYYY')}`}
+			hint={`For example: ${moment().format('M D YYYY')}`}
 			className={className}
 			status={status}
 			optional={optional}
