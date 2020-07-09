@@ -39,7 +39,10 @@ export const DateInput: React.FC<DateInputProps> = ({
 	const [year, setYear] = useState(moment(date).format('YYYY'))
 
 	useEffect(() => {
-		setDate(moment(`${month}/${day}/${year}`).toDate())
+		const newDate = moment(`${month}/${day}/${year}`);
+		if (newDate.isValid()) {
+			setDate(moment(`${month}/${day}/${year}`).toDate());
+		}
 	}, [month, day, year])
 
 	useEffect(() => {
@@ -49,9 +52,6 @@ export const DateInput: React.FC<DateInputProps> = ({
 		setYear(newMoment.format('YYYY'))
 		onChange(date)
 	}, [date, onChange])
-
-	console.log(date, month, day, year)
-
 
 	return (
 		<FieldSet
@@ -94,7 +94,7 @@ export const DateInput: React.FC<DateInputProps> = ({
 				}}
 				id={`${id}-year`}
 				label="Year"
-				inputProps={{ minLength: 4, maxLength: 4, min: 1900, max: 2200, type: 'number' }}
+				inputProps={{ minLength: 0, maxLength: 4, min: 1900, max: 2200, type: 'number' }}
 				{...commonDateInputProps}
 			/>
 			<div className="oec-calendar-dropdown oec-date-input__calendar-dropdown">

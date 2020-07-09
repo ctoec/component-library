@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import cx from 'classnames';
 import { FormStatus, FormStatusProps } from '..';
 
@@ -50,7 +50,7 @@ export function TextInput({
 	type = 'input',
 	name,
 	label,
-	onChange,
+	onChange: inputOnChange,
 	onBlur,
 	id,
 	defaultValue,
@@ -69,12 +69,18 @@ export function TextInput({
 	| TextInputHTMLInputElementProps
 	| TextInlineInputHTMLInputElementProps
 	| TextInputHTMLTextAreaElementProps) {
+
+	const [value, updateValue] = useState(defaultValue);
+	const onChange = (e: any) => {
+		inputOnChange(e)
+		updateValue(e.target.value)
+	}
+
 	const commonProps = {
 		id,
 		name,
 		disabled,
-		defaultValue,
-		value: defaultValue,
+		value,
 		'aria-describedby': status ? status.id : undefined,
 		'aria-invalid': status && status.type === 'error',
 		// Using aria-required to avoid default Chrome behavior
