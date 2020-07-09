@@ -1,63 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import moment, { Moment } from 'moment';
-import { FieldSet, TextInput, FormStatusProps } from '..';
+import moment from 'moment';
+import { DayPickerSingleDateController } from 'react-dates';
+import { FieldSet, TextInput, FormStatusProps, Button } from '..';
+import { ReactComponent as CalendarIcon } from '../../assets/images/calendar.svg';
 
-
-type inputDetailType = {
-	props: {
-		label: string;
-		inputProps: any;
-	};
-	parseMoment: (inputMoment: Moment | null) => string | undefined;
-	checkValidity: (value: any) => boolean;
-	errorMessage: string;
-};
-
-type inputDetailsType = { [key: string]: inputDetailType };
 
 type DateInputProps = {
-	date: Date;
-	onChange: (newDate: Date) => void;
+	onChange: (newDate: Date | undefined) => void;
 	id: string;
 	label: string;
+	date?: Date;
 	disabled?: boolean;
 	optional?: boolean;
 	status?: FormStatusProps;
 	className?: string;
-};
-
-const inputDetails: inputDetailsType = {
-	// month: {
-	//   props: {
-	//     inputProps: { maxLength: 2, type: 'number', min: 1, max: 12 },
-	//     label: 'Month',
-	//   },
-	//   parseMoment: (inputMoment: Moment | null) =>
-	//     inputMoment ? inputMoment.format('MM') : undefined,
-	//   checkValidity: value => +value > 0 && +value < 13,
-	//   errorMessage: 'Invalid month',
-	// },
-	day: {
-		props: {
-			label: 'Day',
-			inputProps: { maxLength: 2, type: 'number', min: 1, max: 31 },
-		},
-		parseMoment: (inputMoment: Moment | null) =>
-			inputMoment ? inputMoment.format('DD') : undefined,
-		checkValidity: value => +value < 32 && +value > 0,
-		errorMessage: 'Invalid day',
-	},
-	year: {
-		props: {
-			label: 'Year',
-			inputProps: { maxLength: 4, type: 'number', min: 1990, max: 2100 },
-		},
-		parseMoment: (inputMoment: Moment | null) =>
-			inputMoment ? inputMoment.format('YYYY') : undefined,
-		checkValidity: value =>
-			value.length === 2 || (value.length === 4 && +value > 1989 && +value < 2101),
-		errorMessage: 'Invalid year',
-	},
 };
 
 export const DateInput: React.FC<DateInputProps> = ({
@@ -76,7 +32,8 @@ export const DateInput: React.FC<DateInputProps> = ({
 		inline: true,
 	};
 
-	const [date, setDate] = useState(inputDate);
+	const [calendarOpen, setCalendarOpen] = useState<boolean>(false);
+	const [date, setDate] = useState<Date | undefined>(inputDate);
 	const [month, setMonth] = useState(moment(date).format('MM'))
 	const [day, setDay] = useState(moment(date).format('DD'))
 	const [year, setYear] = useState(moment(date).format('YYYY'))
@@ -86,8 +43,14 @@ export const DateInput: React.FC<DateInputProps> = ({
 	}, [month, day, year])
 
 	useEffect(() => {
+		const newMoment = moment(date)
+		setMonth(newMoment.format('MM'))
+		setDay(newMoment.format('DD'))
+		setYear(newMoment.format('YYYY'))
 		onChange(date)
 	}, [date, onChange])
+
+	console.log(date, month, day, year)
 
 
 	return (
@@ -113,7 +76,7 @@ export const DateInput: React.FC<DateInputProps> = ({
 				{...commonDateInputProps}
 			/>
 			<TextInput
-				// TODO DEFAULT VALUE
+				defaultValue={day}
 				onChange={event => {
 					const newDay = event.target.value;
 					setDay(newDay)
@@ -124,7 +87,7 @@ export const DateInput: React.FC<DateInputProps> = ({
 				{...commonDateInputProps}
 			/>
 			<TextInput
-				// TODO DEFAULT VALUE
+				defaultValue={year}
 				onChange={event => {
 					const newYear = event.target.value;
 					setYear(newYear)
@@ -134,7 +97,43 @@ export const DateInput: React.FC<DateInputProps> = ({
 				inputProps={{ minLength: 4, maxLength: 4, min: 1900, max: 2200, type: 'number' }}
 				{...commonDateInputProps}
 			/>
-			{/* TODO: AIRBNB DROPDOWN HERE */}
+			<div className="oec-calendar-dropdown oec-date-input__calendar-dropdown">
+				<Button
+					text={<CalendarIcon className="oec-calendar-toggle__icon" />}
+					onClick={() => {
+						setCalendarOpen(!calendarOpen);
+					}}
+					title={`${calendarOpen ? 'close' : 'open'} calendar`}
+					className="oec-calendar-toggle oec-calendar-dropdown__toggle"
+				/>
+				<div
+					className="oec-calendar-dropdown__calendar position-absolute z-top"
+					hidden={!calendarOpen}
+				>
+					<DayPickerSingleDateController
+						// Key forces re-render, which helps deal with bugs in this library-- see scss file
+						key={JSON.stringify({ date, calendarOpen })}
+						date={moment(date)}
+						onDateChange={(newDate) => {
+							setDate(newDate?.toDate())
+						}}
+						focused={calendarOpen}
+						// Annoyingly this does not do anything for keyboard users
+						onFocusChange={(f) => setCalendarOpen(f.focused || false)}
+						onBlur={() => setCalendarOpen(false)}
+						// TODO: IMPLEMENT ON TAB ONCE TYPES FOR THIS LIBRARY ARE UPDATED :/
+						// onTab={() => {}}
+						onOutsideClick={(e) => {
+							const clickOnCalendarOrButton = e.target.closest(`#${id} .oec-calendar-dropdown`);
+							// If a user clicks the button again, the button will handle closing it, and this would fire first and cause problems
+							if (!clickOnCalendarOrButton) {
+								setCalendarOpen(false);
+							}
+						}}
+						initialVisibleMonth={() => moment(date) || moment()}
+					/>
+				</div>
+			</div>
 		</FieldSet>
 	)
 };

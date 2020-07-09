@@ -74,6 +74,7 @@ export function TextInput({
 		name,
 		disabled,
 		defaultValue,
+		value: defaultValue,
 		'aria-describedby': status ? status.id : undefined,
 		'aria-invalid': status && status.type === 'error',
 		// Using aria-required to avoid default Chrome behavior
@@ -156,7 +157,7 @@ export function TextInput({
 		<div
 			className={`${className || ''} usa-form-group${
 				status ? ` usa-form-group--${status.type}` : ''
-			}`}
+				}`}
 		>
 			<label
 				className={cx('usa-label', status ? `usa-label--${status.type}` : '', {
