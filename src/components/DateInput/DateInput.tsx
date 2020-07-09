@@ -26,7 +26,7 @@ export const DateInput: React.FC<DateInputProps> = ({
 	className,
 }) => {
 	const commonDateInputProps = {
-		className: 'oec-date-input__input',
+		className: 'oec-date-input__input margin-right-1',
 		disabled: disabled,
 		inline: true,
 		// Pass an undefined message to make text input show correct outline color, but not a redundant message
@@ -61,12 +61,11 @@ export const DateInput: React.FC<DateInputProps> = ({
 			id={id}
 			showLegend={true}
 			hint={`For example: ${moment().format('MM DD YYYY')}`}
-			childrenGroupClassName="flex-row flex-align-end usa-memorable-date"
 			className={className}
 			status={status}
 			optional={optional}
 		>
-			<div className="">
+			<div className="flex-row flex-align-end usa-memorable-date">
 				<TextInput
 					value={month}
 					onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
