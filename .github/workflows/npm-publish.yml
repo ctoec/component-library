@@ -19,11 +19,9 @@ jobs:
           node-version: 12
       - run: npm ci
       - run: npm test
-      - run: |
-        npm install -g yarn
-        yarn install
-        yarn build
-
+      - run: npm install -g yarn
+      - run: yarn install
+      - run: yarn build
   publish-npm:
     needs: build
     runs-on: ubuntu-latest
