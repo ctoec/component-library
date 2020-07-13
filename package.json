@@ -1,6 +1,6 @@
 {
 	"name": "@ctoec/component-library",
-	"version": "0.0.7",
+	"version": "0.0.8",
 	"description": "React Component Library for OEC branded web applications",
 	"homepage": "https://github.com/ctoec/component-library#readme",
 	"repository": {
@@ -13,7 +13,7 @@
 		"test": "react-scripts test",
 		"storybook": "start-storybook -p 9009 -s public",
 		"build-storybook": "build-storybook -s public",
-		"build": "rm -rf dist && NODE_ENV=production npm run build:types && npm run build:js",
+		"build": "rm -rf dist && NODE_ENV=production yarn run build:types && yarn run build:js",
 		"build:types": "tsc --emitDeclarationOnly",
 		"build:js": "babel src --out-dir dist --extensions \".ts,.tsx\" --source-maps inline  --copy-files --ignore \"**/*.stories.tsx,**/*.test.tsx,.storybook\""
 	},
