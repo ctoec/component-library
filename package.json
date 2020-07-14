@@ -1,6 +1,6 @@
 {
 	"name": "@ctoec/component-library",
-	"version": "0.0.9",
+	"version": "0.0.12",
 	"description": "React Component Library for OEC branded web applications",
 	"homepage": "https://github.com/ctoec/component-library#readme",
 	"repository": {
@@ -89,7 +89,7 @@
 		"storybook-react-router": "^1.0.8",
 		"style-loader": "^1.2.1"
 	},
-	"engines": { 
-		"node": "^12" 
+	"engines": {
+		"node": "^12"
 	}
 }
