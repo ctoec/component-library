@@ -88,5 +88,8 @@
 		"sass-resources-loader": "^2.0.3",
 		"storybook-react-router": "^1.0.8",
 		"style-loader": "^1.2.1"
+	},
+	"engines": { 
+		"node": "^12" 
 	}
 }
