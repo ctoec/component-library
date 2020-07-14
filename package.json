@@ -14,7 +14,7 @@
 		"storybook": "start-storybook -p 9009 -s public",
 		"build-storybook": "build-storybook -s public",
 		"build": "rm -rf dist && NODE_ENV=production yarn run build:types && yarn run build:js",
-		"build:types": "tsc --emitDeclarationOnly",
+		"build:types": "tsc -p tsconfig.build.json",
 		"build:js": "babel src --out-dir dist --extensions \".ts,.tsx\" --source-maps inline  --copy-files --ignore \"**/*.stories.tsx,**/*.test.tsx,.storybook\""
 	},
 	"keywords": [
