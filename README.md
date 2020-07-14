@@ -11,6 +11,10 @@ This library provides a uniform collection of reusable UX components, static ass
     yarn install --frozen-lockfile
     ```
 
+## Deploy
+
+### GitHub Pages
+If you're looking for some live examples of the types of components maintained here, we have this Storybook deployed to GitHub Pages.
 
 ## To use this library
 
