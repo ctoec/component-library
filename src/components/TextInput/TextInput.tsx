@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import cx from 'classnames';
 import { FormStatus, FormStatusProps } from '..';
 
@@ -11,7 +11,10 @@ type InternalTextInputProps = {
 	name?: string;
 	label: string | JSX.Element;
 	id: string;
-	defaultValue?: string;
+	// If you want a controlled component, pass it the value
+	// Otherwise just pass a defaultValue or nothing
+	value?: string | number;
+	defaultValue?: string | number;
 	disabled?: boolean;
 	status?: FormStatusProps;
 	small?: boolean;
@@ -50,9 +53,10 @@ export function TextInput({
 	type = 'input',
 	name,
 	label,
-	onChange,
+	onChange: inputOnChange,
 	onBlur,
 	id,
+	value,
 	defaultValue,
 	disabled,
 	status,
@@ -69,11 +73,23 @@ export function TextInput({
 	| TextInputHTMLInputElementProps
 	| TextInlineInputHTMLInputElementProps
 	| TextInputHTMLTextAreaElementProps) {
+
+	const [_value, updateValue] = useState(defaultValue);
+	const onChange = (e: any) => {
+		inputOnChange(e)
+		if (!value) {
+			// If there isn't a value, then this component should manage its own value
+			updateValue(e.target.value)
+		}
+	}
+
 	const commonProps = {
 		id,
 		name,
 		disabled,
 		defaultValue,
+		// Use the value if one is passed in; otherwise this manages its own state
+		value: value || _value,
 		'aria-describedby': status ? status.id : undefined,
 		'aria-invalid': status && status.type === 'error',
 		// Using aria-required to avoid default Chrome behavior
@@ -96,6 +112,8 @@ export function TextInput({
 			);
 			break;
 		case 'inline-input':
+			// For when the input needs additional context in addition to its label
+			// i.e. "[input box] number of children"
 			inputElement = (
 				<>
 					{beforeContent && (
@@ -156,7 +174,7 @@ export function TextInput({
 		<div
 			className={`${className || ''} usa-form-group${
 				status ? ` usa-form-group--${status.type}` : ''
-			}`}
+				}`}
 		>
 			<label
 				className={cx('usa-label', status ? `usa-label--${status.type}` : '', {
