@@ -1,6 +1,6 @@
 import React from 'react';
 
-type SuspendProps = {
+export type SuspendProps = {
 	waitFor: boolean;
 	fallback: React.ReactElement | null;
 };

@@ -4,7 +4,7 @@ import { DayPickerSingleDateController } from 'react-dates';
 import { FieldSet, TextInput, FormStatusProps, Button } from '..';
 import { ReactComponent as CalendarIcon } from '../../assets/images/calendar.svg';
 
-type DateInputProps = {
+export type DateInputProps = {
 	onChange: (newDate: Date | undefined) => void;
 	id: string;
 	label: string;

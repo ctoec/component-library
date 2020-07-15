@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import cx from 'classnames';
 import { useHistory } from 'react-router';
 
-type TabItemProps = {
+export type TabItemProps = {
 	id: string;
 	text: JSX.Element | string;
 	content: JSX.Element;
 };
 
-type TabNavProps = {
+export type TabNavProps = {
 	items: TabItemProps[];
 	activeId?: string;
 };

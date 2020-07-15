@@ -3,7 +3,7 @@ import cx from 'classnames';
 import { SortOrder, TableSort } from './Table';
 import { ReactComponent as DownArrowCircle } from '../../assets/images/arrowRight.svg';
 
-type ColumnHeaderProps = {
+export type ColumnHeaderProps = {
 	name: string | JSX.Element;
 	sortable: boolean;
 	sorted: boolean;
@@ -78,5 +78,3 @@ export class ColumnHeader extends React.Component<ColumnHeaderProps> {
 		);
 	}
 }
-
-export default ColumnHeader;

@@ -9,7 +9,7 @@ export type LegendItem = {
 	hidden?: boolean | null;
 };
 
-type LegendProps = {
+export type LegendProps = {
 	items: LegendItem[];
 	vertical?: boolean;
 };
@@ -44,7 +44,7 @@ export function Legend({ items, vertical = false }: LegendProps) {
 						<div
 							className={`oec-legend-item__text width-fit-content display-inline margin-left-1 ${
 								item.textClass || ''
-							}`}
+								}`}
 						>
 							{item.text}
 						</div>

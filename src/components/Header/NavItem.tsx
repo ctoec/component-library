@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-type NavItemType = 'primary' | 'secondary';
+export type NavItemType = 'primary' | 'secondary';
 
 export type NavItemProps = {
 	title: string;
@@ -11,7 +11,7 @@ export type NavItemProps = {
 	attentionNeeded?: boolean;
 };
 
-export default function NavItem({
+export function NavItem({
 	title,
 	path,
 	type,

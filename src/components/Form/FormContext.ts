@@ -13,7 +13,7 @@ import { TObjectDriller } from './ObjectDriller';
  *
  * @property updateData Immutable update function for form data
  */
-type FormContextType = {
+export type FormContextType = {
 	data: any;
 	dataDriller: any;
 	updateData: React.Dispatch<React.SetStateAction<any>>;
@@ -41,11 +41,10 @@ export function useGenericContext<S>(context: Context<any>) {
 	return processedContext as GenericFormContextType<S>;
 }
 
-const FormContext = createContext<FormContextType>({
+export const FormContext = createContext<FormContextType>({
 	data: undefined,
 	dataDriller: undefined,
-	updateData: (_) => {},
+	updateData: (_) => { },
 });
 
 export const { Provider: FormProvider, Consumer: FormConsumer } = FormContext;
-export default FormContext;

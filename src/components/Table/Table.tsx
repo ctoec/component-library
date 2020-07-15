@@ -1,6 +1,6 @@
 import React from 'react';
-import ColumnHeader from './ColumnHeader';
-import Row from './Row';
+import { ColumnHeader } from './ColumnHeader';
+import { Row } from './Row';
 import cx from 'classnames';
 
 export type Column<T> = {
@@ -99,5 +99,3 @@ export class Table<T> extends React.Component<TableProps<T>, TableSort> {
 		);
 	}
 }
-
-export default Table;

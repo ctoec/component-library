@@ -2,7 +2,7 @@ import React from 'react';
 import { matchPath } from 'react-router';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { default as NavItem, NavItemProps } from './NavItem';
+import { NavItem, NavItemProps } from './NavItem';
 import closeIcon from 'uswds/src/img/close.svg';
 import cx from 'classnames';
 
@@ -134,8 +134,8 @@ class HeaderWithoutRouter extends React.Component<HeaderProps & RouteComponentPr
 									{userFirstName ? (
 										<span>Hi, {userFirstName}.</span>
 									) : (
-										<Link to={loginPath}>Sign in</Link>
-									)}
+											<Link to={loginPath}>Sign in</Link>
+										)}
 								</div>
 							</div>
 						</div>
