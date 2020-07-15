@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-	default as Step,
+	Step,
 	ExternalStepStatus,
 	InternalStepProps,
 	InternalStepStatus,
@@ -66,5 +66,3 @@ export function StepList<T>({
 		</ol>
 	);
 }
-
-export default StepList;

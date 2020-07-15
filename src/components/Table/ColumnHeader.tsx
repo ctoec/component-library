@@ -78,5 +78,3 @@ export class ColumnHeader extends React.Component<ColumnHeaderProps> {
 		);
 	}
 }
-
-export default ColumnHeader;

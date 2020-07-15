@@ -11,7 +11,7 @@ export type NavItemProps = {
 	attentionNeeded?: boolean;
 };
 
-export default function NavItem({
+export function NavItem({
 	title,
 	path,
 	type,

@@ -86,5 +86,3 @@ export function Step<T>({
 		</li>
 	);
 }
-
-export default Step;

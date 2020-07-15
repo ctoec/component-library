@@ -69,5 +69,3 @@ export const ButtonWithDropdown: React.FC<ButtonWithDropdownProps> = ({
 		</div>
 	);
 };
-
-export default ButtonWithDropdown;

@@ -58,5 +58,3 @@ const Form = <T extends any>({
 		</FormProvider>
 	);
 };
-
-export default Form;

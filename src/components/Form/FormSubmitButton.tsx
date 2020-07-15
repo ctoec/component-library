@@ -11,8 +11,6 @@ type FormSumbitButtonProps = {
  * to be used with generic Form
  * @param props
  */
-const FormSubmitButton: React.FC<FormSumbitButtonProps> = ({ text, ...props }) => {
+export const FormSubmitButton: React.FC<FormSumbitButtonProps> = ({ text, ...props }) => {
 	return <Button {...props} text={text} onClick="submit" />;
 };
-
-export default FormSubmitButton;

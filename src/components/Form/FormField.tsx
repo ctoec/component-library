@@ -10,26 +10,26 @@ type FormFieldProps<TData, TComponentProps, TFieldData> =
 	// subtype contrainst error. See https://stackoverflow.com/a/59363875. As a
 	// work around, we can conditionally check that TComponentProps extends {}.
 	TComponentProps extends {}
-		? {
-				defaultValue?: TFieldData;
-				getValue: (_: TObjectDriller<NonNullable<TData>>) => TObjectDriller<TFieldData>;
-				preprocessForDisplay?: (
-					_: TFieldData | undefined
-				) => TFieldData | JSX.Element | string | undefined;
-				parseOnChangeEvent: (
-					event: React.ChangeEvent<any>,
-					data: TObjectDriller<TData>
-				) => TFieldData;
-				status?: FormStatusFunc<TData>;
-				inputComponent: React.FC<TComponentProps>;
-		  } & /* Include TComponentProps props, except onChange, defaultValue, and status */ Pick<
-				TComponentProps,
-				Exclude<keyof TComponentProps, 'onChange' | 'defaultValue' | 'status'>
-		  > /*
+	? {
+		defaultValue?: TFieldData;
+		getValue: (_: TObjectDriller<NonNullable<TData>>) => TObjectDriller<TFieldData>;
+		preprocessForDisplay?: (
+			_: TFieldData | undefined
+		) => TFieldData | JSX.Element | string | undefined;
+		parseOnChangeEvent: (
+			event: React.ChangeEvent<any>,
+			data: TObjectDriller<TData>
+		) => TFieldData;
+		status?: FormStatusFunc<TData>;
+		inputComponent: React.FC<TComponentProps>;
+	} & /* Include TComponentProps props, except onChange, defaultValue, and status */ Pick<
+		TComponentProps,
+		Exclude<keyof TComponentProps, 'onChange' | 'defaultValue' | 'status'>
+	> /*
 			If TComponentProps does not extend {}, React will choke on creating
 			the component. So don't allow this case.
 		*/
-		: never;
+	: never;
 
 /**
  * Generic form input field component that handles simple use cases,
@@ -41,7 +41,7 @@ type FormFieldProps<TData, TComponentProps, TFieldData> =
  */
 // TData must extend object for lodash set.
 // TComponentProps must extend {} for React.
-const FormField = <TData extends object, TComponentProps extends {}, TFieldData>({
+export const FormField = <TData extends object, TComponentProps extends {}, TFieldData>({
 	getValue,
 	defaultValue,
 	preprocessForDisplay,
@@ -79,5 +79,3 @@ const FormField = <TData extends object, TComponentProps extends {}, TFieldData>
 		</InputComponent>
 	);
 };
-
-export default FormField;

@@ -14,7 +14,7 @@ export type RadioButtonProps = {
 /**
  * Component that wraps a native radio input element
  */
-export default function RadioButton({
+export function RadioButton({
 	text,
 	value,
 	name,
