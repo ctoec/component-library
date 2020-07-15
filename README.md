@@ -11,10 +11,15 @@ This library provides a uniform collection of reusable UX components, static ass
     yarn install --frozen-lockfile
     ```
 
-## Deploy
+## Demo
 
 ### GitHub Pages
 If you're looking for some live examples of the types of components maintained here, we have this Storybook deployed to GitHub Pages.  Check it out at http://ctoec.github.io/component-library/.
+
+We maintain Storybook deployments to GitHub Pages with the `gh-pages` branch as the site's source.  To update GitHug Pages with any newly committed changes, run the following command from project root:
+```.sh
+yarn run deploy-storybook
+```
 
 ## To use this library
 
