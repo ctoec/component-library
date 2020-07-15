@@ -14,7 +14,7 @@ This library provides a uniform collection of reusable UX components, static ass
 ## Deploy
 
 ### GitHub Pages
-If you're looking for some live examples of the types of components maintained here, we have this Storybook deployed to GitHub Pages.
+If you're looking for some live examples of the types of components maintained here, we have this Storybook deployed to GitHub Pages.  Check it out at http://ctoec.github.io/component-library/.
 
 ## To use this library
 
