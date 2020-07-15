@@ -34,7 +34,7 @@ const labelForStatus = (status: ExternalStepStatus) => {
 	}
 };
 
-export default function Step<T>({
+export function Step<T>({
 	name,
 	status,
 	editPath,
@@ -86,3 +86,5 @@ export default function Step<T>({
 		</li>
 	);
 }
+
+export default Step;

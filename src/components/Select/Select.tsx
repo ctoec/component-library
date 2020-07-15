@@ -2,9 +2,9 @@ import React, { useState, HTMLAttributes } from 'react';
 import { FormStatus, FormStatusProps } from '../FormStatus/FormStatus';
 import { FieldSet, FieldSetProps } from '../FieldSet/FieldSet';
 import cx from 'classnames';
-import { FormFieldSetProps, FormFieldSet } from '../Form_New';
+import { FormFieldSetProps, FormFieldSet } from '../Form';
 
-type SelectOption = {
+export type SelectOption = {
 	text: string;
 	value: string;
 	expansion?: React.ReactNode;

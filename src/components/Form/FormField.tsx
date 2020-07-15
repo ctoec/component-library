@@ -1,131 +1,83 @@
-import React from 'react';
-import { FormContext, GenericFormContextType } from './Form';
-import { _useContext as useContext } from './utilities';
+import React, { PropsWithChildren } from 'react';
+import FormContext, { useGenericContext } from './FormContext';
+import produce from 'immer';
+import set from 'lodash/set';
+import { TObjectDriller } from './ObjectDriller';
+import { FormStatusFunc } from './FormStatusFunc';
+
+type FormFieldProps<TData, TComponentProps, TFieldData> =
+	// React.FC<P> assigns the generic P to {} as a default type. That causes a
+	// subtype contrainst error. See https://stackoverflow.com/a/59363875. As a
+	// work around, we can conditionally check that TComponentProps extends {}.
+	TComponentProps extends {}
+		? {
+				defaultValue?: TFieldData;
+				getValue: (_: TObjectDriller<NonNullable<TData>>) => TObjectDriller<TFieldData>;
+				preprocessForDisplay?: (
+					_: TFieldData | undefined
+				) => TFieldData | JSX.Element | string | undefined;
+				parseOnChangeEvent: (
+					event: React.ChangeEvent<any>,
+					data: TObjectDriller<TData>
+				) => TFieldData;
+				status?: FormStatusFunc<TData>;
+				inputComponent: React.FC<TComponentProps>;
+		  } & /* Include TComponentProps props, except onChange, defaultValue, and status */ Pick<
+				TComponentProps,
+				Exclude<keyof TComponentProps, 'onChange' | 'defaultValue' | 'status'>
+		  > /*
+			If TComponentProps does not extend {}, React will choke on creating
+			the component. So don't allow this case.
+		*/
+		: never;
 
 /**
- * Helper type to exclude null or undefined from the type
+ * Generic form input field component that handles simple use cases,
+ * where the data displayed in the field and updated by the user maps
+ * directly to the necessary updates to form data state.
+ *
+ * For complex use cases (e.g. adding or removing array element),
+ * custom form field components should be created
  */
-type Value<T> = Exclude<T, null | undefined>;
+// TData must extend object for lodash set.
+// TComponentProps must extend {} for React.
+const FormField = <TData extends object, TComponentProps extends {}, TFieldData>({
+	getValue,
+	defaultValue,
+	preprocessForDisplay,
+	parseOnChangeEvent,
+	status = () => undefined,
+	inputComponent: InputComponent,
+	children,
+	...props
+}: PropsWithChildren<FormFieldProps<TData, TComponentProps, TFieldData>>) => {
+	const { data, dataDriller, updateData } = useGenericContext<TData>(FormContext);
 
-/**
- * Helper utility to test whether a variable is of Value type
- * @param _ Any obj to test whether it satisfies Value type
- */
-function isValue<T>(_: T): _ is Value<T> {
-	return _ !== null && _ !== undefined;
-}
+	const accessor = getValue(dataDriller);
+	const value = accessor.value;
+	const updatePath = accessor.path;
 
-/**
- * A type-safe way to drill down into an object and gather the associated path
- */
-class Updateable<T> {
-	data: T;
-	path: string;
-
-	constructor(obj: T, path?: string) {
-		this.data = obj;
-		this.path = path || '';
-	}
-
-	/**
-	 * Drill down into the object by specifying the next field
-	 * @param field A field on the data object
-	 */
-	at<K extends keyof T>(field: K): Updateable<Value<T[K]>> {
-		if (!isValue(this.data)) {
-			if (typeof field === 'number') {
-				this.data = ([] as unknown) as T;
-			} else {
-				this.data = ({ [field]: undefined } as unknown) as T;
-			}
-		}
-		const newPath = this.path === '' ? '' + field : `${this.path}.${field}`;
-		let subObj = this.data[field];
-
-		return new Updateable((subObj as unknown) as Value<T[K]>, newPath);
-	}
-}
-
-/**
- * Wrapper to the Updateable constructor with type casting
- * @param data
- */
-function makeUpdateableType<T>(data: Value<T>): Updateable<Value<T>> {
-	return new Updateable(data);
-}
-
-/**
- * Type for the props of the rendered form field component
- */
-type FormFieldComponentProps<TData, TFieldData> = {
-	/**
-	 * An internal controller to trigger the reducer on user changes
-	 */
-	onChange: any;
-	// TO DELETE
-	onChange_Old: any;
-	/**
-	 * The data of the specified field that is being displayed/edited
-	 */
-	data: TFieldData;
-	/**
-	 * The data of the object controlling the form
-	 */
-	containingData: TData;
-	/**
-	 * The path to the field data
-	 */
-	name: string;
-};
-
-/**
- * Type for the props supplied to the FormField component
- */
-type FormFieldProps<TData, TProps extends React.Props<any>, TFieldData, TAdditionalData> = {
-	render: (
-		_: FormFieldComponentProps<TData, TFieldData> & {
-			additionalInformation: TAdditionalData;
-		}
-	) => React.ReactElement<TProps>;
-	/**
-	 * Function for converting the HTML Event target value string
-	 * into the data corresponding to the model
-	 */
-	parseValue: (_: any, __?: any) => TFieldData;
-	/**
-	 * Function for accessing a specific value in the supplied data
-	 */
-	field: (_: Updateable<Value<TData>>) => Updateable<Value<TFieldData>>;
-};
-
-/**
- * Component for rendering a form field
- * @param props
- */
-function FormField<TData, TProps, TFieldData, TAdditionalData>({
-	render,
-	parseValue,
-	field: getField,
-}: FormFieldProps<TData, TProps, TFieldData, TAdditionalData>) {
-	// Uses a non-React useContext hook to allow for generics in the supplied type
-	const { data: parentObjectData, updateData, additionalInformation } = useContext<
-		GenericFormContextType<Value<TData>, TFieldData, TAdditionalData>
-	>(FormContext);
-	// Prepare data as an Updateable and access the specified field and path
-	const { data: fieldData, path: objectFieldAccessorPath } = getField(
-		makeUpdateableType(parentObjectData)
-	);
-
-	const renderProps = {
-		onChange: updateData(parseValue),
-		onChange_Old: updateData(parseValue),
-		data: fieldData,
-		containingData: parentObjectData,
-		name: objectFieldAccessorPath,
-		additionalInformation,
+	const onChange = (e: React.ChangeEvent<any>) => {
+		const processedData = parseOnChangeEvent(e, dataDriller);
+		updateData(
+			produce<TData>(data, (draft) => set(draft, updatePath, processedData))
+		);
 	};
 
-	return render(renderProps);
-}
+	const displayValue =
+		value != null // checks null and undefined
+			? value
+			: defaultValue;
+	return (
+		<InputComponent
+			defaultValue={preprocessForDisplay ? preprocessForDisplay(displayValue) : displayValue}
+			onChange={onChange}
+			status={status(dataDriller)}
+			{...props}
+		>
+			{children}
+		</InputComponent>
+	);
+};
 
 export default FormField;

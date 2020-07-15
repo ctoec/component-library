@@ -1,6 +1,6 @@
 import React from 'react';
 
-type RowProps<T> = {
+export type RowProps<T> = {
 	row: T;
 	cells: React.FC<{ row: T }>[];
 	onClick?: (row: T) => () => any;

@@ -11,14 +11,14 @@ import cx from 'classnames';
 import { Tag } from '..';
 import { CardExpansion } from './CardExpansion';
 
-type CardContextType = {
+export type CardContextType = {
 	isExpanded: boolean;
 	toggleExpanded: () => void;
 };
 
 const CardContext = createContext<CardContextType>({
 	isExpanded: false,
-	toggleExpanded: () => {},
+	toggleExpanded: () => { },
 });
 
 const { Provider: CardProvider } = CardContext;

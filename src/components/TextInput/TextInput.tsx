@@ -28,21 +28,21 @@ type InternalTextInputProps = {
 	afterContent?: string | JSX.Element;
 };
 
-type TextInputHTMLInputElementProps = InternalTextInputProps & {
+export type TextInputHTMLInputElementProps = InternalTextInputProps & {
 	type?: 'input';
 	onChange: (event: React.ChangeEvent<HTMLInputElement>) => any;
 	onBlur?: (event: React.FocusEvent<HTMLInputElement>) => any;
 	inputProps?: React.HTMLProps<HTMLInputElement>;
 };
 
-type TextInlineInputHTMLInputElementProps = InternalTextInputProps & {
+export type TextInlineInputHTMLInputElementProps = InternalTextInputProps & {
 	type?: 'inline-input';
 	onChange: (event: React.ChangeEvent<HTMLInputElement>) => any;
 	onBlur?: (event: React.FocusEvent<HTMLInputElement>) => any;
 	inputProps?: React.HTMLProps<HTMLInputElement>;
 };
 
-type TextInputHTMLTextAreaElementProps = InternalTextInputProps & {
+export type TextInputHTMLTextAreaElementProps = InternalTextInputProps & {
 	type: 'textarea';
 	onChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => any;
 	onBlur?: (event: React.FocusEvent<HTMLTextAreaElement>) => any;

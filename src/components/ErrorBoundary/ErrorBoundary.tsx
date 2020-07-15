@@ -1,11 +1,11 @@
 import React from 'react';
 import { Alert, AlertProps } from '..';
 
-type ErrorBoundaryState = {
+export type ErrorBoundaryState = {
 	hasError: boolean;
 };
 
-type ErrorBoundaryProps = {
+export type ErrorBoundaryProps = {
 	alertProps?: AlertProps;
 };
 
