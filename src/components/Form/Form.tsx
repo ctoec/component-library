@@ -2,7 +2,7 @@ import React, { FormHTMLAttributes, PropsWithChildren, useState, useEffect } fro
 import { FormProvider } from './FormContext';
 import { ObjectDriller } from './ObjectDriller';
 
-type FormProps<T> = {
+export type FormProps<T> = {
 	onSubmit: (_: T) => void;
 	data: T;
 	className: string;
@@ -19,7 +19,7 @@ type FormProps<T> = {
  * The form tracks state of the object, and requires the use of a
  * 'submit' button (should be a FormSubmitButton)
  */
-const Form = <T extends any>({
+export const Form = <T extends any>({
 	className,
 	onSubmit,
 	data,

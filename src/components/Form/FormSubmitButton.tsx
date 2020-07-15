@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from '..';
 import { ButtonProps } from '../Button/Button';
 
-type FormSumbitButtonProps = {
+export type FormSumbitButtonProps = {
 	text: string;
 } & Pick<ButtonProps, Exclude<keyof ButtonProps, 'text'>>;
 

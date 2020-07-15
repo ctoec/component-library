@@ -1,11 +1,11 @@
 import React, { PropsWithChildren } from 'react';
-import FormContext, { useGenericContext } from './FormContext';
+import { FormContext, useGenericContext } from './FormContext';
 import produce from 'immer';
 import set from 'lodash/set';
 import { TObjectDriller } from './ObjectDriller';
 import { FormStatusFunc } from './FormStatusFunc';
 
-type FormFieldProps<TData, TComponentProps, TFieldData> =
+export type FormFieldProps<TData, TComponentProps, TFieldData> =
 	// React.FC<P> assigns the generic P to {} as a default type. That causes a
 	// subtype contrainst error. See https://stackoverflow.com/a/59363875. As a
 	// work around, we can conditionally check that TComponentProps extends {}.

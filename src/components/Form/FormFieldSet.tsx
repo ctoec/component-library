@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from 'react';
-import FormContext, { useGenericContext } from './FormContext';
+import { FormContext, useGenericContext } from './FormContext';
 import { FieldSetProps, FieldSet } from '../FieldSet/FieldSet';
 import { FormStatusFunc } from './FormStatusFunc';
 

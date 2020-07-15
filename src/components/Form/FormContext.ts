@@ -13,7 +13,7 @@ import { TObjectDriller } from './ObjectDriller';
  *
  * @property updateData Immutable update function for form data
  */
-type FormContextType = {
+export type FormContextType = {
 	data: any;
 	dataDriller: any;
 	updateData: React.Dispatch<React.SetStateAction<any>>;
