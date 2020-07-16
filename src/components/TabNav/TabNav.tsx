@@ -22,11 +22,11 @@ export const TabNav: React.FC<TabNavProps> = ({ items, activeId }) => {
 		const activeIndex = items.findIndex((item) => item.id === activeId);
 		const activeIndexOrCurrent = activeIndex < 0 ? activeTabIndex : activeIndex;
 		setActiveTabIndex(activeIndexOrCurrent);
-	}, [activeId]);
+	}, [activeId, activeTabIndex, items]);
 
 	useEffect(() => {
 		history.push(`#${items[activeTabIndex].id}`);
-	}, [activeTabIndex]);
+	}, [activeTabIndex, history, items]);
 
 	const onClick = (index: number) => {
 		setActiveTabIndex(index);
