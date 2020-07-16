@@ -14,6 +14,7 @@
 		"test": "react-scripts test",
 		"storybook": "start-storybook -p 9009 -s public",
 		"build-storybook": "build-storybook -s public",
+		"deploy-storybook": "storybook-to-ghpages --source-branch 'base' --branch 'gh-pages' --out=storybook-static",
 		"build": "rm -rf dist && NODE_ENV=production yarn run build:types && yarn run build:js",
 		"build:types": "tsc -p tsconfig.build.json",
 		"build:js": "babel src --out-dir dist --extensions \".ts,.tsx\" --source-maps inline  --copy-files --ignore \"**/*.stories.tsx,**/*.test.tsx,.storybook\""
@@ -77,6 +78,7 @@
 		"@storybook/addons": "^5.3.19",
 		"@storybook/preset-create-react-app": "^3.1.2",
 		"@storybook/react": "^5.3.19",
+		"@storybook/storybook-deployer": "^2.8.6",
 		"@testing-library/jest-dom": "^4.2.4",
 		"@testing-library/react": "^9.3.2",
 		"@testing-library/user-event": "^7.1.2",
