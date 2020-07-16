@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-type ButtonAppearance = 'default' | 'base' | 'secondary' | 'unstyled' | 'outline';
+export type ButtonAppearance = 'default' | 'base' | 'secondary' | 'unstyled' | 'outline';
 
-type BaseButtonProps = {
+export type BaseButtonProps = {
 	href?: string;
 	external?: boolean;
 	appearance?: ButtonAppearance;
@@ -17,7 +17,7 @@ export type ButtonProps = BaseButtonProps &
 		onClick?: () => any;
 	};
 
-type SubmitButtonProps = BaseButtonProps & {
+export type SubmitButtonProps = BaseButtonProps & {
 	text: string;
 	onClick?: 'submit';
 	title?: string;
@@ -50,7 +50,7 @@ export function Button({
 			/>
 		);
 	}
-	onClick = typeof onClick === 'function' ? onClick : () => {};
+	onClick = typeof onClick === 'function' ? onClick : () => { };
 
 	if (href && !external) {
 		return (

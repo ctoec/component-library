@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import cx from 'classnames';
 import { useHistory } from 'react-router';
 
-type TabItemProps = {
+export type TabItemProps = {
 	id: string;
 	text: JSX.Element | string;
 	content: JSX.Element;
 };
 
-type TabNavProps = {
+export type TabNavProps = {
 	items: TabItemProps[];
 	activeId?: string;
 };
@@ -22,11 +22,11 @@ export const TabNav: React.FC<TabNavProps> = ({ items, activeId }) => {
 		const activeIndex = items.findIndex((item) => item.id === activeId);
 		const activeIndexOrCurrent = activeIndex < 0 ? activeTabIndex : activeIndex;
 		setActiveTabIndex(activeIndexOrCurrent);
-	}, [activeId]);
+	}, [activeId, activeTabIndex, items]);
 
 	useEffect(() => {
 		history.push(`#${items[activeTabIndex].id}`);
-	}, [activeTabIndex]);
+	}, [activeTabIndex, history, items]);
 
 	const onClick = (index: number) => {
 		setActiveTabIndex(index);

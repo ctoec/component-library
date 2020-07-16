@@ -8,8 +8,7 @@ export type CheckboxProps = {
 	defaultValue?: boolean;
 	className?: string;
 	disabled?: boolean;
-	value?: string; //TODO remove when ChoiceList is gone
-	name?: string; // TODO remove when ChoiceList is gone
+	name?: string;
 } & Omit<HTMLAttributes<HTMLInputElement>, 'onChange' | 'defaultValue'>;
 
 /**
@@ -41,5 +40,3 @@ export function Checkbox({
 		</div>
 	);
 }
-
-export default Checkbox;

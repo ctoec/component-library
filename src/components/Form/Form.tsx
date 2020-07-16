@@ -1,90 +1,60 @@
-import React, { createContext, useEffect, useReducer, PropsWithChildren } from 'react';
-import { FormReducer, formReducer, updateData, InputField } from './utilities';
-import { HTMLChoiceElement } from '..';
+import React, { FormHTMLAttributes, PropsWithChildren, useState, useEffect } from 'react';
+import { FormProvider } from './FormContext';
+import { ObjectDriller } from './ObjectDriller';
 
-export type GenericFormContextType<TData, TFieldData, TAdditionalInformation> = {
-	data: TData;
-	updateData: (
-		_: (__: any, ___: any) => TFieldData
-	) => <T extends {}>(
-			event: React.ChangeEvent<HTMLChoiceElement | HTMLTextAreaElement> | InputField<T>
-		) => void;
-	additionalInformation: TAdditionalInformation;
-};
-
-export type FormContextType = {
-	data: any;
-	updateData: (
-		_: (__: any, ___: any) => any
-	) => <T extends {}>(
-			event: React.ChangeEvent<HTMLChoiceElement | HTMLTextAreaElement> | InputField<T>
-		) => void;
-	additionalInformation: any;
-};
-
-export const FormContext = createContext<FormContextType>({
-	data: undefined,
-	updateData: () => () => { },
-	additionalInformation: {},
-});
-
-export const { Provider: FormProvider, Consumer: FormConsumer } = FormContext;
-
-type FormProps<TData> = {
+export type FormProps<T> = {
+	onSubmit: (_: T) => void;
+	data: T;
 	className: string;
-	onSave: (_: TData) => any;
-	data: TData;
-	/**
-	 * Allow for consumers to pass down an arbitrary collection of other information
-	 */
-	additionalInformation: any;
-} & React.DetailedHTMLProps<React.FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>;
+} & /**
+ * Creates a set of props that includes
+ * all FormHTMLAttributes<HTMLFormElement> props, except onSubmit
+ */ Pick<
+	FormHTMLAttributes<HTMLFormElement>,
+	Exclude<keyof FormHTMLAttributes<HTMLFormElement>, 'onSubmit'>
+>;
 
 /**
- * General purpose form component
- * Handles intermediate updates to the supplied data with a reducer
- * Accepts a onSave prop for processing data after user submits
- *
- * NOTE: Consumer must supply a submit button (see FormSubmitButton)
- * @param props
+ * Generic form component for updating an object of type T.
+ * The form tracks state of the object, and requires the use of a
+ * 'submit' button (should be a FormSubmitButton)
  */
-const Form = <TData extends object>({
+export const Form = <T extends any>({
 	className,
-	onSave,
+	onSubmit,
 	data,
-	additionalInformation,
 	children,
 	...props
-}: PropsWithChildren<FormProps<TData>>) => {
-	const [_data, updateFormData] = useReducer<FormReducer<TData>>(formReducer, data);
-	const applyFormDataUpdate = updateData<TData>(updateFormData);
+}: PropsWithChildren<FormProps<T>>) => {
+	const [_data, updateData] = useState(data);
 
-	// If data prop changes, update the internal store
-	// This is exceptionally important when multiple forms track the same data
+	// If data prop changes, update the internal store as multiple forms can track the same data
 	useEffect(() => {
-		updateFormData(data);
+		updateData(data);
 	}, [data]);
 
-	const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+	/**
+	 * onSubmit function to supply to the form. The form event
+	 * default is suppressed, and the Form component's onSubmit
+	 * function is called with the form data as an argument.
+	 * @param e FormEvent
+	 */
+	const _onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		onSave(_data);
-		return false;
+		onSubmit(_data);
 	};
 
 	return (
-		// Context provider so each form field can access the current same data store
 		<FormProvider
 			value={{
 				data: _data,
-				updateData: applyFormDataUpdate,
-				additionalInformation,
+				dataDriller: new ObjectDriller(_data),
+				updateData,
 			}}
 		>
-			<form className={className} onSubmit={onSubmit} {...props}>
-				<div className="usa-form">{children}</div>
+			<form className={className} onSubmit={_onSubmit} {...props}>
+				{children}
 			</form>
 		</FormProvider>
 	);
 };
-
-export default Form;

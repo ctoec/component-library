@@ -3,7 +3,7 @@ import { useEffect, useState, useRef } from 'react';
 /**
  * Allows for hiding an element when a user clicks outside of a given element 'ref'
  */
-const useHideOnLostFocus = <T extends HTMLElement>() => {
+export const useHideOnLostFocus = <T extends HTMLElement>() => {
 	const [isComponentVisible, setIsComponentVisible] = useState(false);
 	const ref = useRef<T>(null);
 
@@ -25,5 +25,3 @@ const useHideOnLostFocus = <T extends HTMLElement>() => {
 
 	return { ref, isComponentVisible, setIsComponentVisible };
 };
-
-export default useHideOnLostFocus;

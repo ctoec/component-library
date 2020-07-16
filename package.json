@@ -1,6 +1,6 @@
 {
 	"name": "@ctoec/component-library",
-	"version": "0.0.11",
+	"version": "0.0.18",
 	"description": "React Component Library for OEC branded web applications",
 	"homepage": "https://github.com/ctoec/component-library#readme",
 	"repository": {
@@ -9,13 +9,14 @@
 	},
 	"main": "dist/components/index.js",
 	"types": "dist/components/index.d.ts",
+	"files": ["dist"],
 	"scripts": {
 		"test": "react-scripts test",
 		"storybook": "start-storybook -p 9009 -s public",
 		"build-storybook": "build-storybook -s public",
 		"deploy-storybook": "storybook-to-ghpages --source-branch 'base' --branch 'gh-pages' --out=storybook-static",
 		"build": "rm -rf dist && NODE_ENV=production yarn run build:types && yarn run build:js",
-		"build:types": "tsc --emitDeclarationOnly",
+		"build:types": "tsc -p tsconfig.build.json",
 		"build:js": "babel src --out-dir dist --extensions \".ts,.tsx\" --source-maps inline  --copy-files --ignore \"**/*.stories.tsx,**/*.test.tsx,.storybook\""
 	},
 	"keywords": [
@@ -48,26 +49,22 @@
 		]
 	},
 	"dependencies": {
-		"@testing-library/jest-dom": "^4.2.4",
-		"@testing-library/react": "^9.3.2",
-		"@testing-library/user-event": "^7.1.2",
 		"@types/classnames": "^2.2.10",
 		"@types/jest": "^24.0.0",
 		"@types/lodash": "^4.14.157",
 		"@types/node": "^12.0.0",
 		"@types/react": "^16.9.41",
-		"@types/react-dates": "^17.1.12",
+		"@types/react-dates": "^17.1.13",
 		"@types/react-dom": "^16.9.8",
 		"@types/react-router-dom": "^5.1.5",
 		"@types/storybook__react": "^5.2.1",
-		"flow": "^0.2.3",
 		"lodash": "^4.17.15",
 		"react": "^16.13.1",
 		"react-dates": "^21.8.0",
 		"react-dom": "^16.13.1",
 		"react-router-dom": "^5.2.0",
 		"react-scripts": "^3.4.1",
-		"typescript": "^3.7.5",
+		"typescript": "^3.9.0",
 		"uswds": "^2.7.1"
 	},
 	"eslintConfig": {
@@ -82,6 +79,9 @@
 		"@storybook/preset-create-react-app": "^3.1.2",
 		"@storybook/react": "^5.3.19",
 		"@storybook/storybook-deployer": "^2.8.6",
+		"@testing-library/jest-dom": "^4.2.4",
+		"@testing-library/react": "^9.3.2",
+		"@testing-library/user-event": "^7.1.2",
 		"classnames": "^2.2.6",
 		"css-loader": "^3.6.0",
 		"node-sass": "^4.14.1",
