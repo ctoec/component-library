@@ -1,3 +1,4 @@
+// Export components
 export * from './Alert/Alert';
 export * from './Button/Button';
 export * from './ButtonWithDropdown/ButtonWithDropdown'
@@ -9,6 +10,7 @@ export * from './CheckboxGroup/CheckboxGroup';
 export * from './DateInput/DateInput';
 export * from './ErrorBoundary/ErrorBoundary';
 export * from './FieldSet/FieldSet';
+export * from './FileInput/FileInput';
 export * from './Form';
 export * from './FormStatus/FormStatus';
 export * from './Header/Header';

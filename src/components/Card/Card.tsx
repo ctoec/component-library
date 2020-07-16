@@ -57,7 +57,7 @@ export function Card({
 		if (onExpansionChange && previousIsExpanded !== undefined) {
 			onExpansionChange(isExpanded);
 		}
-	}, [isExpanded, previousIsExpanded]);
+	}, [isExpanded, previousIsExpanded, onExpansionChange]);
 
 	useEffect(() => {
 		if (forceClose) {

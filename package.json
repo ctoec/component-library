@@ -48,9 +48,6 @@
 		]
 	},
 	"dependencies": {
-		"@testing-library/jest-dom": "^4.2.4",
-		"@testing-library/react": "^9.3.2",
-		"@testing-library/user-event": "^7.1.2",
 		"@types/classnames": "^2.2.10",
 		"@types/jest": "^24.0.0",
 		"@types/lodash": "^4.14.157",
@@ -60,14 +57,13 @@
 		"@types/react-dom": "^16.9.8",
 		"@types/react-router-dom": "^5.1.5",
 		"@types/storybook__react": "^5.2.1",
-		"flow": "^0.2.3",
 		"lodash": "^4.17.15",
 		"react": "^16.13.1",
 		"react-dates": "^21.8.0",
 		"react-dom": "^16.13.1",
 		"react-router-dom": "^5.2.0",
 		"react-scripts": "^3.4.1",
-		"typescript": "^3.7.5",
+		"typescript": "^3.9.0",
 		"uswds": "^2.7.1"
 	},
 	"eslintConfig": {
@@ -81,6 +77,9 @@
 		"@storybook/addons": "^5.3.19",
 		"@storybook/preset-create-react-app": "^3.1.2",
 		"@storybook/react": "^5.3.19",
+		"@testing-library/jest-dom": "^4.2.4",
+		"@testing-library/react": "^9.3.2",
+		"@testing-library/user-event": "^7.1.2",
 		"classnames": "^2.2.6",
 		"css-loader": "^3.6.0",
 		"node-sass": "^4.14.1",
