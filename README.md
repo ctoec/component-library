@@ -16,3 +16,9 @@ This library provides a uniform collection of reusable UX components, static ass
 
 1. `yarn add @ctoec/component-library`
 1. `import { ComponentOfYourChoice } from @ctoec/component-library`
+
+## Publishing
+
+1. Increment version in `package.json`
+1. `yarn build`
+2. `npm publish` (If this is the first time, you will need to authenticate yourself by running `npm login`)
