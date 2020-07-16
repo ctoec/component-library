@@ -11,12 +11,15 @@ This library provides a uniform collection of reusable UX components, static ass
     yarn install --frozen-lockfile
     ```
 
-## Demo
+## Examples
+If you're looking for some specific UX examples, we have a Storybook site deployed to [GitHub Pages](https://pages.github.com/), showcasing all of the components within this library.  
 
-### GitHub Pages
-If you're looking for some live examples of the types of components maintained here, we have this Storybook deployed to GitHub Pages.  Check it out at http://ctoec.github.io/component-library/.
+You can check it out live at http://ctoec.github.io/component-library/.
 
-We maintain Storybook deployments to GitHub Pages with the `gh-pages` branch as the site's source.  To update GitHug Pages with any newly committed changes, run the following command from project root:
+### Deploying Storybook
+These Storybook deployments are handled with the `storybook-deployer` package, using the `gh-pages` branch of this repository as the site's source.  Additionally, all commits to our core `base` branch will trigger an associated GitHub Action that automatically updates our Storybook site.  So it'll be kept up to date with the latest state of our library at all times!
+
+Regardless, if there's ever a need for the site to be updated manually, the following command should be run from project root:
 ```.sh
 yarn run deploy-storybook
 ```
