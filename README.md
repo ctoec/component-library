@@ -21,7 +21,7 @@ These Storybook deployments are handled with the `storybook-deployer` package, u
 
 Regardless, if there's ever a need for the site to be updated *manually*, the following command should be run from project root:
 ```.sh
-yarn run deploy-storybook:manual
+yarn run deploy-storybook
 ```
 
 ## To use this library
