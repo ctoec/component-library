@@ -14,7 +14,7 @@
 		"test": "react-scripts test",
 		"storybook": "start-storybook -p 9009 -s public",
 		"build-storybook": "build-storybook -s public",
-		"deploy-storybook": "storybook-to-ghpages --branch 'gh-pages' --out=storybook-static --ci --host-token-env-variable=GITHUB_TOKEN",
+		"deploy-storybook": "storybook-to-ghpages --branch 'gh-pages' --out=storybook-static --ci",
 		"build": "rm -rf dist && NODE_ENV=production yarn run build:types && yarn run build:js",
 		"build:types": "tsc -p tsconfig.build.json",
 		"build:js": "babel src --out-dir dist --extensions \".ts,.tsx\" --source-maps inline  --copy-files --ignore \"**/*.stories.tsx,**/*.test.tsx,.storybook\""
