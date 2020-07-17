@@ -17,4 +17,6 @@ jobs:
           node-version: 12
       - run: npm install -g yarn
       - run: yarn install --frozen-lockfile
-      - run: yarn run deploy-storybook
+      - run: yarn run deploy-storybook:ci
+        env:
+          GITHUB_TOKEN: ${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}
