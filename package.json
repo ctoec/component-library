@@ -1,15 +1,17 @@
 {
 	"name": "@ctoec/component-library",
-	"version": "0.0.18",
+	"version": "0.0.19",
 	"description": "React Component Library for OEC branded web applications",
 	"homepage": "https://github.com/ctoec/component-library#readme",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/ctoec/component-library.git"
 	},
-	"main": "dist/components/index.js",
-	"types": "dist/components/index.d.ts",
-	"files": ["dist"],
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"files": [
+		"dist"
+	],
 	"scripts": {
 		"test": "react-scripts test",
 		"storybook": "start-storybook -p 9009 -s public",
@@ -18,7 +20,7 @@
 		"deploy-storybook:ci": "storybook-to-ghpages --out=storybook-static --ci --host-token-env-variable=GITHUB_TOKEN",
 		"build": "rm -rf dist && NODE_ENV=production yarn run build:types && yarn run build:js",
 		"build:types": "tsc -p tsconfig.build.json",
-		"build:js": "babel src --out-dir dist --extensions \".ts,.tsx\" --source-maps inline  --copy-files --ignore \"**/*.stories.tsx,**/*.test.tsx,.storybook\""
+		"build:js": "babel src --out-dir dist --extensions \".ts,.tsx\" --copy-files --ignore \"**/*.stories.tsx,**/*.test.tsx,.storybook,**/*.d.ts\""
 	},
 	"keywords": [
 		"component",
