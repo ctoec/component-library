@@ -54,6 +54,11 @@ td.oec-table__cell--strong {
 	margin-left: units(1);
 	vertical-align: middle;
 	color: color($theme-color-base-lighter);
+	height: 1em;
+
+	svg {
+		height: inherit;
+	}
 
 	&--ascending,
 	&--descending {

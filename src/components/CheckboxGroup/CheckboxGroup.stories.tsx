@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 import { FormStatusProps } from '..';
 import { TextInput } from '../TextInput/TextInput';
 import { CheckboxOption, CheckboxGroup } from './CheckboxGroup';
-import Checkbox from '../Checkbox/Checkbox';
+import { Checkbox } from '../Checkbox/Checkbox';
 
 const onChange = action('onChange');
 const options: CheckboxOption[] = [

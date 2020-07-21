@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withKnobs, object } from '@storybook/addon-knobs';
 
-import Table from './Table';
+import { Table } from './Table';
 
 const defaultData = [
 	{ id: 0, name: 'Apple', price: '$0.75', color: 'Red' },

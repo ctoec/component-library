@@ -1,7 +1,7 @@
 import React from 'react';
 import cx from 'classnames';
 import { SortOrder, TableSort } from './Table';
-import { ReactComponent as DownArrowCircle } from '../../assets/images/arrowRight.svg';
+import { ReactComponent as DownArrowCircle } from '../../assets/images/downArrowCircle.svg';
 
 export type ColumnHeaderProps = {
 	name: string | JSX.Element;

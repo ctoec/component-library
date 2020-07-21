@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 import { FormStatusProps } from '..';
 import { TextInput } from '../TextInput/TextInput';
 import { RadioButtonGroup, RadioOption } from './RadioButtonGroup';
-import RadioButton from '../RadioButton/RadioButton';
+import { RadioButton } from '../RadioButton/RadioButton';
 import '../../assets/styles/index.scss';
 
 const onChange = action('onChange');
