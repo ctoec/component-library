@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Checkbox, FileInput } from '@ctoec/component-library';
+import { Button, Checkbox, FileInput, Table, ColumnHeader, InlineIcon } from '@ctoec/component-library';
 import '@ctoec/component-library/dist/assets/styles/index.scss'
 import 'uswds/dist/js/uswds';
 
@@ -13,6 +13,9 @@ function App() {
 				<Button text="Enter" />
 				<Checkbox id="test" text="One" onChange={() => {}} />
 				<FileInput id="file" label="Upload file" onChange={() => {}} />
+        <Table id="table" data={[]} rowKey={row => 'i'} columns={[]}/>
+        <InlineIcon icon="angleArrowDown" />
+        <InlineIcon icon="arrowDown" />
 			</main>
     </div>
   );

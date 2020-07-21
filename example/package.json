@@ -3,16 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-		"@ctoec/component-library": "/home/node/app",
-		"@types/node": "^12.0.0",
-		"@types/react": "^16.9.0",
-		"@types/react-dom": "^16.9.0",
-		"node-sass": "npm:sass",
+    "@ctoec/component-library": "file:../dist",
+    "@types/node": "^12.0.0",
+    "@types/react": "^16.9.0",
+    "@types/react-dom": "^16.9.0",
+    "node-sass": "npm:sass",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-		"react-scripts": "3.4.1",
-		"sass": "^1.26.3",
-		"typescript": "^3.9.6"
+    "react-scripts": "^3.4.1",
+    "sass": "^1.26.3",
+    "typescript": "^3.9.6"
   },
   "scripts": {
     "start": "react-scripts start",
