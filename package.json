@@ -21,7 +21,7 @@
 		"deploy-storybook:ci": "storybook-to-ghpages --out=storybook-static --ci --host-token-env-variable=GITHUB_TOKEN",
 		"build": "rm -rf dist && NODE_ENV=production yarn run build:types && yarn run build:js",
 		"build:types": "tsc -p tsconfig.build.json",
-		"build:js": "babel src --out-dir dist --extensions \".ts,.tsx\" --copy-files --ignore \"**/*.stories.tsx,**/*.test.tsx,.storybook,**/*.d.ts\""
+		"build:js": "NODE_ENV=production babel src --out-dir dist --extensions \".ts,.tsx\" --copy-files --ignore \"**/*.stories.tsx,**/*.test.tsx,.storybook,**/*.d.ts\""
 	},
 	"keywords": [
 		"component",
@@ -29,17 +29,6 @@
 		"react",
 		"oec"
 	],
-	"babel": {
-		"presets": [
-			"@babel/env",
-			"@babel/preset-typescript",
-			"@babel/preset-react"
-		],
-		"plugins": [
-			"@babel/proposal-class-properties",
-			"@babel/proposal-object-rest-spread"
-		]
-	},
 	"browserslist": {
 		"production": [
 			">0.2%",
@@ -63,11 +52,8 @@
 		"@types/react-router-dom": "^5.1.5",
 		"@types/storybook__react": "^5.2.1",
 		"lodash": "^4.17.15",
-		"react": "^16.13.1",
 		"react-dates": "^21.8.0",
-		"react-dom": "^16.13.1",
 		"react-router-dom": "^5.2.0",
-		"react-scripts": "^3.4.1",
 		"typescript": "^3.9.0",
 		"uswds": "^2.7.1"
 	},
@@ -75,6 +61,11 @@
 		"extends": "react-app"
 	},
 	"devDependencies": {
+		"@babel/preset-env": "^7.10.4",
+		"@babel/preset-react": "^7.10.4",
+		"react-scripts": "^3.4.1",
+		"react-dom": "^16.13.1",
+		"react": "^16.13.1",
 		"@storybook/addon-a11y": "^5.3.19",
 		"@storybook/addon-actions": "^5.3.19",
 		"@storybook/addon-knobs": "^5.3.19",
