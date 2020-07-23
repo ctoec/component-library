@@ -50,6 +50,8 @@ export function InlineIcon({
 			iconComponent = <Info />;
 	}
 
+	console.log(Error, Success, ArrowDown)
+
 	return (
 		<span className={cx(className, 'oec-inline-icon', `oec-inline-icon--${icon}`)}>
 			{iconComponent}
