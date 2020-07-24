@@ -4,7 +4,13 @@ import React, { useEffect, useState } from 'react';
 // https://github.com/facebook/create-react-app/issues/5276
 // https://stackoverflow.com/questions/61339259/how-to-dynamically-import-svg-and-render-it-inline
 // Possibly there is something weird about our config that's causing this behavior, but I couldn't find it
-export default ({ url }: { url: string }) => {
+type SVGInlineProps = {
+  url: string;
+  svgProps?: React.SVGProps<SVGSVGElement>;
+}
+
+// TODO: FIGURE OUT HOW TO USE SVGPROPS
+export default ({ url, svgProps }: SVGInlineProps) => {
   const [svg, setSvg] = useState<string>('');
 
   useEffect(() => {
