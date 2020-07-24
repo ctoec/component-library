@@ -1,6 +1,6 @@
 import React, { useEffect, useState, createElement } from 'react';
 import dompurify from 'dompurify';
-import parser from 'html-react-parser'
+import parser, { domToReact } from 'html-react-parser'
 
 // Bug in CRA webpack setup is making it impossible to use inline SVG as reactcomponents like the docs instruct
 // https://github.com/facebook/create-react-app/issues/5276
@@ -21,11 +21,11 @@ export default ({ url, svgProps }: SVGInlineProps) => {
       .then(setSvg)
   }, [url]);
 
-  return parser(sanitizer(svg), {
-    replace: domNode => {
-      if (domNode.name === 'svg') {
-        return createElement('svg', svgProps);
+  return <>{parser(sanitizer(svg), {
+    replace: ({ name, children, attribs }) => {
+      if (name === 'svg') {
+        return createElement('svg', { ...svgProps, ...attribs }, children ? domToReact(children) : undefined);
       }
     }
-  })
+  })}</>
 }

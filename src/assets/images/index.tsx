@@ -16,16 +16,16 @@ import pencil from './pencil.svg'
 import plusCircle from './plusCircle.svg'
 import teacherWithChalkboard from './teacherWithChalkboard.svg'
 
-export const ArrowDown = () => <SVGInline url={arrowDown} />
-export const Error = () => <SVGInline url={error} />
-export const Info = () => <SVGInline url={info} />
-export const Success = () => <SVGInline url={success} />
-export const AngleArrowDown = () => <SVGInline url={angleArrowDown} />
-export const ArrowRight = () => <SVGInline url={arrowRight} />
-export const Calendar = () => <SVGInline url={calendar} />
-export const DownArrowCircle = () => <SVGInline url={downArrowCircle} />
-export const Hero = () => <SVGInline url={hero} />
-export const Logo = () => <SVGInline url={logo} />
-export const Pencil = () => <SVGInline url={pencil} />
-export const PlusCircle = () => <SVGInline url={plusCircle} />
-export const TeacherWithChalkboard = () => <SVGInline url={teacherWithChalkboard} />
+export const ArrowDown = (props: React.SVGProps<SVGSVGElement>) => <SVGInline svgProps={props} url={arrowDown} />
+export const Error = (props: React.SVGProps<SVGSVGElement>) => <SVGInline svgProps={props} url={error} />
+export const Info = (props: React.SVGProps<SVGSVGElement>) => <SVGInline svgProps={props} url={info} />
+export const Success = (props: React.SVGProps<SVGSVGElement>) => <SVGInline svgProps={props} url={success} />
+export const AngleArrowDown = (props: React.SVGProps<SVGSVGElement>) => <SVGInline svgProps={props} url={angleArrowDown} />
+export const ArrowRight = (props: React.SVGProps<SVGSVGElement>) => <SVGInline svgProps={props} url={arrowRight} />
+export const Calendar = (props: React.SVGProps<SVGSVGElement>) => <SVGInline svgProps={props} url={calendar} />
+export const DownArrowCircle = (props: React.SVGProps<SVGSVGElement>) => <SVGInline svgProps={props} url={downArrowCircle} />
+export const Hero = (props: React.SVGProps<SVGSVGElement>) => <SVGInline svgProps={props} url={hero} />
+export const Logo = (props: React.SVGProps<SVGSVGElement>) => <SVGInline svgProps={props} url={logo} />
+export const Pencil = (props: React.SVGProps<SVGSVGElement>) => <SVGInline svgProps={props} url={pencil} />
+export const PlusCircle = (props: React.SVGProps<SVGSVGElement>) => <SVGInline svgProps={props} url={plusCircle} />
+export const TeacherWithChalkboard = (props: React.SVGProps<SVGSVGElement>) => <SVGInline svgProps={props} url={teacherWithChalkboard} />

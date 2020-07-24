@@ -13,7 +13,7 @@ function App() {
         <Button text="Enter" />
         <Checkbox id="test" text="One" onChange={() => { }} />
         <FileInput id="file" label="Upload file" onChange={() => { }} />
-        <InlineIcon icon="angleArrowDown" />
+        <InlineIcon icon="angleArrowDown" svgProps={{ fill: "red" }} />
         <InlineIcon icon="complete" />
       </main>
     </div>
