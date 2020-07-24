@@ -14,7 +14,7 @@ function App() {
         <Checkbox id="test" text="One" onChange={() => { }} />
         <FileInput id="file" label="Upload file" onChange={() => { }} />
         <InlineIcon icon="angleArrowDown" />
-        <InlineIcon icon="arrowDown" />
+        <InlineIcon icon="complete" />
       </main>
     </div>
   );
