@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { TextWithIcon } from '..';
-import { ReactComponent as ArrowRight } from '../../assets/images/arrowRight.svg';
+import { ArrowRight } from '../../assets/images';
 
 storiesOf('TextWithIcon', module)
 	.add('Up arrow', () => {
