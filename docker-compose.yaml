@@ -19,6 +19,7 @@ services:
     stdin_open: true
     volumes:
       - ./dist:/home/node/app/dist
+      - ./node_modules:/home/node/app/node_modules
       - ./example:/home/node/app/example:cached
     working_dir: /home/node/app/example
     ports:
