@@ -1,5 +1,5 @@
 import React from 'react';
-import SVGInline from './SVGInline';
+import { SVGInline } from './SVGInline';
 // USWDS imports
 import arrowDown from 'uswds/dist/img/arrow-down.svg';
 import error from 'uswds/dist/img/alerts/error.svg';

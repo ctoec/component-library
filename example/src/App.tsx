@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Checkbox, FileInput, InlineIcon, Table, Column } from '@ctoec/component-library';
-import '@ctoec/component-library/assets/styles/index.scss'
+import '@ctoec/component-library/dist/assets/styles/index.scss'
 import 'uswds/dist/js/uswds';
 
 const defaultData = [

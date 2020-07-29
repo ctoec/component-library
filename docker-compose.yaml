@@ -18,8 +18,9 @@ services:
     image: node:12
     stdin_open: true
     volumes:
-      - ./example:/home/node/app:cached
-    working_dir: /home/node/app
+      - ./dist:/home/node/app/dist
+      - ./example:/home/node/app/example:cached
+    working_dir: /home/node/app/example
     ports:
       - 5000:3000
     entrypoint:

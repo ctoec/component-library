@@ -11,16 +11,19 @@ type SVGInlineProps = {
   svgProps?: React.SVGProps<SVGSVGElement>;
 }
 
-export default ({ url, svgProps }: SVGInlineProps) => {
-  const [svg, setSvg] = useState<string>('');
-  const sanitizer = dompurify.sanitize;
-
+export const SVGInline = ({ url, svgProps }: SVGInlineProps) => {
+  const [svg, setSvg] = useState<string>();
   useEffect(() => {
     fetch(url)
       .then(res => res.text())
       .then(setSvg)
   }, [url]);
 
+  if (!svg) {
+    return <></>;
+  }
+
+  const sanitizer = dompurify.sanitize;
   return <>{parser(sanitizer(svg), {
     replace: ({ name, children, attribs }) => {
       if (name === 'svg') {
