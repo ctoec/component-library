@@ -22,9 +22,6 @@ const defaultColumns: Column<any>[] = [
 ];
 
 function App() {
-  useEffect(() => {
-    console.log('Hooks work')
-  }, [])
   return (
     <div className="App">
       <header className="App-header">
