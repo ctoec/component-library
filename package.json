@@ -20,6 +20,7 @@
 		"deploy-storybook": "storybook-to-ghpages --out=storybook-static",
 		"deploy-storybook:ci": "storybook-to-ghpages --out=storybook-static --ci --host-token-env-variable=GITHUB_TOKEN",
 		"build": "rm -rf dist && NODE_ENV=production yarn run build:types && yarn run build:js",
+		"postinstall": "yarn run build",
 		"build:types": "tsc -p tsconfig.build.json",
 		"build:js": "NODE_ENV=production babel src --out-dir dist --extensions \".ts,.tsx\" --copy-files --ignore \"**/*.stories.tsx,**/*.test.tsx,.storybook,**/*.d.ts\""
 	},
