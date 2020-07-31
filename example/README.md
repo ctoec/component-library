@@ -2,7 +2,7 @@
 
 This project exists to illustrate how to use this library, and to test it locally.
 
-To use docker compose:
+To use docker compose, first [make sure you have it installed](https://docs.docker.com/compose/install/), then:
 
 `docker-compose up`
 

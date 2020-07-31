@@ -1,25 +1,30 @@
 # CT OEC Component Library
+
 This library provides a uniform collection of reusable UX components, static assets and functional units specific to the State of Connecticut's Office of Early Childhood.
 
 ## Setup
 
 ### Local
+
 1. Install (if you haven't already) Visual Studio, [Node 12](https://nodejs.org/en/download/) and [Yarn](https://yarnpkg.com/lang/en/docs/install/).
 
 1. Install all corresponding yarn dependencies, based on the static versions specified in `yarn.lock`:
-    ```.sh
-    yarn install --frozen-lockfile
-    ```
+   ```.sh
+   yarn install --frozen-lockfile
+   ```
 
 ## Examples
-If you're looking for some specific UX examples, we have a Storybook site deployed to [GitHub Pages](https://pages.github.com/), showcasing all of the components within this library.  
+
+If you're looking for some specific UX examples, we have a Storybook site deployed to [GitHub Pages](https://pages.github.com/), showcasing all of the components within this library.
 
 You can check it out live at http://ctoec.github.io/component-library/.
 
 ### Deploying Storybook
-These Storybook deployments are handled with the `storybook-deployer` package, using the `gh-pages` branch of this repository as the site's source.  Additionally, all commits to our core `base` branch will trigger an associated GitHub Action that automatically updates our Storybook site.  So it'll be kept up to date with the latest state of our library at all times!
 
-Regardless, if there's ever a need for the site to be updated *manually*, the following command should be run from project root:
+These Storybook deployments are handled with the `storybook-deployer` package, using the `gh-pages` branch of this repository as the site's source. Additionally, all commits to our core `base` branch will trigger an associated GitHub Action that automatically updates our Storybook site. So it'll be kept up to date with the latest state of our library at all times!
+
+Regardless, if there's ever a need for the site to be updated _manually_, the following command should be run from project root:
+
 ```.sh
 yarn run deploy-storybook
 ```
@@ -27,10 +32,11 @@ yarn run deploy-storybook
 ## To use this library
 
 1. `yarn add @ctoec/component-library`
+1. Import the stylesheets in your application with `import '@ctoec/component-library/dist/assets/styles/index.scss'`
 1. `import { ComponentOfYourChoice } from @ctoec/component-library`
 
 ## Publishing
 
 1. Increment version in `package.json`
 1. `yarn build`
-2. `npm publish` (If this is the first time, you will need to authenticate yourself by running `npm login`)
+1. `npm publish` (If this is the first time, you will need to authenticate yourself by running `npm login`)
