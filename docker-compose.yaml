@@ -18,15 +18,13 @@ services:
     image: node:12
     stdin_open: true
     volumes:
-      - ./dist:/home/node/app/dist
-      - ./node_modules:/home/node/app/node_modules
-      - ./example:/home/node/app/example:cached
+      - .:/home/node/app
     working_dir: /home/node/app/example
     ports:
       - 5000:3000
     entrypoint:
-      - yarn
-      - start
+      - sh
+      - ./entrypoint.sh
     environment:
       HOST: '0.0.0.0'
       SASS_PATH: 'node_modules:src'

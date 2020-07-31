@@ -4,6 +4,8 @@ This project exists to illustrate how to use this library, and to test it locall
 
 To use docker compose:
 
+`docker-compose up`
+
 To run the example app locally:
 
 0. If you have preexisting node_modules folders here and are getting weird errors, you may want to `rm -rf node_modules && rm -rf example/node_modules`
