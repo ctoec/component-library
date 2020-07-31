@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Button, Checkbox, FileInput, InlineIcon, Table, Column } from '@ctoec/component-library';
 import '@ctoec/component-library/dist/assets/styles/index.scss'
 import 'uswds/dist/js/uswds';
@@ -22,9 +22,6 @@ const defaultColumns: Column<any>[] = [
 ];
 
 function App() {
-  useEffect(() => {
-    console.log('Hooks work')
-  }, [])
   return (
     <div className="App">
       <header className="App-header">
