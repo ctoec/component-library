@@ -45,6 +45,8 @@
 		"dompurify": "^2.0.12",
 		"html-react-parser": "^0.13.0",
 		"lodash": "^4.17.15",
+		"react": "^16.13.1",
+		"react-dom": "^16.13.1",
 		"react-dates": "^21.8.0",
 		"react-router-dom": "^5.2.0",
 		"typescript": "^3.9.0",
@@ -52,10 +54,6 @@
 	},
 	"eslintConfig": {
 		"extends": "react-app"
-	},
-	"peerDependencies": {
-		"react": "^16.13.1",
-		"react-dom": "^16.13.1"
 	},
 	"devDependencies": {
 		"@babel/preset-env": "^7.10.4",

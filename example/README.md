@@ -2,6 +2,12 @@
 
 This project exists to illustrate how to use this library, and to test it locally.
 
-1. Run `yarn build` inside the parent directory
-1. Run `yarn` inside this directory
-1. Use docker-compose to start this application. You may run it locally, but will likely run into an error about hooks, which is caused by [multiple copies of React existing in the same directory](https://github.com/facebook/react/issues/13991).
+To use docker compose:
+
+To run the example app locally:
+
+1. Run `yarn` and `yarn build` inside the parent folder
+1. Run `yarn` inside the example folder (`yarn --cwd example` from the root folder)
+1. From the root of the component library, `npm link example/node_modules/react && npm link example/node_modules/react-dom`. (This step is essential to avoid an error resulting from [multiple copies of React existing in the same directory](https://github.com/facebook/react/issues/13991).)
+1. Run `yarn upgrade @ctoec/component-library` inside the example folder (`yarn --cwd example upgrade @ctoec/component-library` from the root folder)
+1. Run `yarn start` inside the example folder (`yarn --cwd example start` from the root folder)
