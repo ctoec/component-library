@@ -21,8 +21,8 @@
 		"deploy-storybook:ci": "storybook-to-ghpages --out=storybook-static --ci --host-token-env-variable=GITHUB_TOKEN",
 		"build": "rm -rf dist && NODE_ENV=production yarn run build:types && yarn run build:js",
 		"postinstall": "yarn run build",
-		"build:types": "tsc -p tsconfig.build.json",
-		"build:js": "NODE_ENV=production babel src --out-dir dist --extensions \".ts,.tsx\" --copy-files --ignore \"**/*.stories.tsx,**/*.test.tsx,.storybook,**/*.d.ts\""
+		"build:types": "./node_modules/.bin/tsc -p tsconfig.build.json",
+		"build:js": "NODE_ENV=production ./node_modules/.bin/babel src --out-dir dist --extensions \".ts,.tsx\" --copy-files --ignore \"**/*.stories.tsx,**/*.test.tsx,.storybook,**/*.d.ts\""
 	},
 	"keywords": [
 		"component",
@@ -79,6 +79,7 @@
 		"@types/react-dom": "^16.9.8",
 		"@types/react-router-dom": "^5.1.5",
 		"@types/storybook__react": "^5.2.1",
+		"babel-cli": "^6.26.0",
 		"classnames": "^2.2.6",
 		"css-loader": "^3.6.0",
 		"node-sass": "^4.14.1",
