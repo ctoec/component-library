@@ -1,24 +1,27 @@
 {
 	"name": "@ctoec/component-library",
-	"version": "0.0.18",
+	"version": "0.0.21",
 	"description": "React Component Library for OEC branded web applications",
 	"homepage": "https://github.com/ctoec/component-library#readme",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/ctoec/component-library.git"
 	},
-	"main": "dist/components/index.js",
-	"types": "dist/components/index.d.ts",
-	"files": ["dist"],
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"files": [
+		"dist"
+	],
 	"scripts": {
 		"test": "react-scripts test",
+		"eject": "react-scripts eject",
 		"storybook": "start-storybook -p 9009 -s public",
 		"build-storybook": "build-storybook -s public",
 		"deploy-storybook": "storybook-to-ghpages --out=storybook-static",
 		"deploy-storybook:ci": "storybook-to-ghpages --out=storybook-static --ci --host-token-env-variable=GITHUB_TOKEN",
 		"build": "rm -rf dist && NODE_ENV=production yarn run build:types && yarn run build:js",
 		"build:types": "tsc -p tsconfig.build.json",
-		"build:js": "babel src --out-dir dist --extensions \".ts,.tsx\" --source-maps inline  --copy-files --ignore \"**/*.stories.tsx,**/*.test.tsx,.storybook\""
+		"build:js": "NODE_ENV=production babel src --out-dir dist --extensions \".ts,.tsx\" --copy-files --ignore \"**/*.stories.tsx,**/*.test.tsx,.storybook,**/*.d.ts\""
 	},
 	"keywords": [
 		"component",
@@ -26,17 +29,6 @@
 		"react",
 		"oec"
 	],
-	"babel": {
-		"presets": [
-			"@babel/env",
-			"@babel/preset-typescript",
-			"@babel/preset-react"
-		],
-		"plugins": [
-			"@babel/proposal-class-properties",
-			"@babel/proposal-object-rest-spread"
-		]
-	},
 	"browserslist": {
 		"production": [
 			">0.2%",
@@ -50,21 +42,13 @@
 		]
 	},
 	"dependencies": {
-		"@types/classnames": "^2.2.10",
-		"@types/jest": "^24.0.0",
-		"@types/lodash": "^4.14.157",
-		"@types/node": "^12.0.0",
-		"@types/react": "^16.9.41",
-		"@types/react-dates": "^17.1.13",
-		"@types/react-dom": "^16.9.8",
-		"@types/react-router-dom": "^5.1.5",
-		"@types/storybook__react": "^5.2.1",
+		"dompurify": "^2.0.12",
+		"html-react-parser": "^0.13.0",
 		"lodash": "^4.17.15",
 		"react": "^16.13.1",
-		"react-dates": "^21.8.0",
 		"react-dom": "^16.13.1",
+		"react-dates": "^21.8.0",
 		"react-router-dom": "^5.2.0",
-		"react-scripts": "^3.4.1",
 		"typescript": "^3.9.0",
 		"uswds": "^2.7.1"
 	},
@@ -72,6 +56,8 @@
 		"extends": "react-app"
 	},
 	"devDependencies": {
+		"@babel/preset-env": "^7.10.4",
+		"@babel/preset-react": "^7.10.4",
 		"@storybook/addon-a11y": "^5.3.19",
 		"@storybook/addon-actions": "^5.3.19",
 		"@storybook/addon-knobs": "^5.3.19",
@@ -83,9 +69,20 @@
 		"@testing-library/jest-dom": "^4.2.4",
 		"@testing-library/react": "^9.3.2",
 		"@testing-library/user-event": "^7.1.2",
+		"@types/dompurify": "^2.0.2",
+		"@types/classnames": "^2.2.10",
+		"@types/jest": "^24.0.0",
+		"@types/lodash": "^4.14.157",
+		"@types/node": "^12.0.0",
+		"@types/react-dates": "^17.1.13",
+		"@types/react-dom": "^16.9.8",
+		"@types/react-router-dom": "^5.1.5",
+		"@types/storybook__react": "^5.2.1",
+		"@types/react": "^16.9.43",
 		"classnames": "^2.2.6",
 		"css-loader": "^3.6.0",
 		"node-sass": "^4.14.1",
+		"react-scripts": "^3.4.1",
 		"require-context.macro": "^1.2.2",
 		"sass-loader": "^8.0.2",
 		"sass-resources-loader": "^2.0.3",

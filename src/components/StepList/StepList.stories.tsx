@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import { default as StepList, StepListProps } from './StepList';
+import { StepList, StepListProps } from './StepList';
 
 const props: StepListProps<any> = {
 	steps: [

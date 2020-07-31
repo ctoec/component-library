@@ -24,7 +24,7 @@ export * from './Select/Select';
 export * from './SideNav/SideNav';
 export * from './StepList/StepList';
 export * from './Suspend/Suspend'
-export * from './Table/Table';
+export * from './Table';
 export * from './TabNav/TabNav'
 export * from './Tag/Tag';
 export * from './TextInput/TextInput';

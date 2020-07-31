@@ -1,9 +1,5 @@
 import React from 'react';
-import { ReactComponent as Error } from 'uswds/dist/img/alerts/error.svg';
-import { ReactComponent as Info } from 'uswds/dist/img/alerts/info.svg';
-import { ReactComponent as Success } from 'uswds/dist/img/alerts/success.svg';
-import { ReactComponent as AngleArrowDown } from '../../assets/images/angleArrowDown.svg';
-import { ReactComponent as ArrowDown } from 'uswds/dist/img/arrow-down.svg';
+import { Error, Info, Success, AngleArrowDown, ArrowDown } from '../../assets/images';
 import cx from 'classnames';
 
 export type Icon = 'attentionNeeded' | 'complete' | 'incomplete' | 'arrowDown' | 'angleArrowDown';
@@ -23,6 +19,9 @@ export function InlineIcon({
 }: InlineIconProps) {
 	let text: string;
 	let iconComponent;
+
+	// TODO: why are arrowdown and anglearrowdown basically the same?
+	// Revisit when we decide this vs textwithicon
 
 	switch (icon) {
 		case 'attentionNeeded':
