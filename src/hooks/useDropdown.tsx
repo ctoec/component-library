@@ -19,6 +19,7 @@ export const useDropdown: (_: DropdownOptions) => {
 	isComponentVisible: boolean;
 	hide: () => void;
 	show: () => void;
+	changeVisibility: () => void;
 } = ({
 	options,
 	optionsProps,
@@ -71,5 +72,5 @@ export const useDropdown: (_: DropdownOptions) => {
 			</ul>
 		</div>
 	)
-	return { ref, dropdownContainer, isComponentVisible, hide, show };
+	return { ref, dropdownContainer, isComponentVisible, hide, show, changeVisibility };
 };

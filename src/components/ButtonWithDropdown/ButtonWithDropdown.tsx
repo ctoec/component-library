@@ -2,6 +2,7 @@ import React from 'react';
 import cx from 'classnames';
 import { Button, ButtonProps } from '../Button/Button';
 import { useDropdown, DropdownOptions } from '../../hooks';
+import { Link } from 'react-router-dom';
 
 export type ButtonOptionProps = {
 	text: string;
@@ -25,7 +26,15 @@ export const ButtonWithDropdown: React.FC<ButtonWithDropdownProps> = ({
 }) => {
 	const { ref, dropdownContainer, changeVisibility } = useDropdown({
 		options,
-		optionsProps
+		optionsProps,
+		optionRender: (props) => (
+			<Link
+				to={props.value}
+				{...props}
+			>
+				{props.text}
+			</Link>
+		)
 	});
 	return (
 		<div

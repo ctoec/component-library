@@ -36,14 +36,17 @@ const SimpleHeaderWithoutRouter: React.FC<SimpleHeaderProps & RouteComponentProp
 	userFirstName,
 	location,
 }) => {
-	const [previousFocusedItem, setPreviousFocusedItem] = useState();
-	const [currentFocusedItem, setCurrentFocusedItem] = useState();
-	const [activeItem, setActiveItem] = useState();
+	const [previousFocusedItem, setPreviousFocusedItem] = useState<HTMLElement | undefined>();
+	const [currentFocusedItem, setCurrentFocusedItem] = useState<HTMLElement | undefined>();
+	const [activeItem, setActiveItem] = useState<HTMLElement | undefined>();
 
 	useEffect(() => {
 		// Update active item when tabing through top-level of navigation
 		// If tabbing through dropdown, we don't want to update the active element
-		if (!currentFocusedItem || currentFocusedItem.parentElement.nodeName !== "LI") {
+		if (
+			!currentFocusedItem ||
+			currentFocusedItem.parentElement?.nodeName !== "LI"
+		) {
 			setActiveItem(currentFocusedItem);
 		}
 	}, [currentFocusedItem]);
@@ -90,7 +93,7 @@ const SimpleHeaderWithoutRouter: React.FC<SimpleHeaderProps & RouteComponentProp
 										setPreviousFocusedItem={setPreviousFocusedItem}
 										currentFocusedItem={currentFocusedItem}
 										setCurrentFocusedItem={setCurrentFocusedItem}
-										showDropdown={activeItem && activeItem.id === item.id}
+										showDropdown={activeItem ? activeItem.id === item.id : false}
 									/>
 								))}
 								{userFirstName && <DropDownNavItem
