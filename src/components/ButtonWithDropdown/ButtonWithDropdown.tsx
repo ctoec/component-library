@@ -1,8 +1,7 @@
 import React from 'react';
 import cx from 'classnames';
-import { Link } from 'react-router-dom';
-import { useHideOnLostFocus } from '../../hooks/useHideOnLostFocus';
 import { Button, ButtonProps } from '../Button/Button';
+import { useDropdown, DropdownOptions } from '../../hooks';
 
 export type ButtonOptionProps = {
 	text: string;
@@ -12,24 +11,22 @@ export type ButtonOptionProps = {
 export type ButtonWithDropdownProps = ButtonProps & {
 	id: string;
 	className?: string;
-	onChange?: (_: React.ChangeEvent<HTMLSelectElement>) => any;
 	dropdownElement: JSX.Element;
-	options: ButtonOptionProps[];
-	optionsProps?: { className: string };
-};
+} & DropdownOptions;
 
 export const ButtonWithDropdown: React.FC<ButtonWithDropdownProps> = ({
 	id,
+	className,
 	appearance,
 	text,
 	dropdownElement,
 	options,
-	className,
 	optionsProps,
 }) => {
-	// TODO: aria popup role kind of stuff probably
-	const { ref, isComponentVisible, setIsComponentVisible } = useHideOnLostFocus<HTMLDivElement>();
-
+	const { ref, dropdownContainer, changeVisibility } = useDropdown({
+		options,
+		optionsProps
+	});
 	return (
 		<div
 			id={id}
@@ -46,26 +43,9 @@ export const ButtonWithDropdown: React.FC<ButtonWithDropdownProps> = ({
 						{dropdownElement}
 					</>
 				}
-				onClick={() => setIsComponentVisible((hide) => !hide)}
+				onClick={changeVisibility}
 			/>
-			<div
-				className={cx(
-					optionsProps && optionsProps.className,
-					{ hidden: !isComponentVisible },
-					'dropdown'
-				)}
-			>
-				{options.map((_option) => (
-					<Link
-						key={_option.value}
-						className="option"
-						onClick={() => setIsComponentVisible((hide) => !hide)}
-						to={_option.value}
-					>
-						{_option.text}
-					</Link>
-				))}
-			</div>
+			{dropdownContainer}
 		</div>
 	);
 };
