@@ -16,12 +16,12 @@ import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 
-export const oecFontFamily =
+export const OEC_FONT_FAMILY =
   'Public Sans Web, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol';
 
 export { DeleteOutline };
 
-export const tableIcons = {
+export const TABLE_ICONS = {
   Add: forwardRef<any, any>((props, ref) => <AddBox {...props} ref={ref} />),
   Check: forwardRef<any, any>((props, ref) => <Check {...props} ref={ref} />),
   Clear: forwardRef<any, any>((props, ref) => <Clear {...props} ref={ref} />),

@@ -1,6 +1,6 @@
 import React from 'react';
 import MaterialTable, { Column } from 'material-table';
-import { tableIcons, oecFontFamily } from './TableIcons';
+import { TABLE_ICONS, OEC_FONT_FAMILY } from './TableIcons';
 
 export type EditableTableColumn<T extends object> = Column<T>;
 
@@ -26,7 +26,7 @@ export const EditableTable = <T extends object>({
   return (
     <div className="oec-editable-table">
       <MaterialTable
-        icons={tableIcons}
+        icons={TABLE_ICONS}
         title={title}
         data={data}
         columns={columns}
@@ -36,10 +36,10 @@ export const EditableTable = <T extends object>({
         }}
         options={{
           rowStyle: {
-            fontFamily: oecFontFamily,
+            fontFamily: OEC_FONT_FAMILY,
           },
           headerStyle: {
-            fontFamily: oecFontFamily,
+            fontFamily: OEC_FONT_FAMILY,
             whiteSpace: 'nowrap',
           },
           showTitle: false,
