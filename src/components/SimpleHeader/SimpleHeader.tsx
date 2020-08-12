@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { matchPath } from 'react-router';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { NavItem } from '../Header/NavItem';
 import { DropDownNavItemProps, DropDownNavItem } from './DropDownNavItem';
 import cx from 'classnames';
 

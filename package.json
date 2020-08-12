@@ -1,6 +1,6 @@
 {
 	"name": "@ctoec/component-library",
-	"version": "0.0.23",
+	"version": "0.0.24",
 	"description": "React Component Library for OEC branded web applications",
 	"homepage": "https://github.com/ctoec/component-library#readme",
 	"repository": {
@@ -42,12 +42,15 @@
 		]
 	},
 	"dependencies": {
+		"@material-ui/core": "^4.11.0",
+		"@material-ui/icons": "^4.9.1",
 		"dompurify": "^2.0.12",
 		"html-react-parser": "^0.13.0",
 		"lodash": "^4.17.15",
+		"material-table": "^1.68.0",
 		"react": "^16.13.1",
-		"react-dom": "^16.13.1",
 		"react-dates": "^21.8.0",
+		"react-dom": "^16.13.1",
 		"react-router-dom": "^5.2.0",
 		"typescript": "^3.9.0",
 		"uswds": "^2.7.1"
@@ -69,16 +72,16 @@
 		"@testing-library/jest-dom": "^4.2.4",
 		"@testing-library/react": "^9.3.2",
 		"@testing-library/user-event": "^7.1.2",
-		"@types/dompurify": "^2.0.2",
 		"@types/classnames": "^2.2.10",
+		"@types/dompurify": "^2.0.2",
 		"@types/jest": "^24.0.0",
 		"@types/lodash": "^4.14.157",
 		"@types/node": "^12.0.0",
+		"@types/react": "^16.9.43",
 		"@types/react-dates": "^17.1.13",
 		"@types/react-dom": "^16.9.8",
 		"@types/react-router-dom": "^5.1.5",
 		"@types/storybook__react": "^5.2.1",
-		"@types/react": "^16.9.43",
 		"classnames": "^2.2.6",
 		"css-loader": "^3.6.0",
 		"node-sass": "^4.14.1",
