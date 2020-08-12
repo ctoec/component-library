@@ -48,7 +48,7 @@ const SimpleHeaderWithoutRouter: React.FC<SimpleHeaderProps & RouteComponentProp
 		) {
 			setActiveItem(currentFocusedItem);
 		}
-	}, [currentFocusedItem]);
+	}, [previousFocusedItem, currentFocusedItem]);
 
 	const processedNavItems = navItems
 		.map((item, index) => setActiveStateOfNavItem(item, index, location.pathname));

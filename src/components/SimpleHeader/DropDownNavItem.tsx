@@ -8,6 +8,7 @@ export type DropDownNavItemProps = {
 	path?: string;
 	active?: boolean;
 	children?: DropDownNavItemProps[];
+	renderer?: (_: any) => JSX.Element;
 }
 
 type InternalDropDownNavItemProps = DropDownNavItemProps & {
@@ -26,7 +27,8 @@ export function DropDownNavItem({
 	children = [],
 	setPreviousFocusedItem,
 	setCurrentFocusedItem,
-	showDropdown
+	showDropdown,
+	renderer
 }: InternalDropDownNavItemProps) {
 	const { ref, dropdownContainer, hide, show } = useDropdown({
 		options: children.map(child => ({
@@ -34,13 +36,15 @@ export function DropDownNavItem({
 			value: child.path || ''
 		})),
 		optionsProps: { className: '' },
-		optionRender: (props) => (
-			<Link
-				to={props.value}
-				{...props}
-			>
-				{props.text}
-			</Link>
+		optionRender: renderer || (
+			(props) => (
+				<Link
+					to={props.value}
+					{...props}
+				>
+					{props.text}
+				</Link>
+			)
 		)
 	});
 
@@ -59,9 +63,11 @@ export function DropDownNavItem({
 				className="display-inline-block with-dropdown"
 				ref={ref}
 				onFocus={(e) => {
+					show();
 					setCurrentFocusedItem(e.target);
 				}}
 				onBlur={(e) => {
+					// setCurrentFocusedItem(null);
 					setPreviousFocusedItem(e.target);
 				}}
 			>
