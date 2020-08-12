@@ -67,7 +67,6 @@ export function DropDownNavItem({
 					setCurrentFocusedItem(e.target);
 				}}
 				onBlur={(e) => {
-					// setCurrentFocusedItem(null);
 					setPreviousFocusedItem(e.target);
 				}}
 			>
