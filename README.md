@@ -38,5 +38,4 @@ yarn run deploy-storybook
 ## Publishing
 
 1. Increment version in `package.json`
-1. `yarn build`
 1. `npm publish` (If this is the first time, you will need to authenticate yourself by running `npm login`)
