@@ -44,4 +44,21 @@ storiesOf('SimpleHeader', module)
 				logoutPath="/logout"
 			/>
 		);
+	})
+	.add('With top-level renderer', () => {
+		const customTitle = text('Title', defaultTitle);
+		const customNavItems = object('Items', defaultNavItems);
+		customNavItems.push({
+			id: 'direct-link',
+			title: 'Feedback',
+			renderer: (_) => <>This is custom</>
+		})
+		return (
+			<SimpleHeader
+				primaryTitle={customTitle}
+				navItems={customNavItems}
+				loginPath="/login"
+				logoutPath="/logout"
+			/>
+		);
 	});

@@ -78,7 +78,12 @@ export function DropDownNavItem({
 						</span>
 					)
 					: (
-						<Link id={id} className={'usa-nav__link' + (active ? ' usa-current' : '')} to={path || '/'}>
+						renderer ?
+						renderer({
+							id: id,
+							className: 'usa-nav__link' + (active ? ' usa-current' : '')
+						})
+						: <Link id={id} className={'usa-nav__link' + (active ? ' usa-current' : '')} to={path || '/'}>
 							<span>
 								{title}
 							</span>
