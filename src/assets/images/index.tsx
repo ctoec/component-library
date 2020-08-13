@@ -12,6 +12,7 @@ import calendar from './calendar.svg'
 import downArrowCircle from './downArrowCircle.svg'
 import hero from './hero.svg'
 import logo from './logo.svg'
+import logoWithCheck from './logoWithCheck.svg';
 import pencil from './pencil.svg'
 import plusCircle from './plusCircle.svg'
 import teacherWithChalkboard from './teacherWithChalkboard.svg'
@@ -26,6 +27,7 @@ export const Calendar = (props: React.SVGProps<SVGSVGElement>) => <SVGInline svg
 export const DownArrowCircle = (props: React.SVGProps<SVGSVGElement>) => <SVGInline svgProps={props} url={downArrowCircle} />
 export const Hero = (props: React.SVGProps<SVGSVGElement>) => <SVGInline svgProps={props} url={hero} />
 export const Logo = (props: React.SVGProps<SVGSVGElement>) => <SVGInline svgProps={props} url={logo} />
+export const LogoWithCheck = (props: React.SVGProps<SVGSVGElement>) => <SVGInline svgProps={props} url={logoWithCheck} />
 export const Pencil = (props: React.SVGProps<SVGSVGElement>) => <SVGInline svgProps={props} url={pencil} />
 export const PlusCircle = (props: React.SVGProps<SVGSVGElement>) => <SVGInline svgProps={props} url={plusCircle} />
 export const TeacherWithChalkboard = (props: React.SVGProps<SVGSVGElement>) => <SVGInline svgProps={props} url={teacherWithChalkboard} />
