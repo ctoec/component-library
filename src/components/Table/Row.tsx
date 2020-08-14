@@ -1,5 +1,6 @@
 import React, { createContext, useState, useContext, isValidElement, Children, ReactEventHandler } from 'react';
 import { Button } from '../';
+import { RowExpansion } from './RowExpansion';
 
 export type RowProps<T> = {
 	row: T;
@@ -36,68 +37,10 @@ type RowContextType = {
 	toggleExpanded: () => void;
 }
 
-const RowContext = createContext<RowContextType>({
+export const RowContext = createContext<RowContextType>({
 	isExpanded: false,
 	toggleExpanded: () => {}
 });
 
 const { Provider: RowProvider } = RowContext;
 export { RowProvider }
-
-// Expansion component, wraps any content in a <td> with spanCell set by row to 
-// total number of row cells
-type RowExpansionProps = {
-	columnCount: number;
-}
-
-export const RowExpansion: React.FC<RowExpansionProps> = ({ columnCount, children }) => 
-	(<td rowSpan={columnCount}>{children}</td>);
-
-// Expand control component, to enable toggling expanded state
-export const ExpandRow: React.FC = ({ children }) =>  {
-	const { toggleExpanded } = useContext(RowContext);
-
-	return 	<Button
-		text='EXPAND ROW'
-		onClick={toggleExpanded}
-	/>;
-	// if (!isValidElement(children)) {
-		// throw new Error('Invalid children to ExpandRow');
-	// }
-
-	//const { type: Type, props, key } = Children.only(children);
-	// return (
-	// 	<Type
-	// 		{ ...key }
-	// 		{ ...props }
-	// 		onClick={(e: Event) => {
-	// 			console.log("ROW EXPAND");
-	// 			toggleExpanded();
-	// 			if(props.onClick) {
-	// 				props.onClick(e);
-	// 			}
-	// 		}}
-	// 	/>
-	// );
-
-	// return <>{children}</>;
-	// return (
-	// 	<>
-	// 		{Children.map(children, (child) => {
-	// 			const { type: Type, props, key } = child;
-	// 			return (
-	// 				<Type
-	// 					{ ...key }
-	// 					{...props }
-	// 					onClick={(e: ReactEventHandler) => {
-	// 						toggleExpanded();
-	// 						if(props.onClick) {
-	// 							props.onClick(e);
-	// 						}
-	// 					}}
-	// 				/>
-	// 			);
-	// 		})}
-	// 	</>
-	// );
-}
