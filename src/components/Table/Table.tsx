@@ -24,7 +24,7 @@ export type TableProps<T> = {
 	fullWidth?: boolean;
 	caption?: string;
 	className?: string;
-	rowExpansionContent?: JSX.Element;
+	rowExpansionRender?: (row: T) => JSX.Element;
 };
 
 export type TableSort = {
@@ -45,7 +45,7 @@ export class Table<T> extends React.Component<TableProps<T>, TableSort> {
 	};
 
 	render() {
-		const { id, data, rowKey, columns, onRowClick, fullWidth, caption, rowExpansionContent, className } = this.props;
+		const { id, data, rowKey, columns, onRowClick, fullWidth, caption, rowExpansionRender, className } = this.props;
 		const { sortColumn, sortOrder } = this.state;
 
 		const cells = columns.map((column) => column.cell);
@@ -94,7 +94,7 @@ export class Table<T> extends React.Component<TableProps<T>, TableSort> {
 				</thead>
 				<tbody>
 					{sortedData.map((row) => (
-						<Row row={row} cells={cells} onClick={onRowClick} key={rowKey(row)} expansionContent={rowExpansionContent}/>
+						<Row row={row} cells={cells} onClick={onRowClick} key={rowKey(row)} expansionRender={rowExpansionRender}/>
 					))}
 				</tbody>
 			</table>

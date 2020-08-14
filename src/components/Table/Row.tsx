@@ -4,10 +4,10 @@ export type RowProps<T> = {
 	row: T;
 	cells: React.FC<{ row: T }>[];
 	onClick?: (row: T) => () => any;
-	expansionContent?: JSX.Element;
+	expansionRender?: (row: T) => JSX.Element;
 };
 
-export function Row<T>({ row, cells, expansionContent }: RowProps<T>) {
+export function Row<T>({ row, cells, expansionRender }: RowProps<T>) {
 	const [isExpanded, setIsExpanded] = useState(false);
 	return (
 		<RowProvider
@@ -22,8 +22,8 @@ export function Row<T>({ row, cells, expansionContent }: RowProps<T>) {
 					<Cell row={row} key={index} />
 				))}
 			</tr>
-			{isExpanded && expansionContent && 
-				<RowExpansion columnCount={cells.length}>{expansionContent}</RowExpansion>
+			{isExpanded && expansionRender && 
+				<RowExpansion columnCount={cells.length}>{expansionRender(row)}</RowExpansion>
 			}
 		</RowProvider>
 	);
@@ -34,9 +34,10 @@ type RowContextType = {
 	isExpanded: boolean;
 	toggleExpanded: () => void;
 }
+
 const RowContext = createContext<RowContextType>({
 	isExpanded: false,
-	toggleExpanded: () => {},
+	toggleExpanded: () => {}
 });
 
 const { Provider: RowProvider } = RowContext;
@@ -49,7 +50,7 @@ type RowExpansionProps = {
 }
 
 export const RowExpansion: React.FC<RowExpansionProps> = ({ columnCount, children }) => 
-	(<td rowSpan={columnCount}>{ children }</td>);
+	(<td rowSpan={columnCount}>{children}</td>);
 
 // Expand control component, to enable toggling expanded state
 export const ExpandRow: React.FC = ({ children }) =>  {
