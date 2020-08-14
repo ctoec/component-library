@@ -67,6 +67,7 @@ export const ExpandRow: React.FC = ({ children }) =>  {
 			{ ...key }
 			{ ...props }
 			onClick={(e: Event) => {
+				console.log("ROW EXPAND");
 				toggleExpanded();
 				if(props.onClick) {
 					props.onClick(e);
