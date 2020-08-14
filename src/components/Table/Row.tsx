@@ -1,4 +1,5 @@
 import React, { createContext, useState, useContext, isValidElement, Children, ReactEventHandler } from 'react';
+import { Button } from '../';
 
 export type RowProps<T> = {
 	row: T;
@@ -56,25 +57,28 @@ export const RowExpansion: React.FC<RowExpansionProps> = ({ columnCount, childre
 export const ExpandRow: React.FC = ({ children }) =>  {
 	const { toggleExpanded } = useContext(RowContext);
 
-	if (!isValidElement(children)) {
-		throw new Error('Invalid children to ExpandRow');
-	}
+	return 	<Button
+		text='EXPAND ROW'
+		onClick={toggleExpanded}
+	/>;
+	// if (!isValidElement(children)) {
+		// throw new Error('Invalid children to ExpandRow');
+	// }
 
-
-	const { type: Type, props, key }= Children.only(children);
-	return (
-		<Type
-			{ ...key }
-			{ ...props }
-			onClick={(e: Event) => {
-				console.log("ROW EXPAND");
-				toggleExpanded();
-				if(props.onClick) {
-					props.onClick(e);
-				}
-			}}
-		/>
-	);
+	//const { type: Type, props, key } = Children.only(children);
+	// return (
+	// 	<Type
+	// 		{ ...key }
+	// 		{ ...props }
+	// 		onClick={(e: Event) => {
+	// 			console.log("ROW EXPAND");
+	// 			toggleExpanded();
+	// 			if(props.onClick) {
+	// 				props.onClick(e);
+	// 			}
+	// 		}}
+	// 	/>
+	// );
 
 	// return <>{children}</>;
 	// return (
