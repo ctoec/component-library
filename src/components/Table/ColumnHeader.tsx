@@ -53,7 +53,7 @@ export class ColumnHeader extends React.Component<ColumnHeaderProps> {
 				aria-sort={sortOrder || 'none'}
 				style={{ width: width }}
 			>
-				{!sortable && <span className="oec-table__column-title">{name}</span>}
+				{!sortable && <p className="oec-table__column-title">{name}</p>}
 				{sortable && (
 					<button
 						className="oec-table__column-title usa-button--unstyled width-full"

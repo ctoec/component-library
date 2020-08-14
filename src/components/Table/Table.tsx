@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createContext } from 'react';
 import { ColumnHeader } from './ColumnHeader';
 import { Row } from './Row';
 import cx from 'classnames';
@@ -23,6 +23,8 @@ export type TableProps<T> = {
 	onRowClick?: (row: T) => () => any;
 	fullWidth?: boolean;
 	caption?: string;
+	className?: string;
+	rowExpansionContent?: JSX.Element;
 };
 
 export type TableSort = {
@@ -43,7 +45,7 @@ export class Table<T> extends React.Component<TableProps<T>, TableSort> {
 	};
 
 	render() {
-		const { id, data, rowKey, columns, onRowClick, fullWidth, caption } = this.props;
+		const { id, data, rowKey, columns, onRowClick, fullWidth, caption, rowExpansionContent, className } = this.props;
 		const { sortColumn, sortOrder } = this.state;
 
 		const cells = columns.map((column) => column.cell);
@@ -71,7 +73,7 @@ export class Table<T> extends React.Component<TableProps<T>, TableSort> {
 		}
 
 		return (
-			<table id={id} className={cx('oec-table', { 'oec-table--full-width': fullWidth })}>
+			<table id={id} className={cx('oec-table', { 'oec-table--full-width': fullWidth }, className)}>
 				{caption && <caption>{caption}</caption>}
 				<thead>
 					<tr>
@@ -92,7 +94,7 @@ export class Table<T> extends React.Component<TableProps<T>, TableSort> {
 				</thead>
 				<tbody>
 					{sortedData.map((row) => (
-						<Row row={row} cells={cells} onClick={onRowClick} key={rowKey(row)} />
+						<Row row={row} cells={cells} onClick={onRowClick} key={rowKey(row)} expansionContent={rowExpansionContent}/>
 					))}
 				</tbody>
 			</table>

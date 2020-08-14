@@ -1,6 +1,7 @@
 .npm
 .npmrc
 .config/
+.devcontainer
 
 node_modules
 storybook-static
