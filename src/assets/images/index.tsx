@@ -1,10 +1,12 @@
 import React from 'react';
 import { SVGInline } from './SVGInline';
+
 // USWDS imports
 import arrowDown from 'uswds/dist/img/arrow-down.svg';
 import error from 'uswds/dist/img/alerts/error.svg';
 import info from 'uswds/dist/img/alerts/info.svg';
 import success from 'uswds/dist/img/alerts/success.svg';
+
 // Local imports
 import angleArrowDown from './angleArrowDown.svg'
 import arrowRight from './arrowRight.svg'
@@ -16,8 +18,10 @@ import logoWithCheck from './logoWithCheck.svg';
 import pencil from './pencil.svg'
 import plusCircle from './plusCircle.svg'
 import teacherWithChalkboard from './teacherWithChalkboard.svg'
+import downloadArrow from './download.svg';
 
 export const ArrowDown = (props: React.SVGProps<SVGSVGElement>) => <SVGInline svgProps={props} url={arrowDown} />
+export const DownloadArrow = (props: React.SVGProps<SVGSVGElement>) => <SVGInline svgProps={props} url={downloadArrow} />
 export const Error = (props: React.SVGProps<SVGSVGElement>) => <SVGInline svgProps={props} url={error} />
 export const Info = (props: React.SVGProps<SVGSVGElement>) => <SVGInline svgProps={props} url={info} />
 export const Success = (props: React.SVGProps<SVGSVGElement>) => <SVGInline svgProps={props} url={success} />
