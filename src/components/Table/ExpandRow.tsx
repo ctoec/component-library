@@ -10,22 +10,6 @@ export const ExpandRow: React.FC = ({ children }) =>  {
 		throw new Error('Invalid children to ExpandRow');
 	}
 
-	//const { type: Type, props, key } = Children.only(children);
-	// return (
-	// 	<Type
-	// 		{ ...key }
-	// 		{ ...props }
-	// 		onClick={(e: Event) => {
-	// 			console.log("ROW EXPAND");
-	// 			toggleExpanded();
-	// 			if(props.onClick) {
-	// 				props.onClick(e);
-	// 			}
-	// 		}}
-	// 	/>
-	// );
-
-	// return <>{children}</>;
 	return (
 		<>
 			{Children.map(children, (child) => {

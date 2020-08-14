@@ -7,4 +7,4 @@ type RowExpansionProps = {
 }
 
 export const RowExpansion: React.FC<RowExpansionProps> = ({ columnCount, children }) => 
-	(<tr><td rowSpan={columnCount}>{children}</td></tr>);
+	(<tr><td colSpan={columnCount}>{children}</td></tr>);
