@@ -54,13 +54,28 @@ export const RowExpansion: React.FC<RowExpansionProps> = ({ columnCount, childre
 
 // Expand control component, to enable toggling expanded state
 export const ExpandRow: React.FC = ({ children }) =>  {
-	// const { toggleExpanded } = useContext(RowContext);
+	const { toggleExpanded } = useContext(RowContext);
 
 	if (!isValidElement(children)) {
 		throw new Error('Invalid children to ExpandRow');
 	}
 
-	return <>{children}</>;
+
+	const { type: Type, props, key }= Children.only(children);
+	return (
+		<Type
+			{ ...key }
+			{ ...props }
+			onClick={(e: Event) => {
+				toggleExpanded();
+				if(props.onClick) {
+					props.onClick(e);
+				}
+			}}
+		/>
+	);
+
+	// return <>{children}</>;
 	// return (
 	// 	<>
 	// 		{Children.map(children, (child) => {
