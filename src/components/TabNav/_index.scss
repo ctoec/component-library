@@ -36,6 +36,8 @@
 
 		&:hover {
 			cursor: pointer;
+			background-color: #ececec;
+			color: $theme-color-primary;
 		}
 	}
 }
