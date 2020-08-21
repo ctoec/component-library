@@ -34,12 +34,7 @@
 			color: #ffffff;
 		}
 
-		&:hover {
-			cursor: pointer;
-			background-color: #ececec;
-			color: $theme-color-primary;
-		}
-		&:focus {
+		&:hover, &:focus {
 			cursor: pointer;
 			background-color: #ececec;
 			color: $theme-color-primary;
