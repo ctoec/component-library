@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import cx from 'classnames';
-import { useHistory } from 'react-router';
 
 export type TabItemProps = {
 	id: string;
@@ -16,20 +15,13 @@ export type TabNavProps = {
 export const TabNav: React.FC<TabNavProps> = ({ items, activeId }) => {
 	const startingIndex = items.findIndex((item) => item.id === activeId);
 	const [activeTabIndex, setActiveTabIndex] = useState(startingIndex < 0 ? 0 : startingIndex);
-	const history = useHistory();
 
-	useEffect(() => {
-		const activeIndex = items.findIndex((item) => item.id === activeId);
-		const activeIndexOrCurrent = activeIndex < 0 ? activeTabIndex : activeIndex;
-		setActiveTabIndex(activeIndexOrCurrent);
-	}, [activeId, activeTabIndex, items]);
-
-	useEffect(() => {
-		history.push(`#${items[activeTabIndex].id}`);
-	}, [activeTabIndex, history, items]);
-
+	// Cleanest way to handle tab switching.
+	// Don't need to use effects because we don't have to actually
+	// run functions after the DOM renders.
+	// This prevents getting caught in infinite state loops.
 	const onClick = (index: number) => {
-		setActiveTabIndex(index);
+        setActiveTabIndex(index);
 	};
 
 	const tabs = items.map(({ text }, index) => (
