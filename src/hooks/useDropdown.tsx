@@ -44,7 +44,7 @@ export const useDropdown: (_: DropdownOptions) => {
 				{options.map((_option, index) => {
 					if (index === options.length - 1) {
 						return (
-							<li>
+							<li key={index}>
 								{optionRender({
 									key: _option.value,
 									value: _option.value,
@@ -57,7 +57,7 @@ export const useDropdown: (_: DropdownOptions) => {
 						);
 					} else {
 						return (
-							<li>
+							<li key={index}>
 								{optionRender({
 									key: _option.value,
 									value: _option.value,
