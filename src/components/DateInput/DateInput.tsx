@@ -9,15 +9,15 @@ export type DateInputProps = {
 	onChange: (newDate: Date | undefined) => void;
 	id: string;
 	label: string;
-	date?: Date;
+	defaultValue?: Date;
 	disabled?: boolean;
-	optional?: boolean;
+	optional?: boolean
 	status?: FormStatusProps;
 	className?: string;
 };
 
 export const DateInput: React.FC<DateInputProps> = ({
-	date: inputDate,
+	defaultValue,
 	onChange,
 	id,
 	label,
@@ -35,7 +35,7 @@ export const DateInput: React.FC<DateInputProps> = ({
 	};
 
 	const [calendarOpen, setCalendarOpen] = useState<boolean>(false);
-	const [date, setDate] = useState<Date | undefined>(inputDate);
+	const [date, setDate] = useState<Date | undefined>(defaultValue);
 	const [month, setMonth] = useState<number | string>(moment(date).format('M'))
 	const [day, setDay] = useState<number | string>(moment(date).format('D'))
 	const [year, setYear] = useState<number | string>(moment(date).format('YYYY'))
@@ -132,7 +132,7 @@ export const DateInput: React.FC<DateInputProps> = ({
 									setCalendarOpen(false);
 								}
 							}}
-							initialVisibleMonth={() => moment(date) || moment()}
+							initialVisibleMonth={() => moment(date)}
 						/>
 					</div>
 				</div>

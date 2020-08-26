@@ -8,8 +8,13 @@
 		@include u-bg('gray-5');
 	}
 
+	// Remove bottom border from 'borderless' style cards
+	&--borderless:not(:last-of-type) {
+		border-bottom: none;
+	}
+
 	// Remove top border from not-first-cards so that we don't have redundant thick borders
-	+ .oec-card {
+	+.oec-card {
 		border-top: none;
 	}
 
