@@ -3,6 +3,7 @@ import moment from 'moment';
 import { DayPickerSingleDateController } from 'react-dates';
 import { FieldSet, TextInput, FormStatusProps, Button } from '..';
 import { Calendar } from '../../assets/images';
+import 'react-dates/lib/css/_datepicker.css';
 
 export type DateInputProps = {
 	onChange: (newDate: Date | undefined) => void;

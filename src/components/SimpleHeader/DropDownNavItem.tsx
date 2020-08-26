@@ -57,7 +57,7 @@ export function DropDownNavItem({
 	}, [showDropdown])
 
 	return (
-		<li className="usa-nav__secondary-item">
+		<li className="usa-nav__secondary-item" key={id}>
 			<span
 				id={title}
 				className="display-inline-block with-dropdown"
@@ -73,7 +73,7 @@ export function DropDownNavItem({
 				{children.length > 0
 					? (
 						<span>
-							<a id={id} href="javascript:void" aria-haspopup="true" className={'usa-nav__link' + (active ? ' usa-current' : '')}>{title}</a>
+							<button id={id} aria-haspopup="true" className={'usa-nav__link' + (active ? ' usa-current' : '')}>{title}</button>
 							{dropdownContainer}
 						</span>
 					)
