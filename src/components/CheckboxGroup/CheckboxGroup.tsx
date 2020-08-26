@@ -8,12 +8,13 @@ import cx from 'classnames';
  * Type for the values that will define
  * a single Checkbox option in the CheckboxGroup
  */
+export type CheckboxOptionRenderProps = {
+	id: string;
+	selected: boolean;
+	onChange: React.ChangeEventHandler<HTMLInputElement>;
+}
 export type CheckboxOption = {
-	render: (props: {
-		id: string;
-		selected: boolean;
-		onChange: React.ChangeEventHandler<HTMLInputElement>;
-	}) => JSX.Element;
+	render: (props: CheckboxOptionRenderProps) => JSX.Element;
 	value: string;
 	expansion?: React.ReactNode;
 };
