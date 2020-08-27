@@ -8,6 +8,8 @@ export type CheckboxProps = {
 	defaultValue?: boolean;
 	className?: string;
 	disabled?: boolean;
+	// Needs a value if it's not in a checkbox group
+	value?: string | undefined;
 	name?: string;
 } & Omit<HTMLAttributes<HTMLInputElement>, 'onChange' | 'defaultValue'>;
 
@@ -18,6 +20,7 @@ export function Checkbox({
 	id,
 	text,
 	onChange,
+	value,
 	defaultValue,
 	className,
 	disabled,
@@ -28,6 +31,7 @@ export function Checkbox({
 			<input
 				className="usa-checkbox__input"
 				id={id}
+				value={value}
 				type="checkbox"
 				defaultChecked={defaultValue}
 				onChange={onChange}
