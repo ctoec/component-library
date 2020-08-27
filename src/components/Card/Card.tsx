@@ -46,7 +46,6 @@ export function Card({
 	const [isExpanded, setIsExpanded] = useState(expanded);
 	const updateExpanded = useCallback(
 		(_: boolean) => {
-			console.log("UPDATE EXPANDED with value", `${_}`);
 			setPreviousIsExpanded(isExpanded);
 			setIsExpanded(_);
 		},
