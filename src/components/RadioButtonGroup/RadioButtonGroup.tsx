@@ -7,13 +7,14 @@ import cx from 'classnames';
  * Type of the values that will define a
  * single RadioButton option in the RadioButtonGroup
  */
-export type RadioOption = {
-	render: (props: {
+export type RadioOptionRenderProps = {
 		selected: boolean;
 		name: string;
 		value: string;
 		onChange: React.ChangeEventHandler<HTMLInputElement>;
-	}) => JSX.Element;
+}
+export type RadioOption = {
+	render: (props: RadioOptionRenderProps) => JSX.Element;
 	value: string;
 	expansion?: React.ReactNode;
 };
