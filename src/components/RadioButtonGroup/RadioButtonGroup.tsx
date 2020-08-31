@@ -8,10 +8,10 @@ import cx from 'classnames';
  * single RadioButton option in the RadioButtonGroup
  */
 export type RadioOptionRenderProps = {
-		selected: boolean;
-		name: string;
-		value: string;
-		onChange: React.ChangeEventHandler<HTMLInputElement>;
+	selected: boolean;
+	name: string;
+	value: string;
+	onChange: React.ChangeEventHandler<HTMLInputElement>;
 }
 export type RadioOption = {
 	render: (props: RadioOptionRenderProps) => JSX.Element;
@@ -108,10 +108,14 @@ const InternalRadioButtonGroup: React.FC<InternalRadioButtonGroupProps & { id: s
 }) => {
 	const [selectedItem, setSelectedItem] = useState(defaultValue);
 
+	const toggleSelection = (value: string) => {
+		if(selectedItem === value) setSelectedItem('');
+		else setSelectedItem(value);
+	}
 	return (
 		<>
 			{options.map(({ render: Render, value, expansion }) => (
-				<span key={`${id}-${value}`} onChange={() => setSelectedItem(value)}>
+				<span key={`${id}-${value}`} onChange={() => { toggleSelection(value) }}>
 					<Render selected={selectedItem === value} name={name} value={value} onChange={onChange} />
 					{expansion && selectedItem === value && (
 						<div className="oec-itemchooser-expansion">{expansion}</div>
