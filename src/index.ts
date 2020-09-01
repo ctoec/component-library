@@ -2,5 +2,5 @@
 import 'react-dates/initialize';
 
 export * from './assets/images';
-export * from './components'
-export * from './hooks'
+export * from './components';
+export * from './hooks';

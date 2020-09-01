@@ -4,7 +4,12 @@ import { FileInput } from '..';
 import 'uswds/dist/js/uswds';
 
 storiesOf('FileInput', module).add('Default', () => {
-	return (
-		<FileInput id="default" label="File" ariaDescribedById="" ariaDescribedByText="" />
-	);
+  return (
+    <FileInput
+      id="default"
+      label="File"
+      ariaDescribedById=""
+      ariaDescribedByText=""
+    />
+  );
 });

@@ -9,9 +9,9 @@ type EditableTableProps<T extends object> = {
   data: T[];
   columns: EditableTableColumn<T>[];
   onRowUpdate?: any;
-	onRowDelete?: any;
-	selectable?: boolean;
-	EditRowComponent?: React.FunctionComponent;
+  onRowDelete?: any;
+  selectable?: boolean;
+  EditRowComponent?: React.FunctionComponent;
 };
 
 // TODO: abstract into component that manages focus: https://www.w3.org/TR/wai-aria-practices-1.1/#grid
@@ -20,8 +20,8 @@ export const EditableTable = <T extends object>({
   data,
   columns,
   onRowUpdate,
-	onRowDelete,
-	selectable = false,
+  onRowDelete,
+  selectable = false,
 }: EditableTableProps<T>) => {
   return (
     <div className="oec-editable-table">
@@ -45,9 +45,9 @@ export const EditableTable = <T extends object>({
           showTitle: false,
           paging: false,
           search: false,
-					toolbar: false,
-					selection: selectable,
-				}}
+          toolbar: false,
+          selection: selectable,
+        }}
       />
     </div>
   );

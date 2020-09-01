@@ -14,22 +14,22 @@ import { TObjectDriller } from './ObjectDriller';
  * @property updateData Immutable update function for form data
  */
 export type FormContextType = {
-	data: any;
-	dataDriller: any;
-	updateData: React.Dispatch<React.SetStateAction<any>>;
+  data: any;
+  dataDriller: any;
+  updateData: React.Dispatch<React.SetStateAction<any>>;
 };
 
 /**
  * The generic form context type, to support parameterized types for the context
  */
 export type GenericFormContextType<T> = {
-	data: T;
-	dataDriller: TObjectDriller<NonNullable<T>>;
-	// Allows for function style update (setState(s => s) as opposed to setState(s))
-	// Needed for components that make multiple edits to the same object
-	// Otherwise just passing the object would result in one of the updates being
-	// overwritten.
-	updateData: React.Dispatch<React.SetStateAction<T>>;
+  data: T;
+  dataDriller: TObjectDriller<NonNullable<T>>;
+  // Allows for function style update (setState(s => s) as opposed to setState(s))
+  // Needed for components that make multiple edits to the same object
+  // Otherwise just passing the object would result in one of the updates being
+  // overwritten.
+  updateData: React.Dispatch<React.SetStateAction<T>>;
 };
 /**
  * Utility for casting the un-typed context to the generic with type parameter,
@@ -37,14 +37,14 @@ export type GenericFormContextType<T> = {
  * @param context
  */
 export function useGenericContext<S>(context: Context<any>) {
-	const processedContext = useContext(context);
-	return processedContext as GenericFormContextType<S>;
+  const processedContext = useContext(context);
+  return processedContext as GenericFormContextType<S>;
 }
 
 export const FormContext = createContext<FormContextType>({
-	data: undefined,
-	dataDriller: undefined,
-	updateData: (_) => { },
+  data: undefined,
+  dataDriller: undefined,
+  updateData: (_) => {},
 });
 
 export const { Provider: FormProvider, Consumer: FormConsumer } = FormContext;
