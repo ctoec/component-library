@@ -12,6 +12,12 @@ This library provides a uniform collection of reusable UX components, static ass
    ```.sh
    yarn install --frozen-lockfile
    ```
+1. Run locally, or on docker
+    ```sh
+    yarn run storybook
+
+    docker run -it -v `pwd`:/home/node -w /home/node -p 9009:9009 node yarn run storybook
+    ```
 
 ## Examples
 

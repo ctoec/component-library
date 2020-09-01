@@ -124,4 +124,32 @@ storiesOf('Card', module)
 				</CardExpansion>
 			</Card>
 		);
+	})
+	.add('With expandDirection = up', () => {
+		return (
+			<Card expanded={true} expandDirection='up'>
+				<div className="usa-grid">
+					<div className="grid-row">
+						<div className="grid-col">
+							<div className="grid-row text-bold">
+								<div className="grid-col">First name</div>
+								<div className="grid-col">Last name</div>
+							</div>
+							<div className="grid-row">
+								<div className="grid-col">Daniel</div>
+								<div className="grid-col">Radcliff</div>
+							</div>
+						</div>
+						<div className="grid-col">
+							<ExpandCard>
+								<Button appearance="unstyled" text="Click on me to toggle showing the expansion" />
+							</ExpandCard>
+						</div>
+					</div>
+				</div>
+				<CardExpansion>
+					<div>You can see me!! :D</div>
+				</CardExpansion>
+			</Card>
+		)
 	});
