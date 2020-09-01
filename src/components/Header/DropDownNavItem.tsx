@@ -30,7 +30,11 @@ export function DropDownNavItem({
   type = 'primary',
   active = false,
 }: DropDownNavItemProps) {
-  const { ref, isComponentVisible, setIsComponentVisible } = useHideOnLostFocus();
+  const {
+    ref,
+    isComponentVisible,
+    setIsComponentVisible,
+  } = useHideOnLostFocus();
 
   return (
     <li className={`usa-nav__${type}-item`} key={id}>
@@ -44,7 +48,9 @@ export function DropDownNavItem({
         >
           {title}
         </button>
-        <div className={cx({ 'display-none': !isComponentVisible }, 'dropdown')}>
+        <div
+          className={cx({ 'display-none': !isComponentVisible }, 'dropdown')}
+        >
           <ul id={id} hidden={!isComponentVisible}>
             {children.map((c, index) => (
               <li key={index} className="option">
