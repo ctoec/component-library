@@ -5,6 +5,7 @@ import { useDropdown } from '../../hooks';
 export type DropDownNavItemProps = {
 	id: string;
 	title: string;
+	type: 'primary' | 'secondary';
 	path?: string;
 	active?: boolean;
 	children?: DropDownNavItemProps[];
@@ -79,15 +80,15 @@ export function DropDownNavItem({
 					)
 					: (
 						renderer ?
-						renderer({
-							id: id,
-							className: 'usa-nav__link' + (active ? ' usa-current' : '')
-						})
-						: <Link id={id} className={'usa-nav__link' + (active ? ' usa-current' : '')} to={path || '/'}>
-							<span>
-								{title}
-							</span>
-						</Link>
+							renderer({
+								id: id,
+								className: 'usa-nav__link' + (active ? ' usa-current' : '')
+							})
+							: <Link id={id} className={'usa-nav__link' + (active ? ' usa-current' : '')} to={path || '/'}>
+								<span>
+									{title}
+								</span>
+							</Link>
 					)
 				}
 			</span>

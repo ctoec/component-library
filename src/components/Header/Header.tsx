@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { matchPath, useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
+import cx from 'classnames';
 import { NavItem, NavItemProps } from './NavItem';
 import closeIcon from 'uswds/src/img/close.svg';
-import cx from 'classnames';
 import { DropDownNavItemProps } from '../SimpleHeader/DropDownNavItem';
-import { useState, useEffect } from '@storybook/addons';
 
 export type HeaderProps = {
 	primaryTitle: string;
@@ -16,11 +15,7 @@ export type HeaderProps = {
 	userFirstName?: string;
 };
 
-type HeaderState = {
-	menuIsVisible: boolean;
-};
-
-const setActiveStateOfNavItem = function (item: NavItemProps, index: number, path: string) {
+const setActiveStateOfNavItem = function (item: NavItemProps | DropDownNavItemProps, index: number, path: string) {
 	let active: boolean;
 
 	if (index === 0 && path === '/') {
@@ -33,13 +28,13 @@ const setActiveStateOfNavItem = function (item: NavItemProps, index: number, pat
 	return { ...item, active };
 };
 
-export function Header({ primaryTitle,
+export const Header: React.FC<HeaderProps> = ({ primaryTitle,
 	secondaryTitle,
 	navItems,
 	loginPath = '/login',
 	logoutPath = '/logout',
 	userFirstName,
-}: HeaderProps) {
+}) => {
 	const [mobileMenuIsVisible, setMobileMenuIsVisible] = useState(false);
 	const location = useLocation();
 
@@ -52,7 +47,6 @@ export function Header({ primaryTitle,
 			window.removeEventListener('resize', hideMenu);
 		}
 	}, [])
-
 
 	const primaryNavItems = navItems
 		.filter((item) => item.type === 'primary')
@@ -129,3 +123,5 @@ export function Header({ primaryTitle,
 		</div >
 	);
 }
+
+export default Header;
