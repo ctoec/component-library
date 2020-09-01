@@ -11,12 +11,12 @@ import '../src/assets/styles/index.scss';
 addDecorator(StoryRouter());
 addDecorator(withA11y());
 
-addDecorator(story => <div style={{ padding: '40px' }}>{story()}</div>);
+addDecorator((story) => <div style={{ padding: '40px' }}>{story()}</div>);
 
 const req = requireContext('../src', true, /\.stories.(jsx|tsx)$/);
 
 function loadStories() {
-	req.keys().forEach(filename => req(filename));
+  req.keys().forEach((filename) => req(filename));
 }
 
 configure(loadStories, module);

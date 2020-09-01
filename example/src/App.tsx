@@ -1,6 +1,13 @@
 import React from 'react';
-import { Button, Checkbox, FileInput, InlineIcon, Table, Column } from '@ctoec/component-library';
-import '@ctoec/component-library/dist/assets/styles/index.scss'
+import {
+  Button,
+  Checkbox,
+  FileInput,
+  InlineIcon,
+  Table,
+  Column,
+} from '@ctoec/component-library';
+import '@ctoec/component-library/dist/assets/styles/index.scss';
 import 'uswds/dist/js/uswds';
 
 const defaultData = [
@@ -29,9 +36,9 @@ function App() {
       </header>
       <main>
         <Button text="Enter" />
-        <Checkbox id="test" text="One" onChange={() => { }} />
-        <FileInput id="file" label="Upload file" onChange={() => { }} />
-        <InlineIcon icon="angleArrowDown" svgProps={{ fill: "red" }} />
+        <Checkbox id="test" text="One" onChange={() => {}} />
+        <FileInput id="file" label="Upload file" onChange={() => {}} />
+        <InlineIcon icon="angleArrowDown" svgProps={{ fill: 'red' }} />
         <InlineIcon icon="complete" />
         <Table
           id="my-table"
