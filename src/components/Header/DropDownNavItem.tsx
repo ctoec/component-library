@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import cx from 'classnames';
 import { Link } from 'react-router-dom';
+import { useHideOnLostFocus } from '../../hooks';
 
 export type NavDropdownOptionProps = {
   text: string;
@@ -29,22 +30,22 @@ export function DropDownNavItem({
   type = 'primary',
   active = false,
 }: DropDownNavItemProps) {
-  const [showDropdown, setShowDropdown] = useState(false);
+  const { ref, isComponentVisible, setIsComponentVisible } = useHideOnLostFocus();
 
   return (
     <li className={`usa-nav__${type}-item`} key={id}>
-      <span id={title} className="display-inline-block with-dropdown">
+      <span id={title} className="display-inline-block with-dropdown" ref={ref}>
         <button
-          aria-expanded={showDropdown}
+          aria-expanded={isComponentVisible}
           aria-controls={id}
           aria-haspopup="true"
           className={'usa-nav__link' + (active ? ' usa-current' : '')}
-          onClick={() => setShowDropdown((s) => !s)}
+          onClick={() => setIsComponentVisible((s) => !s)}
         >
           {title}
         </button>
-        <div className={cx({ 'display-none': !showDropdown }, 'dropdown')}>
-          <ul id={id} className="">
+        <div className={cx({ 'display-none': !isComponentVisible }, 'dropdown')}>
+          <ul id={id} hidden={!isComponentVisible}>
             {children.map((c, index) => (
               <li key={index} className="option">
                 {c.renderer ? c.renderer(c) : defaultRenderer(c)}

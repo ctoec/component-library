@@ -16,7 +16,6 @@ export const useHideOnLostFocus = <T extends HTMLElement>() => {
   useEffect(() => {
     // Bind the event listener
     document.addEventListener('mousedown', handleClickOutside);
-    // TODO: add keyboard functionality
     return () => {
       // Unbind the event listener on clean up
       document.removeEventListener('mousedown', handleClickOutside);
