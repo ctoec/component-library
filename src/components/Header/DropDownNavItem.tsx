@@ -48,7 +48,7 @@ export function DropDownNavItem({
 		} else {
 			hide();
 		}
-	}, [showDropdown, show, hide]);
+	}, [showDropdown]);
 
 	return (
 		<li className={`usa-nav__${type}-item`} key={id}>
