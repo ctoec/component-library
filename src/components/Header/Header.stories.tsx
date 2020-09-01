@@ -1,10 +1,9 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withKnobs, text, object } from '@storybook/addon-knobs';
-
 import { Header } from './Header';
 import { NavItemProps } from './NavItem';
-import { DropDownNavItemProps } from '../SimpleHeader/DropDownNavItem';
+import { DropDownNavItemProps } from './DropDownNavItem';
 
 const defaultTitle = 'Hello world!';
 const defaultName = 'Chris';
@@ -21,18 +20,17 @@ const defaultNavItems: NavItemProps[] = [
   { type: 'secondary', title: 'Another secondary item', path: '/secondary2' },
 ];
 const dropdownNavItems: DropDownNavItemProps[] = [
-  { id: 'test1', title: 'Active section', path: '/' },
   {
     id: 'test2',
     title: 'Attention needed',
-    path: '/attention',
-    children: [{ id: 'test3', title: 'Child two', path: '/child-two' }],
+    type: 'secondary',
+    children: [{ text: 'Child two', value: '/' }],
   },
   {
     id: 'test4',
     title: 'Secondary item',
-    path: '/secondary',
-    children: [{ id: 'test5', title: 'Child one', path: '/child-one' }],
+    type: 'secondary',
+    children: [{ text: 'Child one', value: '/child-one' }],
   },
 ];
 
@@ -66,7 +64,7 @@ storiesOf('Header', module)
   })
   .add('Dropdown', () => {
     const customTitle = text('Title', defaultTitle);
-    const customNavItems = object('Items', dropdownNavItems);
+    const customNavItems = object('Items', [...defaultNavItems, ...dropdownNavItems]);
     return (
       <Header
         primaryTitle={customTitle}

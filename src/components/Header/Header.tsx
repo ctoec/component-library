@@ -7,7 +7,7 @@ import closeIcon from 'uswds/src/img/close.svg';
 import {
   DropDownNavItemProps,
   DropDownNavItem,
-} from '../SimpleHeader/DropDownNavItem';
+} from './DropDownNavItem';
 
 export type HeaderProps = {
   primaryTitle: string;
@@ -127,8 +127,8 @@ export const Header: React.FC<HeaderProps> = ({
                 item.children ? (
                   <DropDownNavItem {...item} key={index} />
                 ) : (
-                  <NavItem {...item} key={index} />
-                )
+                    <NavItem {...item} key={index} />
+                  )
               )}
             </ul>
             <div
@@ -142,8 +142,8 @@ export const Header: React.FC<HeaderProps> = ({
                   item.children ? (
                     <DropDownNavItem {...item} key={index} />
                   ) : (
-                    <NavItem {...item} key={index} />
-                  )
+                      <NavItem {...item} key={index} />
+                    )
                 )}
                 {userFirstName && (
                   <NavItem type="secondary" title="Log out" path={logoutPath} />
@@ -153,8 +153,8 @@ export const Header: React.FC<HeaderProps> = ({
                 {userFirstName ? (
                   <span>Hi, {userFirstName}.</span>
                 ) : (
-                  <Link to={loginPath}>Sign in</Link>
-                )}
+                    <Link to={loginPath}>Sign in</Link>
+                  )}
               </div>
             </div>
           </div>
