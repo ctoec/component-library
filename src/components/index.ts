@@ -23,7 +23,6 @@ export * from './RadioButton/RadioButton';
 export * from './RadioButtonGroup/RadioButtonGroup';
 export * from './Select/Select';
 export * from './SideNav/SideNav';
-export * from './SimpleHeader/SimpleHeader';
 export * from './StepList/StepList';
 export * from './Suspend/Suspend';
 export * from './Table';
