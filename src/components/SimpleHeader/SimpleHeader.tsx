@@ -78,7 +78,6 @@ const SimpleHeaderWithoutRouter: React.FC<SimpleHeaderProps & RouteComponentProp
 					</div>
 				</div>
 				<nav
-					role="navigation"
 					className={cx('usa-nav')}
 				>
 					<div className={cx('usa-nav__inner')}>
@@ -86,7 +85,7 @@ const SimpleHeaderWithoutRouter: React.FC<SimpleHeaderProps & RouteComponentProp
 							<ul className={cx('usa-nav__secondary-links')}>
 								{processedNavItems.map((item, index) => (
 									<DropDownNavItem
-										key={index}	
+										key={index}
 										{...item}
 										previousFocusedItem={previousFocusedItem}
 										setPreviousFocusedItem={setPreviousFocusedItem}

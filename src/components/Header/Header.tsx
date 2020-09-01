@@ -5,11 +5,12 @@ import { Link } from 'react-router-dom';
 import { NavItem, NavItemProps } from './NavItem';
 import closeIcon from 'uswds/src/img/close.svg';
 import cx from 'classnames';
+import { DropDownNavItemProps } from '../SimpleHeader/DropDownNavItem';
 
 export type HeaderProps = {
 	primaryTitle: string;
 	secondaryTitle?: string;
-	navItems: NavItemProps[];
+	navItems: (NavItemProps | DropDownNavItemProps)[];
 	loginPath?: string;
 	logoutPath?: string;
 	userFirstName?: string;
@@ -111,7 +112,6 @@ class HeaderWithoutRouter extends React.Component<HeaderProps & RouteComponentPr
 						</button>
 					</div>
 					<nav
-						role="navigation"
 						className={cx('usa-nav', { 'is-visible': this.state.menuIsVisible })}
 					>
 						<div className={cx('usa-nav__inner')}>
