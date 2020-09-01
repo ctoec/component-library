@@ -1,23 +1,26 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
+import cx from 'classnames';
 import { Link } from 'react-router-dom';
-import { useDropdown, DropdownOptionProps } from '../../hooks';
+
+export type NavDropdownOptionProps = {
+	text: string;
+	value: string;
+	renderer?: (_: any) => JSX.Element;
+}
 
 export type DropDownNavItemProps = {
 	id: string;
 	title: string;
-	children: DropdownOptionProps[];
+	children: NavDropdownOptionProps[];
 	type: 'primary' | 'secondary';
 	active?: boolean;
-	renderer?: (_: any) => JSX.Element;
 };
 
-type InternalDropDownNavItemProps = DropDownNavItemProps & {
-	previousFocusedItem: any;
-	setPreviousFocusedItem: any;
-	currentFocusedItem: any;
-	setCurrentFocusedItem: any;
-	showDropdown: boolean;
-};
+const defaultRenderer = ((props: any) => (
+	<Link to={props.value} {...props}>
+		{props.text}
+	</Link>
+))
 
 export function DropDownNavItem({
 	id,
@@ -25,64 +28,38 @@ export function DropDownNavItem({
 	children = [],
 	type = 'primary',
 	active = false,
-	renderer,
-	setPreviousFocusedItem,
-	setCurrentFocusedItem,
-	showDropdown,
-}: InternalDropDownNavItemProps) {
-	const { ref, dropdownContainer, hide, show } = useDropdown({
-		options: children,
-		optionsProps: { className: '' },
-		optionRender:
-			renderer ||
-			((props) => (
-				<Link to={props.value} {...props}>
-					{props.text}
-				</Link>
-			)),
-	});
-
-	useEffect(() => {
-		if (showDropdown) {
-			show();
-		} else {
-			hide();
-		}
-	}, [showDropdown]);
+}: DropDownNavItemProps) {
+	const [showDropdown, setShowDropdown] = useState(false);
 
 	return (
 		<li className={`usa-nav__${type}-item`} key={id}>
 			<span
 				id={title}
 				className="display-inline-block with-dropdown"
-				ref={ref}
-				onFocus={(e) => {
-					show();
-					setCurrentFocusedItem(e.target);
-				}}
-				onBlur={(e) => {
-					setPreviousFocusedItem(e.target);
-				}}
 			>
-				{!renderer && (
-					<span>
-						{/* TODO: is this the correct aria logic?  Does it need to say whether it's open? */}
-						<button
-							id={id}
-							aria-haspopup="true"
-							className={'usa-nav__link' + (active ? ' usa-current' : '')}
-						>
-							{title}
-						</button>
-						{dropdownContainer}
-					</span>
-				)}
-				{/* TODO: we should only use renderer for child elements; this needs to control the popup */}
-				{renderer &&
-					renderer({
-						id: id,
-						className: 'usa-nav__link' + (active ? ' usa-current' : ''),
-					})}
+				<button
+					aria-expanded={showDropdown}
+					aria-controls={id}
+					aria-haspopup="true"
+					className={'usa-nav__link' + (active ? ' usa-current' : '')}
+					onClick={() => setShowDropdown(s => !s)}
+				>
+					{title}
+				</button>
+				<div
+					className={cx(
+						{ 'display-none': !showDropdown },
+						'dropdown'
+					)}
+				>
+					<ul id={id} className="">
+						{children.map((c, index) =>
+							<li key={index} className="option">
+								{c.renderer ? c.renderer(c) : defaultRenderer(c)}
+							</li>
+						)}
+					</ul>
+				</div>
 			</span>
 		</li>
 	);

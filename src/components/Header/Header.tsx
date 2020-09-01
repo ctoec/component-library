@@ -39,7 +39,6 @@ export const Header: React.FC<HeaderProps> = ({
   primaryTitle,
   secondaryTitle,
   navItems,
-  loginPath = '/login',
   logoutPath = '/logout',
   userFirstName,
 }) => {
@@ -117,7 +116,7 @@ export const Header: React.FC<HeaderProps> = ({
             Menu
           </button>
         </div>
-        <nav className={cx('usa-nav', { 'is-visible': mobileMenuIsVisible })}>
+        <nav aria-label="Primary navigation" className={cx('usa-nav', { 'is-visible': mobileMenuIsVisible })}>
           <div className={cx('usa-nav__inner')}>
             <button className={cx('usa-nav__close')} onClick={hideMenu}>
               <img src={closeIcon} alt="close" />
@@ -149,13 +148,6 @@ export const Header: React.FC<HeaderProps> = ({
                   <NavItem type="secondary" title="Log out" path={logoutPath} />
                 )}
               </ul>
-              <div className={cx('oec-logged-in-user')}>
-                {userFirstName ? (
-                  <span>Hi, {userFirstName}.</span>
-                ) : (
-                    <Link to={loginPath}>Sign in</Link>
-                  )}
-              </div>
             </div>
           </div>
         </nav>

@@ -73,4 +73,16 @@ storiesOf('Header', module)
         logoutPath="/logout"
       />
     );
+  })
+  .add('Dropdown with secondary buttons only', () => {
+    const customTitle = text('Title', defaultTitle);
+    const customNavItems = object('Items', [...defaultNavItems, ...dropdownNavItems]).filter(d => d.type === 'secondary')
+    return (
+      <Header
+        primaryTitle={customTitle}
+        navItems={customNavItems}
+        loginPath="/login"
+        logoutPath="/logout"
+      />
+    );
   });
