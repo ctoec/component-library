@@ -4,10 +4,7 @@ import { Link } from 'react-router-dom';
 import cx from 'classnames';
 import { NavItem, NavItemProps } from './NavItem';
 import closeIcon from 'uswds/src/img/close.svg';
-import {
-  DropDownNavItemProps,
-  DropDownNavItem,
-} from './DropDownNavItem';
+import { DropDownNavItemProps, DropDownNavItem } from './DropDownNavItem';
 
 export type HeaderProps = {
   primaryTitle: string;
@@ -116,7 +113,10 @@ export const Header: React.FC<HeaderProps> = ({
             Menu
           </button>
         </div>
-        <nav aria-label="Primary navigation" className={cx('usa-nav', { 'is-visible': mobileMenuIsVisible })}>
+        <nav
+          aria-label="Primary navigation"
+          className={cx('usa-nav', { 'is-visible': mobileMenuIsVisible })}
+        >
           <div className={cx('usa-nav__inner')}>
             <button className={cx('usa-nav__close')} onClick={hideMenu}>
               <img src={closeIcon} alt="close" />
@@ -126,8 +126,8 @@ export const Header: React.FC<HeaderProps> = ({
                 item.children ? (
                   <DropDownNavItem {...item} key={index} />
                 ) : (
-                    <NavItem {...item} key={index} />
-                  )
+                  <NavItem {...item} key={index} />
+                )
               )}
             </ul>
             <div
@@ -141,8 +141,8 @@ export const Header: React.FC<HeaderProps> = ({
                   item.children ? (
                     <DropDownNavItem {...item} key={index} />
                   ) : (
-                      <NavItem {...item} key={index} />
-                    )
+                    <NavItem {...item} key={index} />
+                  )
                 )}
                 {userFirstName && (
                   <NavItem type="secondary" title="Log out" path={logoutPath} />

@@ -3,64 +3,56 @@ import cx from 'classnames';
 import { Link } from 'react-router-dom';
 
 export type NavDropdownOptionProps = {
-	text: string;
-	value: string;
-	renderer?: (_: any) => JSX.Element;
-}
-
-export type DropDownNavItemProps = {
-	id: string;
-	title: string;
-	children: NavDropdownOptionProps[];
-	type: 'primary' | 'secondary';
-	active?: boolean;
+  text: string;
+  value: string;
+  renderer?: (_: any) => JSX.Element;
 };
 
-const defaultRenderer = ((props: any) => (
-	<Link to={props.value} {...props}>
-		{props.text}
-	</Link>
-))
+export type DropDownNavItemProps = {
+  id: string;
+  title: string;
+  children: NavDropdownOptionProps[];
+  type: 'primary' | 'secondary';
+  active?: boolean;
+};
+
+const defaultRenderer = (props: any) => (
+  <Link to={props.value} {...props}>
+    {props.text}
+  </Link>
+);
 
 export function DropDownNavItem({
-	id,
-	title,
-	children = [],
-	type = 'primary',
-	active = false,
+  id,
+  title,
+  children = [],
+  type = 'primary',
+  active = false,
 }: DropDownNavItemProps) {
-	const [showDropdown, setShowDropdown] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
 
-	return (
-		<li className={`usa-nav__${type}-item`} key={id}>
-			<span
-				id={title}
-				className="display-inline-block with-dropdown"
-			>
-				<button
-					aria-expanded={showDropdown}
-					aria-controls={id}
-					aria-haspopup="true"
-					className={'usa-nav__link' + (active ? ' usa-current' : '')}
-					onClick={() => setShowDropdown(s => !s)}
-				>
-					{title}
-				</button>
-				<div
-					className={cx(
-						{ 'display-none': !showDropdown },
-						'dropdown'
-					)}
-				>
-					<ul id={id} className="">
-						{children.map((c, index) =>
-							<li key={index} className="option">
-								{c.renderer ? c.renderer(c) : defaultRenderer(c)}
-							</li>
-						)}
-					</ul>
-				</div>
-			</span>
-		</li>
-	);
+  return (
+    <li className={`usa-nav__${type}-item`} key={id}>
+      <span id={title} className="display-inline-block with-dropdown">
+        <button
+          aria-expanded={showDropdown}
+          aria-controls={id}
+          aria-haspopup="true"
+          className={'usa-nav__link' + (active ? ' usa-current' : '')}
+          onClick={() => setShowDropdown((s) => !s)}
+        >
+          {title}
+        </button>
+        <div className={cx({ 'display-none': !showDropdown }, 'dropdown')}>
+          <ul id={id} className="">
+            {children.map((c, index) => (
+              <li key={index} className="option">
+                {c.renderer ? c.renderer(c) : defaultRenderer(c)}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </span>
+    </li>
+  );
 }

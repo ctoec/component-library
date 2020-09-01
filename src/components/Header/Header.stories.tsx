@@ -64,7 +64,10 @@ storiesOf('Header', module)
   })
   .add('Dropdown', () => {
     const customTitle = text('Title', defaultTitle);
-    const customNavItems = object('Items', [...defaultNavItems, ...dropdownNavItems]);
+    const customNavItems = object('Items', [
+      ...defaultNavItems,
+      ...dropdownNavItems,
+    ]);
     return (
       <Header
         primaryTitle={customTitle}
@@ -76,7 +79,10 @@ storiesOf('Header', module)
   })
   .add('Dropdown with secondary buttons only', () => {
     const customTitle = text('Title', defaultTitle);
-    const customNavItems = object('Items', [...defaultNavItems, ...dropdownNavItems]).filter(d => d.type === 'secondary')
+    const customNavItems = object('Items', [
+      ...defaultNavItems,
+      ...dropdownNavItems,
+    ]).filter((d) => d.type === 'secondary');
     return (
       <Header
         primaryTitle={customTitle}
