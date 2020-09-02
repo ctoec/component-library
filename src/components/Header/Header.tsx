@@ -2,21 +2,21 @@ import React, { useState, useEffect } from 'react';
 import { matchPath, useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
 import cx from 'classnames';
-import { NavItem, NavItemProps } from './NavItem';
+import { NavLink, NavLinkProps } from './NavLink';
 import closeIcon from 'uswds/src/img/close.svg';
-import { DropDownNavItemProps, DropDownNavItem } from './DropDownNavItem';
+import { NavDropdownProps, NavDropdown } from './NavDropdown';
 
 export type HeaderProps = {
   primaryTitle: string;
   secondaryTitle?: string;
-  navItems: (NavItemProps | DropDownNavItemProps)[];
+  NavLinks: (NavLinkProps | NavDropdownProps)[];
   loginPath?: string;
   logoutPath?: string;
   userFirstName?: string;
 };
 
-const setActiveStateOfNavItem = function (
-  item: NavItemProps | DropDownNavItemProps,
+const setActiveStateOfNavLink = function (
+  item: NavLinkProps | NavDropdownProps,
   index: number,
   path: string
 ) {
@@ -35,7 +35,7 @@ const setActiveStateOfNavItem = function (
 export const Header: React.FC<HeaderProps> = ({
   primaryTitle,
   secondaryTitle,
-  navItems,
+  NavLinks,
   logoutPath = '/logout',
   userFirstName,
 }) => {
@@ -52,13 +52,13 @@ export const Header: React.FC<HeaderProps> = ({
     };
   }, []);
 
-  const primaryNavItems = navItems
-    .filter((item) => item.type === 'primary')
-    .map((item, index) =>
-      setActiveStateOfNavItem(item, index, location.pathname)
-    );
+  const primaryNavLinks = NavLinks.filter(
+    (item) => item.type === 'primary'
+  ).map((item, index) =>
+    setActiveStateOfNavLink(item, index, location.pathname)
+  );
 
-  const secondaryNavItems = navItems.filter(
+  const secondaryNavLinks = NavLinks.filter(
     (item) => item.type === 'secondary'
   );
 
@@ -122,25 +122,25 @@ export const Header: React.FC<HeaderProps> = ({
               <img src={closeIcon} alt="close" />
             </button>
             <ul className="usa-nav__primary usa-accordion">
-              {primaryNavItems.map((item, index) =>
+              {primaryNavLinks.map((item, index) =>
                 item.children ? (
-                  <DropDownNavItem {...item} key={index} />
+                  <NavDropdown {...item} key={index} />
                 ) : (
-                  <NavItem {...item} key={index} />
+                  <NavLink {...item} key={index} />
                 )
               )}
             </ul>
             <div className="usa-nav__secondary usa-nav__secondary--extended">
               <ul className="usa-nav__secondary-links">
-                {secondaryNavItems.map((item, index) =>
+                {secondaryNavLinks.map((item, index) =>
                   item.children ? (
-                    <DropDownNavItem {...item} key={index} />
+                    <NavDropdown {...item} key={index} />
                   ) : (
-                    <NavItem {...item} key={index} />
+                    <NavLink {...item} key={index} />
                   )
                 )}
                 {userFirstName && (
-                  <NavItem type="secondary" title="Log out" path={logoutPath} />
+                  <NavLink type="secondary" text="Log out" path={logoutPath} />
                 )}
               </ul>
             </div>

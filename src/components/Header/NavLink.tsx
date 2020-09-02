@@ -1,34 +1,42 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import cx from 'classnames';
 
-export type NavItemType = 'primary' | 'secondary';
+export type NavLinkType = 'primary' | 'secondary';
 
-export type NavItemProps = {
-  title: string;
+export type NavLinkProps = {
+  text: string;
   path: string;
-  type: NavItemType;
+  type: NavLinkType;
   active?: boolean;
   attentionNeeded?: boolean;
+  target?: string;
+  rel?: string;
   children?: never;
 };
 
-export function NavItem({
-  title,
+export function NavLink({
+  text,
   path,
   type,
   active = false,
   attentionNeeded = false,
-}: NavItemProps) {
+  target,
+  rel,
+}: NavLinkProps) {
+  const commonLinkProps = {
+    className: cx('usa-nav__link', { 'usa-current': active }),
+    to: path,
+    target,
+    rel,
+  };
   switch (type) {
     case 'primary':
       return (
         <li className="usa-nav__primary-item">
-          <Link
-            className={'usa-nav__link' + (active ? ' usa-current' : '')}
-            to={path}
-          >
+          <Link {...commonLinkProps}>
             <span>
-              {title}
+              {text}
               {attentionNeeded && (
                 <span className="attention-needed">
                   &nbsp;&bull;
@@ -42,9 +50,7 @@ export function NavItem({
     case 'secondary':
       return (
         <li className="usa-nav__secondary-item">
-          <Link to={path} className="usa-nav__link">
-            {title}
-          </Link>
+          <Link {...commonLinkProps}>{text}</Link>
         </li>
       );
   }
