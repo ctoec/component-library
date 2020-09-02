@@ -14,6 +14,7 @@ export type DropDownNavItemProps = {
   title: string;
   children: NavDropdownOptionProps[];
   type: 'primary' | 'secondary';
+  path?: never;
   active?: boolean;
 };
 
