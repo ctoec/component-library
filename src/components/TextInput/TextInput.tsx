@@ -36,7 +36,7 @@ export type TextInputHTMLInputElementProps = InternalTextInputProps & {
 };
 
 export type TextInlineInputHTMLInputElementProps = InternalTextInputProps & {
-	type?: 'inline-input';
+	type: 'inline-input';
 	onChange: (event: React.ChangeEvent<HTMLInputElement>) => any;
 	onBlur?: (event: React.FocusEvent<HTMLInputElement>) => any;
 	inputProps?: React.HTMLProps<HTMLInputElement>;
@@ -78,7 +78,7 @@ export function TextInput({
 	const onChange = (e: any) => {
 		inputOnChange(e)
 		if (!value) {
-			// If there isn't a value, then this component should manage its own value
+			// If there isn't an input value, then this component should manage its own value
 			updateValue(e.target.value)
 		}
 	}
@@ -89,7 +89,7 @@ export function TextInput({
 		disabled,
 		defaultValue,
 		// Use the value if one is passed in; otherwise this manages its own state
-		value: value || _value,
+		value: value || _value || '',
 		'aria-describedby': status ? status.id : undefined,
 		'aria-invalid': status && status.type === 'error',
 		// Using aria-required to avoid default Chrome behavior
