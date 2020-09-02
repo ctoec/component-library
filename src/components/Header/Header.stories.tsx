@@ -43,7 +43,7 @@ storiesOf('Header', module)
     return (
       <Header
         primaryTitle={customTitle}
-        navLinks={customNavLinks}
+        navItems={customNavLinks}
         loginPath="/login"
         logoutPath="/logout"
         userFirstName={customName}
@@ -56,7 +56,7 @@ storiesOf('Header', module)
     return (
       <Header
         primaryTitle={customTitle}
-        navLinks={customNavLinks}
+        navItems={customNavLinks}
         loginPath="/login"
         logoutPath="/logout"
       />
@@ -71,7 +71,7 @@ storiesOf('Header', module)
     return (
       <Header
         primaryTitle={customTitle}
-        navLinks={customNavLinks}
+        navItems={customNavLinks}
         loginPath="/login"
         logoutPath="/logout"
       />
@@ -86,7 +86,7 @@ storiesOf('Header', module)
     return (
       <Header
         primaryTitle={customTitle}
-        navLinks={customNavLinks}
+        navItems={customNavLinks}
         loginPath="/login"
         logoutPath="/logout"
       />

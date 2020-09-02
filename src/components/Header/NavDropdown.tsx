@@ -62,7 +62,11 @@ export function NavDropdown({
         >
           <ul id={id} hidden={!isComponentVisible}>
             {children.map((c, index) => (
-              <li key={index} className="option">
+              <li
+                key={index}
+                className="option"
+                onClick={() => setIsComponentVisible(false)}
+              >
                 {c.renderer ? c.renderer(c) : defaultRenderer(c)}
               </li>
             ))}

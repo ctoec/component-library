@@ -8,16 +8,16 @@ import { act } from 'react-dom/test-utils';
 const headerProps: HeaderProps = {
   primaryTitle: 'Header test',
   navItems: [
-    { type: 'primary', title: 'Active section', path: '/first' },
-    { type: 'primary', title: 'Another section', path: '/another' },
+    { type: 'primary', text: 'Active section', path: '/first' },
+    { type: 'primary', text: 'Another section', path: '/another' },
     {
       type: 'primary',
-      title: 'Attention needed',
+      text: 'Attention needed',
       attentionNeeded: true,
       path: '/attention',
     },
-    { type: 'secondary', title: 'Secondary item', path: '/secondary' },
-    { type: 'secondary', title: 'Another secondary item', path: '/secondary2' },
+    { type: 'secondary', text: 'Secondary item', path: '/secondary' },
+    { type: 'secondary', text: 'Another secondary item', path: '/secondary2' },
   ],
   loginPath: '/login',
   logoutPath: '/logout',

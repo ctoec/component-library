@@ -9,7 +9,7 @@ import { NavDropdownProps, NavDropdown } from './NavDropdown';
 export type HeaderProps = {
   primaryTitle: string;
   secondaryTitle?: string;
-  navLinks: (NavLinkProps | NavDropdownProps)[];
+  navItems: (NavLinkProps | NavDropdownProps)[];
   loginPath?: string;
   logoutPath?: string;
   userFirstName?: string;
@@ -35,7 +35,7 @@ const setActiveStateOfNavLink = function (
 export const Header: React.FC<HeaderProps> = ({
   primaryTitle,
   secondaryTitle,
-  navLinks,
+  navItems,
   logoutPath = '/logout',
   userFirstName,
 }) => {
@@ -45,6 +45,7 @@ export const Header: React.FC<HeaderProps> = ({
   function hideMenu() {
     setMobileMenuIsVisible(false);
   }
+
   useEffect(() => {
     window.addEventListener('resize', hideMenu);
     return function cleanup() {
@@ -52,13 +53,17 @@ export const Header: React.FC<HeaderProps> = ({
     };
   }, []);
 
-  const primaryNavLinks = navLinks.filter(
-    (item) => item.type === 'primary'
-  ).map((item, index) =>
-    setActiveStateOfNavLink(item, index, location.pathname)
-  );
+  useEffect(() => {
+    hideMenu();
+  }, [location]);
 
-  const secondaryNavLinks = navLinks.filter(
+  const primaryNavItems = navItems
+    .filter((item) => item.type === 'primary')
+    .map((item, index) =>
+      setActiveStateOfNavLink(item, index, location.pathname)
+    );
+
+  const secondaryNavItems = navItems.filter(
     (item) => item.type === 'secondary'
   );
 
@@ -122,22 +127,22 @@ export const Header: React.FC<HeaderProps> = ({
               <img src={closeIcon} alt="close" />
             </button>
             <ul className="usa-nav__primary usa-accordion">
-              {primaryNavLinks.map((item, index) =>
+              {primaryNavItems.map((item, index) =>
                 item.children ? (
                   <NavDropdown {...item} key={index} />
                 ) : (
-                    <NavLink {...item} key={index} />
-                  )
+                  <NavLink {...item} key={index} />
+                )
               )}
             </ul>
             <div className="usa-nav__secondary usa-nav__secondary--extended">
               <ul className="usa-nav__secondary-links">
-                {secondaryNavLinks.map((item, index) =>
+                {secondaryNavItems.map((item, index) =>
                   item.children ? (
                     <NavDropdown {...item} key={index} />
                   ) : (
-                      <NavLink {...item} key={index} />
-                    )
+                    <NavLink {...item} key={index} />
+                  )
                 )}
                 {userFirstName && (
                   <NavLink type="secondary" text="Log out" path={logoutPath} />
