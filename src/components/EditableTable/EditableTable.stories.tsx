@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
-import { Form, FormField, TextInput, TextInputProps } from '..';
 import { storiesOf } from '@storybook/react';
-
 import { EditableTable, EditableTableColumn } from './EditableTable';
-import { Button } from '../Button/Button';
 
 type TableData = {
   id: number;

@@ -2,35 +2,43 @@ import React from 'react';
 import cx from 'classnames';
 import { Link } from 'react-router-dom';
 import { useHideOnLostFocus } from '../../hooks';
+import { NavLinkType } from './NavLink';
 
-export type NavDropdownOptionProps = {
+export type NavDropdownLinkProps = {
   text: string;
-  value: string;
-  renderer?: (_: any) => JSX.Element;
+  path: string;
+  target?: string;
+  rel?: string;
+  renderer?: never;
 };
 
-export type DropDownNavItemProps = {
+export type NavDropdownRendererProps = {
+  text: string;
+  renderer: (_: any) => JSX.Element;
+};
+
+export type NavDropdownProps = {
   id: string;
-  title: string;
-  children: NavDropdownOptionProps[];
-  type: 'primary' | 'secondary';
-  path?: never;
+  text: string;
+  children: (NavDropdownRendererProps | NavDropdownLinkProps)[];
+  type: NavLinkType;
   active?: boolean;
+  path?: never;
 };
 
-const defaultRenderer = (props: any) => (
-  <Link to={props.value} {...props}>
+const defaultRenderer = (props: NavDropdownLinkProps) => (
+  <Link to={props.path} {...props}>
     {props.text}
   </Link>
 );
 
-export function DropDownNavItem({
+export function NavDropdown({
   id,
-  title,
+  text,
   children = [],
   type = 'primary',
   active = false,
-}: DropDownNavItemProps) {
+}: NavDropdownProps) {
   const {
     ref,
     isComponentVisible,
@@ -39,7 +47,7 @@ export function DropDownNavItem({
 
   return (
     <li className={`usa-nav__${type}-item`} key={id}>
-      <span id={title} className="display-inline-block with-dropdown" ref={ref}>
+      <span id={text} className="display-inline-block with-dropdown" ref={ref}>
         <button
           aria-expanded={isComponentVisible}
           aria-controls={id}
@@ -47,14 +55,18 @@ export function DropDownNavItem({
           className={'usa-nav__link' + (active ? ' usa-current' : '')}
           onClick={() => setIsComponentVisible((s) => !s)}
         >
-          {title}
+          {text}
         </button>
         <div
           className={cx({ 'display-none': !isComponentVisible }, 'dropdown')}
         >
           <ul id={id} hidden={!isComponentVisible}>
             {children.map((c, index) => (
-              <li key={index} className="option">
+              <li
+                key={index}
+                className="option"
+                onClick={() => setIsComponentVisible(false)}
+              >
                 {c.renderer ? c.renderer(c) : defaultRenderer(c)}
               </li>
             ))}

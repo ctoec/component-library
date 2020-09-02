@@ -2,35 +2,35 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withKnobs, text, object } from '@storybook/addon-knobs';
 import { Header } from './Header';
-import { NavItemProps } from './NavItem';
-import { DropDownNavItemProps } from './DropDownNavItem';
+import { NavLinkProps } from './NavLink';
+import { NavDropdownProps } from './NavDropdown';
 
 const defaultTitle = 'Hello world!';
 const defaultName = 'Chris';
-const defaultNavItems: NavItemProps[] = [
-  { type: 'primary', title: 'Active section', path: '/' },
-  { type: 'primary', title: 'Another section', path: '/another' },
+const defaultNavLinks: NavLinkProps[] = [
+  { type: 'primary', text: 'Active section', path: '/' },
+  { type: 'primary', text: 'Another section', path: '/another' },
   {
     type: 'primary',
-    title: 'Attention needed',
+    text: 'Attention needed',
     attentionNeeded: true,
     path: '/attention',
   },
-  { type: 'secondary', title: 'Secondary item', path: '/secondary' },
-  { type: 'secondary', title: 'Another secondary item', path: '/secondary2' },
+  { type: 'secondary', text: 'Secondary item', path: '/secondary' },
+  { type: 'secondary', text: 'Another secondary item', path: '/secondary2' },
 ];
-const dropdownNavItems: DropDownNavItemProps[] = [
+const navDropdowns: NavDropdownProps[] = [
   {
     id: 'test2',
-    title: 'Attention needed',
+    text: 'Attention needed',
     type: 'secondary',
-    children: [{ text: 'Child two', value: '/' }],
+    children: [{ text: 'Child two', path: '/' }],
   },
   {
     id: 'test4',
-    title: 'Secondary item',
+    text: 'Secondary item',
     type: 'secondary',
-    children: [{ text: 'Child one', value: '/child-one' }],
+    children: [{ text: 'Child one', path: '/child-one' }],
   },
 ];
 
@@ -39,11 +39,11 @@ storiesOf('Header', module)
   .add('Logged in', () => {
     const customTitle = text('Title', defaultTitle);
     const customName = text('Name', defaultName);
-    const customNavItems = object('Items', defaultNavItems);
+    const customNavLinks = object('Items', defaultNavLinks);
     return (
       <Header
         primaryTitle={customTitle}
-        navItems={customNavItems}
+        navItems={customNavLinks}
         loginPath="/login"
         logoutPath="/logout"
         userFirstName={customName}
@@ -52,11 +52,11 @@ storiesOf('Header', module)
   })
   .add('Logged out', () => {
     const customTitle = text('Title', defaultTitle);
-    const customNavItems = object('Items', defaultNavItems);
+    const customNavLinks = object('Items', defaultNavLinks);
     return (
       <Header
         primaryTitle={customTitle}
-        navItems={customNavItems}
+        navItems={customNavLinks}
         loginPath="/login"
         logoutPath="/logout"
       />
@@ -64,14 +64,14 @@ storiesOf('Header', module)
   })
   .add('Dropdown', () => {
     const customTitle = text('Title', defaultTitle);
-    const customNavItems = object('Items', [
-      ...defaultNavItems,
-      ...dropdownNavItems,
+    const customNavLinks = object('Items', [
+      ...defaultNavLinks,
+      ...navDropdowns,
     ]);
     return (
       <Header
         primaryTitle={customTitle}
-        navItems={customNavItems}
+        navItems={customNavLinks}
         loginPath="/login"
         logoutPath="/logout"
       />
@@ -79,14 +79,14 @@ storiesOf('Header', module)
   })
   .add('Dropdown with secondary buttons only', () => {
     const customTitle = text('Title', defaultTitle);
-    const customNavItems = object('Items', [
-      ...defaultNavItems,
-      ...dropdownNavItems,
+    const customNavLinks = object('Items', [
+      ...defaultNavLinks,
+      ...navDropdowns,
     ]).filter((d) => d.type === 'secondary');
     return (
       <Header
         primaryTitle={customTitle}
-        navItems={customNavItems}
+        navItems={customNavLinks}
         loginPath="/login"
         logoutPath="/logout"
       />
