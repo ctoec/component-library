@@ -4,7 +4,7 @@ import { FieldSetProps, FieldSet } from '../FieldSet/FieldSet';
 import { FormStatusFunc } from './FormStatusFunc';
 
 export type FormFieldSetProps<TData> = {
-	status?: FormStatusFunc<TData>;
+  status?: FormStatusFunc<TData>;
 } & Pick<FieldSetProps, Exclude<keyof FieldSetProps, 'status'>>;
 
 /**
@@ -14,15 +14,15 @@ export type FormFieldSetProps<TData> = {
  * to which this FormFieldSet has access via the FormContext.
  */
 export const FormFieldSet = <TData extends object>({
-	status = () => undefined,
-	children,
-	...props
+  status = () => undefined,
+  children,
+  ...props
 }: PropsWithChildren<FormFieldSetProps<TData>>) => {
-	const { dataDriller } = useGenericContext<TData>(FormContext);
+  const { dataDriller } = useGenericContext<TData>(FormContext);
 
-	return (
-		<FieldSet status={status(dataDriller)} {...props}>
-			{children}
-		</FieldSet>
-	);
+  return (
+    <FieldSet status={status(dataDriller)} {...props}>
+      {children}
+    </FieldSet>
+  );
 };

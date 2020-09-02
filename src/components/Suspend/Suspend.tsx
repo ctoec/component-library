@@ -1,14 +1,18 @@
 import React from 'react';
 
 export type SuspendProps = {
-	waitFor: boolean;
-	fallback: React.ReactElement | null;
+  waitFor: boolean;
+  fallback: React.ReactElement | null;
 };
 
-export const Suspend: React.FC<SuspendProps> = ({ waitFor, fallback, children }) => {
-	if (!waitFor) {
-		return fallback;
-	}
+export const Suspend: React.FC<SuspendProps> = ({
+  waitFor,
+  fallback,
+  children,
+}) => {
+  if (!waitFor) {
+    return fallback;
+  }
 
-	return <>{children}</>;
+  return <>{children}</>;
 };

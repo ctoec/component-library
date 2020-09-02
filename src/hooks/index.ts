@@ -1,2 +1,2 @@
 export * from './useDropdown';
-export * from './useHideOnLostFocus'
+export * from './useHideOnLostFocus';
