@@ -81,8 +81,8 @@ export const Header: React.FC<HeaderProps> = ({
         )}
         role="banner"
       >
-        <div className={cx('usa-navbar')}>
-          <div className={cx('usa-logo')} id="extended-logo">
+        <div className="usa-navbar">
+          <div className="usa-logo" id="extended-logo">
             <Link to="/" aria-label={`${primaryTitle} home`}>
               <div
                 className={cx(
@@ -107,7 +107,7 @@ export const Header: React.FC<HeaderProps> = ({
             </Link>
           </div>
           <button
-            className={cx('usa-menu-btn')}
+            className="usa-menu-btn"
             onClick={() => setMobileMenuIsVisible(!mobileMenuIsVisible)}
           >
             Menu
@@ -117,11 +117,11 @@ export const Header: React.FC<HeaderProps> = ({
           aria-label="Primary navigation"
           className={cx('usa-nav', { 'is-visible': mobileMenuIsVisible })}
         >
-          <div className={cx('usa-nav__inner')}>
-            <button className={cx('usa-nav__close')} onClick={hideMenu}>
+          <div className="usa-nav__inner">
+            <button className="usa-nav__close" onClick={hideMenu}>
               <img src={closeIcon} alt="close" />
             </button>
-            <ul className={cx('usa-nav__primary usa-accordion')}>
+            <ul className="usa-nav__primary usa-accordion">
               {primaryNavItems.map((item, index) =>
                 item.children ? (
                   <DropDownNavItem {...item} key={index} />
@@ -130,13 +130,8 @@ export const Header: React.FC<HeaderProps> = ({
                 )
               )}
             </ul>
-            <div
-              className={cx(
-                'usa-nav__secondary',
-                'usa-nav__secondary--extended'
-              )}
-            >
-              <ul className={cx('usa-nav__secondary-links')}>
+            <div className="usa-nav__secondary usa-nav__secondary--extended">
+              <ul className="usa-nav__secondary-links">
                 {secondaryNavItems.map((item, index) =>
                   item.children ? (
                     <DropDownNavItem {...item} key={index} />
