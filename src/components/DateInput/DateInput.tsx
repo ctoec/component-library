@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import moment from 'moment';
+import moment, { Moment } from 'moment';
 import { DayPickerSingleDateController } from 'react-dates';
 import { FieldSet, TextInput, FormStatusProps, Button } from '..';
 import { Calendar } from '../../assets/images';
 import 'react-dates/lib/css/_datepicker.css';
 
 export type DateInputProps = {
-	onChange: (newDate: Date | undefined) => void;
+	onChange: (newDate: Moment | undefined) => void;
 	id: string;
 	label: string;
-	defaultValue?: Date;
+	defaultValue?: Date | Moment;
 	disabled?: boolean;
 	optional?: boolean
 	status?: FormStatusProps;
@@ -34,26 +34,35 @@ export const DateInput: React.FC<DateInputProps> = ({
 		status: status ? { ...status, message: undefined } : undefined,
 	};
 
+	const [date, setDate] = useState<Moment | undefined>(moment.utc(defaultValue));
+
+	// Text input values
+	const [month, setMonth] = useState<number | string>(date ? date.format('M') : '')
+	const [day, setDay] = useState<number | string>(date ? date.format('D') : '')
+	const [year, setYear] = useState<number | string>(date ? date.format('YYYY') : '')
+
+	// Calendar
 	const [calendarOpen, setCalendarOpen] = useState<boolean>(false);
-	const [date, setDate] = useState<Date | undefined>(defaultValue);
-	const [month, setMonth] = useState<number | string>(moment(date).format('M'))
-	const [day, setDay] = useState<number | string>(moment(date).format('D'))
-	const [year, setYear] = useState<number | string>(moment(date).format('YYYY'))
+	const [calendarDate, setCalendarDate] = useState<Moment | undefined>(date);
 
 	useEffect(() => {
-		const newDate = moment(`${year}-${month}-${day}`, 'YYYY-MM-DD');
+		const newDate = moment.utc(`${year}-${month}-${day}`, 'YYYY-MM-DD');
 		if (newDate.isValid()) {
-			setDate(newDate.toDate());
+			setDate(newDate);
 		}
 	}, [month, day, year])
 
 	useEffect(() => {
-		const newMoment = moment(date)
-		setMonth(newMoment.format('M'))
-		setDay(newMoment.format('D'))
-		setYear(newMoment.format('YYYY'))
-		onChange(date)
-	}, [date, onChange])
+		if (!calendarDate) return;
+		setDate(calendarDate)
+		setMonth(calendarDate.format('M'))
+		setDay(calendarDate.format('D'))
+		setYear(calendarDate.format('YYYY'))
+	}, [calendarDate])
+
+	useEffect(() => {
+		onChange(date);
+	}, [onChange, date])
 
 	return (
 		<FieldSet
@@ -74,7 +83,7 @@ export const DateInput: React.FC<DateInputProps> = ({
 					}}
 					id={`${id}-month`}
 					label="Month"
-					inputProps={{ maxLength: 2, min: 1, max: 12, type: 'number' }}
+					inputProps={{ min: 1, max: 12, type: 'number' }}
 					{...commonDateInputProps}
 				/>
 				<TextInput
@@ -85,7 +94,7 @@ export const DateInput: React.FC<DateInputProps> = ({
 					}}
 					id={`${id}-day`}
 					label="Day"
-					inputProps={{ maxLength: 2, min: 1, max: 31, type: 'number' }}
+					inputProps={{ min: 1, max: 31, type: 'number' }}
 					{...commonDateInputProps}
 				/>
 				<TextInput
@@ -96,7 +105,7 @@ export const DateInput: React.FC<DateInputProps> = ({
 					}}
 					id={`${id}-year`}
 					label="Year"
-					inputProps={{ minLength: 0, maxLength: 4, min: 1900, max: 2200, type: 'number' }}
+					inputProps={{ min: 1000, max: 2200, type: 'number' }}
 					{...commonDateInputProps}
 				/>
 				<div className="oec-calendar-dropdown oec-date-input__calendar-dropdown">
@@ -114,10 +123,10 @@ export const DateInput: React.FC<DateInputProps> = ({
 					>
 						<DayPickerSingleDateController
 							// Key forces re-render, which helps deal with bugs in this library-- see scss file
-							key={JSON.stringify({ date, calendarOpen })}
-							date={moment(date)}
+							key={JSON.stringify({ calendarDate, calendarOpen })}
+							date={date || null}
 							onDateChange={(newDate) => {
-								setDate(newDate?.toDate())
+								setCalendarDate(newDate || undefined)
 							}}
 							focused={calendarOpen}
 							// Annoyingly this does not do anything for keyboard users
@@ -132,7 +141,7 @@ export const DateInput: React.FC<DateInputProps> = ({
 									setCalendarOpen(false);
 								}
 							}}
-							initialVisibleMonth={() => moment(date)}
+							initialVisibleMonth={() => date || moment()}
 						/>
 					</div>
 				</div>
