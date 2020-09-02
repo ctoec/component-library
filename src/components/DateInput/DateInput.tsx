@@ -34,7 +34,6 @@ export const DateInput: React.FC<DateInputProps> = ({
 		status: status ? { ...status, message: undefined } : undefined,
 	};
 
-	const [calendarOpen, setCalendarOpen] = useState<boolean>(false);
 	const [date, setDate] = useState<Moment | undefined>(moment.utc(defaultValue));
 
 	// Text input values
@@ -42,7 +41,8 @@ export const DateInput: React.FC<DateInputProps> = ({
 	const [day, setDay] = useState<number | string>(date ? date.format('D') : '')
 	const [year, setYear] = useState<number | string>(date ? date.format('YYYY') : '')
 
-	// Calendar input value
+	// Calendar
+	const [calendarOpen, setCalendarOpen] = useState<boolean>(false);
 	const [calendarDate, setCalendarDate] = useState<Moment | undefined>(date);
 
 	useEffect(() => {
