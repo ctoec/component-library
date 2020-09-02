@@ -9,7 +9,7 @@ import { NavDropdownProps, NavDropdown } from './NavDropdown';
 export type HeaderProps = {
   primaryTitle: string;
   secondaryTitle?: string;
-  NavLinks: (NavLinkProps | NavDropdownProps)[];
+  navLinks: (NavLinkProps | NavDropdownProps)[];
   loginPath?: string;
   logoutPath?: string;
   userFirstName?: string;
@@ -35,7 +35,7 @@ const setActiveStateOfNavLink = function (
 export const Header: React.FC<HeaderProps> = ({
   primaryTitle,
   secondaryTitle,
-  NavLinks,
+  navLinks,
   logoutPath = '/logout',
   userFirstName,
 }) => {
@@ -52,13 +52,13 @@ export const Header: React.FC<HeaderProps> = ({
     };
   }, []);
 
-  const primaryNavLinks = NavLinks.filter(
+  const primaryNavLinks = navLinks.filter(
     (item) => item.type === 'primary'
   ).map((item, index) =>
     setActiveStateOfNavLink(item, index, location.pathname)
   );
 
-  const secondaryNavLinks = NavLinks.filter(
+  const secondaryNavLinks = navLinks.filter(
     (item) => item.type === 'secondary'
   );
 
@@ -126,8 +126,8 @@ export const Header: React.FC<HeaderProps> = ({
                 item.children ? (
                   <NavDropdown {...item} key={index} />
                 ) : (
-                  <NavLink {...item} key={index} />
-                )
+                    <NavLink {...item} key={index} />
+                  )
               )}
             </ul>
             <div className="usa-nav__secondary usa-nav__secondary--extended">
@@ -136,8 +136,8 @@ export const Header: React.FC<HeaderProps> = ({
                   item.children ? (
                     <NavDropdown {...item} key={index} />
                   ) : (
-                    <NavLink {...item} key={index} />
-                  )
+                      <NavLink {...item} key={index} />
+                    )
                 )}
                 {userFirstName && (
                   <NavLink type="secondary" text="Log out" path={logoutPath} />
