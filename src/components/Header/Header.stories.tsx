@@ -9,7 +9,13 @@ const defaultTitle = 'Hello world!';
 const defaultName = 'Chris';
 const defaultNavLinks: NavLinkProps[] = [
   { type: 'primary', text: 'Active section', path: '/' },
-  { type: 'primary', text: 'Another section', path: '/another' },
+  {
+    type: 'primary',
+    text: 'Googlywebs',
+    path: 'https://google.com',
+    external: true,
+    target: '_blank',
+  },
   {
     type: 'primary',
     text: 'Attention needed',
