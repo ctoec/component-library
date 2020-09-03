@@ -11,7 +11,7 @@ export type NavLinkProps = {
   active?: boolean;
   attentionNeeded?: boolean;
   target?: string;
-  rel?: string;
+  external?: boolean;
   children?: never;
 };
 
@@ -22,19 +22,35 @@ export function NavLink({
   active = false,
   attentionNeeded = false,
   target,
-  rel,
+  external,
 }: NavLinkProps) {
   const commonLinkProps = {
     className: cx('usa-nav__link', { 'usa-current': active }),
     to: path,
     target,
-    rel,
   };
+
+  let LinkEl: React.FC = ({ children }) => (
+    <Link {...commonLinkProps}>{children}</Link>
+  );
+
+  if (external) {
+    LinkEl = ({ children }) => (
+      <a
+        {...commonLinkProps}
+        href={path}
+        rel="noopener noreferrer"
+      >
+        {children}
+      </a>
+    );
+  }
+
   switch (type) {
     case 'primary':
       return (
         <li className="usa-nav__primary-item">
-          <Link {...commonLinkProps}>
+          <LinkEl>
             <span>
               {text}
               {attentionNeeded && (
@@ -44,13 +60,13 @@ export function NavLink({
                 </span>
               )}
             </span>
-          </Link>
+          </LinkEl>
         </li>
       );
     case 'secondary':
       return (
         <li className="usa-nav__secondary-item">
-          <Link {...commonLinkProps}>{text}</Link>
+          <LinkEl>{text}</LinkEl>
         </li>
       );
   }
