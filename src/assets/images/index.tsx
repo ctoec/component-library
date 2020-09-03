@@ -6,6 +6,7 @@ import arrowDown from 'uswds/dist/img/arrow-down.svg';
 import error from 'uswds/dist/img/alerts/error.svg';
 import info from 'uswds/dist/img/alerts/info.svg';
 import success from 'uswds/dist/img/alerts/success.svg';
+import close from 'uswds/dist/img/close.svg';
 
 // Local imports
 import angleArrowDown from './angleArrowDown.svg';
@@ -20,6 +21,9 @@ import plusCircle from './plusCircle.svg';
 import teacherWithChalkboard from './teacherWithChalkboard.svg';
 import downloadArrow from './download.svg';
 
+export const Close = (props: React.SVGProps<SVGSVGElement>) => (
+	<SVGInline svgProps={props} url={close} />
+);
 export const ArrowDown = (props: React.SVGProps<SVGSVGElement>) => (
   <SVGInline svgProps={props} url={arrowDown} />
 );
