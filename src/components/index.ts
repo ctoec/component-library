@@ -25,6 +25,7 @@ export * from './RadioButtonGroup/RadioButtonGroup';
 export * from './Select/Select';
 export * from './SideNav/SideNav';
 export * from './StepList/StepList';
+export * from './StepList/Step';
 export * from './Suspend/Suspend';
 export * from './Table';
 export * from './TabNav/TabNav';
