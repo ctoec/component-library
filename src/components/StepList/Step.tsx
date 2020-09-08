@@ -3,31 +3,36 @@ import { Link } from 'react-router-dom';
 import { InlineIcon } from '..';
 import cx from 'classnames';
 
-export type ExternalStepStatus =
+export type StepStatus =
   | 'incomplete'
   | 'complete'
   | 'attentionNeeded'
   | 'exempt';
 
-export type InternalStepStatus = 'notStarted' | 'active' | ExternalStepStatus;
+// The statuses 'active' and 'notStarted' can only be assigned by StepList itself
+export type InternalStepStatus = 'notStarted' | 'active' | StepStatus;
 
 export type PossibleHeaderLevels = 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 
-export type InternalStepProps<T> = {
+export type StepProps<T> = {
   key: string;
   name: string;
-  status: InternalStepStatus;
+  status: (props: T) => StepStatus;
   editPath?: string;
   // Edit component is an alternative to edit path
   EditComponent?: React.FC<T>;
   Summary?: React.FC<T>;
   Form: React.FC<T>;
+  headerLevel?: PossibleHeaderLevels;
+};
+
+export type InternalStepProps<T> = Omit<StepProps<T>, 'status'> & {
+  status: InternalStepStatus;
   props: T;
-  headerLevel: PossibleHeaderLevels;
   type?: 'normal' | 'embedded';
 };
 
-const labelForStatus = (status: ExternalStepStatus) => {
+const labelForStatus = (status: StepStatus) => {
   switch (status) {
     case 'incomplete':
       return 'Missing information';
@@ -47,7 +52,7 @@ export function Step<T>({
   Summary,
   Form,
   props,
-  headerLevel,
+  headerLevel = 'h2',
   type = 'normal',
   EditComponent,
 }: InternalStepProps<T>) {

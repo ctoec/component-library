@@ -1,26 +1,13 @@
 import React from 'react';
 import {
   Step,
-  ExternalStepStatus,
   InternalStepProps,
   InternalStepStatus,
   PossibleHeaderLevels,
+  StepProps,
 } from './Step';
 import cx from 'classnames';
 
-// The statuses 'active' and 'notStarted' can only be assigned by StepList itself
-export type StepStatus = ExternalStepStatus;
-
-export type StepProps<T> = {
-  key: string;
-  name: string;
-  status: (props: T) => StepStatus;
-  editPath?: string;
-  EditComponent?: React.FC<T>;
-  Summary?: React.FC<T>;
-  Form: React.FC<T>;
-  headerLevel?: PossibleHeaderLevels;
-};
 
 export type StepListProps<T> = {
   steps: StepProps<T>[];
