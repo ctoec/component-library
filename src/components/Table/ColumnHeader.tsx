@@ -61,7 +61,7 @@ export class ColumnHeader extends React.Component<ColumnHeaderProps> {
             onClick={this.toggleSort}
             aria-label={`Sort table by ${name} in ${
               sorted && sortOrder === 'ascending' ? 'descending' : 'ascending'
-              } order`}
+            } order`}
           >
             {name}
             <div

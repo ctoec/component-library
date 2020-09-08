@@ -90,9 +90,7 @@ export function Step<T>({
                   Edit<span className="usa-sr-only"> {name.toLowerCase()}</span>
                 </Link>
               )}
-              {EditComponent && (
-                <EditComponent {...props} />
-              )}
+              {EditComponent && <EditComponent {...props} />}
             </>
           )}
         </div>

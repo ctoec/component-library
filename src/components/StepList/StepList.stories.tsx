@@ -2,6 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import { StepList, StepListProps } from './StepList';
+import { Button } from '..';
 
 const props: StepListProps<any> = {
   steps: [
@@ -17,7 +18,7 @@ const props: StepListProps<any> = {
       key: '2',
       name: 'One giant leap',
       status: () => 'complete',
-      editPath: '2',
+      EditComponent: () => <Button text="edit component" />,
       Summary: () => <></>,
       Form: () => <p>For mankind.</p>,
     },
@@ -29,9 +30,15 @@ const props: StepListProps<any> = {
       Summary: () => <></>,
       Form: () => <></>,
     },
+    {
+      key: '4',
+      name: 'Without a summary',
+      status: () => 'complete',
+      Form: () => <></>,
+    },
   ],
   props: {},
-  activeStep: '2',
+  activeStep: '3',
 };
 
 storiesOf('StepList', module).add('Default', () => {

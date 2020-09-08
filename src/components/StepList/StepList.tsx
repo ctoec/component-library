@@ -8,7 +8,6 @@ import {
 } from './Step';
 import cx from 'classnames';
 
-
 export type StepListProps<T> = {
   steps: StepProps<T>[];
   props: T;
