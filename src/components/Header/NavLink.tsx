@@ -36,11 +36,7 @@ export function NavLink({
 
   if (external) {
     LinkEl = ({ children }) => (
-      <a
-        {...commonLinkProps}
-        href={path}
-        rel="noopener noreferrer"
-      >
+      <a {...commonLinkProps} href={path} rel="noopener noreferrer">
         {children}
       </a>
     );
