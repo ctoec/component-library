@@ -18,7 +18,9 @@ export type InternalStepProps<T> = {
   name: string;
   status: InternalStepStatus;
   editPath?: string;
-  Summary: React.FC<T>;
+  // Edit component is an alternative to edit path
+  EditComponent?: React.FC<T>;
+  Summary?: React.FC<T>;
   Form: React.FC<T>;
   props: T;
   headerLevel: PossibleHeaderLevels;
@@ -47,6 +49,7 @@ export function Step<T>({
   props,
   headerLevel,
   type = 'normal',
+  EditComponent,
 }: InternalStepProps<T>) {
   const Heading = headerLevel;
   return (
@@ -58,7 +61,7 @@ export function Step<T>({
       <div className="oec-step-list__step__content">
         <Heading className="oec-step-list__step__title">{name}</Heading>
 
-        {status !== 'notStarted' && status !== 'active' && (
+        {Summary && status !== 'notStarted' && status !== 'active' && (
           <div className="oec-step-list__step__summary">
             <Summary {...props} />
           </div>
@@ -79,9 +82,11 @@ export function Step<T>({
               </div>
               {editPath && (
                 <Link to={editPath} className="usa-link">
-                  {/* https://silktide.com/blog/2013/i-thought-title-text-improved-accessibility-i-was-wrong */}
                   Edit<span className="usa-sr-only"> {name.toLowerCase()}</span>
                 </Link>
+              )}
+              {EditComponent && (
+                <EditComponent {...props} />
               )}
             </>
           )}
