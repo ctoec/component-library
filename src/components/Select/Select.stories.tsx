@@ -80,7 +80,7 @@ storiesOf('Select', module)
   .add('Select', () => {
     return (
       <Select
-        label="Select"
+        label={<span>Span label</span>}
         onChange={onChange}
         options={options}
         id="storybook-select"

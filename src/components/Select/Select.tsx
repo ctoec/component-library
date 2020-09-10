@@ -12,7 +12,7 @@ export type SelectOption = {
 
 export type SelectProps = {
   id: string;
-  label: string;
+  label: string | React.ReactNode;
   hint?: string;
   name?: string;
   defaultValue?: string;
@@ -121,13 +121,12 @@ export const Select: React.FC<SelectProps> = ({
 type OtherOptionTextInputWrapperProps<TWrapped> = {
   legend: string;
   showLegend?: boolean;
-  hint?: string;
   optional?: boolean;
   otherInputLabel: string;
   otherInputOnChange: React.ChangeEventHandler;
   otherOptionDisplay: string;
   horizontal?: boolean;
-  labelForSelect: string;
+  labelForSelect: string | React.ReactNode;
 } & Omit<TWrapped, 'label' | 'legend'>;
 
 /**
