@@ -15,6 +15,7 @@ export * from './FileInput/FileInput';
 export * from './Form';
 export * from './FormStatus/FormStatus';
 export * from './Header/Header';
+export * from './HeadingLevel';
 export * from './Header/NavLink';
 export * from './Header/NavDropdown';
 export * from './InlineIcon/InlineIcon';
