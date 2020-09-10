@@ -14,6 +14,7 @@ export type DateInputProps = {
   optional?: boolean;
   status?: FormStatusProps;
   className?: string;
+  hideLegend?: boolean;
 };
 
 export const DateInput: React.FC<DateInputProps> = ({
@@ -25,6 +26,7 @@ export const DateInput: React.FC<DateInputProps> = ({
   optional,
   status,
   className,
+  hideLegend = false,
 }) => {
   const commonDateInputProps = {
     className: 'oec-date-input__input margin-right-1',
@@ -74,7 +76,7 @@ export const DateInput: React.FC<DateInputProps> = ({
     <FieldSet
       legend={label}
       id={id}
-      showLegend={true}
+      showLegend={!hideLegend}
       hint={`For example: ${moment().format('M D YYYY')}`}
       className={className}
       status={status}
