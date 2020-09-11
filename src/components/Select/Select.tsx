@@ -12,7 +12,7 @@ export type SelectOption = {
 
 export type SelectProps = {
   id: string;
-  label: string;
+  label: string | React.ReactNode;
   hint?: string;
   name?: string;
   defaultValue?: string;
@@ -64,18 +64,16 @@ export const Select: React.FC<SelectProps> = ({
       )}
       key={`${id}-form-group`}
     >
+      <label
+        className={cx('usa-label', {
+          [`usa-label--${status && status.type}`]: status,
+        })}
+        htmlFor={id}
+      >
+        {label}
+      </label>
+      {/* TODO: hint needs to be programmatically associated */}
       {hint && <span className="usa-hint text-italic">{hint}</span>}
-      <div className={cx({ 'margin-top-3': !label })}></div>
-      {label && (
-        <label
-          className={cx('usa-label', {
-            [`usa-label--${status && status.type}`]: status,
-          })}
-          htmlFor={id}
-        >
-          {label}
-        </label>
-      )}
       {status && status.message && <FormStatus {...status} />}
       <select
         id={id}
@@ -123,13 +121,12 @@ export const Select: React.FC<SelectProps> = ({
 type OtherOptionTextInputWrapperProps<TWrapped> = {
   legend: string;
   showLegend?: boolean;
-  hint?: string;
   optional?: boolean;
   otherInputLabel: string;
   otherInputOnChange: React.ChangeEventHandler;
   otherOptionDisplay: string;
   horizontal?: boolean;
-  labelForSelect: string;
+  labelForSelect: string | React.ReactNode;
 } & Omit<TWrapped, 'label' | 'legend'>;
 
 /**
