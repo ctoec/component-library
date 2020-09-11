@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import cx from 'classnames';
 import { FormStatus, FormStatusProps } from '..';
 
@@ -11,8 +11,6 @@ type InternalTextInputProps = {
   name?: string;
   label: string | JSX.Element;
   id: string;
-  // If you want a controlled component, pass it the value
-  // Otherwise just pass a defaultValue or nothing
   value?: string | number;
   defaultValue?: string | number;
   disabled?: boolean;
@@ -75,7 +73,10 @@ export function TextInput({
   | TextInputHTMLInputElementProps
   | TextInlineInputHTMLInputElementProps
   | TextInputHTMLTextAreaElementProps) {
-  const [_value, updateValue] = useState(defaultValue);
+	const [_value, updateValue] = useState(value || defaultValue);
+	useEffect(() => {
+		updateValue(value);
+	}, [value]);
   const onChange = (e: any) => {
     inputOnChange(e);
     if (!value) {
@@ -88,9 +89,8 @@ export function TextInput({
     id,
     name,
     disabled,
-    defaultValue,
     // Use the value if one is passed in; otherwise this manages its own state
-    value: value || _value || '',
+    value: _value,
     'aria-describedby': status ? status.id : undefined,
     'aria-invalid': status && status.type === 'error',
     // Using aria-required to avoid default Chrome behavior
