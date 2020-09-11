@@ -34,6 +34,8 @@ export const DateInput: React.FC<DateInputProps> = ({
     inline: true,
     // Pass an undefined message to make text input show correct outline color, but not a redundant message
     status: status ? { ...status, message: undefined } : undefined,
+    optional,
+    hideOptionalText: true,
   };
 
   const [date, setDate] = useState<Moment | undefined>(
