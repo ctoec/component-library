@@ -30,7 +30,8 @@ export const Accordion: React.FC<AccordionProps> = ({
 export type AccordionItemProps = {
 	id: string;
 	title: JSX.Element | string;
-	expand?: JSX.Element | string;
+	expandText?: JSX.Element | string;
+	collapseText?: JSX.Element | string;
 	content: JSX.Element | string;
 	isExpanded?: boolean;	
 }
@@ -42,7 +43,8 @@ type InternalAccordionItemProps = AccordionItemProps & {
 const AccordionItem: React.FC<InternalAccordionItemProps> = ({
 	id,
 	title,
-	expand,
+	expandText,
+	collapseText,
 	content,
 	isExpanded: initialIsExpanded = false,
 	headingLevel,
@@ -63,7 +65,9 @@ const AccordionItem: React.FC<InternalAccordionItemProps> = ({
 							{title}
 						</div>
 						<div className="oec-accordion__heading-expand">
-							{expand} <AngleArrowDown className={cx("oec-accordion__button-icon", {'oec-accordion__button-icon--expanded': isExpanded})}/>
+							{!isExpanded && (collapseText ? collapseText : expandText)}
+							{expandText}
+							<AngleArrowDown className={cx("oec-accordion__button-icon", {'oec-accordion__button-icon--expanded': isExpanded})}/>
 						</div>
 					</div>
 				</button>
