@@ -26,27 +26,25 @@ type InternalTextInputProps = {
   afterContent?: string | JSX.Element;
 };
 
-type InputElementPropsWithoutDefaultValue = Omit<React.HTMLProps<HTMLInputElement>, 'defaultValue'>;
-
 export type TextInputHTMLInputElementProps = InternalTextInputProps & {
   type?: 'input';
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => any;
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => any;
-  inputProps?: InputElementPropsWithoutDefaultValue;
+  inputProps?: React.HTMLProps<HTMLInputElement>;
 };
 
 export type TextInlineInputHTMLInputElementProps = InternalTextInputProps & {
   type: 'inline-input';
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => any;
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => any;
-  inputProps?: InputElementPropsWithoutDefaultValue;
+  inputProps?: React.HTMLProps<HTMLInputElement>;
 };
 
 export type TextInputHTMLTextAreaElementProps = InternalTextInputProps & {
   type: 'textarea';
   onChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => any;
   onBlur?: (event: React.FocusEvent<HTMLTextAreaElement>) => any;
-  inputProps?: InputElementPropsWithoutDefaultValue & { inputMode: 'text' } & {
+  inputProps?: React.HTMLProps<HTMLTextAreaElement> & { inputMode: 'text' } & {
     type: 'textarea';
   };
 };
@@ -92,7 +90,7 @@ export function TextInput({
     name,
     disabled,
     // Use the value if one is passed in; otherwise this manages its own state
-    value: _value,
+    value: _value || '',
     'aria-describedby': status ? status.id : undefined,
     'aria-invalid': status && status.type === 'error',
     // Using aria-required to avoid default Chrome behavior
