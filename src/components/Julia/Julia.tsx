@@ -8,7 +8,7 @@ export type TProps = {
   className?: string;
 };
 
-export function Accordion({ key, text, color, className }: TProps) {
+export function Julia({ key, text, color, className }: TProps) {
   const colorClass = color ? `bg-${color}` : undefined;
   return (
     <span
