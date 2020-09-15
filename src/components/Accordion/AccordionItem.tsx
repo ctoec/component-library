@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import cx from 'classnames';
-import { AngleArrowDown } from "../..";
+import { AngleArrowDown } from "../../assets/images";
 
 export type AccordionItemProps = {
 	id: string;
@@ -42,7 +42,7 @@ export const AccordionItem: React.FC<InternalAccordionItemProps> = ({
 						</div>
 						<div className="oec-accordion__heading-expand">
 							{!isExpanded && (collapseText ? collapseText : expandText)}
-							{expandText}
+							{isExpanded && expandText}
 							<AngleArrowDown className={cx("oec-accordion__button-icon", {'oec-accordion__button-icon--expanded': isExpanded})}/>
 						</div>
 					</div>
