@@ -1,6 +1,6 @@
 // Export components
-export * from './Accordion/Accordion';
 export * from './Alert/Alert';
+export * from './Accordion/Accordion';
 export * from './Button/Button';
 export * from './ButtonWithDropdown/ButtonWithDropdown';
 export * from './Card/Card';
