@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import cx from 'classnames';
 import { HeadingLevel } from '..';
-import { AngleArrowDown } from '../../assets/images';
+// import { AngleArrowDown } from '../../assets/images';
 
 export type AccordionProps = {
 	items: AccordionItemProps[];
