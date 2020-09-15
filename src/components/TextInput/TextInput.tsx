@@ -26,25 +26,27 @@ type InternalTextInputProps = {
   afterContent?: string | JSX.Element;
 };
 
+type InputElementPropsWithoutDefaultValue = Omit<React.HTMLProps<HTMLInputElement>, 'defaultValue'>;
+
 export type TextInputHTMLInputElementProps = InternalTextInputProps & {
   type?: 'input';
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => any;
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => any;
-  inputProps?: React.HTMLProps<HTMLInputElement>;
+  inputProps?: InputElementPropsWithoutDefaultValue;
 };
 
 export type TextInlineInputHTMLInputElementProps = InternalTextInputProps & {
   type: 'inline-input';
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => any;
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => any;
-  inputProps?: React.HTMLProps<HTMLInputElement>;
+  inputProps?: InputElementPropsWithoutDefaultValue;
 };
 
 export type TextInputHTMLTextAreaElementProps = InternalTextInputProps & {
   type: 'textarea';
   onChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => any;
   onBlur?: (event: React.FocusEvent<HTMLTextAreaElement>) => any;
-  inputProps?: React.HTMLProps<HTMLTextAreaElement> & { inputMode: 'text' } & {
+  inputProps?: InputElementPropsWithoutDefaultValue & { inputMode: 'text' } & {
     type: 'textarea';
   };
 };
