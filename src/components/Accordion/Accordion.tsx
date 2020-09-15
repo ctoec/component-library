@@ -12,19 +12,20 @@ export const Accordion: React.FC<AccordionProps> = ({
 	// items,
 	titleHeadingLevel
 }) => {
-	return (
-		<div
-			className="oec-accordion"
-			aria-multiselectable
-		>
-			{/* {items.map((item) => (
-				<AccordionItem
-					{...item}
-					headingLevel={titleHeadingLevel}
-				/>
-			))} */}
-		</div>
-	);
+	return <div>ACCORDION</div>
+	// return (
+	// 	<div
+	// 		className="oec-accordion"
+	// 		aria-multiselectable
+	// 	>
+	// 		{/* {items.map((item) => (
+	// 			<AccordionItem
+	// 				{...item}
+	// 				headingLevel={titleHeadingLevel}
+	// 			/>
+	// 		))} */}
+	// 	</div>
+	// );
 }
 
 // export type AccordionItemProps = {
