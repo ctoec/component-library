@@ -9,7 +9,6 @@ export type StepStatus =
   | 'attentionNeeded'
   | 'exempt';
 
-
 export type PossibleHeaderLevels = 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 
 export type StepProps<T> = {
@@ -35,7 +34,7 @@ export type InternalStepProps<T> = Omit<StepProps<T>, 'status'> & {
 export type PropsPassedToStep<T> = T & {
   visited?: boolean;
   active?: boolean;
-}
+};
 
 const labelForStatus = (status: StepStatus) => {
   switch (status) {

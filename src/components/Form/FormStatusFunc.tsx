@@ -3,9 +3,9 @@ import { TObjectDriller } from './ObjectDriller';
 
 export type FieldStatusFunc<TData> = (
   dataDriller: TObjectDriller<NonNullable<TData>>,
-  path: string,
+  path: string
 ) => FormStatusProps | undefined;
 
 export type FieldSetStatusFunc<TData> = (
-  originalObject: TData,
+  originalObject: TData
 ) => FormStatusProps | undefined;

@@ -50,7 +50,7 @@ export const DownArrowCircle = (props: React.SVGProps<SVGSVGElement>) => (
   <SVGInline svgProps={props} url={downArrowCircle} />
 );
 export const FileDownload = (props: React.SVGProps<SVGSVGElement>) => (
-	<SVGInline svgProps={props} url={fileDownload} />
+  <SVGInline svgProps={props} url={fileDownload} />
 );
 export const Hero = (props: React.SVGProps<SVGSVGElement>) => (
   <SVGInline svgProps={props} url={hero} />
