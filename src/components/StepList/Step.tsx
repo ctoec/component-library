@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { InlineIcon } from '..';
+import { InlineIcon, HeadingLevel } from '..';
 import cx from 'classnames';
 
 export type StepStatus =
@@ -12,7 +12,6 @@ export type StepStatus =
 // The statuses 'active' and 'notStarted' can only be assigned by StepList itself
 export type InternalStepStatus = 'notStarted' | 'active' | StepStatus;
 
-export type PossibleHeaderLevels = 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 
 export type StepProps<T> = {
   key: string;
@@ -23,7 +22,7 @@ export type StepProps<T> = {
   EditComponent?: React.FC<T>;
   Summary?: React.FC<T>;
   Form: React.FC<T>;
-  headerLevel?: PossibleHeaderLevels;
+  headerLevel?: HeadingLevel;
 };
 
 export type InternalStepProps<T> = Omit<StepProps<T>, 'status'> & {

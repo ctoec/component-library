@@ -12,6 +12,10 @@ This library provides a uniform collection of reusable UX components, static ass
    ```.sh
    yarn install --frozen-lockfile
    ```
+1. Build and run the storybook (on port 9009 by default)
+```
+    yarn storybook
+```
 
 ## Examples
 
