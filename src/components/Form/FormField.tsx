@@ -3,7 +3,7 @@ import { FormContext, useGenericContext } from './FormContext';
 import produce from 'immer';
 import set from 'lodash/set';
 import { TObjectDriller } from './ObjectDriller';
-import { FormStatusFunc } from './FormStatusFunc';
+import { FieldStatusFunc } from './FormStatusFunc';
 
 export type FormFieldProps<TData, TComponentProps, TFieldData> =
   // React.FC<P> assigns the generic P to {} as a default type. That causes a
@@ -22,7 +22,7 @@ export type FormFieldProps<TData, TComponentProps, TFieldData> =
       event: React.ChangeEvent<any>,
       data: TObjectDriller<TData>
     ) => TFieldData;
-    status?: FormStatusFunc<TData>;
+    status?: FieldStatusFunc<TData>;
     inputComponent: React.FC<TComponentProps>;
   } & /* Include TComponentProps props, except onChange, defaultValue, and status */ Pick<
     TComponentProps,
@@ -82,7 +82,7 @@ export const FormField = <
         preprocessForDisplay ? preprocessForDisplay(displayValue) : displayValue
       }
       onChange={onChange}
-      status={status(data, updatePath)}
+      status={status(dataDriller, data, updatePath)}
       {...props}
     >
       {children}
