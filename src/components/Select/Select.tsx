@@ -1,5 +1,5 @@
 import React, { useState, HTMLAttributes } from 'react';
-import { FormStatus, FormStatusProps } from '../FormStatus/FormStatus';
+import { FormStatus, FormStatusProps } from '../Form/FormStatus/FormStatus';
 import { FieldSet, FieldSetProps } from '../FieldSet/FieldSet';
 import cx from 'classnames';
 import { FormFieldSetProps, FormFieldSet } from '../Form';
@@ -149,52 +149,52 @@ export const SelectWithOther: React.FC<OtherOptionTextInputWrapperProps<
   children,
   ...props
 }) => {
-  const OTHER_VALUE = '__other';
+    const OTHER_VALUE = '__other';
 
-  const [showOther, setShowOther] = useState(defaultValue === OTHER_VALUE);
+    const [showOther, setShowOther] = useState(defaultValue === OTHER_VALUE);
 
-  const optionsWithOther = [
-    ...options,
-    {
-      text: otherOptionDisplay,
-      value: OTHER_VALUE,
-    },
-  ];
+    const optionsWithOther = [
+      ...options,
+      {
+        text: otherOptionDisplay,
+        value: OTHER_VALUE,
+      },
+    ];
 
-  const _onChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const changedValue = (e.target as any).value;
-    if (changedValue === OTHER_VALUE) {
-      setShowOther(true);
-    } else {
-      setShowOther(false);
+    const _onChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+      const changedValue = (e.target as any).value;
+      if (changedValue === OTHER_VALUE) {
+        setShowOther(true);
+      } else {
+        setShowOther(false);
+      }
+      onChange(e);
+    };
+
+    const selectElement = (
+      <Select
+        id={id}
+        label={labelForSelect}
+        defaultValue={defaultValue}
+        status={status}
+        onChange={_onChange}
+        options={optionsWithOther}
+        {...props}
+      />
+    );
+
+    if (showOther) {
+      const useFormFieldSet = (props as unknown) as FormFieldSetProps<any>;
+      if (useFormFieldSet) {
+        const formFieldSetProps = (props as unknown) as FormFieldSetProps<any>;
+        return (
+          <FormFieldSet {...formFieldSetProps}>{selectElement}</FormFieldSet>
+        );
+      }
+
+      const fieldSetProps = (props as unknown) as FieldSetProps;
+      return <FieldSet {...fieldSetProps}>{selectElement}</FieldSet>;
     }
-    onChange(e);
+
+    return selectElement;
   };
-
-  const selectElement = (
-    <Select
-      id={id}
-      label={labelForSelect}
-      defaultValue={defaultValue}
-      status={status}
-      onChange={_onChange}
-      options={optionsWithOther}
-      {...props}
-    />
-  );
-
-  if (showOther) {
-    const useFormFieldSet = (props as unknown) as FormFieldSetProps<any>;
-    if (useFormFieldSet) {
-      const formFieldSetProps = (props as unknown) as FormFieldSetProps<any>;
-      return (
-        <FormFieldSet {...formFieldSetProps}>{selectElement}</FormFieldSet>
-      );
-    }
-
-    const fieldSetProps = (props as unknown) as FieldSetProps;
-    return <FieldSet {...fieldSetProps}>{selectElement}</FieldSet>;
-  }
-
-  return selectElement;
-};
