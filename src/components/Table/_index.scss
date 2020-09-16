@@ -4,6 +4,9 @@
 
   th,
   td {
+		&:first-child {
+			padding-left: 1rem; // Override usa-table--borderless
+		}
     border-color: color('base-lighter');
   }
 }
