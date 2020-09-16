@@ -2,6 +2,8 @@
   @extend .usa-table;
   @extend .usa-table--borderless;
 
+	table-layout: fixed;
+	
   th,
   td {
 		&:first-child {

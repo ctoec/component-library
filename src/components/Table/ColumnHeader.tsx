@@ -52,7 +52,7 @@ export class ColumnHeader extends React.Component<ColumnHeaderProps> {
         )}
         role="columnheader"
         aria-sort={sortOrder || 'none'}
-        style={{ width: width }}
+        style={{ minWidth: width, maxWidth: width }}
       >
         {!sortable && <span className="oec-table__column-title">{name}</span>}
         {sortable && (
