@@ -33,8 +33,8 @@ export type InternalStepProps<T> = Omit<StepProps<T>, 'status'> & {
 };
 
 export type PropsPassedToStep<T> = T & {
-  visited: boolean;
-  active: boolean;
+  visited?: boolean;
+  active?: boolean;
 }
 
 const labelForStatus = (status: StepStatus) => {
@@ -57,8 +57,8 @@ export function Step<T>({
   Summary,
   Form,
   props,
-  visited,
-  active,
+  visited = false,
+  active = false,
   headerLevel = 'h2',
   type = 'normal',
   EditComponent,
