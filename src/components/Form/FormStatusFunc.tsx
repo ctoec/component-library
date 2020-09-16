@@ -1,6 +1,6 @@
-import { TObjectDriller } from './ObjectDriller';
 import { FormStatusProps } from '..';
 
-export type FormStatusFunc<TFieldData> = (
-  _: TObjectDriller<TFieldData>
+export type FormStatusFunc<TData> = (
+  originalObject: TData,
+  path: string,
 ) => FormStatusProps | undefined;
