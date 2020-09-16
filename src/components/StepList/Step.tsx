@@ -9,8 +9,6 @@ export type StepStatus =
   | 'attentionNeeded'
   | 'exempt';
 
-// The statuses 'active' and 'notStarted' can only be assigned by StepList itself
-export type InternalStepStatus = 'notStarted' | 'active' | StepStatus;
 
 export type PossibleHeaderLevels = 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 
@@ -27,7 +25,9 @@ export type StepProps<T> = {
 };
 
 export type InternalStepProps<T> = Omit<StepProps<T>, 'status'> & {
-  status: InternalStepStatus;
+  status: StepStatus;
+  visited: boolean;
+  active: boolean;
   props: T;
   type?: 'normal' | 'embedded';
 };
@@ -52,6 +52,8 @@ export function Step<T>({
   Summary,
   Form,
   props,
+  visited,
+  active,
   headerLevel = 'h2',
   type = 'normal',
   EditComponent,
@@ -66,12 +68,12 @@ export function Step<T>({
       <div className="oec-step-list__step__content">
         <Heading className="oec-step-list__step__title">{name}</Heading>
 
-        {Summary && status !== 'notStarted' && status !== 'active' && (
+        {Summary && visited && !active && (
           <div className="oec-step-list__step__summary">
             <Summary {...props} />
           </div>
         )}
-        {status === 'active' && (
+        {active && (
           <div className="oec-step-list__step__form">
             <Form {...props} />
           </div>
@@ -79,7 +81,7 @@ export function Step<T>({
       </div>
       {status !== 'exempt' && (
         <div className="oec-step-list__step__actions">
-          {status !== 'notStarted' && status !== 'active' && (
+          {visited && !active && (
             <>
               <div className="oec-step-list__step__status-text">
                 <InlineIcon icon={status} provideScreenReaderFallback={false} />
@@ -90,7 +92,7 @@ export function Step<T>({
                   Edit<span className="usa-sr-only"> {name.toLowerCase()}</span>
                 </Link>
               )}
-              {EditComponent && <EditComponent {...props} />}
+              {EditComponent && <EditComponent {...props} visited={visited} />}
             </>
           )}
         </div>
