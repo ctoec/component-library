@@ -18,9 +18,9 @@ export type StepProps<T> = {
   status: (props: T) => StepStatus;
   editPath?: string;
   // Edit component is an alternative to edit path
-  EditComponent?: React.FC<T>;
-  Summary?: React.FC<T>;
-  Form: React.FC<T>;
+  EditComponent?: React.FC<PropsPassedToStep<T>>;
+  Summary?: React.FC<PropsPassedToStep<T>>;
+  Form: React.FC<PropsPassedToStep<T>>;
   headerLevel?: PossibleHeaderLevels;
 };
 
@@ -31,6 +31,11 @@ export type InternalStepProps<T> = Omit<StepProps<T>, 'status'> & {
   props: T;
   type?: 'normal' | 'embedded';
 };
+
+export type PropsPassedToStep<T> = T & {
+  visited: boolean;
+  active: boolean;
+}
 
 const labelForStatus = (status: StepStatus) => {
   switch (status) {
@@ -59,6 +64,7 @@ export function Step<T>({
   EditComponent,
 }: InternalStepProps<T>) {
   const Heading = headerLevel;
+  const propsForStep = { ...props, visited, active };
   return (
     <li
       className={cx('oec-step-list__step', `oec-step-list__step--${status}`, {
@@ -70,12 +76,12 @@ export function Step<T>({
 
         {Summary && visited && !active && (
           <div className="oec-step-list__step__summary">
-            <Summary {...props} />
+            <Summary {...propsForStep} />
           </div>
         )}
         {active && (
           <div className="oec-step-list__step__form">
-            <Form {...props} />
+            <Form {...propsForStep} />
           </div>
         )}
       </div>
@@ -92,7 +98,7 @@ export function Step<T>({
                   Edit<span className="usa-sr-only"> {name.toLowerCase()}</span>
                 </Link>
               )}
-              {EditComponent && <EditComponent {...props} visited={visited} />}
+              {EditComponent && <EditComponent {...propsForStep} />}
             </>
           )}
         </div>
