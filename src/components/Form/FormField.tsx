@@ -82,7 +82,7 @@ export const FormField = <
         preprocessForDisplay ? preprocessForDisplay(displayValue) : displayValue
       }
       onChange={onChange}
-      status={status(dataDriller, data, updatePath)}
+      status={status(dataDriller, updatePath)}
       {...props}
     >
       {children}

@@ -18,10 +18,10 @@ export const FormFieldSet = <TData extends object>({
   children,
   ...props
 }: PropsWithChildren<FormFieldSetProps<TData>>) => {
-  const { data, dataDriller } = useGenericContext<TData>(FormContext);
+  const { data } = useGenericContext<TData>(FormContext);
 
   return (
-    <FieldSet status={status(dataDriller, data)} {...props}>
+    <FieldSet status={status(data)} {...props}>
       {children}
     </FieldSet>
   );
