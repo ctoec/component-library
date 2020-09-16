@@ -2,5 +2,5 @@ import { FormStatusProps } from '..';
 
 export type FormStatusFunc<TData> = (
   originalObject: TData,
-  path: string,
+  path?: string,
 ) => FormStatusProps | undefined;
