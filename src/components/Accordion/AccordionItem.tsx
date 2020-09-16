@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import cx from 'classnames';
 import { AngleArrowDown } from "../../assets/images";
+import { HeadingLevel } from "..";
 
 export type AccordionItemProps = {
 	id: string;
@@ -11,7 +12,6 @@ export type AccordionItemProps = {
 	isExpanded?: boolean;	
 }
 
-type HeadingLevel = 'h2' | 'h3' | 'h4' | 'h5';
 type InternalAccordionItemProps = AccordionItemProps & {
 	headingLevel: HeadingLevel;
 }
@@ -41,8 +41,8 @@ export const AccordionItem: React.FC<InternalAccordionItemProps> = ({
 							{title}
 						</div>
 						<div className="oec-accordion__heading-expand">
-							{!isExpanded && (collapseText ? collapseText : expandText)}
-							{isExpanded && expandText}
+							{isExpanded && (collapseText ? collapseText : expandText)}
+							{!isExpanded && expandText}
 							<AngleArrowDown className={cx("oec-accordion__button-icon", {'oec-accordion__button-icon--expanded': isExpanded})}/>
 						</div>
 					</div>

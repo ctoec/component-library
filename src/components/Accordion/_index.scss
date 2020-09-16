@@ -19,11 +19,11 @@
 	}
 
 	.oec-accordion__heading-title {
+		@include u-font('body', 'lg');
+
 		* {
 			margin: 0;
 		}
-
-		font-size: x-large;
 	}
 	
 	.oec-accordion__heading-expand {
