@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Step,
   InternalStepProps,
+  InternalStepStatus,
   PossibleHeaderLevels,
   StepProps,
 } from './Step';
@@ -24,21 +25,21 @@ const mapStepsToInternalProps = function <T>(
   let activeStepReached = false;
 
   return steps.map((externalStep) => {
-    // If the active step was already reached, then this one was not previously visited
-    const visited = activeStepReached ? false : true;
-    const active = externalStep.key === activeStep;
-    if (active) {
-      // So next step knows it has not been reached
-      activeStepReached = true;
-    }
+    let status: InternalStepStatus;
 
+    if (activeStepReached) {
+      status = 'notStarted';
+    } else if (externalStep.key === activeStep) {
+      status = 'active';
+      activeStepReached = true;
+    } else {
+      status = externalStep.status(props);
+    }
     const step: InternalStepProps<T> = {
       headerLevel: 'h2',
       ...externalStep,
-      visited,
-      active,
       props,
-      status: externalStep.status(props),
+      status,
     };
 
     return step;

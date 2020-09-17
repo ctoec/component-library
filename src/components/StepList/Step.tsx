@@ -9,6 +9,9 @@ export type StepStatus =
   | 'attentionNeeded'
   | 'exempt';
 
+// The statuses 'active' and 'notStarted' can only be assigned by StepList itself
+export type InternalStepStatus = 'notStarted' | 'active' | StepStatus;
+
 export type PossibleHeaderLevels = 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 
 export type StepProps<T> = {
@@ -17,23 +20,16 @@ export type StepProps<T> = {
   status: (props: T) => StepStatus;
   editPath?: string;
   // Edit component is an alternative to edit path
-  EditComponent?: React.FC<PropsPassedToStep<T>>;
-  Summary?: React.FC<PropsPassedToStep<T>>;
-  Form: React.FC<PropsPassedToStep<T>>;
+  EditComponent?: React.FC<T>;
+  Summary?: React.FC<T>;
+  Form: React.FC<T>;
   headerLevel?: PossibleHeaderLevels;
 };
 
 export type InternalStepProps<T> = Omit<StepProps<T>, 'status'> & {
-  status: StepStatus;
-  visited: boolean;
-  active: boolean;
+  status: InternalStepStatus;
   props: T;
   type?: 'normal' | 'embedded';
-};
-
-export type PropsPassedToStep<T> = T & {
-  visited?: boolean;
-  active?: boolean;
 };
 
 const labelForStatus = (status: StepStatus) => {
@@ -56,14 +52,11 @@ export function Step<T>({
   Summary,
   Form,
   props,
-  visited = false,
-  active = false,
   headerLevel = 'h2',
   type = 'normal',
   EditComponent,
 }: InternalStepProps<T>) {
   const Heading = headerLevel;
-  const propsForStep = { ...props, visited, active };
   return (
     <li
       className={cx('oec-step-list__step', `oec-step-list__step--${status}`, {
@@ -73,20 +66,20 @@ export function Step<T>({
       <div className="oec-step-list__step__content">
         <Heading className="oec-step-list__step__title">{name}</Heading>
 
-        {Summary && visited && !active && (
+        {Summary && status !== 'notStarted' && status !== 'active' && (
           <div className="oec-step-list__step__summary">
-            <Summary {...propsForStep} />
+            <Summary {...props} />
           </div>
         )}
-        {active && (
+        {status === 'active' && (
           <div className="oec-step-list__step__form">
-            <Form {...propsForStep} />
+            <Form {...props} />
           </div>
         )}
       </div>
       {status !== 'exempt' && (
         <div className="oec-step-list__step__actions">
-          {visited && !active && (
+          {status !== 'notStarted' && status !== 'active' && (
             <>
               <div className="oec-step-list__step__status-text">
                 <InlineIcon icon={status} provideScreenReaderFallback={false} />
@@ -97,7 +90,7 @@ export function Step<T>({
                   Edit<span className="usa-sr-only"> {name.toLowerCase()}</span>
                 </Link>
               )}
-              {EditComponent && <EditComponent {...propsForStep} />}
+              {EditComponent && <EditComponent {...props} />}
             </>
           )}
         </div>
