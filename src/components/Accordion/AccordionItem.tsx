@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import cx from 'classnames';
 import { AngleArrowDown } from '../../assets/images';
+import { HeadingLevel } from '../..';
 
 export type AccordionItemProps = {
   id: string;
