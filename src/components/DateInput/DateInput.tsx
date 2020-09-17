@@ -39,7 +39,7 @@ export const DateInput: React.FC<DateInputProps> = ({
   };
 
   const [date, setDate] = useState<Moment | undefined>(
-    defaultValue === null ? undefined  : moment.utc(defaultValue)
+    defaultValue === null ? undefined : moment.utc(defaultValue)
   );
 
   // Text input values

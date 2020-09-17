@@ -1,10 +1,10 @@
 import React, { PropsWithChildren } from 'react';
 import { FormContext, useGenericContext } from './FormContext';
 import { FieldSetProps, FieldSet } from '../FieldSet/FieldSet';
-import { FormStatusFunc } from './FormStatusFunc';
+import { FieldSetStatusFunc } from './FormStatusFunc';
 
 export type FormFieldSetProps<TData> = {
-  status?: FormStatusFunc<TData>;
+  status?: FieldSetStatusFunc<TData>;
 } & Pick<FieldSetProps, Exclude<keyof FieldSetProps, 'status'>>;
 
 /**
@@ -18,10 +18,10 @@ export const FormFieldSet = <TData extends object>({
   children,
   ...props
 }: PropsWithChildren<FormFieldSetProps<TData>>) => {
-  const { dataDriller } = useGenericContext<TData>(FormContext);
+  const { data } = useGenericContext<TData>(FormContext);
 
   return (
-    <FieldSet status={status(dataDriller)} {...props}>
+    <FieldSet status={status(data)} {...props}>
       {children}
     </FieldSet>
   );

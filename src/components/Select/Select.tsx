@@ -1,5 +1,5 @@
 import React, { useState, HTMLAttributes } from 'react';
-import { FormStatus, FormStatusProps } from '../FormStatus/FormStatus';
+import { FormStatus, FormStatusProps } from '../Form/FormStatus/FormStatus';
 import { FieldSet, FieldSetProps } from '../FieldSet/FieldSet';
 import cx from 'classnames';
 import { FormFieldSetProps, FormFieldSet } from '../Form';
