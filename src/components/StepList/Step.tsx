@@ -12,7 +12,6 @@ export type StepStatus =
 // The statuses 'active' and 'notStarted' can only be assigned by StepList itself
 export type InternalStepStatus = 'notStarted' | 'active' | StepStatus;
 
-
 export type StepProps<T> = {
   key: string;
   name: string;

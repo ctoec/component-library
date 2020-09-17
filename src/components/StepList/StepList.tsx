@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  Step,
-  InternalStepProps,
-  InternalStepStatus,
-
-  StepProps,
-} from './Step';
+import { Step, InternalStepProps, InternalStepStatus, StepProps } from './Step';
 import cx from 'classnames';
 import { HeadingLevel } from '../HeadingLevel';
 
