@@ -1,12 +1,7 @@
 import React from 'react';
-import {
-  Step,
-  InternalStepProps,
-  InternalStepStatus,
-  PossibleHeaderLevels,
-  StepProps,
-} from './Step';
+import { Step, InternalStepProps, InternalStepStatus, StepProps } from './Step';
 import cx from 'classnames';
+import { HeadingLevel } from '../HeadingLevel';
 
 export type StepListProps<T> = {
   steps: StepProps<T>[];
@@ -14,7 +9,7 @@ export type StepListProps<T> = {
   activeStep: string;
   type?: 'normal' | 'embedded';
   // https://dev.to/s_aitchison/psa-stop-hard-coding-heading-levels-in-your-react-components-2ekp
-  headerLevel?: PossibleHeaderLevels;
+  headerLevel?: HeadingLevel;
 };
 
 const mapStepsToInternalProps = function <T>(

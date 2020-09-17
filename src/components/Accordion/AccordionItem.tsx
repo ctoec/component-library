@@ -11,7 +11,6 @@ export type AccordionItemProps = {
   isExpanded?: boolean;
 };
 
-type HeadingLevel = 'h2' | 'h3' | 'h4' | 'h5';
 type InternalAccordionItemProps = AccordionItemProps & {
   headingLevel: HeadingLevel;
 };
@@ -39,8 +38,8 @@ export const AccordionItem: React.FC<InternalAccordionItemProps> = ({
           <div className="display-flex flex-justify flex-col flex-align-center padding-top-3 padding-bottom-3">
             <div className="oec-accordion__heading-title">{title}</div>
             <div className="oec-accordion__heading-expand">
-              {!isExpanded && (collapseText ? collapseText : expandText)}
-              {isExpanded && expandText}
+              {isExpanded && (collapseText ? collapseText : expandText)}
+              {!isExpanded && expandText}
               <AngleArrowDown
                 className={cx('oec-accordion__button-icon', {
                   'oec-accordion__button-icon--expanded': isExpanded,

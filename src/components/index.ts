@@ -17,6 +17,7 @@ export * from './Form';
 export * from './Header/Header';
 export * from './Header/NavLink';
 export * from './Header/NavDropdown';
+export * from './HeadingLevel';
 export * from './InlineIcon/InlineIcon';
 export * from './Legend/Legend';
 export * from './ProcessList/ProcessList';
