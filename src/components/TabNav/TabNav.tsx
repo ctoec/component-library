@@ -41,7 +41,7 @@ export const TabNav: React.FC<TabNavProps> = ({
         })}
         onClick={() => onClick(index, id)}
       >
-        <span>{text}</span>
+        {text}
       </button>
     </li>
   ));
