@@ -22,6 +22,7 @@ export const Modal: React.FC<ModalProps> = ({
 }) => {
   return (
     <ReactModal
+			className="grid-container"
       isOpen={isOpen}
       onRequestClose={toggleOpen}
       shouldCloseOnEsc={true}
@@ -36,7 +37,7 @@ export const Modal: React.FC<ModalProps> = ({
         },
       }}
     >
-      <div className="grid-container oec-modal">
+      <div className="grid-col">
         <div
           className={cx(
             'grid-row display-flex flex-justify flex-align-center',
