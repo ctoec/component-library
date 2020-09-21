@@ -2,8 +2,8 @@
   .oec-accordion__heading {
     border-width: 1px;
     @include u-border-top('gray-10');
-		@include u-border-bottom('gray-10');
-		margin: 0;
+    @include u-border-bottom('gray-10');
+    margin: 0;
   }
 
   .oec-accordion__button {
