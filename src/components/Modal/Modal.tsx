@@ -50,7 +50,7 @@ export const Modal: React.FC<ModalProps> = ({
             appearance="unstyled"
             text={
               <div className="display-flex flex-column flex-align-center">
-                <Cancel className="height-3 text-base-darker" />
+                {/* <Cancel className="height-3 text-base-darker" /> */}
                 <p className="margin-y-05">close</p>
               </div>
             }
