@@ -32,11 +32,12 @@ export const Modal: React.FC<ModalProps> = ({
           bottom: 'auto',
           position: 'absolute',
           top: '50%',
-          transform: 'translate(0%, -50%)',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
         },
       }}
     >
-      <div className="grid-container oec-modal">
+      <div className="margin-2">
         <div
           className={cx(
             'grid-row display-flex flex-justify flex-align-center',
@@ -56,7 +57,7 @@ export const Modal: React.FC<ModalProps> = ({
             onClick={toggleOpen}
           />
         </div>
-        <div className={cx('grid-row', { 'margin-top-2': showHeaderBorder })}>
+        <div className={cx({ 'margin-top-2': showHeaderBorder })}>
           {content}
         </div>
       </div>
