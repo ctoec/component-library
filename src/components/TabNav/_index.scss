@@ -22,23 +22,29 @@
   }
 
   &--tab {
+    font-size: 0.8rem;
     flex: 0 1 auto;
-    padding: 1em 3em 1em 3em;
+    padding: 1rem;
+    margin: 0 0.5rem 0 0;
     width: fit-content;
+    color: #565c65;
     background-color: #ffffff;
     border: none;
+    border-radius: 5px 5px 0 0;
 
     &__active {
-      border-radius: 5px 5px 0 0;
       background-color: $theme-color-primary;
       color: #ffffff;
+      font-weight: bold;
     }
 
-    &:hover,
-    &:focus {
-      cursor: pointer;
-      background-color: #ececec;
-      color: $theme-color-primary;
+    &:not(&__active) {
+      &:hover,
+      &:focus {
+        cursor: pointer;
+        background-color: #ececec;
+        color: $theme-color-primary;
+      }
     }
   }
 }
