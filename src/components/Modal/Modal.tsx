@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactModal from 'react-modal';
 import cx from 'classnames';
-import { Cancel } from '../../assets/images';
-import { Button } from '..';
+import { X, Button } from '../..';
 
 type ModalProps = {
   appElementId?: string;
@@ -50,7 +49,7 @@ export const Modal: React.FC<ModalProps> = ({
             appearance="unstyled"
             text={
               <div className="display-flex flex-column flex-align-center">
-                <Cancel className="height-3 text-base-darker" />
+                <X className="height-3 text-base-darker" />
                 <p className="margin-y-05">close</p>
               </div>
             }

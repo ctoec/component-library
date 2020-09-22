@@ -21,7 +21,7 @@ import plusCircle from './plusCircle.svg';
 import teacherWithChalkboard from './teacherWithChalkboard.svg';
 import downloadArrow from './download.svg';
 import trashCan from './trashCan.svg';
-import cancel from './cancel.svg';
+import x from './x.svg';
 
 export const ArrowDown = (props: React.SVGProps<SVGSVGElement>) => (
   <SVGInline svgProps={props} url={arrowDown} />
@@ -74,6 +74,6 @@ export const TeacherWithChalkboard = (props: React.SVGProps<SVGSVGElement>) => (
 export const TrashCan = (props: React.SVGProps<SVGSVGElement>) => (
   <SVGInline svgProps={props} url={trashCan} />
 );
-export const Cancel = (props: React.SVGProps<SVGSVGElement>) => (
-	<SVGInline svgProps={props} url={cancel} />
+export const X = (props: React.SVGProps<SVGSVGElement>) => (
+	<SVGInline svgProps={props} url={x} />
 );
