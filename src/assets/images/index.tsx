@@ -23,57 +23,59 @@ import downloadArrow from './download.svg';
 import trashCan from './trashCan.svg';
 import x from './x.svg';
 
-export const ArrowDown = (props: React.SVGProps<SVGSVGElement>) => (
+export type SVGIcon = React.FC<React.SVGProps<SVGSVGElement>>;
+
+export const ArrowDown: SVGIcon = (props) => (
   <SVGInline svgProps={props} url={arrowDown} />
 );
-export const DownloadArrow = (props: React.SVGProps<SVGSVGElement>) => (
+export const DownloadArrow: SVGIcon = (props) => (
   <SVGInline svgProps={props} url={downloadArrow} />
 );
-export const Error = (props: React.SVGProps<SVGSVGElement>) => (
+export const Error: SVGIcon = (props) => (
   <SVGInline svgProps={props} url={error} />
 );
-export const Info = (props: React.SVGProps<SVGSVGElement>) => (
+export const Info: SVGIcon = (props) => (
   <SVGInline svgProps={props} url={info} />
 );
-export const Success = (props: React.SVGProps<SVGSVGElement>) => (
+export const Success: SVGIcon= (props) => (
   <SVGInline svgProps={props} url={success} />
 );
-export const AngleArrowDown = (props: React.SVGProps<SVGSVGElement>) => (
+export const AngleArrowDown: SVGIcon = (props) => (
   <SVGInline svgProps={props} url={angleArrowDown} />
 );
-export const ArrowRight = (props: React.SVGProps<SVGSVGElement>) => (
+export const ArrowRight: SVGIcon = (props) => (
   <SVGInline svgProps={props} url={arrowRight} />
 );
-export const Calendar = (props: React.SVGProps<SVGSVGElement>) => (
+export const Calendar: SVGIcon = (props) => (
   <SVGInline svgProps={props} url={calendar} />
 );
-export const DownArrowCircle = (props: React.SVGProps<SVGSVGElement>) => (
+export const DownArrowCircle: SVGIcon = (props) => (
   <SVGInline svgProps={props} url={downArrowCircle} />
 );
-export const FileDownload = (props: React.SVGProps<SVGSVGElement>) => (
+export const FileDownload: SVGIcon= (props) => (
   <SVGInline svgProps={props} url={fileDownload} />
 );
-export const Hero = (props: React.SVGProps<SVGSVGElement>) => (
+export const Hero: SVGIcon = (props) => (
   <SVGInline svgProps={props} url={hero} />
 );
-export const Logo = (props: React.SVGProps<SVGSVGElement>) => (
+export const Logo: SVGIcon= (props) => (
   <SVGInline svgProps={props} url={logo} />
 );
-export const LogoWithCheck = (props: React.SVGProps<SVGSVGElement>) => (
+export const LogoWithCheck: SVGIcon = (props) => (
   <SVGInline svgProps={props} url={logoWithCheck} />
 );
-export const Pencil = (props: React.SVGProps<SVGSVGElement>) => (
+export const Pencil: SVGIcon = (props) => (
   <SVGInline svgProps={props} url={pencil} />
 );
-export const PlusCircle = (props: React.SVGProps<SVGSVGElement>) => (
+export const PlusCircle: SVGIcon = (props) => (
   <SVGInline svgProps={props} url={plusCircle} />
 );
-export const TeacherWithChalkboard = (props: React.SVGProps<SVGSVGElement>) => (
+export const TeacherWithChalkboard: SVGIcon = (props) => (
   <SVGInline svgProps={props} url={teacherWithChalkboard} />
 );
-export const TrashCan = (props: React.SVGProps<SVGSVGElement>) => (
+export const TrashCan: SVGIcon = (props) => (
   <SVGInline svgProps={props} url={trashCan} />
 );
-export const X = (props: React.SVGProps<SVGSVGElement>) => (
+export const X: SVGIcon = (props) => (
 	<SVGInline svgProps={props} url={x} />
 );

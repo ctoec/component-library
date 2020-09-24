@@ -8,15 +8,3 @@
   left: 0.1em;
   margin-right: 0.25em;
 }
-
-.oec-inline-icon--attentionNeeded path {
-  fill: color($theme-color-error-dark);
-}
-
-.oec-inline-icon--complete path {
-  fill: color($theme-color-success-dark);
-}
-
-.oec-inline-icon--incomplete path {
-  fill: color($theme-color-warning-dark);
-}

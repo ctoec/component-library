@@ -1,12 +1,9 @@
 import React from 'react';
 import cx from 'classnames';
+import { SVGIcon } from '../../assets/images';
 
 export type TextWithIconProps = {
-  Icon: React.FunctionComponent<
-    React.SVGProps<SVGSVGElement> & {
-      title?: string | undefined;
-    }
-  >;
+  Icon: SVGIcon;
   text: string;
   direction?: 'left' | 'right' | 'up' | 'down';
   iconSide?: 'left' | 'right';

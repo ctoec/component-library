@@ -5,7 +5,8 @@ import { HeadingLevel } from '../..';
 
 export type AccordionItemProps = {
   id: string;
-  title: JSX.Element | string;
+	title: string;
+	headerContent?: JSX.Element;
   expandText?: JSX.Element | string;
   collapseText?: JSX.Element | string;
   content: JSX.Element | string;
@@ -18,7 +19,8 @@ type InternalAccordionItemProps = AccordionItemProps & {
 
 export const AccordionItem: React.FC<InternalAccordionItemProps> = ({
   id,
-  title,
+	title,
+	headerContent,
   expandText,
   collapseText,
   content,
@@ -29,7 +31,7 @@ export const AccordionItem: React.FC<InternalAccordionItemProps> = ({
   const Heading = headingLevel;
   return (
     <>
-      <Heading className="oec-accordion__heading">
+      <div className="oec-accordion__heading">
         <button
           className="oec-accordion__button"
           onClick={() => setIsExpanded((e) => !e)}
@@ -37,7 +39,11 @@ export const AccordionItem: React.FC<InternalAccordionItemProps> = ({
           aria-controls={id}
         >
           <div className="display-flex flex-justify flex-col flex-align-center padding-top-3 padding-bottom-3">
-            <div className="oec-accordion__heading-title">{title}</div>
+						<div>
+            	<Heading className="oec-accordion__heading-title">{title}</Heading>
+							{headerContent}
+						</div>
+
             <div className="oec-accordion__heading-expand">
               {isExpanded && (collapseText ? collapseText : expandText)}
               {!isExpanded && expandText}
@@ -49,7 +55,7 @@ export const AccordionItem: React.FC<InternalAccordionItemProps> = ({
             </div>
           </div>
         </button>
-      </Heading>
+      </div>
       <div className="oec-accordion__content" id={id} aria-hidden={!isExpanded}>
         {content}
       </div>
