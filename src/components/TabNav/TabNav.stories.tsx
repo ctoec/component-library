@@ -1,8 +1,8 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { TabNav } from './TabNav';
-import { TextWithIcon } from '../TextWithIcon/TextWithIcon';
-import { Error } from '../../assets/images';
+import { ExclamationCircle } from '../../assets/images';
+import { InlineIcon } from '../InlineIcon/InlineIcon';
 
 // Thanks to http://www.christinachern.com/hpipsum/
 const tabNavItems = [
@@ -41,7 +41,7 @@ const tabNavItems = [
   },
   {
     id: 'two',
-    text: <TextWithIcon Icon={Error} text="Section three" iconSide="right" />,
+    text: <span><InlineIcon className="text-error" Icon={ExclamationCircle}/> Section three</span>,
     content: (
       <p>
         Half-giant jinxes peg-leg gillywater broken glasses large black dog

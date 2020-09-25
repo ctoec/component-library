@@ -31,7 +31,7 @@ export const SVGInline = ({ url, svgProps }: SVGInlineProps) => {
           if (name === 'svg') {
             return createElement(
               'svg',
-              { ...svgProps, ...attribs },
+              {...attribs, ...svgProps},
               children ? domToReact(children) : undefined
             );
           }

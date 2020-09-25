@@ -1,7 +1,7 @@
 import React from 'react';
 import cx from 'classnames';
 import { SortOrder, TableSort } from './Table';
-import { DownArrowCircle } from '../../assets/images';
+import { ArrowDownCircle } from '../../assets/images';
 
 export type ColumnHeaderProps = {
   name: string | JSX.Element;
@@ -77,7 +77,7 @@ export class ColumnHeader extends React.Component<ColumnHeaderProps> {
                 }
               )}
             >
-              <DownArrowCircle />
+              <ArrowDownCircle />
             </div>
           </button>
         )}
