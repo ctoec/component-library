@@ -33,7 +33,6 @@ export * from './Table';
 export * from './TabNav/TabNav';
 export * from './Tag/Tag';
 export * from './TextInput/TextInput';
-export * from './TextWithIcon/TextWithIcon';
 
 // TODO: DEAL WITH THIS
 export type HTMLChoiceElement = HTMLInputElement | HTMLSelectElement;
