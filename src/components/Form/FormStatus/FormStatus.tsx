@@ -1,5 +1,6 @@
 import React from 'react';
 import { InlineIcon } from '../..';
+import { ExclamationCircle } from '../../../assets/images';
 
 export type FormStatusProps = {
   type: 'warning' | 'error' | 'success';
@@ -15,7 +16,7 @@ export const FormStatus = ({ message, type, id }: FormStatusProps) => {
       id={id}
       role={type === 'error' ? 'alert' : 'status'}
     >
-      {type === 'warning' && message ? <InlineIcon icon="incomplete" /> : ''}{' '}
+      {type === 'warning' && message ? <InlineIcon Icon={ExclamationCircle} className="text-warning"/> : ''}{' '}
       {message}
     </span>
   );

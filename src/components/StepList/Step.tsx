@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { InlineIcon, HeadingLevel } from '..';
 import cx from 'classnames';
+import { ExclamationCircle, CheckCircle } from '../../assets/images';
 
 export type StepStatus =
   | 'incomplete'
@@ -54,7 +55,14 @@ export function Step<T>({
   type = 'normal',
   EditComponent,
 }: InternalStepProps<T>) {
-  const Heading = headerLevel;
+	const Heading = headerLevel;
+	const statusColorClassNames: { [key in StepStatus]: string} = {
+		complete: 'text-success',
+		incomplete: 'text-warning',
+		attentionNeeded: 'text-error',
+		exempt: '',
+	};
+
   return (
     <li
       className={cx('oec-step-list__step', `oec-step-list__step--${status}`, {
@@ -80,7 +88,7 @@ export function Step<T>({
           {status !== 'notStarted' && status !== 'active' && (
             <>
               <div className="oec-step-list__step__status-text">
-                <InlineIcon icon={status} provideScreenReaderFallback={false} />
+                <InlineIcon className={statusColorClassNames[status]} Icon={status === 'complete' ? CheckCircle : ExclamationCircle} />
                 {labelForStatus(status)}
               </div>
               {editPath && (

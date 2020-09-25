@@ -1,11 +1,10 @@
 import React from 'react';
 import cx from 'classnames';
-import { InlineIcon, Icon, Button } from '..';
+import { Button } from '..';
 
 export type SideNavItemProps = {
   title: string | JSX.Element;
   description: string;
-  icon?: Icon;
   onClick?: () => any;
   content: JSX.Element;
 };
@@ -20,7 +19,6 @@ export const SideNavItem = ({
   description,
   active,
   onClick,
-  icon,
 }: InternalSideNavItemProps) => {
   return (
     <li className={cx('oec-sidenav__item', { active })}>
@@ -30,7 +28,7 @@ export const SideNavItem = ({
         text={
           <div>
             <p className="oec-sidenav-item__title">
-              {title} {icon && <InlineIcon icon={icon} />}
+              {title}
             </p>
             <p className="oec-sidenav-item__desc">{description}</p>
           </div>

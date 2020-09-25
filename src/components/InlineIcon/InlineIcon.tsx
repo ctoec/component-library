@@ -20,7 +20,7 @@ export function InlineIcon({
       className={cx(className, 'oec-inline-icon')}
     >
 			<Icon {...svgProps} />
-			<span className={cx('usa-sr-only')}>({screenReaderFallback})</span>
+			<span className={cx('usa-sr-only')}>({screenReaderFallback || Icon.toString()})</span>
     </span>
   );
 }

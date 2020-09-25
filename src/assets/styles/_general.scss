@@ -142,9 +142,20 @@ ol.no-list-counter > li:before {
 }
 
 // Background and text colors-- text used for SVG where fill or stroke attr = currentColor
-
 .text-undefined {
   color: inherit;
+}
+
+.text-error {
+	@include u-color($theme-color-error);
+}
+
+.text-warning {
+	@include u-color($theme-color-warning-dark);
+}
+
+.text-success {
+	@include u-color($theme-color-success-dark);
 }
 
 // blue-50v text and tag bg
