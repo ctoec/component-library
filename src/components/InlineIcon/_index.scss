@@ -1,10 +1,27 @@
-.oec-inline-icon svg {
-  height: 1em;
-  width: 1em;
-  vertical-align: middle;
-  display: inline-block;
-  position: relative;
-  top: -0.1em;
-  left: 0.1em;
-  margin-right: 0.25em;
+.oec-inline-icon {
+	svg {
+		height: 1em;
+		width: 1em;
+		vertical-align: middle;
+		display: inline-block;
+		position: relative;
+		top: -0.1em;
+		left: 0.1em;
+		margin-right: 0.25em;
+	}
+
+	&--rotate-90 svg {
+		-webkit-transform: rotate(90deg);
+		transform: rotate(90deg);
+	}
+
+	&--rotate-180 svg {
+		-webkit-transform: rotate(180deg);
+		transform: rotate(180deg);
+	}
+
+	&--rotate-270 svg {
+		-webkit-transform: rotate(270deg);
+		transform: rotate(270deg);
+	}
 }

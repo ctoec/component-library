@@ -17,6 +17,14 @@ Object.entries(Icons)
 				Black: 'text-ink',
 			}
 			const colorClassName = select('Icon color', colorOpts, 'text-ink');
-			return <InlineIcon className={colorClassName} Icon={Icon} />
+
+			const rotateOpts = {
+				'none': undefined,
+				'90 degrees': '90',
+				'180 degrees': '180',
+				'270 degrees': '270'
+			}
+			const rotate = select('Rotation', rotateOpts, undefined);
+			return <InlineIcon className={colorClassName} Icon={Icon} rotate={rotate}/>
 		}).addDecorator(withKnobs)
 	});

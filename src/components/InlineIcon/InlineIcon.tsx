@@ -7,17 +7,19 @@ export type InlineIconProps = {
 	screenReaderFallback?: string;
   className?: string;
 	svgProps?: React.SVGProps<SVGSVGElement>;
+	rotate?: '90' | '180' | '270' ;
 };
 
 export function InlineIcon({
 	Icon,
 	screenReaderFallback,
 	className,
-  svgProps,
+	svgProps,
+	rotate
 }: InlineIconProps) {
   return (
     <span
-      className={cx(className, 'oec-inline-icon')}
+			className={cx(className, 'oec-inline-icon', {[`oec-inline-icon--rotate-${rotate}`]: rotate})}
     >
 			<Icon {...svgProps} />
 			<span className={cx('usa-sr-only')}>({screenReaderFallback || Icon.toString()})</span>
