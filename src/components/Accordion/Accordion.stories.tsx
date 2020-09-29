@@ -51,15 +51,13 @@ storiesOf('Accordion', module)
       />
     );
   })
-  .add('with item title element', () => {
+  .add('with item heading content', () => {
     return (
       <Accordion
         items={items.map((i) => ({
           ...i,
-          title: (
-            <p>
-              This is a title <span className="text-bold">element</span>
-            </p>
+          headerContent: (
+            <div> this is some additional context for the header</div>
           ),
         }))}
         titleHeadingLevel="h2"
