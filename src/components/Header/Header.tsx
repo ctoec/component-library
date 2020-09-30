@@ -10,6 +10,7 @@ export type HeaderProps = {
   primaryTitle: string;
   secondaryTitle?: string;
   navItems: (NavLinkProps | NavDropdownProps)[];
+  showPrimaryNavItems?: boolean;
   loginPath?: string;
   logoutPath?: string;
   userFirstName?: string;
@@ -38,6 +39,7 @@ export const Header: React.FC<HeaderProps> = ({
   navItems,
   logoutPath = '/logout',
   userFirstName,
+  showPrimaryNavItems = true
 }) => {
   const [mobileMenuIsVisible, setMobileMenuIsVisible] = useState(false);
   const location = useLocation();
@@ -126,15 +128,17 @@ export const Header: React.FC<HeaderProps> = ({
             <button className="usa-nav__close" onClick={hideMenu}>
               <img src={closeIcon} alt="close" />
             </button>
-            <ul className="usa-nav__primary usa-accordion">
-              {primaryNavItems.map((item, index) =>
-                item.children ? (
-                  <NavDropdown {...item} key={index} />
-                ) : (
-                  <NavLink {...item} key={index} />
-                )
-              )}
-            </ul>
+            {showPrimaryNavItems && (
+              <ul className="usa-nav__primary usa-accordion">
+                {primaryNavItems.map((item, index) =>
+                  item.children ? (
+                    <NavDropdown {...item} key={index} />
+                  ) : (
+                    <NavLink {...item} key={index} />
+                  )
+                )}
+              </ul>
+            )}
             <div className="usa-nav__secondary usa-nav__secondary--extended">
               <ul className="usa-nav__secondary-links">
                 {secondaryNavItems.map((item, index) =>
