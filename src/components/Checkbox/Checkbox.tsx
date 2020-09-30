@@ -1,4 +1,4 @@
-import React, { HTMLAttributes } from 'react';
+import React, { InputHTMLAttributes } from 'react';
 import cx from 'classnames';
 
 export type CheckboxProps = {
@@ -11,7 +11,7 @@ export type CheckboxProps = {
   // Needs a value if it's not in a checkbox group
   value?: string | undefined;
   name?: string;
-} & Omit<HTMLAttributes<HTMLInputElement>, 'onChange' | 'defaultValue'>;
+} & Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'defaultValue'>;
 
 /**
  * Component that wraps a native checkbox input element
