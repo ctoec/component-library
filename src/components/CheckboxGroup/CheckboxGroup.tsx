@@ -3,19 +3,14 @@ import { FieldSetProps } from '..';
 import { FormFieldSetProps, FormFieldSet } from '../Form';
 import { FieldSet } from '../FieldSet/FieldSet';
 import cx from 'classnames';
+import { CheckboxProps, Checkbox } from '../Checkbox/Checkbox';
 
 /**
  * Type for the values that will define
  * a single Checkbox option in the CheckboxGroup
  */
-export type CheckboxOptionRenderProps = {
-  id: string;
-  selected: boolean;
-  onChange: React.ChangeEventHandler<HTMLInputElement>;
-};
-export type CheckboxOption = {
-  render: (props: CheckboxOptionRenderProps) => JSX.Element;
-  value: string;
+export type CheckboxOptionProps = Omit<CheckboxProps, 'onChange'> & {
+	onChange?: (event: React.ChangeEvent<HTMLInputElement>) => any;
   expansion?: React.ReactNode;
 };
 
@@ -23,7 +18,7 @@ export type CheckboxOption = {
  * Props for InternalCheckboxGroup
  */
 type InternalCheckboxGroupProps = {
-  options: CheckboxOption[];
+  options: CheckboxOptionProps[];
   defaultValue?: string | string[];
   name?: string;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
@@ -103,38 +98,51 @@ export const CheckboxGroup = <
  */
 const InternalCheckboxGroup: React.FC<
   InternalCheckboxGroupProps & { id: string }
-> = ({ id, options, onChange = () => {}, defaultValue = [] }) => {
-  const selectedItemsOnInput = Array.isArray(defaultValue)
+> = ({ id, options, onChange: groupOnChange = () => {}, defaultValue = [] }) => {
+  const defaultSelectedItems = Array.isArray(defaultValue)
     ? defaultValue
-    : [defaultValue];
-  const [selectedItems, setSelectedItems] = useState(selectedItemsOnInput);
+		: [defaultValue];
+		
+	const [selectedItems, setSelectedItems] = useState(defaultSelectedItems);
+	const manageInternalState = (event: React.ChangeEvent<HTMLInputElement>) => {
+		if(event.target.checked) {
+			setSelectedItems((selected) => [...selected, event.target.value])
+		} else {
+			setSelectedItems((selected) => selected.filter((value) => value !== event.target.value))
+		}
+	}
 
+	const _groupOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		groupOnChange(event);
+		manageInternalState(event);
+	}
+	
   return (
-    <>
-      {options.map(({ render: Render, value, expansion }) => (
-        <span
-          key={`${id}-${value}`}
-          onChange={() => {
-            setSelectedItems((items) => {
-              if (items.includes(value)) {
-                return items.filter((i) => i !== value);
-              }
+    <span id={id}>
+      {options.map(({ expansion, onChange, selected, value, ...props }) => {
 
-              return [...items, value];
-            });
-            return false;
-          }}
-        >
-          <Render
-            id={value}
-            selected={selectedItems.includes(value)}
-            onChange={onChange}
-          />
-          {expansion && selectedItems.includes(value) && (
-            <div className="oec-itemchooser-expansion">{expansion}</div>
-          )}
-        </span>
-      ))}
-    </>
+				let _onChange = undefined;
+				if(onChange) {
+					_onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+						onChange(event);
+						manageInternalState(event);
+					}
+				}
+				const _selected = selected === undefined ? selectedItems.includes(value) : selected;
+
+				return (
+					<>
+						<Checkbox
+							onChange={_onChange || _groupOnChange}
+							selected={_selected}
+							value={value}
+							{...props}
+						/>
+						{expansion && _selected && (
+							<div className="oec-itemchooser-expansion">{expansion}</div>
+						)}
+					</>
+      )})}
+    </span>
   );
 };

@@ -1,4 +1,4 @@
-import React, { InputHTMLAttributes } from 'react';
+import React, { HTMLAttributes } from 'react';
 import cx from 'classnames';
 
 export type CheckboxProps = {
@@ -7,11 +7,12 @@ export type CheckboxProps = {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => any;
   defaultValue?: boolean;
   className?: string;
-  disabled?: boolean;
+	disabled?: boolean;
+	selected?: boolean;
   // Needs a value if it's not in a checkbox group
-  value?: string | undefined;
+  value: string;
   name?: string;
-} & Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'defaultValue'>;
+} & Omit<HTMLAttributes<HTMLInputElement>, 'onChange' | 'defaultValue' | 'value'>;
 
 /**
  * Component that wraps a native checkbox input element
@@ -23,7 +24,8 @@ export function Checkbox({
   value,
   defaultValue,
   className,
-  disabled,
+	disabled,
+	selected,
   ...props
 }: CheckboxProps) {
   return (
@@ -31,9 +33,10 @@ export function Checkbox({
       <input
         className="usa-checkbox__input"
         id={id}
-        value={value}
+				value={value}
+				checked={selected === undefined ? defaultValue : selected}
         type="checkbox"
-        defaultChecked={defaultValue}
+        // defaultChecked={defaultValue}
         onChange={onChange}
         disabled={!!disabled}
         {...props}

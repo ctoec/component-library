@@ -1,66 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { FormStatusProps } from '..';
-import { TextInput } from '../TextInput/TextInput';
-import { CheckboxOption, CheckboxGroup } from './CheckboxGroup';
-import { Checkbox } from '../Checkbox/Checkbox';
+import { CheckboxOptionProps, CheckboxGroup } from './CheckboxGroup';
 
 const onChange = action('onChange');
-const options: CheckboxOption[] = [
-  {
-    render: (props) => <Checkbox text="Option 1" {...props} />,
-    value: 'one',
-  },
-  {
-    render: (props) => <Checkbox text="Option 2" {...props} />,
-    value: 'two',
-  },
-];
-const optionsWithOneExpansion: CheckboxOption[] = [
-  {
-    render: (props) => <Checkbox text="Option 1" {...props} />,
-    value: 'one',
-    expansion: <p>Thank you for selecting option one!</p>,
-  },
-  {
-    render: (props) => <Checkbox text="Option 2" {...props} />,
-    value: 'two',
-  },
-];
-const optionsWithOneComplexExpansion: CheckboxOption[] = [
-  {
-    render: (props) => <Checkbox text="Option 1" {...props} />,
-    value: 'one',
-    expansion: (
-      <>
-        <p>Thank you for selecting option one!</p>
-        <TextInput
-          id="radio-multi-text-input"
-          label="Interactive Element?"
-          defaultValue="Yes, you can!"
-          onChange={onChange}
-        />
-      </>
-    ),
-  },
-  {
-    render: (props) => <Checkbox text="Option 2" {...props} />,
-    value: 'two',
-  },
-];
-const optionsWithTwoExpansions: CheckboxOption[] = [
-  {
-    render: (props) => <Checkbox text="Option 1" {...props} />,
-    value: 'one',
-    expansion: <p>Thank you for selecting option one!</p>,
-  },
-  {
-    render: (props) => <Checkbox text="Option 2" {...props} />,
-    value: 'two',
-    expansion: <p>Woo! #2</p>,
-  },
-];
+
+const optionProps: CheckboxOptionProps[] = [
+	{
+		value: 'one',
+		id: 'one-checkbox',
+		text: 'Option 1',
+	},
+	{
+		value: 'two',
+		id: 'two-checkbox',
+		text: 'Option 2',
+	}
+]
 const warning: FormStatusProps = {
   type: 'warning',
   message: 'These fields need your attention',
@@ -83,7 +40,18 @@ storiesOf('CheckboxGroup', module)
       <CheckboxGroup
         legend="CheckboxGroup"
         onChange={onChange}
-        options={options}
+        options={optionProps}
+        id="storybook-CheckboxGroup"
+      />
+    );
+	})
+	.add('CheckboxGroup with visible legend', () => {
+    return (
+      <CheckboxGroup
+				legend="CheckboxGroup"
+				showLegend
+        onChange={onChange}
+        options={optionProps}
         id="storybook-CheckboxGroup"
       />
     );
@@ -93,7 +61,7 @@ storiesOf('CheckboxGroup', module)
       <CheckboxGroup
         legend="CheckboxGroup"
         onChange={onChange}
-        options={options}
+        options={optionProps}
         id="storybook-CheckboxGroup"
         status={success}
       />
@@ -104,7 +72,7 @@ storiesOf('CheckboxGroup', module)
       <CheckboxGroup
         legend="CheckboxGroup"
         onChange={onChange}
-        options={options}
+        options={optionProps}
         id="storybook-CheckboxGroup"
         status={warning}
       />
@@ -115,7 +83,7 @@ storiesOf('CheckboxGroup', module)
       <CheckboxGroup
         legend="CheckboxGroup"
         onChange={onChange}
-        options={options}
+        options={optionProps}
         id="storybook-CheckboxGroup"
         status={error}
       />
@@ -126,39 +94,75 @@ storiesOf('CheckboxGroup', module)
       <CheckboxGroup
         legend="CheckboxGroup"
         onChange={onChange}
-        options={options}
+        options={optionProps}
         id="storybook-CheckboxGroup"
         disabled={true}
       />
     );
   })
-  .add('CheckboxGroup with one single element expansion', () => {
+  .add('CheckboxGroup with element expansions', () => {
     return (
       <CheckboxGroup
         legend="CheckboxGroup"
         onChange={onChange}
-        options={optionsWithOneExpansion}
+        options={optionProps.map((props) => ({...props, expansion: <div>This is an expansion yay!</div>}))}
         id="storybook-CheckboxGroup"
       />
     );
-  })
-  .add('CheckboxGroup with one multi element expansion', () => {
-    return (
-      <CheckboxGroup
-        legend="CheckboxGroup"
-        onChange={onChange}
-        options={optionsWithOneComplexExpansion}
-        id="storybook-CheckboxGroup"
-      />
-    );
-  })
-  .add('CheckboxGroup with both single element expansion', () => {
-    return (
-      <CheckboxGroup
-        legend="CheckboxGroup"
-        onChange={onChange}
-        options={optionsWithTwoExpansions}
-        id="storybook-CheckboxGroup"
-      />
-    );
-  });
+	})
+	.add('CheckboxGroup with custom select logic', () => 
+		React.createElement(() => {
+			const [selectedItems, setSelectedItems] = useState<string[]>([]);
+
+			return <CheckboxGroup
+				id="storybook-CheckboxGroup"
+				legend="CheckboxGroup"
+				options={[
+					{
+						value: 'all',
+						id: 'all-checkbox',
+						text: 'All (If this one is selected, nothing else can be selected)',
+						selected: selectedItems.length === 0,
+						onChange: (e) => {
+							if (e.target.checked) {
+								setSelectedItems([])
+							}
+							e.persist();
+						}
+					},
+					{
+						value: 'one',
+						id: 'one-checkbox',
+						text: 'Option 1',
+						selected: selectedItems.includes('one'),
+						onChange: (e) => {
+							if (e.target.checked) {
+                  setSelectedItems((items) => [...items, 'one']);
+							} else {
+								setSelectedItems((items) =>
+									items.filter((item) => item !== 'one')
+								);
+							}
+							e.persist();
+						}
+					},
+					{
+						value: 'two',
+						id: 'two-checkbox',
+						text: 'Option 2',
+						selected: selectedItems.includes('two'),
+						onChange: (e) => {
+							if (e.target.checked) {
+									setSelectedItems((items) => [...items, 'two']);
+							} else {
+								setSelectedItems((items) =>
+									items.filter((item) => item !== 'two')
+								);
+							}
+							e.persist();
+						}
+					}
+				]}
+			/>
+		})
+	)
