@@ -5,7 +5,7 @@ import { HeadingLevel } from '../..';
 
 export type AccordionItemProps = {
   id: string;
-  title: string;
+  title: JSX.Element | string;
   headerContent?: JSX.Element;
   expandText?: JSX.Element | string;
   collapseText?: JSX.Element | string;
