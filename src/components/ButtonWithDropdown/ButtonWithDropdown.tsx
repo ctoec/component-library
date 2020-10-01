@@ -1,5 +1,4 @@
 import React from 'react';
-import cx from 'classnames';
 import { Button, ButtonProps } from '../Button/Button';
 import { useHideOnLostFocus } from '../../hooks';
 import { AngleArrowDown } from '../../assets/images';
