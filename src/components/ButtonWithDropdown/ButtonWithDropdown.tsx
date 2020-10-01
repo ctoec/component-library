@@ -16,7 +16,7 @@ export const ButtonWithDropdown: React.FC<ButtonWithDropdownProps> = ({
   text,
   ...props
 }) => {
-  const { isComponentVisible, setIsComponentVisible } = useHideOnLostFocus<
+  const { ref, isComponentVisible, setIsComponentVisible } = useHideOnLostFocus<
     HTMLDivElement
   >();
 
@@ -29,6 +29,8 @@ export const ButtonWithDropdown: React.FC<ButtonWithDropdownProps> = ({
 
   return (
     <div
+      // Clicking outside this div will hide the ul
+      ref={ref}
       id={id}
       className="oec-drop-button"
     >
