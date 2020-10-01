@@ -1,21 +1,19 @@
 .oec-text-with-icon {
   display: block;
-  // @include u-text('primary');
-  // @include u-text('bold');
 }
 
 .oec-text-with-icon__icon {
   height: 1em;
   width: 1em;
-  vertical-align: bottom;
+  vertical-align: middle;
 }
 
 .oec-text-with-icon__icon--side-left {
-  margin-right: units(1);
+  margin-right: 0.1em;
 }
 
 .oec-text-with-icon__icon--side-right {
-  margin-left: units(1);
+  margin-left: 0.1em;
 }
 
 // Arrow points right by default
