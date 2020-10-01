@@ -1,5 +1,6 @@
 .oec-text-with-icon {
   display: block;
+  margin-right: 1rem;
 }
 
 .oec-text-with-icon__icon {
@@ -9,11 +10,11 @@
 }
 
 .oec-text-with-icon__icon--side-left {
-  margin-right: 0.1em;
+  margin-right: 0.25em;
 }
 
 .oec-text-with-icon__icon--side-right {
-  margin-left: 0.1em;
+  margin-left: 0.25em;
 }
 
 // Arrow points right by default
