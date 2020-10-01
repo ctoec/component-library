@@ -6,11 +6,11 @@ storiesOf('ButtonWithDropdown', module).add('Default', () => {
   return (
     <ButtonWithDropdown
       id="default"
-      appearence="outline"
+      appearance="unstyled"
       text="Dropdown"
       options={[
         { text: 'Hi', value: 'hi' },
-        { text: 'Bye', value: 'bye' },
+        { text: 'Bye', href: '/bye' },
       ]}
     />
   );

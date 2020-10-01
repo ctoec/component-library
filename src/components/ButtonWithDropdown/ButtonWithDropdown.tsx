@@ -1,61 +1,63 @@
 import React from 'react';
-import cx from 'classnames';
 import { Button, ButtonProps } from '../Button/Button';
-import { useDropdown, DropdownOptions } from '../../hooks';
-import { Link } from 'react-router-dom';
+import { useHideOnLostFocus } from '../../hooks';
+import { AngleArrowDown } from '../../assets/images';
 
-export type ButtonOptionProps = {
-  text: string;
-  value: string;
-};
-
-export type ButtonWithDropdownProps = ButtonProps & {
+export type ButtonWithDropdownProps = {
   id: string;
-  className?: string;
-  dropdownElement: JSX.Element;
-} & DropdownOptions;
+  // Buttons all the way down
+  options: Omit<ButtonProps, 'appearance'>[];
+} & Omit<ButtonProps, 'onClick' | 'href' | 'external'>;
 
 export const ButtonWithDropdown: React.FC<ButtonWithDropdownProps> = ({
   id,
-  className,
-  appearance,
-  text,
-  dropdownElement,
   options,
-  optionsProps,
+  text,
+  ...props
 }) => {
-  const { ref, dropdownContainer, changeVisibility } = useDropdown({
-    options,
-    optionsProps,
-    optionRender: (props) => (
-      <Link to={props.value} {...props}>
-        {props.text}
-      </Link>
-    ),
-  });
+  const { ref, isComponentVisible, setIsComponentVisible } = useHideOnLostFocus<
+    HTMLDivElement
+  >();
+
+  const getOnClick = (optionOnClick?: () => any) => {
+    return () => {
+      setIsComponentVisible(false);
+      if (optionOnClick) optionOnClick();
+    };
+  };
+
   return (
     <div
-      id={id}
+      // Clicking outside this div will hide the ul
       ref={ref}
-      className={cx(
-        'button-container',
-        { 'container--button-unstyled': appearance === 'unstyled' },
-        className
-      )}
+      id={id}
+      className="oec-drop-button"
     >
       <Button
-        className="with-dropdown"
-        appearance={appearance}
+        aria-haspopup="true"
         text={
-          <>
+          <span>
             {text}
             <span>&nbsp;</span>
-            {dropdownElement}
-          </>
+            <AngleArrowDown />
+          </span>
         }
-        onClick={changeVisibility}
+        onClick={() => setIsComponentVisible((v) => !v)}
+        {...props}
       />
-      {dropdownContainer}
+      {isComponentVisible && (
+        <ul aria-expanded={isComponentVisible}>
+          {options.map((o) => (
+            <li>
+              <Button
+                {...o}
+                appearance="unstyled"
+                onClick={getOnClick(o.onClick)}
+              />
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };
