@@ -47,11 +47,9 @@ storiesOf('Alert', module)
   .add('Lots of alerts', () => {
     return (
       <>
-        <div>The content above the alerts should have some breathing room</div>
         {allAlertProps.map((p, i) => (
           <Alert {...p} key={i} />
         ))}
-        <div>As should the content below.</div>
       </>
     );
   });
