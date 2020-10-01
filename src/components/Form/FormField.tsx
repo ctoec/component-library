@@ -22,7 +22,7 @@ export type FormFieldProps<TData, TComponentProps, TFieldData> =
           event: React.ChangeEvent<any>,
           data: TObjectDriller<TData>
         ) => TFieldData;
-        status?: FieldStatusFunc<TData>;
+        status?: FieldStatusFunc<TData, TComponentProps>;
         inputComponent: React.FC<TComponentProps>;
       } & /* Include TComponentProps props, except onChange, defaultValue, and status */ Pick<
         TComponentProps,
@@ -48,8 +48,8 @@ export const FormField = <
   TComponentProps extends {},
   TFieldData
 >({
-  getValue,
   defaultValue,
+  getValue,
   preprocessForDisplay,
   parseOnChangeEvent,
   status = () => undefined,
@@ -82,7 +82,7 @@ export const FormField = <
         preprocessForDisplay ? preprocessForDisplay(displayValue) : displayValue
       }
       onChange={onChange}
-      status={status(dataDriller, updatePath)}
+      status={status(dataDriller, updatePath, props)}
       {...props}
     >
       {children}
