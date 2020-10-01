@@ -16,7 +16,6 @@ export type DropdownOptions = {
 export const useDropdown: (
   _: DropdownOptions
 ) => {
-  ref: React.Ref<HTMLDivElement>;
   dropdownContainer: JSX.Element;
   isComponentVisible: boolean;
   hide: () => void;
@@ -24,7 +23,7 @@ export const useDropdown: (
   changeVisibility: () => void;
 } = ({ options, optionsProps, optionRender }) => {
   // TODO: aria popup role kind of stuff probably
-  const { ref, isComponentVisible, setIsComponentVisible } = useHideOnLostFocus<
+  const { isComponentVisible, setIsComponentVisible } = useHideOnLostFocus<
     HTMLDivElement
   >();
 
@@ -40,6 +39,7 @@ export const useDropdown: (
         'dropdown'
       )}
     >
+      {/* aria expanded is always true bc otherwise parent div has display none */}
       <ul aria-expanded="true">
         {options.map((_option, index) => {
           if (index === options.length - 1) {
@@ -51,6 +51,7 @@ export const useDropdown: (
                   className: 'option',
                   onClick: changeVisibility,
                   text: _option.text,
+                  // TODO: why does the last one get onblur behavior???
                   onBlur: hide,
                 })}
               </li>
@@ -73,7 +74,6 @@ export const useDropdown: (
     </div>
   );
   return {
-    ref,
     dropdownContainer,
     isComponentVisible,
     hide,

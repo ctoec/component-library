@@ -13,7 +13,7 @@ export type ButtonWithDropdownProps = ButtonProps & {
   id: string;
   className?: string;
   dropdownElement: JSX.Element;
-} & DropdownOptions;
+} & Omit<DropdownOptions, 'optionRender'>;
 
 export const ButtonWithDropdown: React.FC<ButtonWithDropdownProps> = ({
   id,
@@ -24,7 +24,7 @@ export const ButtonWithDropdown: React.FC<ButtonWithDropdownProps> = ({
   options,
   optionsProps,
 }) => {
-  const { ref, dropdownContainer, changeVisibility } = useDropdown({
+  const { dropdownContainer, changeVisibility } = useDropdown({
     options,
     optionsProps,
     optionRender: (props) => (
@@ -36,7 +36,6 @@ export const ButtonWithDropdown: React.FC<ButtonWithDropdownProps> = ({
   return (
     <div
       id={id}
-      ref={ref}
       className={cx(
         'button-container',
         { 'container--button-unstyled': appearance === 'unstyled' },
@@ -44,6 +43,7 @@ export const ButtonWithDropdown: React.FC<ButtonWithDropdownProps> = ({
       )}
     >
       <Button
+        aria-haspopup="true"
         className="with-dropdown"
         appearance={appearance}
         text={
