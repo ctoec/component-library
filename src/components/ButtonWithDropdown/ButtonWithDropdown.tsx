@@ -24,8 +24,8 @@ export const ButtonWithDropdown: React.FC<ButtonWithDropdownProps> = ({
     return () => {
       setIsComponentVisible(false);
       if (optionOnClick) optionOnClick();
-    }
-  }
+    };
+  };
 
   return (
     <div
@@ -43,16 +43,22 @@ export const ButtonWithDropdown: React.FC<ButtonWithDropdownProps> = ({
             <AngleArrowDown />
           </span>
         }
-        onClick={() => setIsComponentVisible(v => !v)}
+        onClick={() => setIsComponentVisible((v) => !v)}
         {...props}
       />
-      {isComponentVisible &&
+      {isComponentVisible && (
         <ul aria-expanded={isComponentVisible}>
-          {options.map(o => (
-            <li><Button {...o} appearance="unstyled" onClick={getOnClick(o.onClick)} /></li>
+          {options.map((o) => (
+            <li>
+              <Button
+                {...o}
+                appearance="unstyled"
+                onClick={getOnClick(o.onClick)}
+              />
+            </li>
           ))}
         </ul>
-      }
+      )}
     </div>
   );
 };

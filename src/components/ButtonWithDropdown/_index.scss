@@ -1,37 +1,37 @@
 .oec-drop-button {
-	width: fit-content;
-	display: inline-block;
+  width: fit-content;
+  display: inline-block;
 
-	svg {
-		height: 0.5em;
-		width: 0.5em;
-	}
+  svg {
+    height: 0.5em;
+    width: 0.5em;
+  }
 
-	ul {
-		list-style-type: none;
-		margin: 0.5rem -0.5rem 0 -0.5rem;
-		padding: 0;
-		border: 1px solid color($theme-color-base-lighter);
+  ul {
+    list-style-type: none;
+    margin: 0.5rem -0.5rem 0 -0.5rem;
+    padding: 0;
+    border: 1px solid color($theme-color-base-lighter);
 
-		li {
-			width: 100%;
-			&:not(:last-child) {
-				border-bottom: 1px solid color($theme-color-base-lighter);
-			}
+    li {
+      width: 100%;
+      &:not(:last-child) {
+        border-bottom: 1px solid color($theme-color-base-lighter);
+      }
 
-			a,
-			button {
-				text-align: right;
-				padding: 0.25em;
-				width: 100%;
-				&:hover {
-					background-color: color($theme-color-base-lighter);
-				}
-				&:focus {
-					outline-offset: 0 !important;
-					// Override uswds default
-				}
-			}
-		}
-	}
+      a,
+      button {
+        text-align: right;
+        padding: 0.25em;
+        width: 100%;
+        &:hover {
+          background-color: color($theme-color-base-lighter);
+        }
+        &:focus {
+          outline-offset: 0 !important;
+          // Override uswds default
+        }
+      }
+    }
+  }
 }
