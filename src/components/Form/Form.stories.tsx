@@ -95,7 +95,7 @@ const SampleForm = ({ formData }) => (
         status={(objectDriller) =>
           objectDriller.at('nickName').value === errorfulFormData.nickName
             ? {
-              type: 'warning',
+              type: 'error',
               message: 'Nickname is too cutesy for an evil character',
               id: 'nickName-status',
             }
@@ -157,7 +157,7 @@ const SampleForm = ({ formData }) => (
           ? {
             id: 'checkboxStatus',
             type: 'error',
-            message: 'Gotta stand up to Voldy',
+            message: 'Nope, gotta stand up to Voldy',
           }
           : undefined
       }

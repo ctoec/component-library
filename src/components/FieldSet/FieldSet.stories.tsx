@@ -33,15 +33,6 @@ storiesOf('FieldSet', module)
       </FieldSet>
     );
   })
-  .add('Horizontal', () => {
-    return (
-      <FieldSet legend="Field set" id="horizontal-fieldSet" horizontal>
-        <p>These</p>
-        <p>are</p>
-        <p>horizontal</p>
-      </FieldSet>
-    );
-  })
   .add('With warning', () => {
     return (
       <FieldSet
