@@ -10,7 +10,7 @@ import { ObjectDriller } from './ObjectDriller';
 export type FormProps<T> = {
   onSubmit: (_: T) => void;
   data: T;
-  className: string;
+  className?: string;
 } & /**
  * Creates a set of props that includes
  * all FormHTMLAttributes<HTMLFormElement> props, except onSubmit

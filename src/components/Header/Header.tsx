@@ -39,7 +39,7 @@ export const Header: React.FC<HeaderProps> = ({
   navItems,
   logoutPath = '/logout',
   userFirstName,
-  showPrimaryNavItems = true
+  showPrimaryNavItems = true,
 }) => {
   const [mobileMenuIsVisible, setMobileMenuIsVisible] = useState(false);
   const location = useLocation();
