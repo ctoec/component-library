@@ -21,6 +21,10 @@
     &--error {
       // Don't show two borders if fieldsets are nested
       border-left-style: none;
+
+      legend {
+        font-weight: bold;
+      }
     }
   }
 
@@ -28,6 +32,7 @@
     &--success,
     &--warning,
     &--error {
+      margin-top: 0;
       margin-left: 0;
       padding-left: 0;
       border-left: none;

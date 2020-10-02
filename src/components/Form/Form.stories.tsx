@@ -4,8 +4,14 @@ import { action } from '@storybook/addon-actions';
 import { withKnobs } from '@storybook/addon-knobs';
 
 import { Form, FormField } from '.';
-import { TextInput, TextInputProps } from '..';
-import { FormFieldSet, FormSubmitButton } from '../..';
+import { TextInput, TextInputProps, CheckboxGroup } from '..';
+import {
+  Checkbox,
+  CheckboxProps,
+  FormFieldSet,
+  FormFieldSetProps,
+  FormSubmitButton,
+} from '../..';
 
 const onSubmit = action('onSubmit');
 type FormDataType = {
@@ -16,6 +22,8 @@ type FormDataType = {
     nestType: string;
     nestReason: string;
   };
+  turningIntoAnAnimal: boolean;
+  notBeingAfraidOfVoldemort: boolean;
 };
 
 const _formData = {
@@ -40,7 +48,6 @@ const errorfulFormData = {
   notBeingAfraidOfVoldemort: false,
 };
 
-// TODO: add checkbox example
 const possibleSuperPowers = {
   ANIMAL: 'turningIntoAnAnimal',
   VOLDEMORT: 'notBeingAfraidOfVoldemort',
@@ -55,10 +62,10 @@ const SampleForm = ({ formData }) => (
       status={(data) =>
         data.nestedValue.nestType === 'rat'
           ? {
-              type: 'error',
-              id: 'character-name',
-              message: 'Error: watch out Ron!!!!!',
-            }
+            type: 'error',
+            id: 'character-name',
+            message: 'Error: watch out Ron!!!!!',
+          }
           : undefined
       }
     >
@@ -71,10 +78,10 @@ const SampleForm = ({ formData }) => (
         status={(objectDriller) =>
           objectDriller.at('firstName').value === errorfulFormData.firstName
             ? {
-                type: 'error',
-                message: 'No characters named Peter allowed',
-                id: 'firstName-status',
-              }
+              type: 'error',
+              message: 'No characters named Peter allowed',
+              id: 'firstName-status',
+            }
             : undefined
         }
       />
@@ -88,10 +95,10 @@ const SampleForm = ({ formData }) => (
         status={(objectDriller) =>
           objectDriller.at('nickName').value === errorfulFormData.nickName
             ? {
-                type: 'warning',
-                message: 'Nickname is too cutesy for an evil character',
-                id: 'nickName-status',
-              }
+              type: 'warning',
+              message: 'Nickname is too cutesy for an evil character',
+              id: 'nickName-status',
+            }
             : undefined
         }
       />
@@ -104,14 +111,57 @@ const SampleForm = ({ formData }) => (
         status={(objectDriller) =>
           objectDriller.at('lastName').value === errorfulFormData.lastName
             ? {
-                type: 'success',
-                message: 'This is fine though',
-                id: 'lastName-status',
-              }
+              type: 'success',
+              message: 'This is fine though',
+              id: 'lastName-status',
+            }
             : undefined
         }
       />
     </FormFieldSet>
+    <CheckboxGroup<FormFieldSetProps<FormDataType>>
+      legend="Character superpowers"
+      hint="As identified by readers"
+      id="powers"
+      useFormFieldSet
+      options={[
+        {
+          render: ({ id, selected }) => (
+            <FormField<FormDataType, CheckboxProps, boolean>
+              getValue={(data) => data.at(possibleSuperPowers.ANIMAL)}
+              parseOnChangeEvent={(e) => e.target.checked}
+              defaultValue={selected}
+              inputComponent={Checkbox}
+              id={id}
+              text="Can turn into an animal"
+            />
+          ),
+          value: possibleSuperPowers.ANIMAL,
+        },
+        {
+          render: ({ id, selected }) => (
+            <FormField<FormDataType, CheckboxProps, boolean>
+              getValue={(data) => data.at(possibleSuperPowers.VOLDEMORT)}
+              parseOnChangeEvent={(e) => e.target.checked}
+              defaultValue={selected}
+              inputComponent={Checkbox}
+              id={id}
+              text="Is not afraid of Voldemort"
+            />
+          ),
+          value: possibleSuperPowers.VOLDEMORT,
+        },
+      ]}
+      status={(characterData) =>
+        characterData === errorfulFormData
+          ? {
+            id: 'checkboxStatus',
+            type: 'error',
+            message: 'Gotta stand up to Voldy',
+          }
+          : undefined
+      }
+    />
     <FormSubmitButton />
   </Form>
 );

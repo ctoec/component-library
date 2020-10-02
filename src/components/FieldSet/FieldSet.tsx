@@ -21,7 +21,7 @@ export type FieldSetProps = {
 export const FieldSet: React.FC<FieldSetProps> = ({
   legend,
   id,
-  showLegend,
+  showLegend = true,
   legendStyle = 'normal',
   status,
   optional,
