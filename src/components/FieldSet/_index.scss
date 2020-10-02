@@ -1,5 +1,7 @@
 .usa-fieldset {
-  margin-top: 1rem;
+  + .usa-fieldset {
+    margin-top: 2.5rem;
+  }
 
   &--error {
     border-left-width: 0.25rem;
