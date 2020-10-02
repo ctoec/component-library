@@ -5,7 +5,7 @@ import { withKnobs } from '@storybook/addon-knobs';
 
 import { Form, FormField } from '.';
 import { TextInput, TextInputProps } from '..';
-import { FormFieldSet } from '../..';
+import { CheckboxGroupProps, FormFieldSet } from '../..';
 
 const onSubmit = action('onSubmit');
 type FormDataType = {
@@ -16,13 +16,21 @@ type FormDataType = {
     nestReason: string;
   };
 };
+
 const _formData = {
   firstName: 'Peter',
   lastName: 'Pettigrew',
   nestedValue: {
     nestType: 'rat',
   },
+  turningIntoAnAnimal: true,
+  notBeingAfraidOfVoldemort: false,
 };
+
+const possibleSuperPowers = {
+  ANIMAL: 'turningIntoAnAnimal',
+  VOLDEMORT: 'notBeingAfraidOfVoldemort'
+}
 
 const SampleForm = ({ formData }) => (
   <Form onSubmit={onSubmit} data={formData}>
@@ -33,39 +41,37 @@ const SampleForm = ({ formData }) => (
       status={(data) =>
         data.nestedValue.nestType === 'rat'
           ? {
-              type: 'error',
-              id: 'character-name',
-              message: 'Peter Pettigrew is an animagus!!!!!',
-            }
+            type: 'error',
+            id: 'character-name',
+            message: 'Peter Pettigrew is an animagus!!!!!',
+          }
           : undefined
       }
     >
-      <>
-        <FormField<FormDataType, TextInputProps, string | null>
-          getValue={(data) => data.at('firstName')}
-          inputComponent={TextInput}
-          type="input"
-          id="firstName"
-          label="First name"
-          status={(data) => ({
-            type: 'error',
-            message: 'No characters named Peter allowed',
-            id: 'firstName-status',
-          })}
-        />
-        <FormField<FormDataType, TextInputProps, string | null>
-          getValue={(data) => data.at('lastName')}
-          inputComponent={TextInput}
-          type="input"
-          id="lastName"
-          label="Last name"
-          status={() => ({
-            type: 'error',
-            message: 'He is a death eater!',
-            id: 'lastName-status',
-          })}
-        />
-      </>
+      <FormField<FormDataType, TextInputProps, string | null>
+        getValue={(data) => data.at('firstName')}
+        inputComponent={TextInput}
+        type="input"
+        id="firstName"
+        label="First name"
+        status={(data) => ({
+          type: 'error',
+          message: 'No characters named Peter allowed',
+          id: 'firstName-status',
+        })}
+      />
+      <FormField<FormDataType, TextInputProps, string | null>
+        getValue={(data) => data.at('lastName')}
+        inputComponent={TextInput}
+        type="input"
+        id="lastName"
+        label="Last name"
+        status={() => ({
+          type: 'error',
+          message: 'He is a death eater!',
+          id: 'lastName-status',
+        })}
+      />
     </FormFieldSet>
   </Form>
 );

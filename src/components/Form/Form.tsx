@@ -4,6 +4,7 @@ import React, {
   useState,
   useEffect,
 } from 'react';
+import cx from 'classnames';
 import { FormProvider } from './FormContext';
 import { ObjectDriller } from './ObjectDriller';
 
@@ -57,7 +58,7 @@ export const Form = <T extends any>({
         updateData,
       }}
     >
-      <form className={className} onSubmit={_onSubmit} {...props}>
+      <form className={cx('usa-form', className)} onSubmit={_onSubmit} {...props}>
         {children}
       </form>
     </FormProvider>
