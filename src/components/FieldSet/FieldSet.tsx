@@ -11,7 +11,6 @@ export type FieldSetProps = {
   optional?: boolean;
   className?: string;
   hint?: string;
-  horizontal?: boolean;
   childrenGroupClassName?: string;
   disabled?: boolean;
 };
@@ -29,7 +28,6 @@ export const FieldSet: React.FC<FieldSetProps> = ({
   className,
   children,
   hint,
-  horizontal = false,
   childrenGroupClassName,
   disabled,
 }) => {
@@ -74,16 +72,7 @@ export const FieldSet: React.FC<FieldSetProps> = ({
       </legend>
       {hint && <span className="usa-hint text-italic">{hint}</span>}
       {status && <FormStatus {...status} />}
-      <div
-        className={cx(
-          'grid-gap',
-          childrenGroupClassName,
-          { 'grid-row flex-align-start': !horizontal },
-          { 'grid-col': horizontal }
-        )}
-      >
-        <div>{children}</div>
-      </div>
+      <div className={childrenGroupClassName}>{children}</div>
     </fieldset>
   );
 };
