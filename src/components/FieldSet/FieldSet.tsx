@@ -46,6 +46,7 @@ export const FieldSet: React.FC<FieldSetProps> = ({
         'grid-gap',
         'grid-row',
         'usa-fieldset',
+        'margin-top-3',
         {
           [`usa-fieldset--${status && status.type}`]: status,
         },
