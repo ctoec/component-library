@@ -6,7 +6,7 @@ Object {
   "baseElement": <body>
     <div>
       <div
-        class="usa-alert usa-alert--error grid-row margin-y-4"
+        class="usa-alert usa-alert--error grid-row"
         role="alert"
       >
         <div
@@ -30,7 +30,7 @@ Object {
   </body>,
   "container": <div>
     <div
-      class="usa-alert usa-alert--error grid-row margin-y-4"
+      class="usa-alert usa-alert--error grid-row"
       role="alert"
     >
       <div
