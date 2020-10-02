@@ -1,24 +1,23 @@
-.usa-fieldset--error {
-  border-left-width: 0.25rem;
-  border-left-style: solid;
-  border-left-color: color($theme-color-error-dark);
-}
-
-.usa-fieldset--warning {
-  @extend .usa-fieldset--error;
-  border-left-color: color($theme-color-warning-dark);
-}
-
-.usa-fieldset--success {
-  @extend .usa-fieldset--error;
-  border-left-color: color($theme-color-success);
-}
-
 .usa-fieldset {
+  margin-top: 1rem;
+
   &--error {
+    border-left-width: 0.25rem;
+    border-left-style: solid;
+    border-left-color: color($theme-color-error-dark);
     legend * {
       font-weight: bold;
     }
+  }
+
+  &--warning {
+    @extend .usa-fieldset--error;
+    border-left-color: color($theme-color-warning-dark);
+  }
+
+  &--success {
+    @extend .usa-fieldset--error;
+    border-left-color: color($theme-color-success);
   }
 
   .usa-fieldset {

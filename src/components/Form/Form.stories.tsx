@@ -1,4 +1,5 @@
 import React from 'react';
+import moment, { Moment } from 'moment';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs } from '@storybook/addon-knobs';
@@ -8,12 +9,16 @@ import { TextInput, TextInputProps, CheckboxGroup } from '..';
 import {
   Checkbox,
   CheckboxProps,
+  DateInput,
+  DateInputProps,
   FormFieldSet,
   FormFieldSetProps,
   FormSubmitButton,
 } from '../..';
 
 const onSubmit = action('onSubmit');
+const onChange = action('onChange');
+
 type FormDataType = {
   firstName: string;
   nickName?: string;
@@ -24,6 +29,7 @@ type FormDataType = {
   };
   turningIntoAnAnimal: boolean;
   notBeingAfraidOfVoldemort: boolean;
+  date: Moment;
 };
 
 const _formData = {
@@ -35,6 +41,7 @@ const _formData = {
   },
   turningIntoAnAnimal: true,
   notBeingAfraidOfVoldemort: true,
+  date: moment(),
 };
 
 const errorfulFormData = {
@@ -161,6 +168,14 @@ const SampleForm = ({ formData }) => (
           }
           : undefined
       }
+    />
+    <FormField<FormDataType, DateInputProps, Moment>
+      getValue={(data) => data.at('date')}
+      parseOnChangeEvent={(e) => (e as unknown) as Moment}
+      inputComponent={DateInput}
+      id="date"
+      label="Pick a date"
+      status={objectDriller => objectDriller.at('date').value?.isValid() ? undefined : { id: 'dateStatus', type: 'warning', message: 'Pick one' }}
     />
     <FormSubmitButton />
   </Form>
