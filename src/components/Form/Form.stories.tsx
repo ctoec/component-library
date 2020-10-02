@@ -57,7 +57,7 @@ const SampleForm = ({ formData }) => (
           ? {
               type: 'error',
               id: 'character-name',
-              message: 'Watch out Ron!!!!!',
+              message: 'Error: watch out Ron!!!!!',
             }
           : undefined
       }
