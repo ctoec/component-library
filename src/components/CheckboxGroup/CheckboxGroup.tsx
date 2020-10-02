@@ -67,7 +67,7 @@ export const CheckboxGroup = <
       <FormFieldSet
         {...formFieldSetProps}
         id={`${id}-fieldset`}
-        childrenGroupClassName={cx(childrenGroupClassName, 'margin-top-3')}
+        childrenGroupClassName={childrenGroupClassName}
       >
         <InternalCheckboxGroup id={id} {...checkboxGroupProps} />
       </FormFieldSet>
@@ -79,7 +79,7 @@ export const CheckboxGroup = <
     <FieldSet
       {...fieldSetProps}
       id={`${id}-fieldset`}
-      childrenGroupClassName={cx(childrenGroupClassName, 'margin-top-3')}
+      childrenGroupClassName={childrenGroupClassName}
     >
       <InternalCheckboxGroup id={id} {...checkboxGroupProps} />
     </FieldSet>

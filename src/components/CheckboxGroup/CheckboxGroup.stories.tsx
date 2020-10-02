@@ -82,6 +82,7 @@ storiesOf('CheckboxGroup', module)
     return (
       <CheckboxGroup
         legend="CheckboxGroup"
+        showLegend
         onChange={onChange}
         options={options}
         id="storybook-CheckboxGroup"
@@ -118,6 +119,7 @@ storiesOf('CheckboxGroup', module)
         options={options}
         id="storybook-CheckboxGroup"
         status={error}
+        showLegend
       />
     );
   })
