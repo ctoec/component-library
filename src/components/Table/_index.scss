@@ -2,6 +2,10 @@
   @extend .usa-table;
   @extend .usa-table--borderless;
 
+  th.text-right {
+    @include u-text('right');
+  }
+
   th,
   td {
     &:first-child {
