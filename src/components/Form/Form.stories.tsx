@@ -5,7 +5,7 @@ import { withKnobs } from '@storybook/addon-knobs';
 
 import { Form, FormField } from '.';
 import { TextInput, TextInputProps } from '..';
-import { FormFieldSet } from '../..';
+import { FormFieldSet, FormSubmitButton } from '../..';
 
 const onSubmit = action('onSubmit');
 type FormDataType = {
@@ -55,10 +55,10 @@ const SampleForm = ({ formData }) => (
       status={(data) =>
         data.nestedValue.nestType === 'rat'
           ? {
-              type: 'error',
-              id: 'character-name',
-              message: 'Error: watch out Ron!!!!!',
-            }
+            type: 'error',
+            id: 'character-name',
+            message: 'Error: watch out Ron!!!!!',
+          }
           : undefined
       }
     >
@@ -71,10 +71,10 @@ const SampleForm = ({ formData }) => (
         status={(objectDriller) =>
           objectDriller.at('firstName').value === errorfulFormData.firstName
             ? {
-                type: 'error',
-                message: 'No characters named Peter allowed',
-                id: 'firstName-status',
-              }
+              type: 'error',
+              message: 'No characters named Peter allowed',
+              id: 'firstName-status',
+            }
             : undefined
         }
       />
@@ -88,10 +88,10 @@ const SampleForm = ({ formData }) => (
         status={(objectDriller) =>
           objectDriller.at('nickName').value === errorfulFormData.nickName
             ? {
-                type: 'warning',
-                message: 'Nickname is too cutesy for an evil character',
-                id: 'nickName-status',
-              }
+              type: 'warning',
+              message: 'Nickname is too cutesy for an evil character',
+              id: 'nickName-status',
+            }
             : undefined
         }
       />
@@ -104,14 +104,15 @@ const SampleForm = ({ formData }) => (
         status={(objectDriller) =>
           objectDriller.at('lastName').value === errorfulFormData.lastName
             ? {
-                type: 'success',
-                message: 'This is fine though',
-                id: 'lastName-status',
-              }
+              type: 'success',
+              message: 'This is fine though',
+              id: 'lastName-status',
+            }
             : undefined
         }
       />
     </FormFieldSet>
+    <FormSubmitButton />
   </Form>
 );
 
