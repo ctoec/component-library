@@ -82,9 +82,7 @@ export const FieldSet: React.FC<FieldSetProps> = ({
           { 'grid-col': horizontal }
         )}
       >
-        <div>
-          {children}
-        </div>
+        <div>{children}</div>
       </div>
     </fieldset>
   );

@@ -58,7 +58,11 @@ export const Form = <T extends any>({
         updateData,
       }}
     >
-      <form className={cx('usa-form', className)} onSubmit={_onSubmit} {...props}>
+      <form
+        className={cx('usa-form', className)}
+        onSubmit={_onSubmit}
+        {...props}
+      >
         {children}
       </form>
     </FormProvider>
