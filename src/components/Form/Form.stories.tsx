@@ -17,7 +17,6 @@ import {
 } from '../..';
 
 const onSubmit = action('onSubmit');
-const onChange = action('onChange');
 
 type FormDataType = {
   firstName: string;
@@ -69,10 +68,10 @@ const SampleForm = ({ formData }) => (
       status={(data) =>
         data.nestedValue.nestType === 'rat'
           ? {
-              type: 'error',
-              id: 'character-name',
-              message: 'Error: watch out Ron!!!!!',
-            }
+            type: 'error',
+            id: 'character-name',
+            message: 'Error: watch out Ron!!!!!',
+          }
           : undefined
       }
     >
@@ -85,10 +84,10 @@ const SampleForm = ({ formData }) => (
         status={(objectDriller) =>
           objectDriller.at('firstName').value === errorfulFormData.firstName
             ? {
-                type: 'error',
-                message: 'No characters named Peter allowed',
-                id: 'firstName-status',
-              }
+              type: 'error',
+              message: 'No characters named Peter allowed',
+              id: 'firstName-status',
+            }
             : undefined
         }
       />
@@ -102,10 +101,10 @@ const SampleForm = ({ formData }) => (
         status={(objectDriller) =>
           objectDriller.at('nickName').value === errorfulFormData.nickName
             ? {
-                type: 'error',
-                message: 'Nickname is too cutesy for an evil character',
-                id: 'nickName-status',
-              }
+              type: 'error',
+              message: 'Nickname is too cutesy for an evil character',
+              id: 'nickName-status',
+            }
             : undefined
         }
       />
@@ -118,10 +117,10 @@ const SampleForm = ({ formData }) => (
         status={(objectDriller) =>
           objectDriller.at('lastName').value === errorfulFormData.lastName
             ? {
-                type: 'success',
-                message: 'This is fine though',
-                id: 'lastName-status',
-              }
+              type: 'success',
+              message: 'This is fine though',
+              id: 'lastName-status',
+            }
             : undefined
         }
       />
@@ -162,10 +161,10 @@ const SampleForm = ({ formData }) => (
       status={(characterData) =>
         characterData === errorfulFormData
           ? {
-              id: 'checkboxStatus',
-              type: 'error',
-              message: 'Nope, gotta stand up to Voldy',
-            }
+            id: 'checkboxStatus',
+            type: 'error',
+            message: 'Nope, gotta stand up to Voldy',
+          }
           : undefined
       }
     />
@@ -178,7 +177,7 @@ const SampleForm = ({ formData }) => (
       status={(objectDriller) =>
         objectDriller.at('date').value?.isValid()
           ? undefined
-          : { id: 'dateStatus', type: 'warning', message: 'Pick one' }
+          : { id: 'dateStatus', type: 'error', message: 'Pick one' }
       }
     />
     <FormSubmitButton />
