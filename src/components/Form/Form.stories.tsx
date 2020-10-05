@@ -22,22 +22,20 @@ type FormDataType = {
   firstName: string;
   nickName?: string;
   lastName: string;
-  nestedValue: {
-    nestType: string;
-    nestReason: string;
-  };
   turningIntoAnAnimal: boolean;
   notBeingAfraidOfVoldemort: boolean;
   date: Moment;
+};
+
+const possibleSuperPowers: { [key: string]: keyof FormDataType } = {
+  ANIMAL: 'turningIntoAnAnimal',
+  VOLDEMORT: 'notBeingAfraidOfVoldemort',
 };
 
 const _formData = {
   firstName: 'James',
   nickName: 'Prongs',
   lastName: 'Potter',
-  nestedValue: {
-    nestType: 'stag?',
-  },
   turningIntoAnAnimal: true,
   notBeingAfraidOfVoldemort: true,
   date: moment(),
@@ -47,16 +45,8 @@ const errorfulFormData = {
   firstName: 'Peter',
   nickName: 'Wormtail',
   lastName: 'Pettigrew',
-  nestedValue: {
-    nestType: 'rat',
-  },
   turningIntoAnAnimal: true,
   notBeingAfraidOfVoldemort: false,
-};
-
-const possibleSuperPowers = {
-  ANIMAL: 'turningIntoAnAnimal',
-  VOLDEMORT: 'notBeingAfraidOfVoldemort',
 };
 
 const SampleForm = ({ formData }) => (
@@ -66,12 +56,12 @@ const SampleForm = ({ formData }) => (
       legend="Character name"
       showLegend
       status={(data) =>
-        data.nestedValue.nestType === 'rat'
+        data.firstName === 'Peter'
           ? {
-              type: 'error',
-              id: 'character-name',
-              message: 'Error: watch out Ron!!!!!',
-            }
+            type: 'error',
+            id: 'character-name',
+            message: 'Error: watch out Ron!!!!!',
+          }
           : undefined
       }
     >
@@ -84,10 +74,10 @@ const SampleForm = ({ formData }) => (
         status={(objectDriller) =>
           objectDriller.at('firstName').value === errorfulFormData.firstName
             ? {
-                type: 'error',
-                message: 'No characters named Peter allowed',
-                id: 'firstName-status',
-              }
+              type: 'error',
+              message: 'No characters named Peter allowed',
+              id: 'firstName-status',
+            }
             : undefined
         }
       />
@@ -97,16 +87,15 @@ const SampleForm = ({ formData }) => (
         type="input"
         id="lastName"
         label="Last name"
-        // TODO: investigate success spacing
-        // status={(objectDriller) =>
-        //   objectDriller.at('lastName').value === errorfulFormData.lastName
-        //     ? {
-        //       type: 'success',
-        //       message: 'This is fine though',
-        //       id: 'lastName-status',
-        //     }
-        //     : undefined
-        // }
+        status={(objectDriller) =>
+          objectDriller.at('lastName').value === errorfulFormData.lastName
+            ? {
+              type: 'success',
+              message: 'This is fine though',
+              id: 'lastName-status',
+            }
+            : undefined
+        }
       />
     </FormFieldSet>
     <FormField<FormDataType, TextInputProps, string | null>
@@ -119,10 +108,10 @@ const SampleForm = ({ formData }) => (
       status={(objectDriller) =>
         objectDriller.at('nickName').value === errorfulFormData.nickName
           ? {
-              type: 'error',
-              message: 'Nickname is too cutesy for an evil character',
-              id: 'nickName-status',
-            }
+            type: 'error',
+            message: 'Nickname is too cutesy for an evil character',
+            id: 'nickName-status',
+          }
           : undefined
       }
     />
@@ -134,7 +123,7 @@ const SampleForm = ({ formData }) => (
       options={[
         {
           render: ({ id, selected }) => (
-            <FormField<FormDataType, CheckboxProps, boolean>
+            <FormField<FormDataType, CheckboxProps, string | boolean | Moment>
               getValue={(data) => data.at(possibleSuperPowers.ANIMAL)}
               parseOnChangeEvent={(e) => e.target.checked}
               defaultValue={selected}
@@ -147,7 +136,7 @@ const SampleForm = ({ formData }) => (
         },
         {
           render: ({ id, selected }) => (
-            <FormField<FormDataType, CheckboxProps, boolean>
+            <FormField<FormDataType, CheckboxProps, string | boolean | Moment>
               getValue={(data) => data.at(possibleSuperPowers.VOLDEMORT)}
               parseOnChangeEvent={(e) => e.target.checked}
               defaultValue={selected}
@@ -162,10 +151,10 @@ const SampleForm = ({ formData }) => (
       status={(characterData) =>
         characterData === errorfulFormData
           ? {
-              id: 'checkboxStatus',
-              type: 'error',
-              message: 'Nope, gotta stand up to Voldy',
-            }
+            id: 'checkboxStatus',
+            type: 'error',
+            message: 'Nope, gotta stand up to Voldy',
+          }
           : undefined
       }
     />
