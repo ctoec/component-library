@@ -1,9 +1,6 @@
 .usa-fieldset {
   padding: unset;
-
-  + .usa-fieldset {
-    margin-top: 1rem;
-  }
+  margin-top: 1rem;
 
   &--error {
     padding-left: 1rem;
@@ -39,7 +36,12 @@
     &--success,
     &--warning,
     &--error {
-      border-left: none;
+      border-left-color: transparent;
     }
   }
+}
+
+form > fieldset:first-child {
+  // We only want the top margin for the rest of the fieldsets
+  margin-top: unset;
 }

@@ -92,39 +92,40 @@ const SampleForm = ({ formData }) => (
         }
       />
       <FormField<FormDataType, TextInputProps, string | null>
-        getValue={(data) => data.at('nickName')}
-        preprocessForDisplay={(value) => `"${value}"`}
-        inputComponent={TextInput}
-        type="input"
-        id="nickName"
-        label="Nick name"
-        status={(objectDriller) =>
-          objectDriller.at('nickName').value === errorfulFormData.nickName
-            ? {
-                type: 'error',
-                message: 'Nickname is too cutesy for an evil character',
-                id: 'nickName-status',
-              }
-            : undefined
-        }
-      />
-      <FormField<FormDataType, TextInputProps, string | null>
         getValue={(data) => data.at('lastName')}
         inputComponent={TextInput}
         type="input"
         id="lastName"
         label="Last name"
-        status={(objectDriller) =>
-          objectDriller.at('lastName').value === errorfulFormData.lastName
-            ? {
-                type: 'success',
-                message: 'This is fine though',
-                id: 'lastName-status',
-              }
-            : undefined
-        }
+        // TODO: investigate success spacing
+        // status={(objectDriller) =>
+        //   objectDriller.at('lastName').value === errorfulFormData.lastName
+        //     ? {
+        //       type: 'success',
+        //       message: 'This is fine though',
+        //       id: 'lastName-status',
+        //     }
+        //     : undefined
+        // }
       />
     </FormFieldSet>
+    <FormField<FormDataType, TextInputProps, string | null>
+      getValue={(data) => data.at('nickName')}
+      preprocessForDisplay={(value) => `"${value}"`}
+      inputComponent={TextInput}
+      type="input"
+      id="nickName"
+      label="Nick name"
+      status={(objectDriller) =>
+        objectDriller.at('nickName').value === errorfulFormData.nickName
+          ? {
+              type: 'error',
+              message: 'Nickname is too cutesy for an evil character',
+              id: 'nickName-status',
+            }
+          : undefined
+      }
+    />
     <CheckboxGroup<FormFieldSetProps<FormDataType>>
       legend="Character superpowers"
       hint="As identified by readers"
