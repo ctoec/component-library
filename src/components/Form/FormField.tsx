@@ -18,7 +18,7 @@ export type FormFieldProps<TData, TComponentProps, TFieldData> =
         preprocessForDisplay?: (
           _: TFieldData | undefined
         ) => TFieldData | JSX.Element | string | undefined;
-        parseOnChangeEvent: (
+        parseOnChangeEvent?: (
           event: React.ChangeEvent<any>,
           data: TObjectDriller<TData>
         ) => TFieldData;
@@ -51,7 +51,7 @@ export const FormField = <
   defaultValue,
   getValue,
   preprocessForDisplay,
-  parseOnChangeEvent,
+  parseOnChangeEvent = (e) => e.target.value,
   status = () => undefined,
   inputComponent: InputComponent,
   children,

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { FieldSetProps, FieldSet } from '../FieldSet/FieldSet';
 import { FormFieldSetProps, FormFieldSet } from '../Form/FormFieldSet';
-import cx from 'classnames';
 
 /**
  * Type of the values that will define a
@@ -66,7 +65,7 @@ export const RadioButtonGroup = <
       <FormFieldSet
         {...formFieldSetProps}
         id={`${id}-fieldset`}
-        childrenGroupClassName={cx(childrenGroupClassName, 'margin-top-3')}
+        childrenGroupClassName={childrenGroupClassName}
       >
         <InternalRadioButtonGroup id={id} {...radioButtonGroupProps} />
       </FormFieldSet>
@@ -78,7 +77,7 @@ export const RadioButtonGroup = <
     <FieldSet
       {...fieldSetProps}
       id={`${id}-fieldset`}
-      childrenGroupClassName={cx(childrenGroupClassName, 'margin-top-3')}
+      childrenGroupClassName={childrenGroupClassName}
     >
       <InternalRadioButtonGroup id={id} {...radioButtonGroupProps} />
     </FieldSet>

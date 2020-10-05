@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { FieldSetProps } from '..';
 import { FormFieldSetProps, FormFieldSet } from '../Form';
 import { FieldSet } from '../FieldSet/FieldSet';
-import cx from 'classnames';
 
 /**
  * Type for the values that will define
@@ -67,7 +66,7 @@ export const CheckboxGroup = <
       <FormFieldSet
         {...formFieldSetProps}
         id={`${id}-fieldset`}
-        childrenGroupClassName={cx(childrenGroupClassName, 'margin-top-3')}
+        childrenGroupClassName={childrenGroupClassName}
       >
         <InternalCheckboxGroup id={id} {...checkboxGroupProps} />
       </FormFieldSet>
@@ -79,7 +78,7 @@ export const CheckboxGroup = <
     <FieldSet
       {...fieldSetProps}
       id={`${id}-fieldset`}
-      childrenGroupClassName={cx(childrenGroupClassName, 'margin-top-3')}
+      childrenGroupClassName={childrenGroupClassName}
     >
       <InternalCheckboxGroup id={id} {...checkboxGroupProps} />
     </FieldSet>

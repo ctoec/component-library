@@ -3,7 +3,7 @@ import { Button } from '..';
 import { ButtonProps } from '../Button/Button';
 
 export type FormSumbitButtonProps = {
-  text: string;
+  text?: string;
 } & Pick<ButtonProps, Exclude<keyof ButtonProps, 'text'>>;
 
 /**
@@ -12,7 +12,7 @@ export type FormSumbitButtonProps = {
  * @param props
  */
 export const FormSubmitButton: React.FC<FormSumbitButtonProps> = ({
-  text,
+  text = 'Submit',
   ...props
 }) => {
   return <Button {...props} text={text} onClick="submit" />;

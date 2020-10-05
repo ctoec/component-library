@@ -75,5 +75,5 @@ export const TrashCan = (props: React.SVGProps<SVGSVGElement>) => (
   <SVGInline svgProps={props} url={trashCan} />
 );
 export const X = (props: React.SVGProps<SVGSVGElement>) => (
-	<SVGInline svgProps={props} url={x} />
+  <SVGInline svgProps={props} url={x} />
 );
