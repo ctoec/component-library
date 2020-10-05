@@ -8,6 +8,7 @@
   &--error {
     padding-left: 1rem;
     border-left-width: 0.25rem;
+    margin-left: -1.25rem;
     border-left-style: solid;
     border-left-color: color($theme-color-error-dark);
     legend * {
