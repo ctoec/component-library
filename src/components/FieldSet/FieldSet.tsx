@@ -43,8 +43,6 @@ export const FieldSet: React.FC<FieldSetProps> = ({
   return (
     <fieldset
       className={cx(
-        'grid-gap',
-        'grid-row',
         'usa-fieldset',
         {
           [`usa-fieldset--${status && status.type}`]: status,

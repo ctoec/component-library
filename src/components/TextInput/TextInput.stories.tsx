@@ -94,6 +94,7 @@ storiesOf('TextInput', module)
           status={warning}
           className="display-inline-block"
           id="example-fieldset-warning"
+          childrenGroupClassName="grid-row grid-gap"
         >
           <div className="mobile-lg:grid-col-4 display-inline-block">
             <TextInput

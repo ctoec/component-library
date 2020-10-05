@@ -35,7 +35,7 @@ type InternalRadioButtonGroupProps = {
  */
 export type RadioButtonGroupProps<
   TFieldSetProps extends FieldSetProps | FormFieldSetProps<any> = FieldSetProps
-  > = InternalRadioButtonGroupProps &
+> = InternalRadioButtonGroupProps &
   (TFieldSetProps extends FormFieldSetProps<infer T>
     ? { useFormFieldSet: true } & FormFieldSetProps<T>
     : FieldSetProps);
@@ -47,8 +47,8 @@ export type RadioButtonGroupProps<
  */
 export const RadioButtonGroup = <
   TFormFieldSetProps extends
-  | FieldSetProps
-  | FormFieldSetProps<any> = FieldSetProps
+    | FieldSetProps
+    | FormFieldSetProps<any> = FieldSetProps
 >({
   id,
   childrenGroupClassName,
@@ -103,7 +103,7 @@ export const RadioButtonGroup = <
  */
 const InternalRadioButtonGroup: React.FC<
   InternalRadioButtonGroupProps & { id: string }
-> = ({ id, options, defaultValue = '', name, onChange = () => { } }) => {
+> = ({ id, options, defaultValue = '', name, onChange = () => {} }) => {
   const [selectedItem, setSelectedItem] = useState(defaultValue);
 
   return (

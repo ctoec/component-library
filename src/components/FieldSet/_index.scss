@@ -1,9 +1,12 @@
 .usa-fieldset {
+  padding: unset;
+
   + .usa-fieldset {
     margin-top: 2.5rem;
   }
 
   &--error {
+    padding-left: 1rem;
     border-left-width: 0.25rem;
     border-left-style: solid;
     border-left-color: color($theme-color-error-dark);
@@ -35,8 +38,6 @@
     &--success,
     &--warning,
     &--error {
-      margin-left: 0;
-      padding-left: 0;
       border-left: none;
     }
   }
