@@ -35,6 +35,7 @@ export const ButtonWithDropdown: React.FC<ButtonWithDropdownProps> = ({
     >
       <Button
         aria-haspopup="true"
+        aria-expanded={isComponentVisible}
         text={
           <span>
             {text}
@@ -46,7 +47,7 @@ export const ButtonWithDropdown: React.FC<ButtonWithDropdownProps> = ({
         {...props}
       />
       {isComponentVisible && (
-        <ul aria-expanded={isComponentVisible}>
+        <ul>
           {options.map((o) => (
             <li>
               <Button

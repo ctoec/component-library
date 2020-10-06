@@ -1,3 +1,5 @@
 button {
-  cursor: pointer;
+  &:not(&:disabled) {
+    cursor: pointer;
+  }
 }

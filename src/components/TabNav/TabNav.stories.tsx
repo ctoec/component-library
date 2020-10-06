@@ -1,14 +1,14 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { TabNav } from './TabNav';
+import { TabItem, TabNav } from './TabNav';
 import { TextWithIcon } from '../TextWithIcon/TextWithIcon';
 import { Error } from '../../assets/images';
 
 // Thanks to http://www.christinachern.com/hpipsum/
-const tabNavItems = [
+const tabNavItems: TabItem[] = [
   {
     id: 'one',
-    text: 'Section one',
+    tabText: 'Section one',
     content: (
       <p>
         Squashy armchairs dirt on your nose brass scales crush the Sopophorous
@@ -23,7 +23,7 @@ const tabNavItems = [
   },
   {
     id: 'two',
-    text: 'Section two',
+    tabText: 'Section two',
     content: (
       <p>
         Prefect’s bathroom Trelawney veela squashy armchairs, SPEW: Gamp’s
@@ -40,8 +40,11 @@ const tabNavItems = [
     ),
   },
   {
-    id: 'two',
-    text: <TextWithIcon Icon={Error} text="Section three" iconSide="right" />,
+    id: 'three',
+    tabText: 'Section three',
+    tabTextFormatter: (text) => (
+      <TextWithIcon Icon={Error} text={text} iconSide="right" />
+    ),
     content: (
       <p>
         Half-giant jinxes peg-leg gillywater broken glasses large black dog
@@ -56,8 +59,78 @@ const tabNavItems = [
       </p>
     ),
   },
+  {
+    id: 'four',
+    tabText:
+      'Section with a really really really really really really long name',
+    content: <p>Blah</p>,
+  },
+  {
+    id: 'five',
+    tabText: 'Section five',
+    content: <p>Blah</p>,
+  },
+  {
+    id: 'six',
+    tabText: 'Section six',
+    content: <p>Blah</p>,
+  },
+  {
+    id: 'seven',
+    tabText: 'Section seven',
+    content: <p>Blah</p>,
+  },
+  {
+    id: 'eight',
+    tabText: 'Section eight',
+    content: <p>Blah</p>,
+  },
+  {
+    id: 'nine',
+    tabText: 'Section nine',
+    content: <p>Blah</p>,
+  },
+  {
+    id: 'ten',
+    tabText: 'Section ten',
+    content: <p>Blah</p>,
+  },
+  {
+    id: 'eleven',
+    tabText: 'Section eleven',
+    content: <p>Blah</p>,
+  },
 ];
 
-storiesOf('Tab nav', module).add('Default', () => {
-  return <TabNav items={tabNavItems}></TabNav>;
-});
+storiesOf('Tab nav', module)
+  .add('With only a few tabs', () => {
+    return <TabNav items={tabNavItems.slice(0, 3)}></TabNav>;
+  })
+  .add('With lots of tabs', () => {
+    return <TabNav items={tabNavItems}></TabNav>;
+  })
+  .add('With one item that always stays at the beginning', () => {
+    return (
+      <TabNav
+        items={[
+          {
+            id: 'special-snowflake',
+            tabText: 'Special tab',
+            content: (
+              <p>
+                I am always the first tab! Unless there are multiple first tabs,
+                then we all stay at the front
+              </p>
+            ),
+            firstItem: true,
+          },
+          ...tabNavItems,
+        ]}
+      ></TabNav>
+    );
+  })
+  .add('With nested tab content', () => {
+    let items = [...tabNavItems];
+    items[0] = { ...items[0], nestedTabs: tabNavItems };
+    return <TabNav items={items}></TabNav>;
+  });
