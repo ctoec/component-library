@@ -19,7 +19,7 @@ export type BaseButtonProps = {
 export type ButtonProps = BaseButtonProps &
   React.HTMLProps<HTMLButtonElement | HTMLAnchorElement> & {
     text: string | JSX.Element;
-    onClick?: () => any;
+    onClick?: (e: any) => any;
   };
 
 export type SubmitButtonProps = BaseButtonProps & {
@@ -57,7 +57,7 @@ export function Button({
       />
     );
   }
-  onClick = typeof onClick === 'function' ? onClick : () => {};
+  onClick = typeof onClick === 'function' ? onClick : () => { };
 
   if (href && !external) {
     return (
