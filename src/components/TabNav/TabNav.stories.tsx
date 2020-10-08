@@ -64,6 +64,8 @@ const tabNavItems: TabItem[] = [
     tabText:
       'Section with a really really really really really really long name',
     content: <p>Blah</p>,
+    tabTextFormatter: (text) =>
+      text.length > 20 ? `${text.slice(0, 19)}...` : text,
   },
   {
     id: 'five',
