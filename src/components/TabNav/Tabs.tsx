@@ -7,7 +7,7 @@ import React, {
   useState,
 } from 'react';
 import cx from 'classnames';
-import { TabItem } from './TabNav';
+import { TabItem, TabNav } from './TabNav';
 import { useHideOnLostFocus } from '../..';
 import { formatTabText, resetTabItems } from './tabNavUtils';
 
@@ -16,7 +16,7 @@ type TabsProps = {
   activeTab: TabItem;
   setActiveTab: Dispatch<SetStateAction<TabItem>>;
   itemType?: string;
-  onClick?: (id: string) => void;
+  onClick?: TabNav['onClick'];
   secondary?: boolean;
 };
 
@@ -78,7 +78,7 @@ export const Tabs: React.FC<TabsProps> = ({
 
     // Then reset dropdown items
     setActiveTab(tab);
-    _onClick && _onClick(tab.id);
+    _onClick && _onClick(tab.id, tab);
   };
 
   const [determineDropdownItems, setDetermineDropdownItems] = useState(true);

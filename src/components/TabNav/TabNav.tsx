@@ -16,7 +16,7 @@ export type TabNav = {
   itemType?: string;
   activeId?: string;
   nestedActiveId?: string;
-  onClick?: (id: string) => void;
+  onClick?: (id: string, item: TabItem) => void;
 };
 
 export const TabNav: React.FC<TabNav> = ({
