@@ -43,12 +43,7 @@ export const Modal: React.FC<ModalProps> = ({
         )}
       >
         {header}
-        <div className="margin-right-2" style={{
-          position: 'relative',
-          top: '0%',
-          left: '0%',
-          transform: 'translate(50%, 0%)',
-          }}>
+        <div className={cx("oec-modal-close", "margin-right-2")}>
           <Button
             appearance="unstyled"
             text={
