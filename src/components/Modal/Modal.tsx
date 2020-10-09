@@ -36,16 +36,15 @@ export const Modal: React.FC<ModalProps> = ({
         },
       }}
     >
-      <div className="margin-2">
-        <div
-          className={cx(
-            'grid-row display-flex flex-justify flex-align-center',
-            { 'border-bottom border-base-lighter': showHeaderBorder }
-          )}
-        >
-          {header}
+      <div
+        className={cx(
+          'grid-row display-flex flex-justify flex-align-center',
+          { 'border-bottom border-base-lighter': showHeaderBorder }
+        )}
+      >
+        {header}
+        <div className="oec-modal-close">
           <Button
-            className="margin-bottom-2"
             appearance="unstyled"
             text={
               <div className="display-flex flex-column flex-align-center">
@@ -56,9 +55,9 @@ export const Modal: React.FC<ModalProps> = ({
             onClick={toggleOpen}
           />
         </div>
-        <div className={cx({ 'margin-top-2': showHeaderBorder })}>
-          {content}
-        </div>
+      </div>
+      <div className={cx({ 'margin-top-2': showHeaderBorder })}>
+        {content}
       </div>
     </ReactModal>
   );
