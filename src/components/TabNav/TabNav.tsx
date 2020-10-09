@@ -3,7 +3,10 @@ import { Tabs } from './Tabs';
 
 export type TabItem = {
   id: string;
-  content: JSX.Element;
+  content: JSX.Element | {
+    component: React.FC,
+    props: any;
+  };
   tabText: string;
   firstItem?: boolean;
   tabTextFormatter?: (text: string) => string | JSX.Element;
