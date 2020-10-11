@@ -4,7 +4,7 @@ import { Tabs } from './Tabs';
 export type TabItem = {
   id: string;
   content: JSX.Element | {
-    component: React.FC,
+    component: React.FC<any>,
     props: any;
   };
   tabText: string;
