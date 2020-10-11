@@ -3,11 +3,8 @@ import { Tabs } from './Tabs';
 
 export type TabItem = {
   id: string;
-  content: JSX.Element | {
-    component: React.FC<any>,
-    props: any;
-  };
   tabText: string;
+  content?: JSX.Element; // You can either pass tab navs content or just render children
   firstItem?: boolean;
   tabTextFormatter?: (text: string) => string | JSX.Element;
   nestedItemType?: string;
@@ -28,6 +25,7 @@ export const TabNav: React.FC<TabNav> = ({
   nestedActiveId,
   onClick,
   itemType,
+  children,
 }) => {
   const [activeTab, setActiveTab] = useState(
     items.find((i) => i.id === activeId) || items[0]
@@ -74,6 +72,7 @@ export const TabNav: React.FC<TabNav> = ({
       >
         {nestedActiveTab?.content}
         {!nestedActiveTab && activeTab?.content}
+        {children}
       </div>
     </div>
   );
