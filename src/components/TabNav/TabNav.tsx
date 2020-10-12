@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Tabs } from './Tabs';
 
 export type TabItem = {
@@ -31,18 +31,18 @@ export const TabNav: React.FC<TabNav> = ({
     items.find((i) => i.id === activeId) || items[0]
   );
 
-  const { nestedTabs } = activeTab;
-  let initialNestedActiveTab;
-  if (nestedTabs) {
-    initialNestedActiveTab = nestedActiveId
-      ? nestedTabs.find((i) => i.id === nestedActiveId)
-      : nestedTabs[0];
-  }
-  const [nestedActiveTab, setNestedActiveTab] = useState(
-    initialNestedActiveTab
-  );
+  // TODO: does this need to be the same when a user clicks back to the original tab?
+  const [nestedActiveTab, setNestedActiveTab] = useState<TabItem>();
 
-  console.log(activeTab, nestedActiveTab)
+  const { nestedTabs } = activeTab;
+  useEffect(() => {
+    if (nestedTabs && nestedTabs.length) {
+      const defaultNestedActiveTab = nestedActiveId
+        ? nestedTabs.find((i) => i.id === nestedActiveId)
+        : nestedTabs[0];
+      setNestedActiveTab(defaultNestedActiveTab);
+    }
+  }, [activeTab, nestedActiveId, nestedTabs])
 
   return (
     <div className="oec-tab-nav">
