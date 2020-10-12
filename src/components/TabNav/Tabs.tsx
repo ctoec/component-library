@@ -162,7 +162,7 @@ export const Tabs: React.FC<TabsProps> = ({
           id={tabItem.id}
           role="tab"
           type="button"
-          aria-selected={tabItem.id === activeTab.id}
+          aria-selected={tabItem.id === activeTabId}
           onClick={() => {
             onClick(tabItem);
             setIsDropdownVisible(false);
@@ -198,7 +198,7 @@ export const Tabs: React.FC<TabsProps> = ({
             )}
             onClick={() => onClick(tabItem)}
             role="tab"
-            aria-selected={tabItem.id === activeTab.id}
+            aria-selected={tabItem.id === activeTabId}
           >
             <span>{formatTabText(tabItem)}</span>
           </button>
