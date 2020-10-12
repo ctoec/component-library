@@ -31,18 +31,14 @@ export const TabNav: React.FC<TabNav> = ({
     items.find((i) => i.id === activeId) || items[0]
   );
 
-  // TODO: does this need to be the same when a user clicks back to the original tab?
   const [nestedActiveTab, setNestedActiveTab] = useState<TabItem>();
 
-  const { nestedTabs } = activeTab;
   useEffect(() => {
-    if (nestedTabs && nestedTabs.length) {
-      const defaultNestedActiveTab = nestedActiveId
-        ? nestedTabs.find((i) => i.id === nestedActiveId)
-        : nestedTabs[0];
+    if (activeTab?.nestedTabs?.length) {
+      const defaultNestedActiveTab = activeTab.nestedTabs.find((i) => i.id === nestedActiveId) || activeTab?.nestedTabs?.[0];
       setNestedActiveTab(defaultNestedActiveTab);
     }
-  }, [activeTab, nestedActiveId, nestedTabs]);
+  }, [activeTab, nestedActiveId]);
 
   return (
     <div className="oec-tab-nav">
@@ -54,15 +50,13 @@ export const TabNav: React.FC<TabNav> = ({
           activeTab={activeTab}
           setActiveTab={setActiveTab}
         />
-        {nestedTabs && (
+        {activeTab?.nestedTabs && nestedActiveTab && setNestedActiveTab && (
           <Tabs
             secondary
             itemType={activeTab.nestedItemType}
-            items={nestedTabs}
+            items={activeTab.nestedTabs}
             onClick={onClick}
-            // @ts-ignore TS is not right about this
             activeTab={nestedActiveTab}
-            // @ts-ignore TS is not right about this
             setActiveTab={setNestedActiveTab}
           />
         )}
@@ -72,9 +66,7 @@ export const TabNav: React.FC<TabNav> = ({
         aria-labelledby={nestedActiveId || activeId}
         role="tabpanel"
       >
-        {nestedActiveTab?.content}
-        {!nestedActiveTab && activeTab?.content}
-        {children}
+        {children || nestedActiveTab?.content || activeTab?.content}
       </div>
     </div>
   );
