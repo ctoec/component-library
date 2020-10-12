@@ -7,6 +7,7 @@ import React, {
   useState,
 } from 'react';
 import cx from 'classnames';
+import pluralize from 'pluralize';
 import { TabItem, TabNav } from './TabNav';
 import { useHideOnLostFocus } from '../..';
 import {
@@ -20,8 +21,8 @@ type TabsProps = {
   items: TabItem[];
   activeTab: TabItem;
   setActiveTab:
-  | Dispatch<SetStateAction<TabItem>>
-  | Dispatch<SetStateAction<TabItem | undefined>>;
+    | Dispatch<SetStateAction<TabItem>>
+    | Dispatch<SetStateAction<TabItem | undefined>>;
   itemType?: string;
   onClick?: TabNav['onClick'];
   secondary?: boolean;
@@ -192,7 +193,7 @@ export const Tabs: React.FC<TabsProps> = ({
           aria-haspopup={!!dropdownItems.length}
           aria-expanded={!!dropdownItems.length && isDropdownVisible}
           onClick={() => setIsDropdownVisible((v) => !v)}
-        >{`+${dropdownItems.length} ${itemType}`}</button>
+        >{`+${pluralize(itemType, dropdownItems.length, true)}`}</button>
         {isDropdownVisible && (
           <ul className="position-absolute">
             {dropdownItems.map((tabItem, index) => (
