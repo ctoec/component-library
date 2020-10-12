@@ -35,7 +35,9 @@ export const TabNav: React.FC<TabNav> = ({
 
   useEffect(() => {
     if (activeTab?.nestedTabs?.length) {
-      const defaultNestedActiveTab = activeTab.nestedTabs.find((i) => i.id === nestedActiveId) || activeTab?.nestedTabs?.[0];
+      const defaultNestedActiveTab =
+        activeTab.nestedTabs.find((i) => i.id === nestedActiveId) ||
+        activeTab?.nestedTabs?.[0];
       setNestedActiveTab(defaultNestedActiveTab);
     }
   }, [activeTab, nestedActiveId]);

@@ -9,13 +9,19 @@ import React, {
 import cx from 'classnames';
 import { TabItem, TabNav } from './TabNav';
 import { useHideOnLostFocus } from '../..';
-import { formatTabText, getUniqueElementBottomVals, resetTabItems } from './tabNavUtils';
+import {
+  formatTabText,
+  getUniqueElementBottomVals,
+  resetTabItems,
+} from './tabNavUtils';
 import { Tab } from './Tab';
 
 type TabsProps = {
   items: TabItem[];
   activeTab: TabItem;
-  setActiveTab: Dispatch<SetStateAction<TabItem>> | Dispatch<SetStateAction<TabItem | undefined>>;
+  setActiveTab:
+    | Dispatch<SetStateAction<TabItem>>
+    | Dispatch<SetStateAction<TabItem | undefined>>;
   itemType?: string;
   onClick?: TabNav['onClick'];
   secondary?: boolean;
@@ -95,7 +101,7 @@ export const Tabs: React.FC<TabsProps> = ({
   useEffect(() => {
     setItems(resetTabItems(inputItems));
     setDetermineDropdownItems(true);
-  }, [inputItems])
+  }, [inputItems]);
 
   // When container width changes, change which tabs show
   useLayoutEffect(() => {
@@ -104,7 +110,7 @@ export const Tabs: React.FC<TabsProps> = ({
 
     if (!determineDropdownItems || !dropdownBottom) return;
 
-    const uniqueTabBottomVals = getUniqueElementBottomVals(tabRefs)
+    const uniqueTabBottomVals = getUniqueElementBottomVals(tabRefs);
     const baselineBottom = uniqueTabBottomVals[0];
 
     const newItems = items.map((item) => {
@@ -150,8 +156,7 @@ export const Tabs: React.FC<TabsProps> = ({
     setDetermineDropdownItems(false);
   }, [items, dropdownRef, determineDropdownItems]);
 
-  const dropdownItems = items
-    .filter((i) => i.inDropdown);
+  const dropdownItems = items.filter((i) => i.inDropdown);
 
   return (
     <div
@@ -189,22 +194,24 @@ export const Tabs: React.FC<TabsProps> = ({
           onClick={() => setIsDropdownVisible((v) => !v)}
         >{`+${dropdownItems.length} ${itemType}`}</button>
         {isDropdownVisible && (
-          <ul className="position-absolute">{dropdownItems.map((tabItem, index) => (
-            <li key={`${index}-dropdown`}>
-              <button
-                id={tabItem.id}
-                role="tab"
-                type="button"
-                aria-selected={tabItem.id === activeTabId}
-                onClick={() => {
-                  onClick(tabItem);
-                  setIsDropdownVisible(false);
-                }}
-              >
-                <span>{formatTabText(tabItem)}</span>
-              </button>
-            </li>
-          ))}</ul>
+          <ul className="position-absolute">
+            {dropdownItems.map((tabItem, index) => (
+              <li key={`${index}-dropdown`}>
+                <button
+                  id={tabItem.id}
+                  role="tab"
+                  type="button"
+                  aria-selected={tabItem.id === activeTabId}
+                  onClick={() => {
+                    onClick(tabItem);
+                    setIsDropdownVisible(false);
+                  }}
+                >
+                  <span>{formatTabText(tabItem)}</span>
+                </button>
+              </li>
+            ))}
+          </ul>
         )}
       </div>
     </div>

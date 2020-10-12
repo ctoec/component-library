@@ -18,9 +18,11 @@ export function resetTabItems(
   );
 }
 
-export function getUniqueElementBottomVals(tabRefs: React.MutableRefObject<{
-  [key: string]: HTMLButtonElement | null;
-}>): number[] {
+export function getUniqueElementBottomVals(
+  tabRefs: React.MutableRefObject<{
+    [key: string]: HTMLButtonElement | null;
+  }>
+): number[] {
   return Object.values(tabRefs.current)
     .reduce((valuesAccumulator: number[], thisRef) => {
       if (!thisRef) return valuesAccumulator;
