@@ -17,3 +17,18 @@ export function resetTabItems(
       ({ ...item, inDropdown: false } as InternalTabItemType)
   );
 }
+
+export function getUniqueElementBottomVals(tabRefs: React.MutableRefObject<{
+  [key: string]: HTMLButtonElement | null;
+}>): number[] {
+  return Object.values(tabRefs.current)
+    .reduce((valuesAccumulator: number[], thisRef) => {
+      if (!thisRef) return valuesAccumulator;
+      const { bottom } = thisRef.getBoundingClientRect();
+      if (!valuesAccumulator.includes(bottom)) {
+        valuesAccumulator.push(bottom);
+      }
+      return valuesAccumulator;
+    }, [])
+    .sort((a, b) => a - b);
+}

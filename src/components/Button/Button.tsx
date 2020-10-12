@@ -57,7 +57,7 @@ export function Button({
       />
     );
   }
-  onClick = typeof onClick === 'function' ? onClick : () => { };
+  onClick = typeof onClick === 'function' ? onClick : () => {};
 
   if (href && !external) {
     return (

@@ -104,6 +104,64 @@ const tabNavItems: TabItem[] = [
   },
 ];
 
+const withChildren = {
+  itemType: 'organization',
+  activeId: '3',
+  items: [
+    {
+      id: 'all',
+      tabText: 'All organizations',
+      firstItem: true,
+      nestedItemType: 'site',
+      nestedTabs: [
+        { id: 'all', tabText: 'All sites', firstItem: true },
+        { id: '1', tabText: 'Hufflepuff Childcare' },
+        { id: '2', tabText: 'Gryfinndor Childcare' },
+        { id: '3', tabText: 'Slytherin Childcare' },
+        {
+          id: '4',
+          tabText: "Rowena Ravenclaw's Roost for Rambunctious Rascals",
+        },
+        { id: '5', tabText: 'Delacoeur Day Care' },
+        { id: '6', tabText: 'Future Quidditch Prodigy Academy' },
+      ],
+    },
+    {
+      id: '1',
+      tabText: 'Académie de Magie Beauxbâtons',
+      nestedItemType: 'site',
+      nestedTabs: [
+        { id: 'all', tabText: 'All sites', firstItem: true },
+        { id: '5', tabText: 'Delacoeur Day Care' },
+      ],
+    },
+    {
+      id: '2',
+      tabText: 'Hogwarts Childcare',
+      nestedItemType: 'site',
+      nestedTabs: [
+        { id: 'all', tabText: 'All sites', firstItem: true },
+        { id: '1', tabText: 'Hufflepuff Childcare' },
+        { id: '2', tabText: 'Gryfinndor Childcare' },
+        { id: '3', tabText: 'Slytherin Childcare' },
+        {
+          id: '4',
+          tabText: "Rowena Ravenclaw's Roost for Rambunctious Rascals",
+        },
+      ],
+    },
+    {
+      id: '3',
+      tabText: 'Durmstrang',
+      nestedItemType: 'site',
+      nestedTabs: [
+        { id: 'all', tabText: 'All sites', firstItem: true },
+        { id: '6', tabText: 'Future Quidditch Prodigy Academy' },
+      ],
+    },
+  ],
+};
+
 storiesOf('Tab nav', module)
   .add('With only a few tabs', () => {
     return <TabNav items={tabNavItems.slice(0, 3)}></TabNav>;
@@ -135,4 +193,14 @@ storiesOf('Tab nav', module)
     let items = [...tabNavItems];
     items[0] = { ...items[0], nestedTabs: tabNavItems };
     return <TabNav items={items}></TabNav>;
+  })
+  .add('With nested tab and children', () => {
+    return (
+      <TabNav {...withChildren}>
+        <p>
+          You might put dynamic content in here that is controlled by the
+          onclick behavior of the tab nav
+        </p>
+      </TabNav>
+    );
   });

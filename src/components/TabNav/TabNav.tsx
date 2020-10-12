@@ -42,7 +42,7 @@ export const TabNav: React.FC<TabNav> = ({
         : nestedTabs[0];
       setNestedActiveTab(defaultNestedActiveTab);
     }
-  }, [activeTab, nestedActiveId, nestedTabs])
+  }, [activeTab, nestedActiveId, nestedTabs]);
 
   return (
     <div className="oec-tab-nav">

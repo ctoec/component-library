@@ -9,7 +9,8 @@ import React, {
 import cx from 'classnames';
 import { TabItem, TabNav } from './TabNav';
 import { useHideOnLostFocus } from '../..';
-import { formatTabText, resetTabItems } from './tabNavUtils';
+import { formatTabText, getUniqueElementBottomVals, resetTabItems } from './tabNavUtils';
+import { Tab } from './Tab';
 
 type TabsProps = {
   items: TabItem[];
@@ -98,17 +99,7 @@ export const Tabs: React.FC<TabsProps> = ({
 
     if (!determineDropdownItems || !dropdownBottom) return;
 
-    const uniqueTabBottomVals = Object.values(tabRefs.current)
-      .reduce((valuesAccumulator: number[], thisRef) => {
-        if (!thisRef) return valuesAccumulator;
-        const { bottom } = thisRef.getBoundingClientRect();
-        if (!valuesAccumulator.includes(bottom)) {
-          valuesAccumulator.push(bottom);
-        }
-        return valuesAccumulator;
-      }, [])
-      .sort((a, b) => a - b);
-
+    const uniqueTabBottomVals = getUniqueElementBottomVals(tabRefs)
     const baselineBottom = uniqueTabBottomVals[0];
 
     const newItems = items.map((item) => {
@@ -123,9 +114,9 @@ export const Tabs: React.FC<TabsProps> = ({
       return { ...item, inDropdown };
     });
 
-    let combinedWidthReduced = 0;
     if (uniqueTabBottomVals.length > 1) {
       // If we're using the dropdown, then we need to account for its width
+      let combinedWidthReduced = 0;
       const {
         width: dropdownWidth,
       } = dropdownRef.current?.getBoundingClientRect() || { width: 0 };
@@ -155,23 +146,7 @@ export const Tabs: React.FC<TabsProps> = ({
   }, [items, dropdownRef, determineDropdownItems]);
 
   const dropdownItems = items
-    .filter((i) => i.inDropdown)
-    .map((tabItem, index) => (
-      <li key={`${index}-dropdown`}>
-        <button
-          id={tabItem.id}
-          role="tab"
-          type="button"
-          aria-selected={tabItem.id === activeTabId}
-          onClick={() => {
-            onClick(tabItem);
-            setIsDropdownVisible(false);
-          }}
-        >
-          <span>{formatTabText(tabItem)}</span>
-        </button>
-      </li>
-    ));
+    .filter((i) => i.inDropdown);
 
   return (
     <div
@@ -182,26 +157,14 @@ export const Tabs: React.FC<TabsProps> = ({
       {items
         .filter((i) => !i.inDropdown)
         .map((tabItem, index) => (
-          <button
-            key={index}
-            ref={(node) => (tabRefs.current[tabItem.id] = node)}
-            id={tabItem.id}
-            type="button"
-            className={cx(
-              'oec-tab-nav--tab',
-              {
-                'oec-tab-nav--tab__active': tabItem.id === activeTabId,
-              },
-              {
-                'oec-tab-nav--tab__secondary': secondary,
-              }
-            )}
-            onClick={() => onClick(tabItem)}
-            role="tab"
-            aria-selected={tabItem.id === activeTabId}
-          >
-            <span>{formatTabText(tabItem)}</span>
-          </button>
+          <Tab
+            index={index}
+            tabItem={tabItem}
+            tabRefs={tabRefs}
+            isActiveTab={activeTabId === tabItem.id}
+            onClick={onClick}
+            secondary={secondary}
+          />
         ))}
       <div
         ref={dropdownRef}
@@ -221,7 +184,22 @@ export const Tabs: React.FC<TabsProps> = ({
           onClick={() => setIsDropdownVisible((v) => !v)}
         >{`+${dropdownItems.length} ${itemType}`}</button>
         {isDropdownVisible && (
-          <ul className="position-absolute">{dropdownItems}</ul>
+          <ul className="position-absolute">{dropdownItems.map((tabItem, index) => (
+            <li key={`${index}-dropdown`}>
+              <button
+                id={tabItem.id}
+                role="tab"
+                type="button"
+                aria-selected={tabItem.id === activeTabId}
+                onClick={() => {
+                  onClick(tabItem);
+                  setIsDropdownVisible(false);
+                }}
+              >
+                <span>{formatTabText(tabItem)}</span>
+              </button>
+            </li>
+          ))}</ul>
         )}
       </div>
     </div>
