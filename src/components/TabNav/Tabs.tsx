@@ -91,6 +91,12 @@ export const Tabs: React.FC<TabsProps> = ({
     }
   }, [resetDropdownItems]);
 
+  // Also need to redetermine dropdown items if input items change
+  useEffect(() => {
+    setItems(resetTabItems(inputItems));
+    setDetermineDropdownItems(true);
+  }, [inputItems])
+
   // When container width changes, change which tabs show
   useLayoutEffect(() => {
     const { bottom: dropdownBottom } =

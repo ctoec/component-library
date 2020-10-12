@@ -50,7 +50,7 @@ export const TabNav: React.FC<TabNav> = ({
           activeTab={activeTab}
           setActiveTab={setActiveTab}
         />
-        {activeTab?.nestedTabs && nestedActiveTab && setNestedActiveTab && (
+        {activeTab?.nestedTabs && nestedActiveTab && (
           <Tabs
             secondary
             itemType={activeTab.nestedItemType}

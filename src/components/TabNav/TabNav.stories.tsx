@@ -109,7 +109,7 @@ const withChildren = {
   activeId: '3',
   items: [
     {
-      id: 'all',
+      id: 'all-orgs',
       tabText: 'All organizations',
       firstItem: true,
       nestedItemType: 'site',
