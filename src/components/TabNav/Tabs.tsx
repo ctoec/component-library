@@ -32,7 +32,7 @@ export const Tabs: React.FC<TabsProps> = ({
   secondary,
   itemType = 'tabs',
 }) => {
-  const activeTabId = activeTab.id;
+  const activeTabId = activeTab?.id;
 
   // All tab items, regardless of whether they're in dropdown
   const [items, setItems] = useState<InternalTabItemType[]>(
