@@ -20,8 +20,8 @@ type TabsProps = {
   items: TabItem[];
   activeTab: TabItem;
   setActiveTab:
-    | Dispatch<SetStateAction<TabItem>>
-    | Dispatch<SetStateAction<TabItem | undefined>>;
+  | Dispatch<SetStateAction<TabItem>>
+  | Dispatch<SetStateAction<TabItem | undefined>>;
   itemType?: string;
   onClick?: TabNav['onClick'];
   secondary?: boolean;
@@ -168,7 +168,7 @@ export const Tabs: React.FC<TabsProps> = ({
         .filter((i) => !i.inDropdown)
         .map((tabItem, index) => (
           <Tab
-            index={index}
+            key={`${tabItem.id}-${index}`}
             tabItem={tabItem}
             tabRefs={tabRefs}
             isActiveTab={activeTabId === tabItem.id}
@@ -196,7 +196,7 @@ export const Tabs: React.FC<TabsProps> = ({
         {isDropdownVisible && (
           <ul className="position-absolute">
             {dropdownItems.map((tabItem, index) => (
-              <li key={`${index}-dropdown`}>
+              <li key={`${index}-${tabItem.id}`}>
                 <button
                   id={tabItem.id}
                   role="tab"
