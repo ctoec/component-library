@@ -93,6 +93,7 @@ export const Tabs: React.FC<TabsProps> = ({
   useEffect(() => {
     // After we reset the dropdown items, then we need to redetermine what they are
     if (resetDropdownItems) {
+      tabRefs.current = {};
       setItems((oldItems) => resetTabItems(oldItems));
       setResetDropdownItems(false);
       setDetermineDropdownItems(true);
