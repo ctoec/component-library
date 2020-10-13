@@ -70,16 +70,9 @@ export const Tabs: React.FC<TabsProps> = ({
   const onClick = (tab: InternalTabItemType) => {
     if (tab.inDropdown) {
       setItems((_items) => {
-        const thisIndex = _items.findIndex((i) => i.id === tab.id);
-
-        // Remove this tab from the items
-        _items.splice(thisIndex, 1);
-
-        // This will never be one of the items that stays in front bc it's in the dropdown
-        const itemsThatStayInFront = _items.filter((i) => i.firstItem);
-        const notFirstItems = _items.filter((i) => !i.firstItem);
-
-        console.log(itemsThatStayInFront, tab, notFirstItems)
+        // Get the items before and after this item
+        const itemsThatStayInFront = _items.filter((i) => i.firstItem && i.id !== tab.id);
+        const notFirstItems = _items.filter((i) => !i.firstItem && i.id !== tab.id);
         return [...itemsThatStayInFront, tab, ...notFirstItems];
       });
       // Then reset dropdown items
