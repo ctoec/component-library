@@ -19,10 +19,10 @@ export const ButtonWithDropdown: React.FC<ButtonWithDropdownProps> = ({
     HTMLDivElement
   >();
 
-  const getOnClick = (optionOnClick?: () => any) => {
-    return () => {
+  const getOnClick = (optionOnClick?: (_event: any) => any) => {
+    return (_event: any) => {
       setIsComponentVisible(false);
-      if (optionOnClick) optionOnClick();
+      if (optionOnClick) optionOnClick(_event);
     };
   };
 
@@ -35,6 +35,7 @@ export const ButtonWithDropdown: React.FC<ButtonWithDropdownProps> = ({
     >
       <Button
         aria-haspopup="true"
+        aria-expanded={isComponentVisible}
         text={
           <span>
             {text}
@@ -46,7 +47,7 @@ export const ButtonWithDropdown: React.FC<ButtonWithDropdownProps> = ({
         {...props}
       />
       {isComponentVisible && (
-        <ul aria-expanded={isComponentVisible}>
+        <ul>
           {options.map((o) => (
             <li>
               <Button

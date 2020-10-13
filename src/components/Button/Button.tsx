@@ -19,7 +19,7 @@ export type BaseButtonProps = {
 export type ButtonProps = BaseButtonProps &
   React.HTMLProps<HTMLButtonElement | HTMLAnchorElement> & {
     text: string | JSX.Element;
-    onClick?: () => any;
+    onClick?: (e: any) => any;
   };
 
 export type SubmitButtonProps = BaseButtonProps & {

@@ -1,61 +1,75 @@
-import React, { useState } from 'react';
-import cx from 'classnames';
+import React, { useEffect, useState } from 'react';
+import { Tabs } from './Tabs';
 
-export type TabItemProps = {
+export type TabItem = {
   id: string;
-  text: JSX.Element | string;
-  content: JSX.Element;
+  tabText: string;
+  content?: JSX.Element; // You can either pass tab navs content or just render children
+  firstItem?: boolean;
+  tabTextFormatter?: (text: string) => string | JSX.Element;
+  nestedItemType?: string;
+  nestedTabs?: TabItem[];
 };
 
-export type TabNavProps = {
-  items: TabItemProps[];
+export type TabNav = {
+  items: TabItem[];
+  itemType?: string;
   activeId?: string;
-  onClick?: (id: string) => void;
+  nestedActiveId?: string;
+  onClick?: (id: string, item: TabItem) => void;
 };
 
-export const TabNav: React.FC<TabNavProps> = ({
+export const TabNav: React.FC<TabNav> = ({
   items,
   activeId,
-  onClick: _onClick,
+  nestedActiveId,
+  onClick,
+  itemType,
+  children,
 }) => {
-  const startingIndex = items.findIndex((item) => item.id === activeId);
-  const [activeTabIndex, setActiveTabIndex] = useState(
-    startingIndex < 0 ? 0 : startingIndex
+  const [activeTab, setActiveTab] = useState(
+    items.find((i) => i.id === activeId) || items[0]
   );
 
-  // Cleanest way to handle tab switching.
-  // Don't need to use effects because we don't have to actually
-  // run functions after the DOM renders.
-  // This prevents getting caught in infinite state loops.
-  const onClick = (index: number, id: string) => {
-    setActiveTabIndex(index);
-    _onClick && _onClick(id);
-  };
+  const [nestedActiveTab, setNestedActiveTab] = useState<TabItem>();
 
-  const tabs = items.map(({ text, id }, index) => (
-    <li key={index}>
-      <button
-        type="button"
-        className={cx('oec-tab-nav--tab', {
-          'oec-tab-nav--tab__active': index === activeTabIndex,
-        })}
-        onClick={() => onClick(index, id)}
-      >
-        {text}
-      </button>
-    </li>
-  ));
-
-  const activeTab = items[activeTabIndex];
+  useEffect(() => {
+    if (activeTab?.nestedTabs?.length) {
+      const defaultNestedActiveTab =
+        activeTab.nestedTabs.find((i) => i.id === nestedActiveId) ||
+        activeTab?.nestedTabs?.[0];
+      setNestedActiveTab(defaultNestedActiveTab);
+    }
+  }, [activeTab, nestedActiveId]);
 
   return (
     <div className="oec-tab-nav">
       <div className="oec-tab-nav--header">
-        <nav>
-          <ul>{tabs}</ul>
-        </nav>
+        <Tabs
+          itemType={itemType}
+          items={items}
+          onClick={onClick}
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+        />
+        {activeTab?.nestedTabs && nestedActiveTab && (
+          <Tabs
+            secondary
+            itemType={activeTab.nestedItemType}
+            items={activeTab.nestedTabs}
+            onClick={onClick}
+            activeTab={nestedActiveTab}
+            setActiveTab={setNestedActiveTab}
+          />
+        )}
       </div>
-      <div className="oec-tab-nav--content">{activeTab.content}</div>
+      <div
+        className="oec-tab-nav--content"
+        aria-labelledby={nestedActiveId || activeId}
+        role="tabpanel"
+      >
+        {children || nestedActiveTab?.content || activeTab?.content}
+      </div>
     </div>
   );
 };
