@@ -37,10 +37,9 @@ export const Modal: React.FC<ModalProps> = ({
       }}
     >
       <div
-        className={cx(
-          'grid-row display-flex flex-justify flex-align-center',
-          { 'border-bottom border-base-lighter': showHeaderBorder }
-        )}
+        className={cx('grid-row display-flex flex-justify flex-align-center', {
+          'border-bottom border-base-lighter': showHeaderBorder,
+        })}
       >
         {header}
         <div className="oec-modal-close">
@@ -56,9 +55,7 @@ export const Modal: React.FC<ModalProps> = ({
           />
         </div>
       </div>
-      <div className={cx({ 'margin-top-2': showHeaderBorder })}>
-        {content}
-      </div>
+      <div className={cx({ 'margin-top-2': showHeaderBorder })}>{content}</div>
     </ReactModal>
   );
 };
