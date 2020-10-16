@@ -4,7 +4,7 @@ import { Tabs } from './Tabs';
 export type TabItem = {
   id: string;
   tabText: string;
-  content?: JSX.Element; // You can either pass tab navs content or just render children
+  content?: React.FC | JSX.Element; // You can either pass tab navs content or just render children
   firstItem?: boolean;
   tabTextFormatter?: (text: string) => string | JSX.Element;
   nestedItemType?: string;
