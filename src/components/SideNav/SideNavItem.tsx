@@ -3,11 +3,12 @@ import cx from 'classnames';
 import { InlineIcon, Icon, Button } from '..';
 
 export type SideNavItemProps = {
+  id: string;
   title: string | JSX.Element;
   description: string;
   icon?: Icon;
   onClick?: () => any;
-  content: JSX.Element;
+  content?: JSX.Element;
 };
 
 type InternalSideNavItemProps = SideNavItemProps & {
@@ -16,6 +17,7 @@ type InternalSideNavItemProps = SideNavItemProps & {
 };
 
 export const SideNavItem = ({
+  id,
   title,
   description,
   active,
@@ -23,7 +25,7 @@ export const SideNavItem = ({
   icon,
 }: InternalSideNavItemProps) => {
   return (
-    <li className={cx('oec-sidenav__item', { active })}>
+    <li id={id} className={cx('oec-sidenav__item', { active })}>
       <Button
         onClick={onClick}
         appearance="unstyled"

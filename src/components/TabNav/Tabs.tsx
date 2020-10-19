@@ -21,8 +21,8 @@ type TabsProps = {
   items: TabItem[];
   activeTab: TabItem;
   setActiveTab:
-  | Dispatch<SetStateAction<TabItem>>
-  | Dispatch<SetStateAction<TabItem | undefined>>;
+    | Dispatch<SetStateAction<TabItem>>
+    | Dispatch<SetStateAction<TabItem | undefined>>;
   itemType?: string;
   onClick?: TabNav['onClick'];
   secondary?: boolean;
@@ -71,8 +71,12 @@ export const Tabs: React.FC<TabsProps> = ({
     if (tab.inDropdown) {
       setItems((_items) => {
         // Get the items before and after this item
-        const itemsThatStayInFront = _items.filter((i) => i.firstItem && i.id !== tab.id);
-        const notFirstItems = _items.filter((i) => !i.firstItem && i.id !== tab.id);
+        const itemsThatStayInFront = _items.filter(
+          (i) => i.firstItem && i.id !== tab.id
+        );
+        const notFirstItems = _items.filter(
+          (i) => !i.firstItem && i.id !== tab.id
+        );
         return [...itemsThatStayInFront, tab, ...notFirstItems];
       });
       // Then reset dropdown items

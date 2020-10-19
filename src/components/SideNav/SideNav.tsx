@@ -4,44 +4,36 @@ import { SideNavItem, SideNavItemProps } from './SideNavItem';
 
 export type SideNavProps = {
   items: SideNavItemProps[];
-  externalActiveItemIndex?: number;
-  noActiveItemContent: JSX.Element;
+  activeItemId?: string;
 };
 
-export const SideNav = ({
+export const SideNav: React.FC<SideNavProps> = ({
   items,
-  externalActiveItemIndex,
-  noActiveItemContent,
-}: SideNavProps) => {
-  const [activeItemIndex, setActiveItemIndex] = useState(
-    externalActiveItemIndex
-  );
+  activeItemId,
+  children,
+}) => {
+  const [activeId, setActiveId] = useState(activeItemId);
 
   useEffect(() => {
-    setActiveItemIndex(
-      // eslint-disable-next-line eqeqeq
-      externalActiveItemIndex != undefined && !isNaN(externalActiveItemIndex)
-        ? externalActiveItemIndex
-        : undefined
-    );
-  }, [externalActiveItemIndex]);
+    setActiveId(activeItemId);
+  }, [activeItemId]);
 
   return (
     <div className="oec-sidenav grid-row">
       <div className="mobile-lg:grid-col-4">
         <nav>
           <ul>
-            {items.map((item, idx) => {
+            {items.map((item) => {
               const _onClick = () => {
-                setActiveItemIndex(idx);
+                setActiveId(item.id);
                 item.onClick && item.onClick();
               };
               return (
                 <SideNavItem
                   {...item}
-                  key={idx}
+                  key={item.id}
                   onClick={_onClick}
-                  active={idx === activeItemIndex}
+                  active={item.id === activeId}
                 />
               );
             })}
@@ -55,9 +47,8 @@ export const SideNav = ({
           { 'mobile-lg:grid-col-12': items.length === 0 }
         )}
       >
-        {activeItemIndex !== undefined && activeItemIndex < items.length
-          ? items[activeItemIndex].content
-          : noActiveItemContent}
+        {children ||
+          (activeId && items.find((i) => i.id === activeId)?.content)}
       </div>
     </div>
   );
