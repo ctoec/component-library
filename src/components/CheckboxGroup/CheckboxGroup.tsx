@@ -8,7 +8,10 @@ export type CheckboxInGroup = SingleCheckbox & {
   expansion?: React.ReactNode;
 };
 
-export type CheckboxOptionInForm<TData> = Omit<FormFieldProps<TData, CheckboxInGroup, any>, 'inputComponent' | 'onChange'>;
+export type CheckboxOptionInForm<TData> = Omit<
+  FormFieldProps<TData, CheckboxInGroup, any>,
+  'inputComponent' | 'onChange'
+>;
 
 /**
  * Props for InternalCheckboxGroup
@@ -50,12 +53,13 @@ export const CheckboxGroup = <TData extends {}>({
     : [defaultSelectedItemsIds];
   const [selectedItems, setSelectedItems] = useState(selectedItemsOnInput);
 
-  const internalOnChange = (value: string) => setSelectedItems((items) => {
-    if (items.includes(value)) {
-      return items.filter((i) => i !== value);
-    }
-    return [...items, value];
-  });
+  const internalOnChange = (value: string) =>
+    setSelectedItems((items) => {
+      if (items.includes(value)) {
+        return items.filter((i) => i !== value);
+      }
+      return [...items, value];
+    });
 
   if (inForm) {
     const formFieldSetProps = (props as unknown) as FormFieldSetProps<TData>;
@@ -64,7 +68,7 @@ export const CheckboxGroup = <TData extends {}>({
       <FormFieldSet {...formFieldSetProps}>
         {_options.map((optionProps: any) => {
           const { id, parseOnChangeEvent, expansion } = optionProps;
-          const selected = selectedItems.includes(id)
+          const selected = selectedItems.includes(id);
           return (
             <span key={id}>
               <FormField<TData, SingleCheckbox, any>
@@ -92,7 +96,7 @@ export const CheckboxGroup = <TData extends {}>({
     <FieldSet {...fieldSetProps}>
       {_options.map((optionProps) => {
         const { id, onChange, expansion } = optionProps;
-        const selected = selectedItems.includes(id)
+        const selected = selectedItems.includes(id);
         return (
           <span key={id}>
             <Checkbox

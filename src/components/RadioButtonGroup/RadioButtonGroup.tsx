@@ -8,7 +8,10 @@ export type RadioOption = RadioButtonProps & {
   expansion?: React.ReactNode;
 };
 
-export type RadioOptionInForm<TData> = Omit<FormFieldProps<TData, RadioOption, any>, 'inputComponent' | 'onChange'>;
+export type RadioOptionInForm<TData> = Omit<
+  FormFieldProps<TData, RadioOption, any>,
+  'inputComponent' | 'onChange'
+>;
 
 /**
  * Props for InternalRadioButtonGroup
@@ -22,6 +25,7 @@ type InternalRadioButtonGroupProps = {
 type PropsForGroupInForm<TData> = {
   options: RadioOptionInForm<TData>[];
   inForm: true;
+  defaultSelectedItemId?: string;
 };
 
 /**
@@ -31,8 +35,7 @@ type PropsForGroupInForm<TData> = {
  */
 export type RadioButtonGroupProps<TData> =
   | (InternalRadioButtonGroupProps & FieldSetProps)
-  | (InternalRadioButtonGroupProps &
-    (PropsForGroupInForm<TData> & FormFieldSetProps<TData>));
+  | (PropsForGroupInForm<TData> & FormFieldSetProps<TData>);
 
 /**
  * Component for displaying a group of related RadioButtons.
@@ -49,17 +52,15 @@ export const RadioButtonGroup = <TData extends {}>({
 
   if (inForm) {
     const formFieldSetProps = (props as unknown) as FormFieldSetProps<TData>;
+    const _options = options as RadioOptionInForm<TData>[];
     return (
       <FormFieldSet {...formFieldSetProps}>
-        {options.map((optionProps) => {
-          const _optionProps = (optionProps as unknown) as RadioOptionInForm<
-            TData
-          >;
-          const { id, parseOnChangeEvent, expansion } = _optionProps;
+        {_options.map((optionProps) => {
+          const { id, parseOnChangeEvent, expansion } = optionProps;
           return (
             <span key={id}>
               <FormField<TData, RadioButtonProps, any>
-                {..._optionProps}
+                {...optionProps}
                 parseOnChangeEvent={(e, dataDriller) => {
                   setSelectedItem(e.target.value);
                   parseOnChangeEvent && parseOnChangeEvent(e, dataDriller);
@@ -78,9 +79,10 @@ export const RadioButtonGroup = <TData extends {}>({
   }
 
   const fieldSetProps = (props as unknown) as FieldSetProps;
+  const _options = options as RadioOption[];
   return (
     <FieldSet {...fieldSetProps}>
-      {options.map((optionProps) => {
+      {_options.map((optionProps) => {
         const { id, onChange, expansion } = optionProps;
         return (
           <span key={id}>
