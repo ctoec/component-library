@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FieldSetProps } from '..';
 import { FormFieldSetProps, FormFieldSet } from '../Form';
 import { FieldSet } from '../FieldSet/FieldSet';
+import { CheckboxProps } from '../Checkbox/Checkbox';
 
 /**
  * Type for the values that will define
@@ -12,9 +13,7 @@ export type CheckboxOptionRenderProps = {
   selected: boolean;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
 };
-export type CheckboxOption = {
-  render: (props: CheckboxOptionRenderProps) => JSX.Element;
-  value: string;
+export type CheckboxOption = CheckboxProps & {
   expansion?: React.ReactNode;
 };
 
@@ -25,7 +24,6 @@ type InternalCheckboxGroupProps = {
   options: CheckboxOption[];
   defaultValue?: string | string[];
   name?: string;
-  onChange?: React.ChangeEventHandler<HTMLInputElement>;
 };
 
 /**
@@ -35,7 +33,7 @@ type InternalCheckboxGroupProps = {
  */
 export type CheckboxGroupProps<
   TFieldSetProps extends FieldSetProps | FormFieldSetProps<any>
-> = InternalCheckboxGroupProps &
+  > = InternalCheckboxGroupProps &
   (TFieldSetProps extends FormFieldSetProps<infer T>
     ? { useFormFieldSet: true } & FormFieldSetProps<T>
     : FieldSetProps);
@@ -66,7 +64,6 @@ export const CheckboxGroup = <
       <FormFieldSet
         {...formFieldSetProps}
         id={`${id}-fieldset`}
-        childrenGroupClassName={childrenGroupClassName}
       >
         <InternalCheckboxGroup id={id} {...checkboxGroupProps} />
       </FormFieldSet>
@@ -78,7 +75,6 @@ export const CheckboxGroup = <
     <FieldSet
       {...fieldSetProps}
       id={`${id}-fieldset`}
-      childrenGroupClassName={childrenGroupClassName}
     >
       <InternalCheckboxGroup id={id} {...checkboxGroupProps} />
     </FieldSet>
@@ -102,7 +98,7 @@ export const CheckboxGroup = <
  */
 const InternalCheckboxGroup: React.FC<
   InternalCheckboxGroupProps & { id: string }
-> = ({ id, options, onChange = () => {}, defaultValue = [] }) => {
+> = ({ id, options, onChange = () => { }, defaultValue = [] }) => {
   const selectedItemsOnInput = Array.isArray(defaultValue)
     ? defaultValue
     : [defaultValue];
