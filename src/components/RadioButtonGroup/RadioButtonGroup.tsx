@@ -1,20 +1,10 @@
 import React, { useState } from 'react';
 import { FieldSetProps, FieldSet } from '../FieldSet/FieldSet';
 import { FormFieldSetProps, FormFieldSet } from '../Form/FormFieldSet';
+import { RadioButton, RadioButtonProps } from '../RadioButton/RadioButton';
 
-/**
- * Type of the values that will define a
- * single RadioButton option in the RadioButtonGroup
- */
-export type RadioOptionRenderProps = {
-  selected: boolean;
-  name: string;
-  value: string;
-  onChange: React.ChangeEventHandler<HTMLInputElement>;
-};
-export type RadioOption = {
-  render: (props: RadioOptionRenderProps) => JSX.Element;
-  value: string;
+export type RadioOption = RadioButtonProps & {
+  render: (props: RadioButtonProps) => JSX.Element;
   expansion?: React.ReactNode;
 };
 
@@ -24,8 +14,7 @@ export type RadioOption = {
 type InternalRadioButtonGroupProps = {
   options: RadioOption[];
   defaultValue?: string;
-  name: string;
-  onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  useFormFieldSet?: boolean;
 };
 
 /**
@@ -49,37 +38,25 @@ export const RadioButtonGroup = <
   TFormFieldSetProps extends
     | FieldSetProps
     | FormFieldSetProps<any> = FieldSetProps
->({
-  id,
-  childrenGroupClassName,
-  ...props
-}: RadioButtonGroupProps<TFormFieldSetProps>) => {
+>(
+  props: RadioButtonGroupProps<TFormFieldSetProps>
+) => {
   const radioButtonGroupProps = props as InternalRadioButtonGroupProps;
-  const useFormFieldSet = ((props as unknown) as RadioButtonGroupProps<
-    FormFieldSetProps<any>
-  >).useFormFieldSet;
+  const { useFormFieldSet } = props;
 
   if (useFormFieldSet) {
     const formFieldSetProps = (props as unknown) as FormFieldSetProps<any>;
     return (
-      <FormFieldSet
-        {...formFieldSetProps}
-        id={`${id}-fieldset`}
-        childrenGroupClassName={childrenGroupClassName}
-      >
-        <InternalRadioButtonGroup id={id} {...radioButtonGroupProps} />
+      <FormFieldSet {...formFieldSetProps}>
+        <InternalRadioButtonGroup {...radioButtonGroupProps} />
       </FormFieldSet>
     );
   }
 
   const fieldSetProps = (props as unknown) as FieldSetProps;
   return (
-    <FieldSet
-      {...fieldSetProps}
-      id={`${id}-fieldset`}
-      childrenGroupClassName={childrenGroupClassName}
-    >
-      <InternalRadioButtonGroup id={id} {...radioButtonGroupProps} />
+    <FieldSet {...fieldSetProps}>
+      <InternalRadioButtonGroup {...radioButtonGroupProps} />
     </FieldSet>
   );
 };
@@ -101,26 +78,31 @@ export const RadioButtonGroup = <
  * 		...
  * 	}
  */
-const InternalRadioButtonGroup: React.FC<
-  InternalRadioButtonGroupProps & { id: string }
-> = ({ id, options, defaultValue = '', name, onChange = () => {} }) => {
+const InternalRadioButtonGroup: React.FC<InternalRadioButtonGroupProps> = ({
+  options,
+  defaultValue = '',
+}) => {
   const [selectedItem, setSelectedItem] = useState(defaultValue);
 
   return (
     <>
-      {options.map(({ render: Render, value, expansion }) => (
-        <span key={`${id}-${value}`} onChange={() => setSelectedItem(value)}>
-          <Render
-            selected={selectedItem === value}
-            name={name}
-            value={value}
-            onChange={onChange}
-          />
-          {expansion && selectedItem === value && (
-            <div className="oec-itemchooser-expansion">{expansion}</div>
-          )}
-        </span>
-      ))}
+      {options.map((props) => {
+        const { id, onChange, value, expansion } = props;
+        return (
+          <span key={id}>
+            <RadioButton
+              {...props}
+              onChange={(e) => {
+                setSelectedItem(e.target.value);
+                onChange(e);
+              }}
+            />
+            {expansion && selectedItem === value && (
+              <div className="oec-itemchooser-expansion">{expansion}</div>
+            )}
+          </span>
+        );
+      })}
     </>
   );
 };
