@@ -22,6 +22,7 @@ type InternalCheckboxGroupProps = {
 type PropsForGroupInForm<TData> = {
   options: CheckboxOptionInForm<TData>[];
   inForm: true;
+  defaultSelectedItemsIds?: string | string[];
 };
 
 /**
@@ -31,8 +32,7 @@ type PropsForGroupInForm<TData> = {
  */
 export type CheckboxGroupProps<TData> =
   | (InternalCheckboxGroupProps & FieldSetProps)
-  | (InternalCheckboxGroupProps &
-    (PropsForGroupInForm<TData> & FormFieldSetProps<TData>));
+  | (PropsForGroupInForm<TData> & FormFieldSetProps<TData>);
 
 /**
  * Component for displaying a group of related Checkboxs.
@@ -59,18 +59,16 @@ export const CheckboxGroup = <TData extends {}>({
 
   if (inForm) {
     const formFieldSetProps = (props as unknown) as FormFieldSetProps<TData>;
+    const _options = options as CheckboxOptionInForm<TData>[];
     return (
       <FormFieldSet {...formFieldSetProps}>
-        {options.map((optionProps) => {
-          const _optionProps = (optionProps as unknown) as CheckboxOptionInForm<
-            TData
-          >;
-          const { id, parseOnChangeEvent, expansion } = _optionProps;
+        {_options.map((optionProps: any) => {
+          const { id, parseOnChangeEvent, expansion } = optionProps;
           const selected = selectedItems.includes(id)
           return (
             <span key={id}>
               <FormField<TData, SingleCheckbox, any>
-                {..._optionProps}
+                {...optionProps}
                 parseOnChangeEvent={(e, dataDriller) => {
                   internalOnChange(id);
                   parseOnChangeEvent && parseOnChangeEvent(e, dataDriller);
@@ -89,9 +87,10 @@ export const CheckboxGroup = <TData extends {}>({
   }
 
   const fieldSetProps = (props as unknown) as FieldSetProps;
+  const _options = options as CheckboxInGroup[];
   return (
     <FieldSet {...fieldSetProps}>
-      {options.map((optionProps) => {
+      {_options.map((optionProps) => {
         const { id, onChange, expansion } = optionProps;
         const selected = selectedItems.includes(id)
         return (
