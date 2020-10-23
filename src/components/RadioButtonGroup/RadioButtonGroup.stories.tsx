@@ -13,7 +13,7 @@ const options: RadioOption[] = [
     id: 'one',
     text: 'One',
     name: 'one',
-    onChange
+    onChange,
   },
   {
     value: 'two',

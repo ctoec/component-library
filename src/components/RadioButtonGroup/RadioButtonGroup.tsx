@@ -22,30 +22,29 @@ type InternalRadioButtonGroupProps = {
 type PropsForGroupInForm<TData> = {
   options: RadioOptionInForm<TData>[];
   inForm: true;
-}
+};
 
 /**
  * Props for RadioButtonGroup, which includes props for InternalRadioButtonGroup,
  * props for the wrapping field set(FieldSet or FormFieldSet),
  * and conditionally a flag to indicate when FormFieldSet is used
  */
-export type RadioButtonGroupProps<
-  TData
-  > = (InternalRadioButtonGroupProps & FieldSetProps) |
-  InternalRadioButtonGroupProps & (PropsForGroupInForm<TData> & FormFieldSetProps<TData>);
+export type RadioButtonGroupProps<TData> =
+  | (InternalRadioButtonGroupProps & FieldSetProps)
+  | (InternalRadioButtonGroupProps &
+      (PropsForGroupInForm<TData> & FormFieldSetProps<TData>));
 
 /**
  * Component for displaying a group of related RadioButtons.
  * Renders the radio button group in a FieldSet by default, or FormFieldSet
  * if FormFieldSetProps is provided as type param
  */
-export const RadioButtonGroup = <
-  TData extends {}
->(
-  {
-    options, defaultValue, inForm, ...props
-  }: RadioButtonGroupProps<TData>
-) => {
+export const RadioButtonGroup = <TData extends {}>({
+  options,
+  defaultValue,
+  inForm,
+  ...props
+}: RadioButtonGroupProps<TData>) => {
   const [selectedItem, setSelectedItem] = useState(defaultValue);
 
   if (inForm) {
@@ -53,7 +52,9 @@ export const RadioButtonGroup = <
     return (
       <FormFieldSet {...formFieldSetProps}>
         {options.map((optionProps) => {
-          const _optionProps = optionProps as unknown as RadioOptionInForm<TData>;
+          const _optionProps = (optionProps as unknown) as RadioOptionInForm<
+            TData
+          >;
           const { id, parseOnChangeEvent, value, expansion } = _optionProps;
           return (
             <span key={id}>
@@ -95,6 +96,7 @@ export const RadioButtonGroup = <
             )}
           </span>
         );
-      })}    </FieldSet>
+      })}{' '}
+    </FieldSet>
   );
 };
