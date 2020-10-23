@@ -22,7 +22,7 @@ export function RadioButton({
   name,
   onChange,
   selected,
-  disabled,
+  disabled = false,
   className,
   ...props
 }: RadioButtonProps) {
@@ -35,11 +35,11 @@ export function RadioButton({
         name={name}
         value={value}
         checked={selected}
-        disabled={!!disabled}
+        disabled={disabled}
         onChange={onChange}
         {...props}
       />
-      <label className="usa-radio__label" htmlFor={value}>
+      <label className="usa-radio__label" htmlFor={id}>
         {text}
       </label>
     </div>
