@@ -8,7 +8,7 @@ export type RadioOption = RadioButtonProps & {
   expansion?: React.ReactNode;
 };
 
-export type RadioOptionInForm<TData> = FormFieldProps<TData, RadioOption, any>;
+export type RadioOptionInForm<TData> = Omit<FormFieldProps<TData, RadioOption, any>, 'inputComponent' | 'onChange'>;
 
 /**
  * Props for InternalRadioButtonGroup
@@ -65,6 +65,7 @@ export const RadioButtonGroup = <TData extends {}>({
                   parseOnChangeEvent && parseOnChangeEvent(e, dataDriller);
                 }}
                 selected={id === selectedItem}
+                inputComponent={RadioButton}
               />
               {expansion && selectedItem === id && (
                 <div className="oec-itemchooser-expansion">{expansion}</div>
@@ -79,12 +80,12 @@ export const RadioButtonGroup = <TData extends {}>({
   const fieldSetProps = (props as unknown) as FieldSetProps;
   return (
     <FieldSet {...fieldSetProps}>
-      {options.map((props) => {
-        const { id, onChange, expansion } = props;
+      {options.map((optionProps) => {
+        const { id, onChange, expansion } = optionProps;
         return (
           <span key={id}>
             <RadioButton
-              {...props}
+              {...optionProps}
               onChange={(e) => {
                 setSelectedItem(e.target.value);
                 onChange(e);

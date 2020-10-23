@@ -91,13 +91,13 @@ export const CheckboxGroup = <TData extends {}>({
   const fieldSetProps = (props as unknown) as FieldSetProps;
   return (
     <FieldSet {...fieldSetProps}>
-      {options.map((props) => {
-        const { id, onChange, expansion } = props;
+      {options.map((optionProps) => {
+        const { id, onChange, expansion } = optionProps;
         const selected = selectedItems.includes(id)
         return (
           <span key={id}>
             <Checkbox
-              {...props}
+              {...optionProps}
               onChange={(e) => {
                 internalOnChange(id);
                 onChange(e);
