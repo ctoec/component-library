@@ -1,7 +1,7 @@
 import React, { InputHTMLAttributes } from 'react';
 import cx from 'classnames';
 
-export type CheckboxProps = {
+export type SingleCheckbox = {
   id: string;
   text: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => any;
@@ -25,7 +25,7 @@ export function Checkbox({
   className,
   disabled,
   ...props
-}: CheckboxProps) {
+}: SingleCheckbox) {
   return (
     <div className={cx('usa-checkbox', className)}>
       <input

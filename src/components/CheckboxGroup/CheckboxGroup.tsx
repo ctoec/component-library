@@ -2,21 +2,21 @@ import React, { useState } from 'react';
 import { FieldSetProps, FieldSet } from '../FieldSet/FieldSet';
 import { FormField, FormFieldProps } from '../Form';
 import { FormFieldSetProps, FormFieldSet } from '../Form/FormFieldSet';
-import { Checkbox, CheckboxProps } from '../Checkbox/Checkbox';
+import { Checkbox, SingleCheckbox } from '../Checkbox/Checkbox';
 
-export type CheckboxOption = CheckboxProps & {
+export type CheckboxInGroup = SingleCheckbox & {
   expansion?: React.ReactNode;
 };
 
-export type CheckboxOptionInForm<TData> = FormFieldProps<TData, CheckboxOption, any>;
+export type CheckboxOptionInForm<TData> = FormFieldProps<TData, CheckboxInGroup, any>;
 
 /**
  * Props for InternalCheckboxGroup
  */
 type InternalCheckboxGroupProps = {
-  options: CheckboxOption[];
+  options: CheckboxInGroup[];
   inForm?: boolean;
-  defaultValue?: string | string[];
+  defaultSelectedItemsIds?: string | string[];
 };
 
 type PropsForGroupInForm<TData> = {
@@ -41,13 +41,13 @@ export type CheckboxGroupProps<TData> =
  */
 export const CheckboxGroup = <TData extends {}>({
   options,
-  defaultValue,
+  defaultSelectedItemsIds,
   inForm,
   ...props
 }: CheckboxGroupProps<TData>) => {
-  const selectedItemsOnInput = Array.isArray(defaultValue)
-    ? defaultValue
-    : [defaultValue];
+  const selectedItemsOnInput = Array.isArray(defaultSelectedItemsIds)
+    ? defaultSelectedItemsIds
+    : [defaultSelectedItemsIds];
   const [selectedItems, setSelectedItems] = useState(selectedItemsOnInput);
 
   const internalOnChange = (value: string) => setSelectedItems((items) => {
@@ -69,7 +69,7 @@ export const CheckboxGroup = <TData extends {}>({
           const selected = selectedItems.includes(id)
           return (
             <span key={id}>
-              <FormField<TData, CheckboxProps, any>
+              <FormField<TData, SingleCheckbox, any>
                 {..._optionProps}
                 parseOnChangeEvent={(e, dataDriller) => {
                   internalOnChange(id);

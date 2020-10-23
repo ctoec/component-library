@@ -3,35 +3,35 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { FormStatusProps } from '..';
 import { TextInput } from '../TextInput/TextInput';
-import { CheckboxOption, CheckboxGroup } from './CheckboxGroup';
-import { Checkbox } from '../Checkbox/Checkbox';
+import { CheckboxInGroup, CheckboxGroup } from './CheckboxGroup';
 
 const onChange = action('onChange');
-const options: CheckboxOption[] = [
+const options: CheckboxInGroup[] = [
   {
-    render: (props) => <Checkbox text="Option 1" {...props} />,
     value: 'one',
+    id: 'one',
+    text: 'One',
+    name: 'one',
+    onChange,
   },
   {
-    render: (props) => <Checkbox text="Option 2" {...props} />,
     value: 'two',
+    id: 'two',
+    text: 'Two',
+    name: 'two',
+    onChange,
   },
 ];
-const optionsWithOneExpansion: CheckboxOption[] = [
+const optionsWithOneExpansion: CheckboxInGroup[] = [
   {
-    render: (props) => <Checkbox text="Option 1" {...props} />,
-    value: 'one',
+    ...options[0],
     expansion: <p>Thank you for selecting option one!</p>,
   },
-  {
-    render: (props) => <Checkbox text="Option 2" {...props} />,
-    value: 'two',
-  },
+  options[1],
 ];
-const optionsWithOneComplexExpansion: CheckboxOption[] = [
+const optionsWithOneComplexExpansion: CheckboxInGroup[] = [
   {
-    render: (props) => <Checkbox text="Option 1" {...props} />,
-    value: 'one',
+    ...options[0],
     expansion: (
       <>
         <p>Thank you for selecting option one!</p>
@@ -44,20 +44,15 @@ const optionsWithOneComplexExpansion: CheckboxOption[] = [
       </>
     ),
   },
-  {
-    render: (props) => <Checkbox text="Option 2" {...props} />,
-    value: 'two',
-  },
+  options[1],
 ];
-const optionsWithTwoExpansions: CheckboxOption[] = [
+const optionsWithTwoExpansions: CheckboxInGroup[] = [
   {
-    render: (props) => <Checkbox text="Option 1" {...props} />,
-    value: 'one',
+    ...options[0],
     expansion: <p>Thank you for selecting option one!</p>,
   },
   {
-    render: (props) => <Checkbox text="Option 2" {...props} />,
-    value: 'two',
+    ...options[1],
     expansion: <p>Woo! #2</p>,
   },
 ];
@@ -83,9 +78,18 @@ storiesOf('CheckboxGroup', module)
       <CheckboxGroup
         legend="CheckboxGroup"
         showLegend
-        onChange={onChange}
         options={options}
         id="storybook-CheckboxGroup"
+      />
+    );
+  })
+  .add('CheckboxGroup with default value', () => {
+    return (
+      <CheckboxGroup
+        legend="RadioButtonGroup"
+        options={options}
+        id="storybook-RadioButtonGroup"
+        defaultSelectedItemsIds="one"
       />
     );
   })
@@ -93,7 +97,6 @@ storiesOf('CheckboxGroup', module)
     return (
       <CheckboxGroup
         legend="CheckboxGroup"
-        onChange={onChange}
         options={options}
         id="storybook-CheckboxGroup"
         status={success}
@@ -104,7 +107,6 @@ storiesOf('CheckboxGroup', module)
     return (
       <CheckboxGroup
         legend="CheckboxGroup"
-        onChange={onChange}
         options={options}
         id="storybook-CheckboxGroup"
         status={warning}
@@ -115,7 +117,6 @@ storiesOf('CheckboxGroup', module)
     return (
       <CheckboxGroup
         legend="CheckboxGroup"
-        onChange={onChange}
         options={options}
         id="storybook-CheckboxGroup"
         status={error}
@@ -127,7 +128,6 @@ storiesOf('CheckboxGroup', module)
     return (
       <CheckboxGroup
         legend="CheckboxGroup"
-        onChange={onChange}
         options={options}
         id="storybook-CheckboxGroup"
         disabled={true}
@@ -138,7 +138,6 @@ storiesOf('CheckboxGroup', module)
     return (
       <CheckboxGroup
         legend="CheckboxGroup"
-        onChange={onChange}
         options={optionsWithOneExpansion}
         id="storybook-CheckboxGroup"
       />
@@ -148,7 +147,6 @@ storiesOf('CheckboxGroup', module)
     return (
       <CheckboxGroup
         legend="CheckboxGroup"
-        onChange={onChange}
         options={optionsWithOneComplexExpansion}
         id="storybook-CheckboxGroup"
       />
@@ -158,7 +156,6 @@ storiesOf('CheckboxGroup', module)
     return (
       <CheckboxGroup
         legend="CheckboxGroup"
-        onChange={onChange}
         options={optionsWithTwoExpansions}
         id="storybook-CheckboxGroup"
       />

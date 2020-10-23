@@ -89,7 +89,7 @@ storiesOf('RadioButtonGroup', module)
         legend="RadioButtonGroup"
         options={options}
         id="storybook-RadioButtonGroup"
-        defaultValue="one"
+        defaultSelectedItemId="one"
       />
     );
   })
