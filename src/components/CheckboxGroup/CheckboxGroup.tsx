@@ -8,7 +8,7 @@ export type CheckboxInGroup = SingleCheckbox & {
   expansion?: React.ReactNode;
 };
 
-export type CheckboxOptionInForm<TData> = FormFieldProps<TData, CheckboxInGroup, any>;
+export type CheckboxOptionInForm<TData> = Omit<FormFieldProps<TData, CheckboxInGroup, any>, 'inputComponent' | 'onChange'>;
 
 /**
  * Props for InternalCheckboxGroup
@@ -76,6 +76,7 @@ export const CheckboxGroup = <TData extends {}>({
                   parseOnChangeEvent && parseOnChangeEvent(e, dataDriller);
                 }}
                 defaultValue={selected}
+                inputComponent={Checkbox}
               />
               {expansion && selected && (
                 <div className="oec-itemchooser-expansion">{expansion}</div>
