@@ -83,6 +83,16 @@ storiesOf('RadioButtonGroup', module)
       />
     );
   })
+  .add('RadioButtonGroup with default value', () => {
+    return (
+      <RadioButtonGroup
+        legend="RadioButtonGroup"
+        options={options}
+        id="storybook-RadioButtonGroup"
+        defaultValue="one"
+      />
+    );
+  })
   .add('RadioButtonGroup with success', () => {
     return (
       <RadioButtonGroup
