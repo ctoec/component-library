@@ -8,6 +8,7 @@ export type RadioOption = RadioButtonProps & {
   expansion?: React.ReactNode;
 };
 
+// TODO: we probably actually want to let the user specify the return type
 export type RadioOptionInForm<TData> = Omit<
   FormFieldProps<TData, RadioOption, any>,
   'inputComponent' | 'onChange'
