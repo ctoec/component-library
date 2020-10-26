@@ -12,14 +12,12 @@ const options: RadioOption[] = [
     value: 'one',
     id: 'one',
     text: 'One',
-    name: 'one',
     onChange,
   },
   {
     value: 'two',
     id: 'two',
     text: 'Two',
-    name: 'two',
     onChange,
   },
 ];
@@ -77,6 +75,7 @@ storiesOf('RadioButtonGroup', module)
   .add('RadioButtonGroup', () => {
     return (
       <RadioButtonGroup
+        inputName="example-group"
         legend="RadioButtonGroup"
         options={options}
         id="storybook-RadioButtonGroup"
@@ -86,6 +85,7 @@ storiesOf('RadioButtonGroup', module)
   .add('RadioButtonGroup with default value', () => {
     return (
       <RadioButtonGroup
+        inputName="example-group"
         legend="RadioButtonGroup"
         options={options}
         id="storybook-RadioButtonGroup"
@@ -96,6 +96,7 @@ storiesOf('RadioButtonGroup', module)
   .add('RadioButtonGroup with success', () => {
     return (
       <RadioButtonGroup
+        inputName="example-group"
         legend="RadioButtonGroup"
         options={options}
         id="storybook-RadioButtonGroup"
@@ -106,6 +107,7 @@ storiesOf('RadioButtonGroup', module)
   .add('RadioButtonGroup with warning', () => {
     return (
       <RadioButtonGroup
+        inputName="example-group"
         legend="RadioButtonGroup"
         options={options}
         id="storybook-RadioButtonGroup"
@@ -116,6 +118,7 @@ storiesOf('RadioButtonGroup', module)
   .add('RadioButtonGroup with error', () => {
     return (
       <RadioButtonGroup
+        inputName="example-group"
         legend="RadioButtonGroup"
         options={options}
         id="storybook-RadioButtonGroup"
@@ -126,6 +129,7 @@ storiesOf('RadioButtonGroup', module)
   .add('Disabled RadioButtonGroup', () => {
     return (
       <RadioButtonGroup
+        inputName="example-group"
         legend="RadioButtonGroup"
         options={options}
         id="storybook-RadioButtonGroup"
@@ -136,6 +140,7 @@ storiesOf('RadioButtonGroup', module)
   .add('RadioButtonGroup with one single element expansion', () => {
     return (
       <RadioButtonGroup
+        inputName="example-group"
         legend="RadioButtonGroup"
         options={optionsWithOneExpansion}
         id="storybook-RadioButtonGroup"
@@ -145,6 +150,7 @@ storiesOf('RadioButtonGroup', module)
   .add('RadioButtonGroup with one multi element expansion', () => {
     return (
       <RadioButtonGroup
+        inputName="example-group"
         legend="RadioButtonGroup"
         options={optionsWithOneComplexExpansion}
         id="storybook-RadioButtonGroup"
@@ -154,6 +160,7 @@ storiesOf('RadioButtonGroup', module)
   .add('RadioButtonGroup with both single element expansion', () => {
     return (
       <RadioButtonGroup
+        inputName="example-group"
         legend="RadioButtonGroup"
         options={optionsWithTwoExpansions}
         id="storybook-RadioButtonGroup"
