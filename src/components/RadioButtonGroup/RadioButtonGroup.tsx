@@ -4,7 +4,7 @@ import { FormField, FormFieldProps } from '../Form';
 import { FormFieldSetProps, FormFieldSet } from '../Form/FormFieldSet';
 import { RadioButton, RadioButtonProps } from '../RadioButton/RadioButton';
 
-export type RadioOption = RadioButtonProps & {
+export type RadioOption = Omit<RadioButtonProps, 'name'> & {
   expansion?: React.ReactNode;
 };
 
@@ -14,19 +14,22 @@ export type RadioOptionInForm<TData> = Omit<
   'inputComponent' | 'onChange'
 >;
 
+type CommonRadioGroupProps = {
+  inputName: string;
+  defaultSelectedItemId?: string;
+}
+
 /**
  * Props for InternalRadioButtonGroup
  */
-type InternalRadioButtonGroupProps = {
+type InternalRadioButtonGroupProps = CommonRadioGroupProps & {
   options: RadioOption[];
   inForm?: boolean;
-  defaultSelectedItemId?: string;
 };
 
-type PropsForGroupInForm<TData> = {
+type PropsForGroupInForm<TData> = CommonRadioGroupProps & {
   options: RadioOptionInForm<TData>[];
   inForm: true;
-  defaultSelectedItemId?: string;
 };
 
 /**
@@ -47,6 +50,7 @@ export const RadioButtonGroup = <TData extends {}>({
   options,
   defaultSelectedItemId,
   inForm,
+  inputName,
   ...props
 }: RadioButtonGroupProps<TData>) => {
   const [selectedItem, setSelectedItem] = useState(defaultSelectedItemId);
@@ -62,6 +66,7 @@ export const RadioButtonGroup = <TData extends {}>({
             <span key={id}>
               <FormField<TData, RadioButtonProps, any>
                 {...optionProps}
+                name={inputName}
                 parseOnChangeEvent={(e, dataDriller) => {
                   setSelectedItem(e.target.value);
                   parseOnChangeEvent && parseOnChangeEvent(e, dataDriller);
@@ -89,6 +94,7 @@ export const RadioButtonGroup = <TData extends {}>({
           <span key={id}>
             <RadioButton
               {...optionProps}
+              name={inputName}
               onChange={(e) => {
                 setSelectedItem(e.target.value);
                 onChange(e);
