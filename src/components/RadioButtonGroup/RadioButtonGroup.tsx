@@ -17,7 +17,7 @@ export type RadioOptionInForm<TData> = Omit<
 type CommonRadioGroupProps = {
   inputName: string;
   defaultSelectedItemId?: string;
-}
+};
 
 /**
  * Props for InternalRadioButtonGroup
