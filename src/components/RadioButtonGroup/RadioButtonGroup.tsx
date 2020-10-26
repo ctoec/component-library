@@ -60,8 +60,8 @@ export const RadioButtonGroup = <TData extends {}>({
     const _options = options as RadioOptionInForm<TData>[];
     return (
       <FormFieldSet {...formFieldSetProps}>
-        {_options.map((optionProps) => {
-          const { id, parseOnChangeEvent, expansion } = optionProps;
+        {_options.map(({ expansion, ...optionProps }) => {
+          const { id, parseOnChangeEvent } = optionProps;
           return (
             <span key={id}>
               <FormField<TData, RadioButtonProps, any>
@@ -88,8 +88,8 @@ export const RadioButtonGroup = <TData extends {}>({
   const _options = options as RadioOption[];
   return (
     <FieldSet {...fieldSetProps}>
-      {_options.map((optionProps) => {
-        const { id, onChange, expansion } = optionProps;
+      {_options.map(({ expansion, ...optionProps }) => {
+        const { id, onChange } = optionProps;
         return (
           <span key={id}>
             <RadioButton

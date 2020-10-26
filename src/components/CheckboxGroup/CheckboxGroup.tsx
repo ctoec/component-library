@@ -66,8 +66,8 @@ export const CheckboxGroup = <TData extends {}>({
     const _options = options as CheckboxOptionInForm<TData>[];
     return (
       <FormFieldSet {...formFieldSetProps}>
-        {_options.map((optionProps: any) => {
-          const { id, parseOnChangeEvent, expansion } = optionProps;
+        {_options.map(({ expansion, ...optionProps }) => {
+          const { id, parseOnChangeEvent } = optionProps;
           const selected = selectedItems.includes(id);
           return (
             <span key={id}>
@@ -94,8 +94,8 @@ export const CheckboxGroup = <TData extends {}>({
   const _options = options as CheckboxInGroup[];
   return (
     <FieldSet {...fieldSetProps}>
-      {_options.map((optionProps) => {
-        const { id, onChange, expansion } = optionProps;
+      {_options.map(({ expansion, ...optionProps }) => {
+        const { id, onChange } = optionProps;
         const selected = selectedItems.includes(id);
         return (
           <span key={id}>
