@@ -2,19 +2,27 @@
   width: fit-content;
   display: inline-block;
 
-  &__arrow {
-    height: 0.5em;
-    width: 0.5em;
+  .button-content {
+    align-items: baseline;
+    .arrow {
+      margin-left: 0.5rem;
+      height: 0.5em;
+      width: 0.5em;
+    }
   }
 
   ul {
+    position: absolute;
+    z-index: 999;
     list-style-type: none;
     margin: 0.5rem -0.5rem 0 -0.5rem;
     padding: 0;
     border: 1px solid color($theme-color-base-lighter);
+    background-color: #ffffff;
 
     li {
       width: 100%;
+      text-align: right;
       &:not(:last-child) {
         border-bottom: 1px solid color($theme-color-base-lighter);
       }

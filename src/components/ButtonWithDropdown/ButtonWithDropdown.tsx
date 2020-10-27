@@ -37,9 +37,9 @@ export const ButtonWithDropdown: React.FC<ButtonWithDropdownProps> = ({
         aria-haspopup="true"
         aria-expanded={isComponentVisible}
         text={
-          <div className="display-flex">
+          <div className="button-content display-flex">
             {text}
-            <AngleArrowDown className="oec-drop-button__arrow" />
+            <AngleArrowDown className="arrow" />
           </div>
         }
         onClick={() => setIsComponentVisible((v) => !v)}
