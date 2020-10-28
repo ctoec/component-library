@@ -75,7 +75,7 @@ export const CheckboxGroup = <TData extends {}>({
                 {...optionProps}
                 parseOnChangeEvent={(e, dataDriller) => {
                   internalOnChange(id);
-                  parseOnChangeEvent && parseOnChangeEvent(e, dataDriller);
+                  return parseOnChangeEvent ? parseOnChangeEvent(e, dataDriller) : e;
                 }}
                 defaultValue={selected}
                 inputComponent={Checkbox}

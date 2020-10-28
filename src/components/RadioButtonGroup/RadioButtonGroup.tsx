@@ -69,7 +69,7 @@ export const RadioButtonGroup = <TData extends {}>({
                 name={inputName}
                 parseOnChangeEvent={(e, dataDriller) => {
                   setSelectedItemId(id);
-                  parseOnChangeEvent && parseOnChangeEvent(e, dataDriller);
+                  return parseOnChangeEvent ? parseOnChangeEvent(e, dataDriller) : e;
                 }}
                 defaultValue={id === selectedItemId}
                 inputComponent={RadioButton}
