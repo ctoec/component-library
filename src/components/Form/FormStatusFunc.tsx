@@ -7,6 +7,8 @@ export type FieldStatusFunc<TData, TComponentProps> = (
   props: TComponentProps
 ) => FormStatusProps | undefined;
 
+// TODO: refactor this to be more like fieldset status func
 export type FieldSetStatusFunc<TData> = (
-  originalObject: TData
+  originalObject: TData,
+  dataDriller: TObjectDriller<NonNullable<TData>>
 ) => FormStatusProps | undefined;

@@ -2,6 +2,7 @@ import React, { HTMLAttributes } from 'react';
 import cx from 'classnames';
 
 export type RadioButtonProps = {
+  id: string | number;
   text: string;
   value: string;
   name: string;
@@ -15,29 +16,30 @@ export type RadioButtonProps = {
  * Component that wraps a native radio input element
  */
 export function RadioButton({
+  id,
   text,
   value,
   name,
   onChange,
   selected,
-  disabled,
+  disabled = false,
   className,
   ...props
 }: RadioButtonProps) {
   return (
     <div className={cx('usa-radio', className)}>
       <input
-        id={value}
+        id={id}
         type="radio"
         className="usa-radio__input"
         name={name}
         value={value}
         checked={selected}
-        disabled={!!disabled}
+        disabled={disabled}
         onChange={onChange}
         {...props}
       />
-      <label className="usa-radio__label" htmlFor={value}>
+      <label className="usa-radio__label" htmlFor={id}>
         {text}
       </label>
     </div>

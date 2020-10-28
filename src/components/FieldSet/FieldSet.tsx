@@ -31,13 +31,14 @@ export const FieldSet: React.FC<FieldSetProps> = ({
   childrenGroupClassName,
   disabled,
 }) => {
+  const legendId = `fieldset-legend-${id}`;
   const hintId = `${id}-hint`;
-  let ariaDescriber;
+  let ariaLabeler = legendId;
   if (hint) {
-    ariaDescriber = hintId;
+    ariaLabeler = `${ariaLabeler} ${hintId}`;
   }
   if (status) {
-    ariaDescriber = status.id;
+    ariaLabeler = `${ariaLabeler} ${status.id}`;
   }
 
   return (
@@ -50,11 +51,11 @@ export const FieldSet: React.FC<FieldSetProps> = ({
         className
       )}
       id={id}
-      aria-describedby={ariaDescriber}
+      aria-labelledby={ariaLabeler}
       aria-invalid={status && status.type === 'error'}
       disabled={disabled}
     >
-      <legend id={`fieldset-legend-${id}`}>
+      <legend id={legendId}>
         {/* Needs to be wrapped in another el because spacing works differently for legends */}
         <span
           className={cx({
@@ -67,7 +68,11 @@ export const FieldSet: React.FC<FieldSetProps> = ({
           {optional && <span className="usa-hint">&nbsp;(optional)</span>}
         </span>
       </legend>
-      {hint && <span className="usa-hint text-italic">{hint}</span>}
+      {hint && (
+        <span className="usa-hint text-italic" id={hintId}>
+          {hint}
+        </span>
+      )}
       {status && <FormStatus {...status} />}
       <div className={childrenGroupClassName}>{children}</div>
     </fieldset>
