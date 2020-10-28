@@ -10,28 +10,28 @@ export type FormFieldProps<TData, TComponentProps, TFieldData> =
   // subtype contrainst error. See https://stackoverflow.com/a/59363875. As a
   // work around, we can conditionally check that TComponentProps extends {}.
   TComponentProps extends {}
-    ? {
-        defaultValue?: TFieldData;
-        getValue: (
-          _: TObjectDriller<NonNullable<TData>>
-        ) => TObjectDriller<TFieldData>;
-        preprocessForDisplay?: (
-          _: TFieldData | undefined
-        ) => TFieldData | JSX.Element | string | undefined;
-        parseOnChangeEvent?: (
-          event: React.ChangeEvent<any>,
-          data: TObjectDriller<TData>
-        ) => TFieldData;
-        status?: FieldStatusFunc<TData, TComponentProps>;
-        inputComponent: React.FC<TComponentProps>;
-      } & /* Include TComponentProps props, except onChange, defaultValue, and status */ Pick<
-        TComponentProps,
-        Exclude<keyof TComponentProps, 'onChange' | 'defaultValue' | 'status'>
-      > /*
+  ? {
+    defaultValue?: TFieldData;
+    getValue: (
+      _: TObjectDriller<NonNullable<TData>>
+    ) => TObjectDriller<TFieldData>;
+    preprocessForDisplay?: (
+      _: TFieldData | undefined
+    ) => TFieldData | JSX.Element | string | undefined;
+    parseOnChangeEvent?: (
+      event: React.ChangeEvent<any>,
+      data: TObjectDriller<TData>
+    ) => TFieldData;
+    status?: FieldStatusFunc<TData, TComponentProps>;
+    inputComponent: React.FC<TComponentProps>;
+  } & /* Include TComponentProps props, except onChange, defaultValue, and status */ Pick<
+    TComponentProps,
+    Exclude<keyof TComponentProps, 'onChange' | 'defaultValue' | 'status'>
+  > /*
 			If TComponentProps does not extend {}, React will choke on creating
 			the component. So don't allow this case.
 		*/
-    : never;
+  : never;
 
 /**
  * Generic form input field component that handles simple use cases,
@@ -72,14 +72,14 @@ export const FormField = <
     );
   };
 
-  const displayValue =
-    value != null // checks null and undefined
-      ? value
-      : defaultValue;
+  // const displayValue =
+  //   value != null // checks null and undefined
+  //     ? value
+  //     : defaultValue;
   return (
     <InputComponent
       defaultValue={
-        preprocessForDisplay ? preprocessForDisplay(displayValue) : displayValue
+        preprocessForDisplay ? preprocessForDisplay(value) : value
       }
       onChange={onChange}
       status={status(dataDriller, updatePath, props)}
