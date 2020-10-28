@@ -53,7 +53,7 @@ export const RadioButtonGroup = <TData extends {}>({
   inputName,
   ...props
 }: RadioButtonGroupProps<TData>) => {
-  const [selectedItem, setSelectedItem] = useState(defaultSelectedItemId);
+  const [selectedItemId, setSelectedItemId] = useState(defaultSelectedItemId);
 
   if (inForm) {
     const formFieldSetProps = (props as unknown) as FormFieldSetProps<TData>;
@@ -68,13 +68,13 @@ export const RadioButtonGroup = <TData extends {}>({
                 {...optionProps}
                 name={inputName}
                 parseOnChangeEvent={(e, dataDriller) => {
-                  setSelectedItem(e.target.value);
+                  setSelectedItemId(id);
                   parseOnChangeEvent && parseOnChangeEvent(e, dataDriller);
                 }}
-                selected={id === selectedItem}
+                selected={id === selectedItemId}
                 inputComponent={RadioButton}
               />
-              {expansion && selectedItem === id && (
+              {expansion && selectedItemId === id && (
                 <div className="oec-itemchooser-expansion">{expansion}</div>
               )}
             </span>
@@ -96,12 +96,12 @@ export const RadioButtonGroup = <TData extends {}>({
               {...optionProps}
               name={inputName}
               onChange={(e) => {
-                setSelectedItem(e.target.value);
+                setSelectedItemId(e.target.value);
                 onChange(e);
               }}
-              selected={id === selectedItem}
+              selected={id === selectedItemId}
             />
-            {expansion && selectedItem === id && (
+            {expansion && selectedItemId === id && (
               <div className="oec-itemchooser-expansion">{expansion}</div>
             )}
           </span>
