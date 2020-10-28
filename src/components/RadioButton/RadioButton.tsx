@@ -7,10 +7,10 @@ export type RadioButtonProps = {
   value: string;
   name: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => any;
-  selected?: boolean;
+  defaultValue?: boolean;
   disabled?: boolean;
   className?: string;
-} & Omit<HTMLAttributes<HTMLInputElement>, 'onChange'>;
+} & Omit<HTMLAttributes<HTMLInputElement>, 'onChange' | 'defaultValue'>;
 
 /**
  * Component that wraps a native radio input element
@@ -21,7 +21,7 @@ export function RadioButton({
   value,
   name,
   onChange,
-  selected,
+  defaultValue,
   disabled = false,
   className,
   ...props
@@ -34,7 +34,7 @@ export function RadioButton({
         className="usa-radio__input"
         name={name}
         value={value}
-        checked={selected}
+        checked={defaultValue}
         disabled={disabled}
         onChange={onChange}
         {...props}

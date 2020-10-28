@@ -71,7 +71,7 @@ export const RadioButtonGroup = <TData extends {}>({
                   setSelectedItemId(id);
                   parseOnChangeEvent && parseOnChangeEvent(e, dataDriller);
                 }}
-                selected={id === selectedItemId}
+                defaultValue={id === selectedItemId}
                 inputComponent={RadioButton}
               />
               {expansion && selectedItemId === id && (
@@ -99,7 +99,7 @@ export const RadioButtonGroup = <TData extends {}>({
                 setSelectedItemId(e.target.value);
                 onChange(e);
               }}
-              selected={id === selectedItemId}
+              defaultValue={id === selectedItemId}
             />
             {expansion && selectedItemId === id && (
               <div className="oec-itemchooser-expansion">{expansion}</div>
