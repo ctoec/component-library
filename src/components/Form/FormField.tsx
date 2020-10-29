@@ -72,15 +72,9 @@ export const FormField = <
     );
   };
 
-  const displayValue =
-    value != null // checks null and undefined
-      ? value
-      : defaultValue;
   return (
     <InputComponent
-      defaultValue={
-        preprocessForDisplay ? preprocessForDisplay(displayValue) : displayValue
-      }
+      defaultValue={preprocessForDisplay ? preprocessForDisplay(value) : value}
       onChange={onChange}
       status={status(dataDriller, updatePath, props)}
       {...props}

@@ -53,7 +53,7 @@ export const RadioButtonGroup = <TData extends {}>({
   inputName,
   ...props
 }: RadioButtonGroupProps<TData>) => {
-  const [selectedItem, setSelectedItem] = useState(defaultSelectedItemId);
+  const [selectedItemId, setSelectedItemId] = useState(defaultSelectedItemId);
 
   if (inForm) {
     const formFieldSetProps = (props as unknown) as FormFieldSetProps<TData>;
@@ -65,16 +65,21 @@ export const RadioButtonGroup = <TData extends {}>({
           return (
             <span key={id}>
               <FormField<TData, RadioButtonProps, any>
+                // Stuff we want the option props to override
+                preprocessForDisplay={(data) => data === optionProps.value}
                 {...optionProps}
+                // Stuff the option props should not override
                 name={inputName}
                 parseOnChangeEvent={(e, dataDriller) => {
-                  setSelectedItem(e.target.value);
-                  parseOnChangeEvent && parseOnChangeEvent(e, dataDriller);
+                  setSelectedItemId(id);
+                  return parseOnChangeEvent
+                    ? parseOnChangeEvent(e, dataDriller)
+                    : e.target.value;
                 }}
-                selected={id === selectedItem}
+                defaultValue={id === selectedItemId}
                 inputComponent={RadioButton}
               />
-              {expansion && selectedItem === id && (
+              {expansion && selectedItemId === id && (
                 <div className="oec-itemchooser-expansion">{expansion}</div>
               )}
             </span>
@@ -96,12 +101,12 @@ export const RadioButtonGroup = <TData extends {}>({
               {...optionProps}
               name={inputName}
               onChange={(e) => {
-                setSelectedItem(e.target.value);
+                setSelectedItemId(e.target.value);
                 onChange(e);
               }}
-              selected={id === selectedItem}
+              defaultValue={id === selectedItemId}
             />
-            {expansion && selectedItem === id && (
+            {expansion && selectedItemId === id && (
               <div className="oec-itemchooser-expansion">{expansion}</div>
             )}
           </span>
