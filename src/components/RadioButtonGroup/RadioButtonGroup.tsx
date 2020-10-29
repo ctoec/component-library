@@ -66,7 +66,7 @@ export const RadioButtonGroup = <TData extends {}>({
             <span key={id}>
               <FormField<TData, RadioButtonProps, any>
                 // Stuff we want the option props to override
-                preprocessForDisplay={data => data === optionProps.value}
+                preprocessForDisplay={(data) => data === optionProps.value}
                 {...optionProps}
                 // Stuff the option props should not override
                 name={inputName}
