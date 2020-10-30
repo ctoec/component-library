@@ -18,7 +18,7 @@ export type CardContextType = {
 
 const CardContext = createContext<CardContextType>({
   isExpanded: false,
-  toggleExpanded: () => {},
+  toggleExpanded: () => { },
 });
 
 const { Provider: CardProvider } = CardContext;
@@ -30,7 +30,7 @@ export type CardProps = {
   className?: string;
   expanded?: boolean;
   onExpansionChange?: (_: boolean) => void;
-  forceClose?: boolean;
+  forceClose?: boolean; // TODO: ditch this bc we fixed expanded
   showTag?: boolean;
 };
 
@@ -40,7 +40,6 @@ export function Card({
   className,
   expanded = false,
   onExpansionChange,
-  forceClose,
   showTag = false,
   children,
 }: PropsWithChildren<CardProps>) {
@@ -56,16 +55,19 @@ export function Card({
   const toggleExpanded = () => updateExpanded(!isExpanded);
 
   useEffect(() => {
-    if (onExpansionChange && previousIsExpanded !== undefined) {
-      onExpansionChange(isExpanded);
+    // After initial render, previous is expanded should always be a boolean
+    const isFirstRender = previousIsExpanded === undefined;
+    if (isFirstRender || !onExpansionChange) {
+      // We don't want to run on expansion change on the first render of the card
+      return;
     }
+    onExpansionChange(isExpanded);
   }, [isExpanded, previousIsExpanded, onExpansionChange]);
 
   useEffect(() => {
-    if (forceClose) {
-      updateExpanded(false);
-    }
-  }, [forceClose, updateExpanded]);
+    // This allows the parent component to control the card
+    updateExpanded(expanded);
+  }, [expanded, updateExpanded]);
 
   return (
     <CardProvider
