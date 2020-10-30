@@ -3,7 +3,7 @@ import ReactModal from 'react-modal';
 import cx from 'classnames';
 import { X, Button } from '../..';
 
-type ModalProps = {
+export type ModalProps = {
   appElementId?: string;
   isOpen: boolean;
   toggleOpen: () => void;
@@ -11,6 +11,7 @@ type ModalProps = {
   showHeaderBorder?: boolean;
   content: JSX.Element;
 };
+
 export const Modal: React.FC<ModalProps> = ({
   appElementId = 'root',
   isOpen,

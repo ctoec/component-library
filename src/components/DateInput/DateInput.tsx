@@ -15,6 +15,7 @@ export type DateInputProps = {
   status?: FormStatusProps;
   className?: string;
   hideLegend?: boolean;
+  hideField?: { month?: boolean; day?: boolean; year?: boolean, calendar?: boolean };
 };
 
 export const DateInput: React.FC<DateInputProps> = ({
@@ -27,6 +28,7 @@ export const DateInput: React.FC<DateInputProps> = ({
   status,
   className,
   hideLegend = false,
+  hideField = {},
 }) => {
   const commonDateInputProps = {
     className: 'oec-date-input__input margin-right-1 margin-top-0',
@@ -74,6 +76,8 @@ export const DateInput: React.FC<DateInputProps> = ({
     onChange(date);
   }, [onChange, date]);
 
+  const { month: hideMonth, day: hideDay, year: hideYear, calendar: hideCalendar } = hideField;
+
   return (
     <FieldSet
       legend={label}
@@ -85,40 +89,46 @@ export const DateInput: React.FC<DateInputProps> = ({
       optional={optional}
     >
       <div className="flex-row flex-align-end usa-memorable-date">
-        <TextInput
-          value={month}
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            const newMonth = event.target.value;
-            setMonth(newMonth);
-          }}
-          id={`${id}-month`}
-          label="Month"
-          inputProps={{ min: 1, max: 12, type: 'number' }}
-          {...commonDateInputProps}
-        />
-        <TextInput
-          value={day}
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            const newDay = event.target.value;
-            setDay(newDay);
-          }}
-          id={`${id}-day`}
-          label="Day"
-          inputProps={{ min: 1, max: 31, type: 'number' }}
-          {...commonDateInputProps}
-        />
-        <TextInput
-          value={year}
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            const newYear = event.target.value;
-            setYear(newYear);
-          }}
-          id={`${id}-year`}
-          label="Year"
-          inputProps={{ min: 1000, max: 2200, type: 'number' }}
-          {...commonDateInputProps}
-        />
-        <div className="oec-calendar-dropdown oec-date-input__calendar-dropdown">
+        {!hideMonth && (
+          <TextInput
+            value={month}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              const newMonth = event.target.value;
+              setMonth(newMonth);
+            }}
+            id={`${id}-month`}
+            label="Month"
+            inputProps={{ min: 1, max: 12, type: 'number' }}
+            {...commonDateInputProps}
+          />
+        )}
+        {!hideDay && (
+          <TextInput
+            value={day}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              const newDay = event.target.value;
+              setDay(newDay);
+            }}
+            id={`${id}-day`}
+            label="Day"
+            inputProps={{ min: 1, max: 31, type: 'number' }}
+            {...commonDateInputProps}
+          />
+        )}
+        {!hideYear && (
+          <TextInput
+            value={year}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              const newYear = event.target.value;
+              setYear(newYear);
+            }}
+            id={`${id}-year`}
+            label="Year"
+            inputProps={{ min: 1000, max: 2200, type: 'number' }}
+            {...commonDateInputProps}
+          />
+        )}
+        {!hideCalendar && <div className="oec-calendar-dropdown oec-date-input__calendar-dropdown">
           <Button
             text={<Calendar className="oec-calendar-toggle__icon" />}
             onClick={() => {
@@ -156,7 +166,7 @@ export const DateInput: React.FC<DateInputProps> = ({
               initialVisibleMonth={() => date || moment()}
             />
           </div>
-        </div>
+        </div>}
       </div>
     </FieldSet>
   );

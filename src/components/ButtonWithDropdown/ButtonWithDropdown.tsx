@@ -37,11 +37,10 @@ export const ButtonWithDropdown: React.FC<ButtonWithDropdownProps> = ({
         aria-haspopup="true"
         aria-expanded={isComponentVisible}
         text={
-          <span>
+          <div className="button-content display-flex">
             {text}
-            <span>&nbsp;</span>
-            <AngleArrowDown />
-          </span>
+            <AngleArrowDown className="arrow" />
+          </div>
         }
         onClick={() => setIsComponentVisible((v) => !v)}
         {...props}
