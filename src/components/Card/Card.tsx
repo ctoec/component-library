@@ -29,8 +29,9 @@ export type CardProps = {
   borderless?: boolean;
   className?: string;
   expanded?: boolean;
-  onExpansionChange?: (_: boolean) => void;
   forceClose?: boolean;
+  onExpansionChange?: (_: boolean) => void;
+  setExpansion?: boolean;
   showTag?: boolean;
 };
 
@@ -39,8 +40,9 @@ export function Card({
   borderless = false,
   className,
   expanded = false,
-  onExpansionChange,
   forceClose,
+  onExpansionChange,
+  setExpansion,
   showTag = false,
   children,
 }: PropsWithChildren<CardProps>) {
@@ -62,11 +64,18 @@ export function Card({
   }, [isExpanded, previousIsExpanded, onExpansionChange]);
 
   useEffect(() => {
+      if (setExpansion !== undefined)
+      {
+        updateExpanded(setExpansion);
+      }
+  }, [setExpansion, updateExpanded]);
+  
+  useEffect(() => {
     if (forceClose) {
       updateExpanded(false);
     }
   }, [forceClose, updateExpanded]);
-
+  
   return (
     <CardProvider
       value={{
