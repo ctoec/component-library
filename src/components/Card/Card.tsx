@@ -58,7 +58,13 @@ export function Card({
   const toggleExpanded = () => updateExpanded(!isExpanded);
 
   useEffect(() => {
-    if (onExpansionChange && previousIsExpanded !== undefined) {
+    // After initial render, previous is expanded should always be a boolean
+    const isFirstRender = previousIsExpanded === undefined;
+    if (isFirstRender || !onExpansionChange) {
+      // We don't want to run on expansion change on the first render of the card
+      return;
+    }
+    if (isExpanded !== previousIsExpanded) {
       onExpansionChange(isExpanded);
     }
   }, [isExpanded, previousIsExpanded, onExpansionChange]);
