@@ -34,6 +34,8 @@ export const Modal: React.FC<ModalProps> = ({
           top: '50%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
+          maxHeight: '100%',
+          overflowY: 'scroll',
         },
       }}
     >
