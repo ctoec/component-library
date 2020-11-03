@@ -64,7 +64,6 @@ export function Card({
       // We don't want to run on expansion change on the first render of the card
       return;
     }
-    console.log(`Is expanded ${isExpanded}, Previous Expanded ${previousIsExpanded}`)
     if (isExpanded !== previousIsExpanded) {
       onExpansionChange(isExpanded);
     }
