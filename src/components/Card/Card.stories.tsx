@@ -99,8 +99,7 @@ storiesOf('Card', module)
   })
   .add('With card expansion and card expander', () => {
     return (
-      <Card expanded={true}
-      onExpansionChange={(expanded) => expanded ? console.log('open') : console.log('closed')}>
+      <Card expanded={true}>
         <div className="usa-grid">
           <div className="grid-row">
             <div className="grid-col">
