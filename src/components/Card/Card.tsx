@@ -82,7 +82,7 @@ export function Card({
       updateExpanded(false);
     }
   }, [forceClose, updateExpanded]);
-  console.log('Rendering card')
+
   return (
     <CardProvider
       value={{
