@@ -20,6 +20,7 @@ export * from './Header/NavDropdown';
 export * from './HeadingLevel';
 export * from './InlineIcon/InlineIcon';
 export * from './Legend/Legend';
+export * from './LoadingWrapper/LoadingWrapper';
 export * from './Modal/Modal';
 export * from './ProcessList/ProcessList';
 export * from './RadioButton/RadioButton';

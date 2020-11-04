@@ -37,7 +37,9 @@ storiesOf('Date input', module)
     return <DateInput {...commonProps} disabled />;
   })
   .add('Hidden field', () => {
-    return <DateInput {...commonProps} hideField={{ day: true, calendar: true }} />;
+    return (
+      <DateInput {...commonProps} hideField={{ day: true, calendar: true }} />
+    );
   })
   .add('Success', () => {
     return <DateInput {...commonProps} status={success} />;
@@ -47,4 +49,4 @@ storiesOf('Date input', module)
   })
   .add('Error', () => {
     return <DateInput {...commonProps} status={error} />;
-  })
+  });

@@ -1,0 +1,16 @@
+.oec-loading-wrapper {
+  width: 100%;
+  position: relative;
+
+  &__indicator {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+  }
+
+  .MuiCircularProgress-colorPrimary {
+    color: color($theme-link-color);
+  }
+}
