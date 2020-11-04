@@ -7,7 +7,7 @@ storiesOf('LoadingWrapper', module)
   .addDecorator(withKnobs)
   .add('Default', () => {
     return (
-      <LoadingWrapper text="Loading so much data..." isLoading={true}>
+      <LoadingWrapper text="Loading so much data..." loading={true}>
         <p>You can't see me because it's loading!</p>
       </LoadingWrapper>
     );

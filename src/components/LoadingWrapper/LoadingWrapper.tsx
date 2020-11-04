@@ -1,23 +1,27 @@
 import React from 'react';
 import { CircularProgress } from '@material-ui/core';
+import cx from 'classnames';
 
 export type LoadingWrapperPrps = {
-  isLoading: boolean;
+  loading: boolean;
   text?: string | JSX.Element;
 };
 
 export const LoadingWrapper: React.FC<LoadingWrapperPrps> = ({
   children,
   text,
-  isLoading,
+  loading,
 }) => {
-  if (!isLoading) {
-    return <>{children}</>;
-  }
   return (
     <div className="oec-loading-wrapper">
-      <CircularProgress className="indeterminate" />
-      {text && <div>{text}</div>}
+      <div>{children}</div>
+      <div
+        className={cx('oec-loading-wrapper__indicator', 'bg-white')}
+        hidden={!loading}
+      >
+        <CircularProgress className="indeterminate" />
+        {text && <div>{text}</div>}
+      </div>
     </div>
   );
 };
