@@ -15,7 +15,12 @@ export type DateInputProps = {
   status?: FormStatusProps;
   className?: string;
   hideLegend?: boolean;
-  hideField?: { month?: boolean; day?: boolean; year?: boolean, calendar?: boolean };
+  hideField?: {
+    month?: boolean;
+    day?: boolean;
+    year?: boolean;
+    calendar?: boolean;
+  };
 };
 
 export const DateInput: React.FC<DateInputProps> = ({
@@ -76,7 +81,12 @@ export const DateInput: React.FC<DateInputProps> = ({
     onChange(date);
   }, [onChange, date]);
 
-  const { month: hideMonth, day: hideDay, year: hideYear, calendar: hideCalendar } = hideField;
+  const {
+    month: hideMonth,
+    day: hideDay,
+    year: hideYear,
+    calendar: hideCalendar,
+  } = hideField;
 
   return (
     <FieldSet
@@ -128,45 +138,47 @@ export const DateInput: React.FC<DateInputProps> = ({
             {...commonDateInputProps}
           />
         )}
-        {!hideCalendar && <div className="oec-calendar-dropdown oec-date-input__calendar-dropdown">
-          <Button
-            text={<Calendar className="oec-calendar-toggle__icon" />}
-            onClick={() => {
-              setCalendarOpen(!calendarOpen);
-            }}
-            title={`${calendarOpen ? 'close' : 'open'} calendar`}
-            className="oec-calendar-toggle oec-calendar-dropdown__toggle"
-          />
-          <div
-            className="oec-calendar-dropdown__calendar position-absolute z-top"
-            hidden={!calendarOpen}
-          >
-            <DayPickerSingleDateController
-              // Key forces re-render, which helps deal with bugs in this library-- see scss file
-              key={JSON.stringify({ calendarDate, calendarOpen })}
-              date={date || null}
-              onDateChange={(newDate) => {
-                setCalendarDate(newDate || undefined);
+        {!hideCalendar && (
+          <div className="oec-calendar-dropdown oec-date-input__calendar-dropdown">
+            <Button
+              text={<Calendar className="oec-calendar-toggle__icon" />}
+              onClick={() => {
+                setCalendarOpen(!calendarOpen);
               }}
-              focused={calendarOpen}
-              // Annoyingly this does not do anything for keyboard users
-              onFocusChange={(f) => setCalendarOpen(f.focused || false)}
-              onBlur={() => setCalendarOpen(false)}
-              // TODO: IMPLEMENT ON TAB ONCE TYPES FOR THIS LIBRARY ARE UPDATED :/
-              // onTab={() => {}}
-              onOutsideClick={(e) => {
-                const clickOnCalendarOrButton = e.target.closest(
-                  `#${id} .oec-calendar-dropdown`
-                );
-                // If a user clicks the button again, the button will handle closing it, and this would fire first and cause problems
-                if (!clickOnCalendarOrButton) {
-                  setCalendarOpen(false);
-                }
-              }}
-              initialVisibleMonth={() => date || moment()}
+              title={`${calendarOpen ? 'close' : 'open'} calendar`}
+              className="oec-calendar-toggle oec-calendar-dropdown__toggle"
             />
+            <div
+              className="oec-calendar-dropdown__calendar position-absolute z-top"
+              hidden={!calendarOpen}
+            >
+              <DayPickerSingleDateController
+                // Key forces re-render, which helps deal with bugs in this library-- see scss file
+                key={JSON.stringify({ calendarDate, calendarOpen })}
+                date={date || null}
+                onDateChange={(newDate) => {
+                  setCalendarDate(newDate || undefined);
+                }}
+                focused={calendarOpen}
+                // Annoyingly this does not do anything for keyboard users
+                onFocusChange={(f) => setCalendarOpen(f.focused || false)}
+                onBlur={() => setCalendarOpen(false)}
+                // TODO: IMPLEMENT ON TAB ONCE TYPES FOR THIS LIBRARY ARE UPDATED :/
+                // onTab={() => {}}
+                onOutsideClick={(e) => {
+                  const clickOnCalendarOrButton = e.target.closest(
+                    `#${id} .oec-calendar-dropdown`
+                  );
+                  // If a user clicks the button again, the button will handle closing it, and this would fire first and cause problems
+                  if (!clickOnCalendarOrButton) {
+                    setCalendarOpen(false);
+                  }
+                }}
+                initialVisibleMonth={() => date || moment()}
+              />
+            </div>
           </div>
-        </div>}
+        )}
       </div>
     </FieldSet>
   );

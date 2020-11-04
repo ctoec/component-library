@@ -1,0 +1,7 @@
+.oec-loading-wrapper {
+  width: 100%;
+  text-align: center;
+  .MuiCircularProgress-colorPrimary {
+    color: color($theme-link-color);
+  }
+}
