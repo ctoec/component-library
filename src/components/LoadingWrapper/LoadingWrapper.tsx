@@ -14,7 +14,7 @@ export const LoadingWrapper: React.FC<LoadingWrapperPrps> = ({
 }) => {
   return (
     <div className="oec-loading-wrapper">
-      <div>{children}</div>
+      <div aria-hidden={loading}>{children}</div>
       <div
         className={cx('oec-loading-wrapper__indicator', 'bg-white')}
         hidden={!loading}
