@@ -14,6 +14,7 @@ import calendar from './calendar.svg';
 import downArrowCircle from './downArrowCircle.svg';
 import fileDownload from './fileDownload.svg';
 import hero from './hero.svg';
+import history from './history.svg';
 import logo from './logo.svg';
 import logoWithCheck from './logoWithCheck.svg';
 import pencil from './pencil.svg';
@@ -55,6 +56,9 @@ export const FileDownload = (props: React.SVGProps<SVGSVGElement>) => (
 );
 export const Hero = (props: React.SVGProps<SVGSVGElement>) => (
   <SVGInline svgProps={props} url={hero} />
+);
+export const History = (props: React.SVGProps<SVGSVGElement>) => (
+  <SVGInline svgProps={props} url={history} />
 );
 export const Logo = (props: React.SVGProps<SVGSVGElement>) => (
   <SVGInline svgProps={props} url={logo} />
