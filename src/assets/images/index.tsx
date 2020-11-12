@@ -15,16 +15,16 @@ import downArrowCircle from './downArrowCircle.svg';
 import fileDownload from './fileDownload.svg';
 import hero from './hero.svg';
 import history from './history.svg';
+import howToIcon from './howToIcon.svg';
 import logo from './logo.svg';
 import logoWithCheck from './logoWithCheck.svg';
 import pencil from './pencil.svg';
 import plusCircle from './plusCircle.svg';
+import questionIllustration from './questionIllustration.svg';
 import teacherWithChalkboard from './teacherWithChalkboard.svg';
 import downloadArrow from './download.svg';
-import trashCan from './trashCan.svg';
-import howToIcon from './howToIcon.svg';
-import questionIllustration from './questionIllustration.svg';
 import supportIcon from './supportIcon.svg';
+import trashCan from './trashCan.svg';
 import x from './x.svg';
 
 export const ArrowDown = (props: React.SVGProps<SVGSVGElement>) => (
@@ -63,6 +63,9 @@ export const Hero = (props: React.SVGProps<SVGSVGElement>) => (
 export const History = (props: React.SVGProps<SVGSVGElement>) => (
   <SVGInline svgProps={props} url={history} />
 );
+export const HowToIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <SVGInline svgProps={props} url={howToIcon} />
+);
 export const Logo = (props: React.SVGProps<SVGSVGElement>) => (
   <SVGInline svgProps={props} url={logo} />
 );
@@ -75,6 +78,12 @@ export const Pencil = (props: React.SVGProps<SVGSVGElement>) => (
 export const PlusCircle = (props: React.SVGProps<SVGSVGElement>) => (
   <SVGInline svgProps={props} url={plusCircle} />
 );
+export const QuestionIllustration = (props: React.SVGProps<SVGSVGElement>) => (
+  <SVGInline svgProps={props} url={questionIllustration} />
+);
+export const SupportIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <SVGInline svgProps={props} url={supportIcon} />
+);
 export const TeacherWithChalkboard = (props: React.SVGProps<SVGSVGElement>) => (
   <SVGInline svgProps={props} url={teacherWithChalkboard} />
 );
@@ -83,13 +92,4 @@ export const TrashCan = (props: React.SVGProps<SVGSVGElement>) => (
 );
 export const X = (props: React.SVGProps<SVGSVGElement>) => (
   <SVGInline svgProps={props} url={x} />
-);
-export const HowToIcon = (props: React.SVGProps<SVGSVGElement>) => (
-  <SVGInline svgProps={props} url={howToIcon} />
-);
-export const QuestionIllustration = (props: React.SVGProps<SVGSVGElement>) => (
-  <SVGInline svgProps={props} url={questionIllustration} />
-);
-export const SupportIcon = (props: React.SVGProps<SVGSVGElement>) => (
-  <SVGInline svgProps={props} url={supportIcon} />
 );
