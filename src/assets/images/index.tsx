@@ -22,6 +22,9 @@ import plusCircle from './plusCircle.svg';
 import teacherWithChalkboard from './teacherWithChalkboard.svg';
 import downloadArrow from './download.svg';
 import trashCan from './trashCan.svg';
+import howToIcon from './howToIcon.svg';
+import questionIllustration from './questionIllustration.svg';
+import supportIcon from './supportIcon.svg';
 import x from './x.svg';
 
 export const ArrowDown = (props: React.SVGProps<SVGSVGElement>) => (
@@ -80,4 +83,13 @@ export const TrashCan = (props: React.SVGProps<SVGSVGElement>) => (
 );
 export const X = (props: React.SVGProps<SVGSVGElement>) => (
   <SVGInline svgProps={props} url={x} />
+);
+export const HowToIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <SVGInline svgProps={props} url={howToIcon} />
+);
+export const QuestionIllustration = (props: React.SVGProps<SVGSVGElement>) => (
+  <SVGInline svgProps={props} url={questionIllustration} />
+);
+export const SupportIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <SVGInline svgProps={props} url={supportIcon} />
 );
