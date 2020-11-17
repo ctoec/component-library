@@ -45,22 +45,23 @@ export const DateInput: React.FC<DateInputProps> = ({
     hideOptionalText: true,
   };
 
-  const [date, setDate] = useState<Moment | undefined>(
-    defaultValue ? moment.utc(defaultValue) : undefined
-  );
+  const _defaultValue = defaultValue ? moment.utc(defaultValue) : undefined;
+  const [date, setDate] = useState<Moment | undefined>(_defaultValue);
 
   // Text input values
   const [month, setMonth] = useState<number | string>(
-    date ? date.format('M') : ''
+    _defaultValue?.format('M') || ''
   );
-  const [day, setDay] = useState<number | string>(date ? date.format('D') : '');
+  const [day, setDay] = useState<number | string>(
+    _defaultValue?.format('D') || ''
+  );
   const [year, setYear] = useState<number | string>(
-    date ? date.format('YYYY') : ''
+    _defaultValue?.format('YYYY') || ''
   );
 
   // Calendar
   const [calendarOpen, setCalendarOpen] = useState<boolean>(false);
-  const [calendarDate, setCalendarDate] = useState<Moment | undefined>(date);
+  const [calendarDate, setCalendarDate] = useState<Moment | undefined>(_defaultValue);
 
   useEffect(() => {
     const newDate = moment.utc(`${year}-${month}-${day}`, 'YYYY-MM-DD');
