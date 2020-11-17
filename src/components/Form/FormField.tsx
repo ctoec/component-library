@@ -62,7 +62,7 @@ export const FormField = <
   );
 
   const accessor = getValue(dataDriller);
-  const value = accessor.value;
+  const value = accessor.value || defaultValue;
   const updatePath = accessor.path;
 
   const onChange = (e: React.ChangeEvent<any>) => {
