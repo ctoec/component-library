@@ -61,7 +61,9 @@ export const DateInput: React.FC<DateInputProps> = ({
 
   // Calendar
   const [calendarOpen, setCalendarOpen] = useState<boolean>(false);
-  const [calendarDate, setCalendarDate] = useState<Moment | undefined>(_defaultValue);
+  const [calendarDate, setCalendarDate] = useState<Moment | undefined>(
+    _defaultValue
+  );
 
   useEffect(() => {
     const newDate = moment.utc(`${year}-${month}-${day}`, 'YYYY-MM-DD');
