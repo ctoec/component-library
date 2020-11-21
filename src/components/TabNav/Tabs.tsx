@@ -21,8 +21,8 @@ type TabsProps = {
   items: TabItem[];
   activeTab: TabItem;
   setActiveTab:
-  | Dispatch<SetStateAction<TabItem>>
-  | Dispatch<SetStateAction<TabItem | undefined>>;
+    | Dispatch<SetStateAction<TabItem>>
+    | Dispatch<SetStateAction<TabItem | undefined>>;
   itemType?: string;
   onClick?: TabNav['onClick'];
   secondary?: boolean;

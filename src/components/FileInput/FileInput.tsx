@@ -28,7 +28,8 @@ export const FileInput: React.FC<FileInputProps> = ({
   }, []);
 
   return (
-    <label htmlFor={id}>{label}
+    <label htmlFor={id}>
+      {label}
       {ariaDescribedByText && (
         <span id={`${id}-aria-describedby`}> {ariaDescribedByText}</span>
       )}
