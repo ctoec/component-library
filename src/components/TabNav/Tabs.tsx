@@ -206,6 +206,8 @@ export const Tabs: React.FC<TabsProps> = ({
                     onClick(tabItem);
                     setIsDropdownVisible(false);
                   }}
+                  className="oec-tab-nav--tab"
+                  title={tabItem.tabText}
                 >
                   <span>{formatTabText(tabItem)}</span>
                 </button>

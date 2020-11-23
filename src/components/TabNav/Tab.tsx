@@ -34,6 +34,7 @@ export const Tab = ({
     )}
     onClick={() => onClick(tabItem)}
     aria-selected={isActiveTab}
+    title={tabItem.tabText}
   >
     <span>{formatTabText(tabItem)}</span>
   </button>
