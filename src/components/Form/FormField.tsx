@@ -57,9 +57,9 @@ export const FormField = <
   children,
   ...props
 }: PropsWithChildren<FormFieldProps<TData, TComponentProps, TFieldData>>) => {
-  const { data, dataDriller, updateData } = useGenericContext<TData>(
-    FormContext
-  );
+  const { data, dataDriller, updateData, hideStatus } = useGenericContext<
+    TData
+  >(FormContext);
 
   const accessor = getValue(dataDriller);
   const value = accessor.value || defaultValue;
@@ -76,7 +76,7 @@ export const FormField = <
     <InputComponent
       defaultValue={preprocessForDisplay ? preprocessForDisplay(value) : value}
       onChange={onChange}
-      status={status(dataDriller, updatePath, props)}
+      status={hideStatus ? undefined : status(dataDriller, updatePath, props)}
       {...props}
     >
       {children}

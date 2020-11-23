@@ -17,6 +17,7 @@ export type FormContextType = {
   data: any;
   dataDriller: any;
   updateData: React.Dispatch<React.SetStateAction<any>>;
+  hideStatus?: boolean;
 };
 
 /**
@@ -30,6 +31,7 @@ export type GenericFormContextType<T> = {
   // Otherwise just passing the object would result in one of the updates being
   // overwritten.
   updateData: React.Dispatch<React.SetStateAction<T>>;
+  hideStatus?: boolean;
 };
 /**
  * Utility for casting the un-typed context to the generic with type parameter,

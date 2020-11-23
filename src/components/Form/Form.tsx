@@ -12,6 +12,7 @@ export type FormProps<T> = {
   onSubmit: (_: T) => void;
   data: T;
   className?: string;
+  hideStatus?: boolean;
 } & /**
  * Creates a set of props that includes
  * all FormHTMLAttributes<HTMLFormElement> props, except onSubmit
@@ -29,6 +30,7 @@ export const Form = <T extends any>({
   className,
   onSubmit,
   data,
+  hideStatus,
   children,
   ...props
 }: PropsWithChildren<FormProps<T>>) => {
@@ -56,6 +58,7 @@ export const Form = <T extends any>({
         data: _data,
         dataDriller: new ObjectDriller(_data),
         updateData,
+        hideStatus,
       }}
     >
       <form
