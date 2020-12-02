@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import cx from 'classnames';
-import { AngleArrowDown } from '../../assets/images';
+import { ReactComponent as AngleArrowDown } from '../../assets/images/angleArrowDown.svg';
 import { HeadingLevel } from '../..';
 
 export type AccordionItemProps = {

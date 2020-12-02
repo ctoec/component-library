@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import moment, { Moment } from 'moment';
 import { DayPickerSingleDateController } from 'react-dates';
 import { FieldSet, TextInput, FormStatusProps, Button } from '..';
-import { Calendar } from '../../assets/images';
+import { ReactComponent as Calendar } from '../../assets/images/calendar.svg';
 import 'react-dates/lib/css/_datepicker.css';
 
 export type DateInputProps = {

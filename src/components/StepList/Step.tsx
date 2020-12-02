@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { InlineIcon, HeadingLevel } from '..';
 import cx from 'classnames';
+import { ReactComponent as ExclamationCircle } from '../../assets/images/exclamationCircle.svg';
+import { ReactComponent as CheckCircle } from '../../assets/images/checkCircle.svg';
+import { HeadingLevel } from '..';
 
 export type StepStatus =
   | 'incomplete'
@@ -43,6 +45,17 @@ const labelForStatus = (status: StepStatus) => {
   }
 };
 
+const iconForStatus = (status: StepStatus) => {
+	switch(status) {
+		case 'incomplete':
+			return <ExclamationCircle className="text-warning" />
+		case 'complete':
+			return <CheckCircle className="text-success" />
+		case 'attentionNeeded':
+			return <ExclamationCircle className="text-error" />
+	}
+}
+
 export function Step<T>({
   name,
   status,
@@ -54,7 +67,7 @@ export function Step<T>({
   type = 'normal',
   EditComponent,
 }: InternalStepProps<T>) {
-  const Heading = headerLevel;
+	const Heading = headerLevel;
   return (
     <li
       className={cx('oec-step-list__step', `oec-step-list__step--${status}`, {
@@ -80,7 +93,7 @@ export function Step<T>({
           {status !== 'notStarted' && status !== 'active' && (
             <>
               <div className="oec-step-list__step__status-text">
-                <InlineIcon icon={status} provideScreenReaderFallback={false} />
+								{iconForStatus(status)}
                 {labelForStatus(status)}
               </div>
               {editPath && (

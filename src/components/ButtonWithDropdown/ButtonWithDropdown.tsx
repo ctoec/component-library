@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, ButtonProps } from '../Button/Button';
 import { useHideOnLostFocus } from '../../hooks';
-import { AngleArrowDown } from '../../assets/images';
+import { ReactComponent as AngleArrowDown } from '../../assets/images/angleArrowDown.svg';
 
 export type ButtonWithDropdownProps = {
   id: string;

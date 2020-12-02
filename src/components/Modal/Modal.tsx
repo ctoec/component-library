@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactModal from 'react-modal';
 import cx from 'classnames';
-import { X, Button } from '../..';
+import { Button } from '../..';
+import { ReactComponent as X } from '../../assets/images/x.svg';
 
 export type ModalProps = {
   appElementId?: string;
