@@ -18,8 +18,6 @@ export * from './Header/Header';
 export * from './Header/NavLink';
 export * from './Header/NavDropdown';
 export * from './HeadingLevel';
-export * from './Icons';
-export * from './InlineIcon/InlineIcon';
 export * from './Legend/Legend';
 export * from './LoadingWrapper/LoadingWrapper';
 export * from './Modal/Modal';
