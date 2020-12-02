@@ -1,5 +1,5 @@
 import React from 'react';
-import { ReactComponent as ExclamationCircle } from '../../../assets/images/exclamationCircle.svg';
+import { ExclamationCircle } from '../../../assets/images';
 
 export type FormStatusProps = {
   type: 'warning' | 'error' | 'success';

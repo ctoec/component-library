@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import cx from 'classnames';
-import { ReactComponent as ExclamationCircle } from '../../assets/images/exclamationCircle.svg';
-import { ReactComponent as CheckCircle } from '../../assets/images/checkCircle.svg';
+import { ExclamationCircle, CheckCircle } from '../../assets/images';
 import { HeadingLevel } from '..';
 
 export type StepStatus =

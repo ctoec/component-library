@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import cx from 'classnames';
-import { ReactComponent as AngleArrowDown } from '../../assets/images/angleArrowDown.svg';
+import { AngleArrowDown } from '../../assets/images';
 import { HeadingLevel } from '../..';
 
 export type AccordionItemProps = {
@@ -28,7 +28,9 @@ export const AccordionItem: React.FC<InternalAccordionItemProps> = ({
   headingLevel,
 }) => {
   const [isExpanded, setIsExpanded] = useState(initialIsExpanded);
-  const Heading = headingLevel;
+	const Heading = headingLevel;
+	
+
   return (
     <>
       <div className="oec-accordion__heading">
