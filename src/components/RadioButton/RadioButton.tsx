@@ -4,7 +4,7 @@ import cx from 'classnames';
 export type RadioButtonProps = {
   id: string | number;
   text: string;
-  value: string;
+  value: string | number;
   name: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => any;
   defaultValue?: boolean;
