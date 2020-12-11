@@ -13,6 +13,7 @@ This library provides a uniform collection of reusable UX components, static ass
    yarn install --frozen-lockfile
    ```
 1. Build and run the storybook (on port 9009 by default)
+
 ```
     yarn storybook
 ```
@@ -22,6 +23,8 @@ This library provides a uniform collection of reusable UX components, static ass
 If you're looking for some specific UX examples, we have a Storybook site deployed to [GitHub Pages](https://pages.github.com/), showcasing all of the components within this library.
 
 You can check it out live at http://ctoec.github.io/component-library/.
+
+You can also see all of these components in action in the [data collection project](https://github.com/ctoec/data-collection).
 
 ### Deploying Storybook
 
