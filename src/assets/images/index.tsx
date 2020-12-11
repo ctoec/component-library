@@ -11,6 +11,7 @@ import success from 'uswds/dist/img/alerts/success.svg';
 import angleArrowDown from './angleArrowDown.svg';
 import arrowRight from './arrowRight.svg';
 import calendar from './calendar.svg';
+import doubleClipboard from './doubleClipboard.svg';
 import downArrowCircle from './downArrowCircle.svg';
 import fileDownload from './fileDownload.svg';
 import hero from './hero.svg';
@@ -29,6 +30,9 @@ import x from './x.svg';
 
 export const ArrowDown = (props: React.SVGProps<SVGSVGElement>) => (
   <SVGInline svgProps={props} url={arrowDown} />
+);
+export const DoubleClipboard = (props: React.SVGProps<SVGSVGElement>) => (
+  <SVGInline svgProps={props} url={doubleClipboard) />
 );
 export const DownloadArrow = (props: React.SVGProps<SVGSVGElement>) => (
   <SVGInline svgProps={props} url={downloadArrow} />
