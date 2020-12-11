@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="16px" height="21px" viewBox="0 0 16 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 62 (91390) - https://sketch.com -->
-    <title>Download-icon</title>
-    <desc>Created with Sketch.</desc>
-    <g id="MVP-lite" stroke="none" stroke-width="1" fill="currentColor" fill-rule="evenodd">
-        <g id="Log-in-v2" transform="translate(-322.000000, -755.000000)" fill="#005EA2">
-            <g id="Group-3" transform="translate(322.000000, 751.000000)">
-                <g id="Download-icon" transform="translate(0.000000, 4.000000)">
-                    <polygon id="Fill-1" points="14.2856571 6.76704 9.16737143 11.78296 9.16737143 -1.77635684e-15 6.78568571 -1.77635684e-15 6.78568571 11.78296 1.6674 6.76704 -9.68114477e-14 8.4 7.97657143 16.21704 15.9531429 8.4"></polygon>
-                    <polygon id="Fill-2" points="1.42851429 21 14.5233714 21 14.5233714 18.66704 1.42851429 18.66704"></polygon>
+    <g stroke="none" stroke-width="1" fill="currentColor" fill-rule="evenodd">
+        <g transform="translate(-322.000000, -755.000000)" fill="#005EA2">
+            <g transform="translate(322.000000, 751.000000)">
+                <g transform="translate(0.000000, 4.000000)">
+                    <polygon points="14.2856571 6.76704 9.16737143 11.78296 9.16737143 -1.77635684e-15 6.78568571 -1.77635684e-15 6.78568571 11.78296 1.6674 6.76704 -9.68114477e-14 8.4 7.97657143 16.21704 15.9531429 8.4"></polygon>
+                    <polygon points="1.42851429 21 14.5233714 21 14.5233714 18.66704 1.42851429 18.66704"></polygon>
                 </g>
             </g>
         </g>
