@@ -32,7 +32,7 @@ export const ArrowDown = (props: React.SVGProps<SVGSVGElement>) => (
   <SVGInline svgProps={props} url={arrowDown} />
 );
 export const DoubleClipboard = (props: React.SVGProps<SVGSVGElement>) => (
-  <SVGInline svgProps={props} url={doubleClipboard) />
+  <SVGInline svgProps={props} url={doubleClipboard} />
 );
 export const DownloadArrow = (props: React.SVGProps<SVGSVGElement>) => (
   <SVGInline svgProps={props} url={downloadArrow} />
