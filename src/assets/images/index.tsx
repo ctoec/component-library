@@ -13,7 +13,7 @@ import arrowRight from './arrowRight.svg';
 import calendar from './calendar.svg';
 import doubleClipboard from './doubleClipboard.svg';
 import downArrowCircle from './downArrowCircle.svg';
-import { ReactComponent as FileDownload } from './fileDownload.svg';
+// import { ReactComponent as FileDownload } from './fileDownload.svg';
 import hero from './hero.svg';
 import history from './history.svg';
 import howToIcon from './howToIcon.svg';
@@ -59,10 +59,7 @@ export const Calendar = (props: React.SVGProps<SVGSVGElement>) => (
 export const DownArrowCircle = (props: React.SVGProps<SVGSVGElement>) => (
   <SVGInline svgProps={props} url={downArrowCircle} />
 );
-module.exports = { ...module.exports, FileDownload };
-// export const FileDownload = (props: React.SVGProps<SVGSVGElement>) => (
-//   <SVGInline svgProps={props} url={fileDownload} />
-// );
+export { ReactComponent as FileDownload } from './fileDownload.svg';
 export const Hero = (props: React.SVGProps<SVGSVGElement>) => (
   <SVGInline svgProps={props} url={hero} />
 );
