@@ -54,9 +54,7 @@
     "lodash": "^4.17.15",
     "material-table": "^1.68.0",
     "pluralize": "^8.0.0",
-    "react": "^16.13.1",
     "react-dates": "^21.8.0",
-    "react-dom": "^16.13.1",
     "react-modal": "^3.11.2",
     "react-router-dom": "^5.2.0",
     "typescript": "^3.9.0",
@@ -93,7 +91,6 @@
     "css-loader": "^3.6.0",
     "node-sass": "^4.14.1",
     "prettier": "^2.1.1",
-    "react-scripts": "^3.4.3",
     "require-context.macro": "^1.2.2",
     "sass-loader": "^8.0.2",
     "sass-resources-loader": "^2.0.3",
@@ -102,5 +99,24 @@
   },
   "engines": {
     "node": "^12"
+  },
+  "overrides": {
+    "*": {
+      "peerDependencies": {
+        "react": "^16.13.1",
+        "react-scripts": "^3.4.3",
+        "react-dom": "^16.13.1"
+      }
+    },
+    "./src/assets/*": {
+      "env": {
+        "compiler": "-"
+      }
+    },
+    "src/*.scss": {
+      "env": {
+        "compiler": "-"
+      }
+    }
   }
 }
