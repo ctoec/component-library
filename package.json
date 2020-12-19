@@ -64,8 +64,9 @@
     "extends": "react-app"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.10.4",
+    "@babel/preset-env": "^7.12.11",
     "@babel/preset-react": "^7.10.4",
+    "@babel/preset-typescript": "^7.12.7",
     "@storybook/addon-a11y": "^5.3.19",
     "@storybook/addon-actions": "^5.3.19",
     "@storybook/addon-knobs": "^5.3.19",
@@ -101,19 +102,7 @@
     "node": "^12"
   },
   "overrides": {
-    "*": {
-      "peerDependencies": {
-        "react": "^16.13.1",
-        "react-scripts": "^3.4.3",
-        "react-dom": "^16.13.1"
-      }
-    },
-    "./src/assets/*": {
-      "env": {
-        "compiler": "-"
-      }
-    },
-    "src/*.scss": {
+    "./src/assets/images/*.svg": {
       "env": {
         "compiler": "-"
       }
