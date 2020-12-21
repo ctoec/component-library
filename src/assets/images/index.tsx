@@ -59,7 +59,7 @@ export const Calendar = (props: React.SVGProps<SVGSVGElement>) => (
 export const DownArrowCircle = (props: React.SVGProps<SVGSVGElement>) => (
   <SVGInline svgProps={props} url={downArrowCircle} />
 );
-export { ReactComponent as FileDownload } from './fileDownload.svg';
+export { ReactComponent as FileDownload } from '../../../assets/fileDownload.svg'
 export const Hero = (props: React.SVGProps<SVGSVGElement>) => (
   <SVGInline svgProps={props} url={hero} />
 );
