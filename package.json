@@ -24,7 +24,7 @@
     "prettier": "prettier --single-quote --write",
     "build": "rm -rf dist && NODE_ENV=production yarn run build:types && yarn run build:js",
     "build:types": "tsc -p tsconfig.build.json",
-    "build:js": "NODE_ENV=production babel src --out-dir dist --extensions \".ts,.tsx\" --copy-files --ignore \"**/*.stories.tsx,**/*.test.tsx,.storybook,**/*.d.ts,**/*.svg\""
+    "build:js": "NODE_ENV=production babel src assets --out-dir dist --extensions \".ts,.tsx\" --copy-files --ignore \"**/*.stories.tsx,**/*.test.tsx,.storybook,**/*.d.ts,**/*.svg\""
   },
   "keywords": [
     "component",
