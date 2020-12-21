@@ -18,7 +18,7 @@
     "emitDeclarationOnly": true,
     "typeRoots": ["./src/@types", "./node_modules/@types"]
   },
-  "include": ["./global.d.ts", "./src/**/*.d.ts"],
+  "include": ["./src"],
   "exclude": [
     "./node_modules",
     "./dist",
