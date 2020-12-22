@@ -22,7 +22,7 @@
     "prepare": "yarn build",
     "prettier-all": "prettier --single-quote --write **/*.{js,jsx,ts,tsx,json,css,scss}",
     "prettier": "prettier --single-quote --write",
-    "build": "rollup -c"
+    "build": "rm -rf dist && rollup -c"
   },
   "keywords": [
     "component",
@@ -108,7 +108,7 @@
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.0",
     "rollup-plugin-typescript2": "^0.29.0",
-    "sass-loader": "8.0.2",
+    "sass-loader": "^10.1.0",
     "semver": "6.3.0",
     "style-loader": "0.23.1",
     "terser-webpack-plugin": "2.3.8",
