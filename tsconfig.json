@@ -19,7 +19,6 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "emitDeclarationOnly": true,
     "typeRoots": [
       "./src/@types",
       "./node_modules/@types"
