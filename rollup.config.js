@@ -25,6 +25,7 @@ export default {
       targets: [
         { src: 'src/assets/images/*.svg', dest: 'dist/assets/images' },
         { src: 'src/assets/images/*.png', dest: 'dist/assets/images' },
+        { src: 'src/assets/styles', dest: 'dist/assets' },
       ],
     }),
   ],

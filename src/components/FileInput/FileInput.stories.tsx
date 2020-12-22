@@ -10,6 +10,7 @@ storiesOf('FileInput', module).add('Default', () => {
       label="File"
       ariaDescribedById=""
       ariaDescribedByText=""
+      onChange={() => { }}
     />
   );
 });
