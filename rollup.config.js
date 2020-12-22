@@ -5,7 +5,6 @@ import url from '@rollup/plugin-url';
 import copy from 'rollup-plugin-copy';
 
 import pkg from './package.json';
-// continued
 export default {
   input: 'src/index.ts',
   output: [
@@ -21,7 +20,7 @@ export default {
     url(),
     svgr(),
     sass({ insert: true }),
-    typescript({ objectHashIgnoreUnknownHack: true }),
+    typescript(),
     copy({
       targets: [
         { src: 'src/assets/images/*.svg', dest: 'dist/assets/images' },
