@@ -37,7 +37,7 @@ export default {
     // Url + svgr allows us to import ReactComponent as SVGName and use it like a component
     svgr(),
     json(),
-    copy({ targets: [{ src: 'src/assets/images/*.svg', dest: 'dist/images' }] }),
+    copy({ targets: [{ src: 'src/assets/images/*.svg', dest: 'dist/assets/images' }] }),
     // If true, the plugin will prefer built-in modules (e.g. fs, path)
     resolve({ preferBuiltins: true }),
     commonjs(),
