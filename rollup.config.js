@@ -3,6 +3,7 @@ import sass from 'rollup-plugin-sass';
 import typescript from 'rollup-plugin-typescript2';
 import url from '@rollup/plugin-url';
 import pkg from './package.json';
+import copy from 'rollup-plugin-copy';
 
 export default {
   input: 'src/index.ts',
@@ -15,8 +16,17 @@ export default {
       strict: false,
     },
   ],
-  plugins: [url(), svgr(), sass(), typescript()],
+  plugins: [
+    url(),
+    svgr(),
+    sass(),
+    copy({
+      targets: [
+        { src: ['src/assets/images/*.svg', 'src/assets/images/*.png'], dest: 'dist/assets/images' },
+      ],
+    }),
+    typescript(),
+  ],
   external: ['react', 'react-dom'],
   inlineDynamicImports: true,
-  // No need to copy images and scss bc we're including src in what is downloaded from npm
 };

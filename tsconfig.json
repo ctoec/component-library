@@ -22,7 +22,8 @@
     "isolatedModules": true,
     "typeRoots": [
       "./src/@types",
-      "./node_modules/@types"
+      "./node_modules/@types",
+      "/src/components/react-app-env.d.ts"
     ]
   },
   "include": [
