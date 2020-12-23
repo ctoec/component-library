@@ -15,7 +15,7 @@ export default {
       strict: false,
     },
   ],
-  plugins: [url(), svgr(), sass(), typescript({ objectHashIgnoreUnknownHack: true })],
+  plugins: [url(), svgr(), sass(), typescript()],
   external: ['react', 'react-dom'],
   inlineDynamicImports: true,
   // No need to copy images and scss bc we're including src in what is downloaded from npm
