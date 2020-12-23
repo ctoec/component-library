@@ -20,7 +20,7 @@ export default {
     url(),
     svgr(),
     sass({ insert: true }),
-    typescript(),
+    typescript({ objectHashIgnoreUnknownHack: true }),
     copy({
       targets: [
         { src: 'src/assets/images/*.svg', dest: 'dist/assets/images' },

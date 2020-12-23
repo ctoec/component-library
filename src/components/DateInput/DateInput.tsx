@@ -4,6 +4,7 @@ import { DayPickerSingleDateController } from 'react-dates';
 import { FieldSet, TextInput, FormStatusProps, Button } from '..';
 import { Calendar } from '../../assets/images';
 import 'react-dates/lib/css/_datepicker.css';
+// Note: need to include "import 'react-dates/initialize';" in the app file of the react app for styles to work
 
 export type DateInputProps = {
   onChange: (newDate: Moment | undefined) => void;
