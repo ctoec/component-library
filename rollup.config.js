@@ -18,11 +18,11 @@ export default {
   ],
   plugins: [
     url(),
-    svgr({ output: 'dist/assets/styles/index.scss' }),
+    svgr(),
     sass(),
     typescript({ objectHashIgnoreUnknownHack: true }),
     copy({
-      targets: [{ src: 'src', dest: 'dist/src' }],
+      targets: [{ src: ['*', '!node_modules'], dest: 'dist' }],
     }),
   ],
   external: ['react', 'react-dom'],
