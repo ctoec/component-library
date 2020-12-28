@@ -1,5 +1,5 @@
 import svgr from '@svgr/rollup';
-import sass from 'rollup-plugin-sass';
+import scss from 'rollup-plugin-scss';
 import typescript from 'rollup-plugin-typescript2';
 import url from '@rollup/plugin-url';
 import pkg from './package.json';
@@ -19,7 +19,16 @@ export default {
   plugins: [
     url(),
     svgr(),
-    sass(),
+    scss({
+      output: true,
+      failOnError: true,
+      includePaths: [
+        './node_modules',
+        'node_modules/',
+        './src/_index.scss',
+        './src/assets/styles.index.scss',
+      ],
+    }),
     copy({
       targets: [
         { src: ['src/assets/images/*.svg', 'src/assets/images/*.png'], dest: 'dist/assets/images' },

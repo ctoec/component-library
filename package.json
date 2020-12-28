@@ -10,8 +10,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
-    "dist",
-    "src"
+    "dist"
   ],
   "scripts": {
     "test": "react-scripts test",
@@ -113,7 +112,7 @@
     "require-context.macro": "^1.2.2",
     "rollup": "^2.35.1",
     "rollup-plugin-copy": "^3.3.0",
-    "rollup-plugin-sass": "^1.2.2",
+    "rollup-plugin-scss": "^2.6.1",
     "rollup-plugin-typescript2": "^0.29.0",
     "sass-loader": "^10.1.0",
     "sass-resources-loader": "^2.0.3",
