@@ -19,14 +19,12 @@ export type InlineIconProps = {
   icon: Icon;
   provideScreenReaderFallback?: boolean;
   className?: string;
-  svgProps?: React.SVGProps<SVGSVGElement>;
 };
 
 export function InlineIcon({
   icon,
   provideScreenReaderFallback = true,
   className,
-  svgProps,
 }: InlineIconProps) {
   let text: string;
   let iconComponent;
@@ -37,23 +35,23 @@ export function InlineIcon({
   switch (icon) {
     case 'attentionNeeded':
       text = 'attention needed';
-      iconComponent = <Error {...svgProps} />;
+      iconComponent = <Error />;
       break;
     case 'complete':
       text = 'complete';
-      iconComponent = <Success {...svgProps} />;
+      iconComponent = <Success />;
       break;
     case 'incomplete':
       text = 'incomplete';
-      iconComponent = <Error {...svgProps} />;
+      iconComponent = <Error />;
       break;
     case 'arrowDown':
       text = 'select dropdown';
-      iconComponent = <ArrowDown {...svgProps} />;
+      iconComponent = <ArrowDown />;
       break;
     case 'angleArrowDown':
       text = 'select dropdown';
-      iconComponent = <AngleArrowDown {...svgProps} />;
+      iconComponent = <AngleArrowDown />;
       break;
     default:
       text = '';
