@@ -1,10 +1,10 @@
 // USWDS imports
-export { ReactComponent as ArrowDown } from 'uswds/dist/img/arrow-down.svg';
-export { ReactComponent as Error } from 'uswds/dist/img/alerts/error.svg';
-export { ReactComponent as Info } from 'uswds/dist/img/alerts/info.svg';
-export { ReactComponent as Success } from 'uswds/dist/img/alerts/success.svg';
+export { ReactComponent as ArrowDown } from './uswds/arrow-down.svg';
+export { ReactComponent as Error } from './uswds/alerts/error.svg';
+export { ReactComponent as Info } from './uswds/alerts/info.svg';
+export { ReactComponent as Success } from './uswds/alerts/success.svg';
 
-// Local imports
+// Project specific imports
 export { ReactComponent as AngleArrowDown } from './angleArrowDown.svg';
 export { ReactComponent as ArrowRight } from './arrowRight.svg';
 export { ReactComponent as Calendar } from './calendar.svg';
