@@ -49,8 +49,6 @@
     "@material-ui/icons": "^4.9.1",
     "@types/pluralize": "^0.0.29",
     "@types/react-modal": "^3.10.6",
-    "dompurify": "^2.0.12",
-    "html-react-parser": "^0.13.0",
     "lodash": "^4.17.15",
     "material-table": "^1.68.0",
     "pluralize": "^8.0.0",
