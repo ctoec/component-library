@@ -18,6 +18,12 @@ This library provides a uniform collection of reusable UX components, static ass
     yarn storybook
 ```
 
+## Development
+
+### USWDS
+
+This library uses USWDS for layout, component styles, and most icons. Due to a React bug affecting the way that SVG imports as react components from node modules into this library are handled in any application using this library, USWDS icons are copied into `src/assets/images/uswds`. To re-copy files from USWDS into that folder, run `cp -r node_modules/uswds/dist/img/* src/assets/images/uswds`.
+
 ## Examples
 
 If you're looking for some specific UX examples, we have a Storybook site deployed to [GitHub Pages](https://pages.github.com/), showcasing all of the components within this library.
