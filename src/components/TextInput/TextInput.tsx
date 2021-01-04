@@ -160,6 +160,7 @@ export function TextInput({
         <input
           className={cx(
             'usa-input',
+            'oec-text-input',
             {
               [`usa-input--${status && status.type}`]: status,
             },
