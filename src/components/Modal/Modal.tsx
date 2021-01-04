@@ -6,22 +6,28 @@ import { X, Button } from '../..';
 export type ModalProps = {
   appElementId?: string;
   isOpen: boolean;
-  onXClick: () => void;
+  onModalClose: () => void;
   header: JSX.Element;
-  showHeaderBorder?: boolean;
   content: JSX.Element;
+  // On x click is separate in case we want additional closing side effects (like clearing form data)
+  // Default x click behavior is same as modal close
+  onXClick?: () => void;
+  showHeaderBorder?: boolean;
 };
 
 export const Modal: React.FC<ModalProps> = ({
   appElementId = 'root',
   isOpen,
+  onModalClose,
   onXClick,
   header,
   showHeaderBorder = false,
   content,
-}) => (
+}) => {
+  return (
     <ReactModal
       isOpen={isOpen}
+      onRequestClose={onModalClose}
       shouldCloseOnEsc={true}
       shouldCloseOnOverlayClick={true}
       appElement={document.getElementById(appElementId) || undefined}
@@ -52,10 +58,11 @@ export const Modal: React.FC<ModalProps> = ({
                 <p className="margin-y-05">close</p>
               </div>
             }
-            onClick={onXClick}
+            onClick={onXClick || onModalClose}
           />
         </div>
       </div>
       <div className={cx({ 'margin-top-2': showHeaderBorder })}>{content}</div>
     </ReactModal>
   );
+};
