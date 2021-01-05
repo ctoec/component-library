@@ -50,5 +50,5 @@ export {
   TeacherWithChalkboard,
   SupportIcon,
   TrashCan,
-  X
-}
+  X,
+};
