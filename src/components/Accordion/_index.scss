@@ -3,10 +3,16 @@
     border-width: 1px;
     @include u-border-top('gray-10');
     @include u-border-bottom('gray-10');
+
+    &-title {
+      @include u-font('body', 'lg');
+      margin: 0;
+    }
   }
 
   .oec-accordion__button {
     @include button-unstyled;
+    padding: 1rem;
     width: 100%;
     text-decoration: none;
     color: black;
@@ -15,11 +21,6 @@
       text-decoration: none;
       color: black;
     }
-  }
-
-  .oec-accordion__heading-title {
-    @include u-font('body', 'lg');
-    margin: 0;
   }
 
   .oec-accordion__heading-expand {

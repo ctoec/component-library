@@ -32,8 +32,8 @@ export const AccordionItem: React.FC<InternalAccordionItemProps> = ({
   return (
     <>
       <div className="oec-accordion__heading">
-        <div className="display-flex flex-justify flex-col flex-align-center padding-top-3 padding-bottom-3">
-          <div>
+        <div className="display-flex flex-justify flex-col flex-align-center">
+          <div className="padding-top-3 padding-bottom-3">
             <Heading className="oec-accordion__heading-title">{title}</Heading>
             {headerContent}
           </div>
