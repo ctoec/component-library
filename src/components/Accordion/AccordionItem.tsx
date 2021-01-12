@@ -44,10 +44,12 @@ export const AccordionItem: React.FC<InternalAccordionItemProps> = ({
               aria-expanded={isExpanded}
               aria-controls={id}
             >
-              {isExpanded && collapseText}
-              {!isExpanded && expandText}
+              <span className="padding-right-1">
+                {isExpanded && collapseText}
+                {!isExpanded && expandText}
+              </span>
               <AngleArrowDown
-                className={cx('oec-accordion__button-icon', {
+                className={cx('oec-accordion__button-icon', 'width-auto', {
                   'oec-accordion__button-icon--expanded': isExpanded,
                 })}
               />
