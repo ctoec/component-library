@@ -21,8 +21,8 @@ export const AccordionItem: React.FC<InternalAccordionItemProps> = ({
   id,
   title,
   headerContent,
-  expandText,
-  collapseText,
+  expandText = 'Show',
+  collapseText = 'Hide',
   content,
   isExpanded: initialIsExpanded = false,
   headingLevel,
@@ -32,31 +32,28 @@ export const AccordionItem: React.FC<InternalAccordionItemProps> = ({
   return (
     <>
       <div className="oec-accordion__heading">
-        <button
-          className="oec-accordion__button"
-          onClick={() => setIsExpanded((e) => !e)}
-          aria-expanded={isExpanded}
-          aria-controls={id}
-        >
-          <div className="display-flex flex-justify flex-col flex-align-center padding-top-3 padding-bottom-3">
-            <div>
-              <Heading className="oec-accordion__heading-title">
-                {title}
-              </Heading>
-              {headerContent}
-            </div>
-
-            <div className="oec-accordion__heading-expand">
-              {isExpanded && (collapseText ? collapseText : expandText)}
+        <div className="display-flex flex-justify flex-col flex-align-center padding-top-3 padding-bottom-3">
+          <div>
+            <Heading className="oec-accordion__heading-title">{title}</Heading>
+            {headerContent}
+          </div>
+          <div className="oec-accordion__heading-expand">
+            <button
+              className="oec-accordion__button"
+              onClick={() => setIsExpanded((e) => !e)}
+              aria-expanded={isExpanded}
+              aria-controls={id}
+            >
+              {isExpanded && collapseText}
               {!isExpanded && expandText}
               <AngleArrowDown
                 className={cx('oec-accordion__button-icon', {
                   'oec-accordion__button-icon--expanded': isExpanded,
                 })}
               />
-            </div>
+            </button>
           </div>
-        </button>
+        </div>
       </div>
       <div className="oec-accordion__content" id={id} aria-hidden={!isExpanded}>
         {content}
