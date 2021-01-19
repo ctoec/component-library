@@ -22,6 +22,7 @@ import { ReactComponent as PlusCircle } from './plusCircle.svg';
 import { ReactComponent as QuestionIllustration } from './questionIllustration.svg';
 import { ReactComponent as TeacherWithChalkboard } from './teacherWithChalkboard.svg';
 import { ReactComponent as SupportIcon } from './supportIcon.svg';
+import { ReactComponent as Stars } from './stars.svg';
 import { ReactComponent as TrashCan } from './trashCan.svg';
 import { ReactComponent as X } from './x.svg';
 
@@ -48,6 +49,7 @@ export {
   PlusCircle,
   QuestionIllustration,
   TeacherWithChalkboard,
+  Stars,
   SupportIcon,
   TrashCan,
   X,
