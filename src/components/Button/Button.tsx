@@ -1,5 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
+import {
+  Button as CarbonButton,
+  Link as CarbonLink,
+} from 'carbon-components-react';
 
 export type ButtonAppearance =
   | 'default'
@@ -32,7 +36,6 @@ export function Button({
   text,
   onClick,
   href,
-  external,
   appearance,
   disabled,
   className,
@@ -47,36 +50,28 @@ export function Button({
 
   if (onClick === 'submit') {
     return (
-      <input
-        className={classString}
-        disabled={disabled}
-        type="submit"
-        value={text as string}
-        // Value will never actually be an element for a submit button but TS doesn't know that
-        title={title}
-      />
+      <CarbonButton type="submit" className={classString}>
+        {text}
+      </CarbonButton>
     );
   }
   onClick = typeof onClick === 'function' ? onClick : () => {};
 
-  if (href && !external) {
+  if (href) {
     return (
-      <Link to={href} className={classString} onClick={onClick} title={title}>
+			<CarbonLink
+        href={href}
+        className={classString}
+        onClick={onClick}
+        title={title}
+      >
         {text}
-      </Link>
-    );
-  }
-
-  if (href && external) {
-    return (
-      <a href={href} className={classString} onClick={onClick} title={title}>
-        {text}
-      </a>
+      </CarbonLink>
     );
   }
 
   return (
-    <button
+    <CarbonButton
       className={classString}
       disabled={disabled}
       onClick={onClick}
@@ -84,6 +79,6 @@ export function Button({
       title={title}
     >
       {text}
-    </button>
+    </CarbonButton>
   );
 }

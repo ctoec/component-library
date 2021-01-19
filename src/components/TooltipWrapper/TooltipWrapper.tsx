@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tooltip } from '@material-ui/core';
+import { TooltipIcon } from 'carbon-components-react';
 
 type TooltipWrapperProps = {
   tooltipText: string;
@@ -12,10 +12,8 @@ export const TooltipWrapper: React.FC<TooltipWrapperProps> = ({
   className,
 }) => {
   return (
-    <div className="oec-tooltip-wrapper">
-      <Tooltip title={tooltipText}>
-        <div className={className}>{children}</div>
-      </Tooltip>
-    </div>
+    <TooltipIcon tooltipText={tooltipText}>
+      <div className={className}>{children}</div>
+    </TooltipIcon>
   );
 };
