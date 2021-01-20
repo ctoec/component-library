@@ -17,6 +17,7 @@ export type TableProps<T> = {
   id: string;
   data: T[];
   rowKey: (row: T) => number | string;
+  rowId?: (row: T) => string;
   columns: Column<T>[];
   defaultSortColumn?: number;
   defaultSortOrder?: SortOrder;
@@ -49,6 +50,7 @@ export class Table<T> extends React.Component<TableProps<T>, TableSort> {
       id,
       data,
       rowKey,
+      rowId,
       columns,
       onRowClick,
       fullWidth,
@@ -115,6 +117,7 @@ export class Table<T> extends React.Component<TableProps<T>, TableSort> {
               row={row}
               cells={cells}
               onClick={onRowClick}
+              id={!!rowId ? rowId(row) : undefined}
               key={rowKey(row)}
               expansionRender={rowExpansionRender}
             />

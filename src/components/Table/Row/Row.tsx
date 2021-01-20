@@ -3,12 +3,13 @@ import { RowExpansion } from './RowExpansion';
 
 export type RowProps<T> = {
   row: T;
+  id?: string;
   cells: React.FC<{ row: T }>[];
   onClick?: (row: T) => () => any;
   expansionRender?: (row: T) => JSX.Element;
 };
 
-export function Row<T>({ row, cells, expansionRender }: RowProps<T>) {
+export function Row<T>({ row, cells, id, expansionRender }: RowProps<T>) {
   const [isExpanded, setIsExpanded] = useState(false);
   return (
     <RowProvider
@@ -17,7 +18,7 @@ export function Row<T>({ row, cells, expansionRender }: RowProps<T>) {
         toggleExpanded: () => setIsExpanded((e) => !e),
       }}
     >
-      <tr>
+      <tr id={id}>
         {cells.map((Cell, index) => (
           <Cell row={row} key={index} />
         ))}
