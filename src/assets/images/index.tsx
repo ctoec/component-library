@@ -20,6 +20,7 @@ import { ReactComponent as LogoWithCheck } from './logoWithCheck.svg';
 import { ReactComponent as Pencil } from './pencil.svg';
 import { ReactComponent as PlusCircle } from './plusCircle.svg';
 import { ReactComponent as QuestionIllustration } from './questionIllustration.svg';
+import { ReactComponent as Reviews } from './reviews.svg';
 import { ReactComponent as TeacherWithChalkboard } from './teacherWithChalkboard.svg';
 import { ReactComponent as SupportIcon } from './supportIcon.svg';
 import { ReactComponent as Stars } from './stars.svg';
@@ -48,6 +49,7 @@ export {
   Pencil,
   PlusCircle,
   QuestionIllustration,
+  Reviews,
   TeacherWithChalkboard,
   Stars,
   SupportIcon,
