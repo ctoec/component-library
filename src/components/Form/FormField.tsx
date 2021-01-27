@@ -62,7 +62,10 @@ export const FormField = <
   >(FormContext);
 
   const accessor = getValue(dataDriller);
-  const value = accessor.value || defaultValue;
+  let value: TFieldData | undefined = accessor.value;
+  if (value === undefined) {
+    value = defaultValue;
+  }
   const updatePath = accessor.path;
 
   const onChange = (e: React.ChangeEvent<any>) => {
