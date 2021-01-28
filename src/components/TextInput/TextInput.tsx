@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import cx from 'classnames';
 import { FormStatus, FormStatusProps } from '..';
 
@@ -75,26 +75,20 @@ export function TextInput({
   | TextInputHTMLInputElementProps
   | TextInlineInputHTMLInputElementProps
   | TextInputHTMLTextAreaElementProps) {
-  const [_value, updateValue] = useState(defaultValue);
+  const [value, updateValue] = useState(
+    inputValue != null ? inputValue : defaultValue
+  );
+
   const onChange = (e: any) => {
     inputOnChange(e);
-    // if (inputValue == null) {
-    // null or undefined
     // If there isn't an input value, then this component should manage its own value
     updateValue(e.target.value);
-    // }
   };
 
-  let value = _value;
-  if (inputValue != null) {
-    // Use the value if one is passed in; otherwise this manages its own state
-    value = inputValue;
-  }
   const commonProps = {
     id,
     name,
     disabled,
-    // defaultValue: _value,
     value,
     'aria-describedby': status ? status.id : undefined,
     'aria-invalid': status && status.type === 'error',
@@ -187,8 +181,9 @@ export function TextInput({
 
   return (
     <div
-      className={`${className || ''} usa-form-group${status ? ` usa-form-group--${status.type}` : ''
-        }`}
+      className={`${className || ''} usa-form-group${
+        status ? ` usa-form-group--${status.type}` : ''
+      }`}
     >
       <label
         className={cx('usa-label', status ? `usa-label--${status.type}` : '', {
