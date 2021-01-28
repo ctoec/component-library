@@ -78,11 +78,11 @@ export function TextInput({
   const [_value, updateValue] = useState(defaultValue);
   const onChange = (e: any) => {
     inputOnChange(e);
-    if (inputValue == null) {
-      // null or undefined
-      // If there isn't an input value, then this component should manage its own value
-      updateValue(e.target.value);
-    }
+    // if (inputValue == null) {
+    // null or undefined
+    // If there isn't an input value, then this component should manage its own value
+    updateValue(e.target.value);
+    // }
   };
 
   let value = _value;
@@ -94,7 +94,7 @@ export function TextInput({
     id,
     name,
     disabled,
-    defaultValue,
+    // defaultValue: _value,
     value,
     'aria-describedby': status ? status.id : undefined,
     'aria-invalid': status && status.type === 'error',
@@ -187,9 +187,8 @@ export function TextInput({
 
   return (
     <div
-      className={`${className || ''} usa-form-group${
-        status ? ` usa-form-group--${status.type}` : ''
-      }`}
+      className={`${className || ''} usa-form-group${status ? ` usa-form-group--${status.type}` : ''
+        }`}
     >
       <label
         className={cx('usa-label', status ? `usa-label--${status.type}` : '', {
