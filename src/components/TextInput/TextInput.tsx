@@ -58,7 +58,7 @@ export function TextInput({
   onChange: inputOnChange,
   onBlur,
   id,
-  value,
+  value: inputValue,
   defaultValue,
   disabled,
   status,
@@ -78,19 +78,24 @@ export function TextInput({
   const [_value, updateValue] = useState(defaultValue);
   const onChange = (e: any) => {
     inputOnChange(e);
-    if (!value) {
+    if (inputValue == null) {
+      // null or undefined
       // If there isn't an input value, then this component should manage its own value
       updateValue(e.target.value);
     }
   };
 
+  let value = _value;
+  if (inputValue != null) {
+    // Use the value if one is passed in; otherwise this manages its own state
+    value = inputValue;
+  }
   const commonProps = {
     id,
     name,
     disabled,
     defaultValue,
-    // Use the value if one is passed in; otherwise this manages its own state
-    value: value || _value || '',
+    value,
     'aria-describedby': status ? status.id : undefined,
     'aria-invalid': status && status.type === 'error',
     // Using aria-required to avoid default Chrome behavior
