@@ -38,7 +38,7 @@ storiesOf('TextInput', module)
         id="id1"
         label="Default text input"
         onChange={onChange}
-        defaultValue="default text"
+        defaultValue={0}
       />
     );
   })
