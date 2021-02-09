@@ -73,7 +73,6 @@ export const DateInput: React.FC<DateInputProps> = ({
   }, [month, day, year]);
 
   useEffect(() => {
-    console.log(calendarDate);
     if (!calendarDate) return;
     setDate(calendarDate);
     setMonth(calendarDate.format('M'));
