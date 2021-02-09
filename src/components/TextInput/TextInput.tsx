@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import cx from 'classnames';
 import { FormStatus, FormStatusProps } from '..';
 
@@ -78,6 +78,10 @@ export function TextInput({
   const [value, updateValue] = useState(
     inputValue != null ? inputValue : defaultValue
   );
+  useEffect(() => {
+    if (inputValue !== value) updateValue(inputValue);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [inputValue]);
 
   const onChange = (e: any) => {
     inputOnChange(e);
