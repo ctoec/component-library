@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import cx from 'classnames';
 import { FormStatus, FormStatusProps } from '..';
 
@@ -76,12 +76,17 @@ export function TextInput({
   | TextInlineInputHTMLInputElementProps
   | TextInputHTMLTextAreaElementProps) {
   const [value, updateValue] = useState(
+    // Value overrides default value
     inputValue != null ? inputValue : defaultValue
   );
+  useEffect(() => {
+    // If input value is not null or undefined and it changes
+    if (inputValue != null && inputValue !== value) updateValue(inputValue);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [inputValue]);
 
   const onChange = (e: any) => {
     inputOnChange(e);
-    // If there isn't an input value, then this component should manage its own value
     updateValue(e.target.value);
   };
 
