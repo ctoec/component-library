@@ -6,7 +6,9 @@ import React, {
 } from 'react';
 import cx from 'classnames';
 import { FormProvider } from './FormContext';
-import { ObjectDriller } from './ObjectDriller';
+import { ObjectDriller, TObjectDriller } from './ObjectDriller';
+import produce from 'immer';
+import set from 'lodash/set';
 
 export type FormProps<T> = {
   onSubmit: (_: T) => void;
@@ -26,7 +28,7 @@ export type FormProps<T> = {
  * The form tracks state of the object, and requires the use of a
  * 'submit' button (should be a FormSubmitButton)
  */
-export const Form = <T extends any>({
+export const Form = <T extends object>({
   className,
   onSubmit,
   data,
@@ -52,12 +54,24 @@ export const Form = <T extends any>({
     onSubmit(_data);
   };
 
+  const immutableUpdateData = <
+    TField extends string | number | boolean | undefined
+  >(
+    fieldDriller: TObjectDriller<TField>,
+    value: TField
+  ) => {
+    updateData(
+      produce<T>(data, (draft) => set(draft, fieldDriller.path, value))
+    );
+  };
+
   return (
     <FormProvider
       value={{
         data: _data,
         dataDriller: new ObjectDriller(_data),
         updateData,
+        immutableUpdateData,
         hideStatus,
       }}
     >
