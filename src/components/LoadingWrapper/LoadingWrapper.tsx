@@ -1,6 +1,5 @@
 import React from 'react';
-import { CircularProgress } from '@material-ui/core';
-import cx from 'classnames';
+import { Loading } from 'carbon-components-react';
 
 export type LoadingWrapperPrps = {
   loading: boolean;
@@ -12,18 +11,14 @@ export const LoadingWrapper: React.FC<LoadingWrapperPrps> = ({
   text,
   loading,
 }) => {
-  return (
-    <div className="oec-loading-wrapper">
-      <div aria-hidden={loading} className={cx({ 'opacity-0': loading })}>
-        {children}
-      </div>
-      <div
-        className={cx('oec-loading-wrapper__indicator', 'bg-white')}
-        hidden={!loading}
-      >
-        <CircularProgress className="indeterminate" />
+  if (loading) {
+    return (
+      <div className="oec-loading-wrapper">
+        <Loading active={true} withOverlay={false} />
         {text && <div>{text}</div>}
       </div>
-    </div>
-  );
+    );
+  }
+
+  return <>{children}</>;
 };

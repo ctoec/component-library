@@ -1,3 +1,18 @@
+@import 'node_modules/carbon-components/scss/globals/scss/styles';
+$carbon--font-families: (
+  'mono':
+    unquote(
+      "'Roboto Mono Web, 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace"
+    ),
+  'sans': unquote("'Public Sans Web', 'Helvetica Neue', Arial, sans-serif"),
+  'sans-condensed':
+    unquote("'Public Sans Web', 'Helvetica Neue', Arial, sans-serif"),
+  'serif': unquote("'IBM Plex Serif', 'Georgia', Times, serif"),
+) !important;
+
+body {
+	font-family: 'Public Sans Web', 'Helvetica Neue', Arial, sans-serif
+}
 /*
 * * * * * ==============================
 * * * * * ==============================

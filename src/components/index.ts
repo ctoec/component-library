@@ -9,7 +9,7 @@ export * from './Card/ExpandCard';
 export * from './Checkbox/Checkbox';
 export * from './CheckboxGroup/CheckboxGroup';
 export * from './DateInput/DateInput';
-export * from './EditableTable/EditableTable';
+export * from './Divider/Divider';
 export * from './ErrorBoundary/ErrorBoundary';
 export * from './FieldSet/FieldSet';
 export * from './FileInput/FileInput';
