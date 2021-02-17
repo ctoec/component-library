@@ -17,6 +17,10 @@ export type FormContextType = {
   data: any;
   dataDriller: any;
   updateData: React.Dispatch<React.SetStateAction<any>>;
+  immutableUpdateData: (
+    _: TObjectDriller<string | number | boolean | undefined>,
+    __: any
+  ) => void;
   hideStatus?: boolean;
 };
 
@@ -31,6 +35,10 @@ export type GenericFormContextType<T> = {
   // Otherwise just passing the object would result in one of the updates being
   // overwritten.
   updateData: React.Dispatch<React.SetStateAction<T>>;
+  immutableUpdateData: (
+    _: TObjectDriller<string | number | boolean | undefined>,
+    __: any
+  ) => void;
   hideStatus?: boolean;
 };
 /**
@@ -47,6 +55,7 @@ export const FormContext = createContext<FormContextType>({
   data: undefined,
   dataDriller: undefined,
   updateData: (_) => {},
+  immutableUpdateData: (_, __) => {},
 });
 
 export const { Provider: FormProvider, Consumer: FormConsumer } = FormContext;
