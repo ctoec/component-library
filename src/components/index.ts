@@ -23,6 +23,7 @@ export * from './Legend/Legend';
 export * from './LoadingWrapper/LoadingWrapper';
 export * from './Modal/Modal';
 export * from './ProcessList/ProcessList';
+export * from './ProgressIndicator/ProgressIndicator';
 export * from './RadioButton/RadioButton';
 export * from './RadioButtonGroup/RadioButtonGroup';
 export * from './Select/Select';
