@@ -15,6 +15,10 @@
     @extend .usa-step-indicator__segment--complete;
   }
 
+  .bx--progress-step-button svg {
+    display: none;
+  }
+
   .bx--progress-label {
     @extend .usa-step-indicator__segment-label;
 
