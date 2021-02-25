@@ -17,5 +17,6 @@
 
   .bx--progress-label {
     @extend .usa-step-indicator__segment-label;
+    max-width: 100%;
   }
 }
