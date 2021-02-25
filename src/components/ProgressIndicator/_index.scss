@@ -5,6 +5,8 @@
 
   .bx--progress-step {
     @extend .usa-step-indicator__segment;
+
+    max-width: 12rem;
   }
 
   .bx--progress-step--current {
@@ -25,5 +27,6 @@
     max-width: 100%;
     width: 100%;
     text-align: center;
+    padding-right: 0;
   }
 }
