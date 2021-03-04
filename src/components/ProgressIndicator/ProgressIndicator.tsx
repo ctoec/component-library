@@ -1,5 +1,8 @@
 import React from 'react';
-import { ProgressIndicator as CarbonProgressIndicator, ProgressStep as CarbonProgressStep } from "carbon-components-react";
+import {
+  ProgressIndicator as CarbonProgressIndicator,
+  ProgressStep as CarbonProgressStep,
+} from 'carbon-components-react';
 
 export type ProgressIndicatorProps = {
   currentIndex: number;
@@ -9,7 +12,7 @@ export type ProgressIndicatorProps = {
 export type ProgressIndicatorStepProps = {
   label: string;
   description?: string;
-}
+};
 
 export function ProgressIndicator({
   currentIndex,

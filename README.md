@@ -3,26 +3,40 @@
 This library provides a uniform collection of reusable UX components, static assets and functional units specific to the State of Connecticut's Office of Early Childhood.
 
 ## Setup
+The following steps will allow you to quickly get set up for local development of these components.
 
-### Local
+1. Ensure you have the following libraries installed on your machine:
+   - [Visual Studio](https://visualstudio.microsoft.com/)
+   - [Node 12](https://nodejs.org/en/download/)
+   - [Yarn](https://yarnpkg.com/lang/en/docs/install/)
 
-1. Install (if you haven't already) Visual Studio, [Node 12](https://nodejs.org/en/download/) and [Yarn](https://yarnpkg.com/lang/en/docs/install/).
-
-1. Install all corresponding yarn dependencies, based on the static versions specified in `yarn.lock`:
+1. Install all yarn packages.
    ```.sh
    yarn install --frozen-lockfile
    ```
-1. Build and run the storybook (on port 9009 by default)
 
-```
-    yarn storybook
-```
+1. (Optional) We have [Storybook](https://storybook.js.org/) configured for some easy viewing of these components.  If interested, you can build and run it locally (on port 9009, by default).
+   ```
+   yarn storybook
+   ```
 
-## Development
+## Usage
+Bringing this library into your application is a pretty straightforward process, no different from most other component libraries.
 
-### USWDS
+1. Install the package.
 
-This library uses USWDS for layout, component styles, and most icons. Due to a React bug affecting the way that SVG imports as react components from node modules into this library are handled in any application using this library, USWDS icons are copied into `src/assets/images/uswds`. To re-copy files from USWDS into that folder, run `cp -r node_modules/uswds/dist/img/* src/assets/images/uswds`.
+   ```
+   yarn add @ctoec/component-library
+   ```
+1. Once installed, manually import the stylesheets.
+
+   ```.css
+   import '@ctoec/component-library/dist/assets/styles/index.scss'
+   ```
+1. That's it!  Now you can import any component as needed.
+   ```
+   import { ComponentOfYourChoice } from @ctoec/component-library;
+   ```
 
 ## Examples
 
@@ -32,23 +46,22 @@ You can check it out live at http://ctoec.github.io/component-library/.
 
 You can also see all of these components in action in the [data collection project](https://github.com/ctoec/data-collection).
 
-### Deploying Storybook
+## Deploy
 
-These Storybook deployments are handled with the `storybook-deployer` package, using the `gh-pages` branch of this repository as the site's source. Additionally, all commits to our core `base` branch will trigger an associated GitHub Action that automatically updates our Storybook site. So it'll be kept up to date with the latest state of our library at all times!
+Our Storybook deployments are handled with the `storybook-deployer` package, using the `gh-pages` branch of this repository as the site's source. Additionally, all commits to our core `base` branch will trigger an associated GitHub Action that automatically updates our Storybook site. So it'll be kept up to date with the latest state of our library at all times!
 
 Regardless, if there's ever a need for the site to be updated _manually_, the following command should be run from project root:
 
-```.sh
-yarn run deploy-storybook
-```
+   ```.sh
+   yarn run deploy-storybook
+   ```
 
-## To use this library
-
-1. `yarn add @ctoec/component-library`
-1. Import the stylesheets in your application with `import '@ctoec/component-library/dist/assets/styles/index.scss'`
-1. `import { ComponentOfYourChoice } from @ctoec/component-library`
-
-## Publishing
+## Publish
+Publishing a new version of our library (which we do with virtually every substantive change made) is a super simple process.
 
 1. Increment version in `package.json`
 1. `npm publish` (If this is the first time, you will need to authenticate yourself by running `npm login`)
+
+## Gotchas
+
+This library uses USWDS for layout, component styles, and most icons. Due to a React bug affecting the way that SVG imports as react components from node modules into this library are handled in any application using this library, USWDS icons are copied into `src/assets/images/uswds`. To re-copy files from USWDS into that folder, run `cp -r node_modules/uswds/dist/img/* src/assets/images/uswds`.

@@ -27,6 +27,7 @@ export { CardContext };
 export type CardProps = {
   appearance?: 'primary' | 'secondary';
   borderless?: boolean;
+  stacked?: boolean;
   className?: string;
   expanded?: boolean;
   onExpansionChange?: (_: boolean) => void;
@@ -37,6 +38,7 @@ export type CardProps = {
 export function Card({
   appearance,
   borderless = false,
+  stacked = true,
   className,
   expanded = false,
   onExpansionChange,
@@ -80,6 +82,7 @@ export function Card({
           {
             [`oec-card--${appearance}`]: appearance,
             'oec-card--borderless': borderless,
+            'oec-card--stacked': stacked,
           },
           className
         )}

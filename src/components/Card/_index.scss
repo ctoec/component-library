@@ -20,7 +20,7 @@
   }
 
   // Remove top border from not-first-cards so that we don't have redundant thick borders
-  + .oec-card {
+  .oec-card--stacked + .oec-card--stacked {
     border-top: none;
   }
 
