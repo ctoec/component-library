@@ -16,13 +16,21 @@ export type ProgressIndicatorStepProps = {
 
 export function ProgressIndicator({
   currentIndex,
-  steps,
+  steps
 }: ProgressIndicatorProps) {
   return (
-    <CarbonProgressIndicator vertical={false} currentIndex={currentIndex}>
-      {steps.map((step) => (
-        <CarbonProgressStep label={step.label} description={step.description} />
+  <div className="usa-step-indicator" aria-label="progress">
+    <CarbonProgressIndicator
+      vertical={false}
+      currentIndex={currentIndex}>
+
+      {steps.map(step => (
+        <CarbonProgressStep
+        label={step.label}
+        description={step.description}
+        />
       ))}
     </CarbonProgressIndicator>
+  </div>
   );
 }

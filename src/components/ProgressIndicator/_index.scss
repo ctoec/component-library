@@ -1,0 +1,32 @@
+.usa-step-indicator {
+  .bx--progress {
+    @extend .usa-step-indicator__segments;
+  }
+
+  .bx--progress-step {
+    @extend .usa-step-indicator__segment;
+
+    max-width: 12rem;
+  }
+
+  .bx--progress-step--current {
+    @extend .usa-step-indicator__segment--current;
+  }
+
+  .bx--progress-step--complete {
+    @extend .usa-step-indicator__segment--complete;
+  }
+
+  .bx--progress-step-button svg {
+    display: none;
+  }
+
+  .bx--progress-label {
+    @extend .usa-step-indicator__segment-label;
+
+    max-width: 100%;
+    width: 100%;
+    text-align: center;
+    padding-right: 0;
+  }
+}
