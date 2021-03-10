@@ -18,7 +18,7 @@ export type FormContextType = {
   dataDriller: any;
   updateData: React.Dispatch<React.SetStateAction<any>>;
   immutableUpdateData: (
-    _: TObjectDriller<string | number | boolean | undefined>,
+    _: TObjectDriller<object | string | number | boolean | undefined>,
     __: any
   ) => void;
   hideStatus?: boolean;
@@ -36,7 +36,7 @@ export type GenericFormContextType<T> = {
   // overwritten.
   updateData: React.Dispatch<React.SetStateAction<T>>;
   immutableUpdateData: (
-    _: TObjectDriller<string | number | boolean | undefined>,
+    _: TObjectDriller<object | string | number | boolean | undefined>,
     __: any
   ) => void;
   hideStatus?: boolean;
