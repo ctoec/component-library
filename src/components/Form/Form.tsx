@@ -55,7 +55,7 @@ export const Form = <T extends object>({
   };
 
   const immutableUpdateData = <
-    TField extends string | number | boolean | undefined
+    TField extends object | string | number | boolean | undefined
   >(
     fieldDriller: TObjectDriller<TField>,
     value: TField
