@@ -117,6 +117,13 @@ export const DateInput: React.FC<DateInputProps> = ({
           placeholder="mm/dd/yyyy"
           labelText="Date Picker label"
           id="date-picker-single"
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+            const newDate = moment.utc(event.target.value, 'MM/DD/YYYY');
+            console.log('newDate', newDate);
+            if (newDate.isValid()) {
+              setDate(newDate);
+            }
+          }}
         />
       </CarbonDatePicker>
       {/* <div className="flex-row flex-align-end usa-memorable-date">
