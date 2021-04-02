@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import moment, { Moment } from 'moment';
 import { DayPickerSingleDateController } from 'react-dates';
+import {
+  DatePicker as CarbonDatePicker,
+  DatePickerInput as CarbonDatePickerInput,
+} from 'carbon-components-react';
 import { FieldSet, TextInput, FormStatusProps, Button } from '..';
 import { Calendar } from '../../assets/images';
 import 'react-dates/lib/css/_datepicker.css';
@@ -65,31 +69,31 @@ export const DateInput: React.FC<DateInputProps> = ({
     _defaultValue
   );
 
-  useEffect(() => {
-    const newDate = moment.utc(`${year}-${month}-${day}`, 'YYYY-MM-DD');
-    if (newDate.isValid()) {
-      setDate(newDate);
-    }
-  }, [month, day, year]);
+  // useEffect(() => {
+  //   const newDate = moment.utc(`${year}-${month}-${day}`, 'YYYY-MM-DD');
+  //   if (newDate.isValid()) {
+  //     setDate(newDate);
+  //   }
+  // }, [month, day, year]);
 
-  useEffect(() => {
-    console.log('setting calendarDate', calendarDate);
-    if (!calendarDate) {
-      setDate(undefined);
-      setMonth('');
-      setDay('');
-      setYear('');
-    } else {
-      setDate(calendarDate);
-      setMonth(calendarDate.format('M'));
-      setDay(calendarDate.format('D'));
-      setYear(calendarDate.format('YYYY'));
-    }
-  }, [calendarDate]);
+  // useEffect(() => {
+  //   console.log('setting calendarDate', calendarDate);
+  //   if (!calendarDate) {
+  //     setDate(undefined);
+  //     setMonth('');
+  //     setDay('');
+  //     setYear('');
+  //   } else {
+  //     setDate(calendarDate);
+  //     setMonth(calendarDate.format('M'));
+  //     setDay(calendarDate.format('D'));
+  //     setYear(calendarDate.format('YYYY'));
+  //   }
+  // }, [calendarDate]);
 
-  useEffect(() => {
-    onChange(date);
-  }, [onChange, date]);
+  // useEffect(() => {
+  //   onChange(date);
+  // }, [onChange, date]);
 
   const {
     month: hideMonth,
@@ -108,7 +112,14 @@ export const DateInput: React.FC<DateInputProps> = ({
       status={status}
       optional={optional}
     >
-      <div className="flex-row flex-align-end usa-memorable-date">
+      <CarbonDatePicker datePickerType="single">
+        <CarbonDatePickerInput
+          placeholder="mm/dd/yyyy"
+          labelText="Date Picker label"
+          id="date-picker-single"
+        />
+      </CarbonDatePicker>
+      {/* <div className="flex-row flex-align-end usa-memorable-date">
         {!hideMonth && (
           <TextInput
             value={month}
@@ -189,7 +200,7 @@ export const DateInput: React.FC<DateInputProps> = ({
             </div>
           </div>
         )}
-      </div>
+      </div> */}
     </FieldSet>
   );
 };
