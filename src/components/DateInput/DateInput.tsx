@@ -122,6 +122,7 @@ export const DateInput: React.FC<DateInputProps> = ({
             console.log('newDate', newDate);
             if (newDate.isValid()) {
               setDate(newDate);
+              setCalendarDate(newDate);
             }
           }}
         />
