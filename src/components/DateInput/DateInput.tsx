@@ -115,7 +115,7 @@ export const DateInput: React.FC<DateInputProps> = ({
       <CarbonDatePicker datePickerType="single">
         <CarbonDatePickerInput
           placeholder="mm/dd/yyyy"
-          labelText="Date Picker label"
+          labelText="Date Picker - 4-5-21"
           id="date-picker-single"
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
             const newDate = moment.utc(event.target.value, 'MM/DD/YYYY');
