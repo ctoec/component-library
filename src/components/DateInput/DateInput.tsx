@@ -91,9 +91,9 @@ export const DateInput: React.FC<DateInputProps> = ({
   //   }
   // }, [calendarDate]);
 
-  // useEffect(() => {
-  //   onChange(date);
-  // }, [onChange, date]);
+  useEffect(() => {
+    onChange(date);
+  }, [onChange, date]);
 
   const {
     month: hideMonth,
