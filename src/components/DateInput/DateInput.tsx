@@ -114,7 +114,7 @@ export const DateInput: React.FC<DateInputProps> = ({
     >
       <CarbonDatePicker
         // value={date ? Date.parse(date.toString()) : undefined}
-        value={Date.parse('4/21/22')}
+        value="07/15/1988"
         datePickerType="single"
       >
         <CarbonDatePickerInput
