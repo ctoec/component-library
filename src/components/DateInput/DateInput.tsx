@@ -95,6 +95,11 @@ export const DateInput: React.FC<DateInputProps> = ({
     onChange(date);
   }, [onChange, date]);
 
+  useEffect(() => {
+    console.log(date);
+    console.log(date?.toString);
+  });
+
   const {
     month: hideMonth,
     day: hideDay,
