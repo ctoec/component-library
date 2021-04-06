@@ -112,7 +112,7 @@ export const DateInput: React.FC<DateInputProps> = ({
       status={status}
       optional={optional}
     >
-      <CarbonDatePicker datePickerType="single">
+      <CarbonDatePicker value={'10/12/21'} datePickerType="single">
         <CarbonDatePickerInput
           placeholder="mm/dd/yyyy"
           labelText="Date Picker - 4-5-21"
