@@ -50,6 +50,7 @@ export const DateInput: React.FC<DateInputProps> = ({
   };
 
   const _defaultValue = defaultValue ? moment.utc(defaultValue) : undefined;
+
   const [date, setDate] = useState<Moment | undefined>(_defaultValue);
 
   // Text input values
@@ -95,10 +96,13 @@ export const DateInput: React.FC<DateInputProps> = ({
     onChange(date);
   }, [onChange, date]);
 
+  let initialValue = undefined;
+
   useEffect(() => {
     console.log(date);
     console.log(date?.format('MM/DD/YYYY'));
-  });
+    initialValue = _defaultValue?.format('MM/DD/YYYY');
+  }, []);
 
   const {
     month: hideMonth,
@@ -119,7 +123,7 @@ export const DateInput: React.FC<DateInputProps> = ({
     >
       <CarbonDatePicker
         // value={date ? Date.parse(date.toString()) : undefined}
-        value={`${_defaultValue?.format('MM/DD/YYYY')}`}
+        value={`${initialValue}`}
         datePickerType="single"
       >
         <CarbonDatePickerInput
