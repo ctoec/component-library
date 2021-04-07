@@ -102,6 +102,7 @@ export const DateInput: React.FC<DateInputProps> = ({
     console.log(date);
     console.log(date?.format('MM/DD/YYYY'));
     initialValue = _defaultValue?.format('MM/DD/YYYY');
+    console.log('initialvalue in useeffec:', initialValue);
   }, []);
 
   const {
