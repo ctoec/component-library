@@ -51,6 +51,10 @@ export const DateInput: React.FC<DateInputProps> = ({
 
   const _defaultValue = defaultValue ? moment.utc(defaultValue) : undefined;
 
+  const [initialDate, setInitialDate] = useState<string | undefined>(
+    _defaultValue ? _defaultValue.format('MM/DD/YYYY') : undefined
+  );
+
   const [date, setDate] = useState<Moment | undefined>(_defaultValue);
 
   // Text input values
@@ -96,13 +100,13 @@ export const DateInput: React.FC<DateInputProps> = ({
     onChange(date);
   }, [onChange, date]);
 
-  let initialValue = undefined;
+  // let initialValue = undefined;
 
   useEffect(() => {
     console.log(date);
     console.log(date?.format('MM/DD/YYYY'));
-    initialValue = _defaultValue?.format('MM/DD/YYYY');
-    console.log('initialvalue in useeffec:', initialValue);
+    // initialValue = _defaultValue?.format('MM/DD/YYYY');
+    // console.log('initialvalue in useeffec:', initialValue);
   }, []);
 
   const {
@@ -124,7 +128,7 @@ export const DateInput: React.FC<DateInputProps> = ({
     >
       <CarbonDatePicker
         // value={date ? Date.parse(date.toString()) : undefined}
-        value={`${initialValue}`}
+        value={`${initialDate}`}
         datePickerType="single"
       >
         <CarbonDatePickerInput
