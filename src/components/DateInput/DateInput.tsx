@@ -134,7 +134,11 @@ export const DateInput: React.FC<DateInputProps> = ({
         onChange={(d) => {
           console.log(d);
           const newDate = moment(
-            d[0].toLocaleDateString('en-US', { day: '2-digit' }),
+            d[0].toLocaleDateString('en-US', {
+              day: '2-digit',
+              month: '2-digit',
+              year: 'numeric',
+            }),
             'MM/DD/YYYY'
           );
           console.log('newDate', newDate);
