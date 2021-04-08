@@ -155,16 +155,17 @@ export const DateInput: React.FC<DateInputProps> = ({
           type="date"
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
             let val = event.target.value;
-            val = val.replaceAll('/', '');
-            console.log('val', val);
-            console.log('vallength', val.length);
-            if (val.length >= 5)
-              val = `${val.substr(0, 2)}/${val.substr(2, 2)}/${val.substr(4)}`;
-            else if (val.length > 2)
-              val = `${val.substr(0, 2)}/${val.substr(2)}`;
-            else if (val.length <= 2) val = `${val.substr(0)}`;
-
-            event.target.value = val;
+            // val = val.replaceAll('/', '');
+            // console.log('val', val);
+            // console.log('vallength', val.length);
+            // if (val.length >= 5)
+            //   val = `${val.substr(0, 2)}/${val.substr(2, 2)}/${val.substr(4)}`;
+            // else if (val.length > 2)
+            //   val = `${val.substr(0, 2)}/${val.substr(2)}`;
+            // else if (val.length <= 2) val = `${val.substr(0)}`;
+            event.target.value = val.match(/\d{8}/)
+              ? `${val.substr(0, 2)}/${val.substr(2, 2)}/${val.substr(4, 4)}`
+              : val;
           }}
           // onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           //   const newDate = moment(event.target.value, 'MM/DD/YYYY');
