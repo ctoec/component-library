@@ -159,10 +159,10 @@ export const DateInput: React.FC<DateInputProps> = ({
             console.log('val', val);
             console.log('vallength', val.length);
             if (val.length >= 5)
-              val = `${val.substr(0, 1)}/${val.substr(2, 3)}/${val.substr(4)}`;
+              val = `${val.substr(0, 2)}/${val.substr(2, 2)}/${val.substr(4)}`;
             else if (val.length === 4)
-              val = `${val.substr(0, 1)}/${val.substr(2, 3)}/`;
-            else if (val.length === 2) val = `${val.substr(0, 1)}/`;
+              val = `${val.substr(0, 1)}/${val.substr(2, 4)}/`;
+            else if (val.length === 2) val = `${val.substr(0, 2)}/`;
 
             event.target.value = val;
           }}
