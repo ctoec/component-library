@@ -153,6 +153,12 @@ export const DateInput: React.FC<DateInputProps> = ({
           labelText="Date Picker - 4-5-21 -4:32"
           id="date-picker-single"
           type="date"
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+            let val = event.target.value;
+            val = val.replaceAll('/', '');
+            val = `${val.substr(0, 1)}/${val.substr(2, 3)}/${val.substr(4)}`;
+            setInitialDate(val);
+          }}
           // onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           //   const newDate = moment(event.target.value, 'MM/DD/YYYY');
           //   console.log('newDate', newDate);
