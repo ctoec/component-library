@@ -157,7 +157,7 @@ export const DateInput: React.FC<DateInputProps> = ({
             let val = event.target.value;
             val = val.replaceAll('/', '');
             val = `${val.substr(0, 1)}/${val.substr(2, 3)}/${val.substr(4)}`;
-            setInitialDate(val);
+            event.target.value = val;
           }}
           // onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           //   const newDate = moment(event.target.value, 'MM/DD/YYYY');
