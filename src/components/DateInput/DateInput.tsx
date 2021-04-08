@@ -121,7 +121,7 @@ export const DateInput: React.FC<DateInputProps> = ({
       legend={label}
       id={id}
       showLegend={!hideLegend}
-      hint={`For example: ${moment().format('M D YYYY')}`}
+      hint={`For example: ${moment().format('MM/DD/YYYY')}`}
       className={className}
       status={status}
       optional={optional}
@@ -136,7 +136,7 @@ export const DateInput: React.FC<DateInputProps> = ({
           labelText="Date Picker - 4-5-21 -4:32"
           id="date-picker-single"
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            const newDate = moment.utc(event.target.value, 'MM/DD/YYYY');
+            const newDate = moment(event.target.value, 'MM/DD/YYYY');
             console.log('newDate', newDate);
             if (newDate.isValid()) {
               setDate(newDate);
