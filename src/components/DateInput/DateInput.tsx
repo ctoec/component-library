@@ -131,9 +131,16 @@ export const DateInput: React.FC<DateInputProps> = ({
         value={`${initialDate}`}
         datePickerType="single"
         dateFormat="m/d/Y"
-        onChange={(event) => {
-          console.log(event);
-          console.log('test');
+        onChange={(d) => {
+          const newDate = moment(
+            d[0].toLocaleDateString('en-US', { day: '2-digit' }),
+            'MM/DD/YYYY'
+          );
+          console.log('newDate', newDate);
+          if (newDate.isValid()) {
+            setDate(newDate);
+            setCalendarDate(newDate);
+          }
         }}
       >
         <CarbonDatePickerInput
@@ -141,14 +148,14 @@ export const DateInput: React.FC<DateInputProps> = ({
           labelText="Date Picker - 4-5-21 -4:32"
           id="date-picker-single"
           type="date"
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            const newDate = moment(event.target.value, 'MM/DD/YYYY');
-            console.log('newDate', newDate);
-            if (newDate.isValid()) {
-              setDate(newDate);
-              setCalendarDate(newDate);
-            }
-          }}
+          // onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+          //   const newDate = moment(event.target.value, 'MM/DD/YYYY');
+          //   console.log('newDate', newDate);
+          //   if (newDate.isValid()) {
+          //     setDate(newDate);
+          //     setCalendarDate(newDate);
+          //   }
+          // }}
         />
       </CarbonDatePicker>
       {/* <div className="flex-row flex-align-end usa-memorable-date">
