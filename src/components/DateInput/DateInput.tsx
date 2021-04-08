@@ -130,7 +130,7 @@ export const DateInput: React.FC<DateInputProps> = ({
         // value={date ? Date.parse(date.toString()) : undefined}
         value={`${initialDate}`}
         datePickerType="single"
-        dateFormat="m/d/YYYY"
+        dateFormat="m/d/Y"
       >
         <CarbonDatePickerInput
           placeholder="mm/dd/yyyy"
