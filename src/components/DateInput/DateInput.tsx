@@ -125,6 +125,7 @@ export const DateInput: React.FC<DateInputProps> = ({
             momentFormat
           );
           if (newDate.isValid()) {
+            console.log('disabled', disabled);
             if (disabled) {
               setDate(undefined);
               setCalendarDate(undefined);
@@ -141,6 +142,7 @@ export const DateInput: React.FC<DateInputProps> = ({
           id="date-picker-single"
           disabled={disabled}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+            console.log('disabled - datepickerinput', disabled);
             event.target.value = disabled
               ? ''
               : formatDateInput(event.target.value);
