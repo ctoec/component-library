@@ -67,7 +67,7 @@ export const DateInput: React.FC<DateInputProps> = ({
   useEffect(() => {
     if (disabled) {
       console.log('setting date to undefined');
-      setDate(undefined);
+      setDate(null);
     }
   });
 
