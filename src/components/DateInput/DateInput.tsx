@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import moment, { Moment } from 'moment';
-import { DayPickerSingleDateController } from 'react-dates';
 import {
   DatePicker as CarbonDatePicker,
   DatePickerInput as CarbonDatePickerInput,
 } from 'carbon-components-react';
-import { FieldSet, TextInput, FormStatusProps, Button } from '..';
-import { Calendar } from '../../assets/images';
+import { FieldSet, FormStatusProps } from '..';
 import 'react-dates/lib/css/_datepicker.css';
 
 export type DateInputProps = {
@@ -57,57 +55,14 @@ export const DateInput: React.FC<DateInputProps> = ({
 
   const [date, setDate] = useState<Moment | undefined>(_defaultValue);
 
-  // Text input values
-  const [month, setMonth] = useState<number | string>(
-    _defaultValue?.format('M') || ''
-  );
-  const [day, setDay] = useState<number | string>(
-    _defaultValue?.format('D') || ''
-  );
-  const [year, setYear] = useState<number | string>(
-    _defaultValue?.format('YYYY') || ''
-  );
-
   // Calendar
-  const [calendarOpen, setCalendarOpen] = useState<boolean>(false);
   const [calendarDate, setCalendarDate] = useState<Moment | undefined>(
     _defaultValue
   );
 
-  // useEffect(() => {
-  //   const newDate = moment.utc(`${year}-${month}-${day}`, 'YYYY-MM-DD');
-  //   if (newDate.isValid()) {
-  //     setDate(newDate);
-  //   }
-  // }, [month, day, year]);
-
-  // useEffect(() => {
-  //   console.log('setting calendarDate', calendarDate);
-  //   if (!calendarDate) {
-  //     setDate(undefined);
-  //     setMonth('');
-  //     setDay('');
-  //     setYear('');
-  //   } else {
-  //     setDate(calendarDate);
-  //     setMonth(calendarDate.format('M'));
-  //     setDay(calendarDate.format('D'));
-  //     setYear(calendarDate.format('YYYY'));
-  //   }
-  // }, [calendarDate]);
-
   useEffect(() => {
     onChange(date);
   }, [onChange, date]);
-
-  // let initialValue = undefined;
-
-  useEffect(() => {
-    console.log(date);
-    console.log(date?.format('MM/DD/YYYY'));
-    // initialValue = _defaultValue?.format('MM/DD/YYYY');
-    // console.log('initialvalue in useeffec:', initialValue);
-  }, []);
 
   const {
     month: hideMonth,
@@ -117,29 +72,31 @@ export const DateInput: React.FC<DateInputProps> = ({
   } = hideField;
   console.log(hideField);
 
-  const formatDate = `${hideMonth ? '' : 'm'}${hideDay ? '' : '/d'}${
+  const formatStrftime = `${hideMonth ? '' : 'm'}${hideDay ? '' : '/d'}${
     hideYear ? '' : '/Y'
   }`;
-  const placeHolder = `${hideMonth ? '' : 'mm'}${hideDay ? '' : '/dd'}${
-    hideYear ? '' : '/yyyy'
+
+  const momentFormat = `${hideMonth ? '' : 'MM'}${hideDay ? '' : '/DD'}${
+    hideYear ? '' : '/YYYY'
   }`;
+
+  const placeHolder = `${momentFormat.toLocaleLowerCase()}`;
 
   const simpleCalendar = hideMonth || hideDay || hideYear;
 
+  //Formats date string entered with `/` based on the type
+  //of date field. Text is only replaced if text string does
+  //not contain `/`'s already
   const formatDateInput = (date: string): string => {
-    let val = date;
-    if (!simpleCalendar) {
-      return val.match(/^\d{8}$/gm)
-        ? moment(val, 'MMDDYYYY').format('MM/DD/YYYY')
-        : val;
-    } else if (hideDay) {
-      return val.match(/^\d{6}$/gm)
-        ? moment(val, 'MMYYYY').format('MM/YYYY')
-        : val;
-    } else if (hideYear) {
-      return val.match(/^\d{4}$/gm) ? moment(val, 'MMDD').format('MM/DD') : val;
-    }
-    return val;
+    if (
+      (!simpleCalendar && date.match(/^\d{8}$/gm)) ||
+      (hideDay && date.match(/^\d{6}$/gm)) ||
+      (hideYear && date.match(/^\d{4}$/gm))
+    )
+      return moment(date, momentFormat.replaceAll('/', '')).format(
+        momentFormat
+      );
+    else return date;
   };
 
   return (
@@ -153,10 +110,9 @@ export const DateInput: React.FC<DateInputProps> = ({
       optional={optional}
     >
       <CarbonDatePicker
-        // value={date ? Date.parse(date.toString()) : undefined}
         value={`${initialDate}`}
         datePickerType={hideCalendar || simpleCalendar ? 'simple' : 'single'}
-        dateFormat={formatDate}
+        dateFormat={formatStrftime}
         minDate="01/01/1900"
         maxDate="01/01/2200"
         onChange={(d) => {
@@ -169,7 +125,6 @@ export const DateInput: React.FC<DateInputProps> = ({
             }),
             placeHolder.toUpperCase()
           );
-          console.log('newDate', newDate);
           if (newDate.isValid()) {
             setDate(newDate);
             setCalendarDate(newDate);
@@ -186,88 +141,6 @@ export const DateInput: React.FC<DateInputProps> = ({
           }}
         />
       </CarbonDatePicker>
-      {/* <div className="flex-row flex-align-end usa-memorable-date">
-        {!hideMonth && (
-          <TextInput
-            value={month}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-              const newMonth = event.target.value;
-              setMonth(newMonth);
-            }}
-            id={`${id}-month`}
-            label="Month"
-            inputProps={{ min: 1, max: 12, type: 'number' }}
-            {...commonDateInputProps}
-          />
-        )}
-        {!hideDay && (
-          <TextInput
-            value={day}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-              const newDay = event.target.value;
-              setDay(newDay);
-            }}
-            id={`${id}-day`}
-            label="Day"
-            inputProps={{ min: 1, max: 31, type: 'number' }}
-            {...commonDateInputProps}
-          />
-        )}
-        {!hideYear && (
-          <TextInput
-            value={year}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-              const newYear = event.target.value;
-              setYear(newYear);
-            }}
-            id={`${id}-year`}
-            label="Year"
-            inputProps={{ min: 1000, max: 2200, type: 'number' }}
-            {...commonDateInputProps}
-          />
-        )}
-        {!hideCalendar && (
-          <div className="oec-calendar-dropdown oec-date-input__calendar-dropdown">
-            <Button
-              text={<Calendar className="oec-calendar-toggle__icon" />}
-              onClick={() => {
-                setCalendarOpen(!calendarOpen);
-              }}
-              title={`${calendarOpen ? 'close' : 'open'} calendar`}
-              className="oec-calendar-toggle oec-calendar-dropdown__toggle"
-            />
-            <div
-              className="oec-calendar-dropdown__calendar position-absolute z-top"
-              hidden={!calendarOpen}
-            >
-              <DayPickerSingleDateController
-                // Key forces re-render, which helps deal with bugs in this library-- see scss file
-                key={JSON.stringify({ calendarDate, calendarOpen })}
-                date={date || null}
-                onDateChange={(newDate) => {
-                  setCalendarDate(newDate || undefined);
-                }}
-                focused={calendarOpen}
-                // Annoyingly this does not do anything for keyboard users
-                onFocusChange={(f) => setCalendarOpen(f.focused || false)}
-                onBlur={() => setCalendarOpen(false)}
-                // TODO: IMPLEMENT ON TAB ONCE TYPES FOR THIS LIBRARY ARE UPDATED :/
-                // onTab={() => {}}
-                onOutsideClick={(e) => {
-                  const clickOnCalendarOrButton = e.target.closest(
-                    `#${id} .oec-calendar-dropdown`
-                  );
-                  // If a user clicks the button again, the button will handle closing it, and this would fire first and cause problems
-                  if (!clickOnCalendarOrButton) {
-                    setCalendarOpen(false);
-                  }
-                }}
-                initialVisibleMonth={() => date || moment()}
-              />
-            </div>
-          </div>
-        )}
-      </div> */}
     </FieldSet>
   );
 };
