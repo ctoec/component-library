@@ -70,7 +70,6 @@ export const DateInput: React.FC<DateInputProps> = ({
     year: hideYear,
     calendar: hideCalendar,
   } = hideField;
-  console.log(hideField);
 
   const formatStrftime = `${hideMonth ? '' : 'm'}${hideDay ? '' : '/d'}${
     hideYear ? '' : '/Y'
@@ -123,11 +122,16 @@ export const DateInput: React.FC<DateInputProps> = ({
               month: '2-digit',
               year: 'numeric',
             }),
-            placeHolder.toUpperCase()
+            momentFormat
           );
           if (newDate.isValid()) {
-            setDate(newDate);
-            setCalendarDate(newDate);
+            if (disabled) {
+              setDate(undefined);
+              setCalendarDate(undefined);
+            } else {
+              setDate(newDate);
+              setCalendarDate(newDate);
+            }
           }
         }}
       >
@@ -137,7 +141,9 @@ export const DateInput: React.FC<DateInputProps> = ({
           id="date-picker-single"
           disabled={disabled}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            event.target.value = formatDateInput(event.target.value);
+            event.target.value = disabled
+              ? ''
+              : formatDateInput(event.target.value);
           }}
         />
       </CarbonDatePicker>
