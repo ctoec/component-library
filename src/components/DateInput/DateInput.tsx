@@ -61,10 +61,15 @@ export const DateInput: React.FC<DateInputProps> = ({
   );
 
   useEffect(() => {
-    console.log('onchange date');
-    console.log(date);
-    onChange(disabled ? undefined : date);
+    onChange(date);
   }, [onChange, date]);
+
+  useEffect(() => {
+    if (disabled) {
+      console.log('setting date to undefined');
+      setDate(undefined);
+    }
+  });
 
   const {
     month: hideMonth,
