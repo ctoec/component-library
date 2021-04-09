@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import moment, { Moment } from 'moment';
 import { DayPickerSingleDateController } from 'react-dates';
+import {
+  DatePicker as CarbonDatePicker,
+  DatePickerInput as CarbonDatePickerInput,
+} from 'carbon-components-react';
 import { FieldSet, TextInput, FormStatusProps, Button } from '..';
 import { Calendar } from '../../assets/images';
 import 'react-dates/lib/css/_datepicker.css';
@@ -46,6 +50,11 @@ export const DateInput: React.FC<DateInputProps> = ({
   };
 
   const _defaultValue = defaultValue ? moment.utc(defaultValue) : undefined;
+
+  const [initialDate, setInitialDate] = useState<string | undefined>(
+    _defaultValue ? _defaultValue.format('MM/DD/YYYY') : undefined
+  );
+
   const [date, setDate] = useState<Moment | undefined>(_defaultValue);
 
   // Text input values
@@ -65,24 +74,40 @@ export const DateInput: React.FC<DateInputProps> = ({
     _defaultValue
   );
 
-  useEffect(() => {
-    const newDate = moment.utc(`${year}-${month}-${day}`, 'YYYY-MM-DD');
-    if (newDate.isValid()) {
-      setDate(newDate);
-    }
-  }, [month, day, year]);
+  // useEffect(() => {
+  //   const newDate = moment.utc(`${year}-${month}-${day}`, 'YYYY-MM-DD');
+  //   if (newDate.isValid()) {
+  //     setDate(newDate);
+  //   }
+  // }, [month, day, year]);
 
-  useEffect(() => {
-    if (!calendarDate) return;
-    setDate(calendarDate);
-    setMonth(calendarDate.format('M'));
-    setDay(calendarDate.format('D'));
-    setYear(calendarDate.format('YYYY'));
-  }, [calendarDate]);
+  // useEffect(() => {
+  //   console.log('setting calendarDate', calendarDate);
+  //   if (!calendarDate) {
+  //     setDate(undefined);
+  //     setMonth('');
+  //     setDay('');
+  //     setYear('');
+  //   } else {
+  //     setDate(calendarDate);
+  //     setMonth(calendarDate.format('M'));
+  //     setDay(calendarDate.format('D'));
+  //     setYear(calendarDate.format('YYYY'));
+  //   }
+  // }, [calendarDate]);
 
   useEffect(() => {
     onChange(date);
   }, [onChange, date]);
+
+  // let initialValue = undefined;
+
+  useEffect(() => {
+    console.log(date);
+    console.log(date?.format('MM/DD/YYYY'));
+    // initialValue = _defaultValue?.format('MM/DD/YYYY');
+    // console.log('initialvalue in useeffec:', initialValue);
+  }, []);
 
   const {
     month: hideMonth,
@@ -90,18 +115,78 @@ export const DateInput: React.FC<DateInputProps> = ({
     year: hideYear,
     calendar: hideCalendar,
   } = hideField;
+  console.log(hideField);
+
+  const formatDate = `${hideMonth ? '' : 'm'}${hideDay ? '' : '/d'}${
+    hideYear ? '' : '/Y'
+  }`;
+  const placeHolder = `${hideMonth ? '' : 'mm'}${hideDay ? '' : '/dd'}${
+    hideYear ? '' : '/yyyy'
+  }`;
+
+  const simpleCalendar = hideMonth || hideDay || hideYear;
+
+  const formatDateInput = (date: string): string => {
+    let val = date;
+    if (!simpleCalendar) {
+      return val.match(/^\d{8}$/gm)
+        ? moment(val, 'MMDDYYYY').format('MM/DD/YYYY')
+        : val;
+    } else if (hideDay) {
+      return val.match(/^\d{6}$/gm)
+        ? moment(val, 'MMYYYY').format('MM/YYYY')
+        : val;
+    } else if (hideYear) {
+      return val.match(/^\d{4}$/gm) ? moment(val, 'MMDD').format('MM/DD') : val;
+    }
+    return val;
+  };
 
   return (
     <FieldSet
       legend={label}
       id={id}
       showLegend={!hideLegend}
-      hint={`For example: ${moment().format('M D YYYY')}`}
+      hint={placeHolder}
       className={className}
       status={status}
       optional={optional}
     >
-      <div className="flex-row flex-align-end usa-memorable-date">
+      <CarbonDatePicker
+        // value={date ? Date.parse(date.toString()) : undefined}
+        value={`${initialDate}`}
+        datePickerType={hideCalendar || simpleCalendar ? 'simple' : 'single'}
+        dateFormat={formatDate}
+        minDate="01/01/1900"
+        maxDate="01/01/2200"
+        onChange={(d) => {
+          console.log(d);
+          const newDate = moment(
+            d[0].toLocaleDateString('en-US', {
+              day: '2-digit',
+              month: '2-digit',
+              year: 'numeric',
+            }),
+            placeHolder.toUpperCase()
+          );
+          console.log('newDate', newDate);
+          if (newDate.isValid()) {
+            setDate(newDate);
+            setCalendarDate(newDate);
+          }
+        }}
+      >
+        <CarbonDatePickerInput
+          placeholder={placeHolder}
+          labelText="Date Picker"
+          id="date-picker-single"
+          disabled={disabled}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+            event.target.value = formatDateInput(event.target.value);
+          }}
+        />
+      </CarbonDatePicker>
+      {/* <div className="flex-row flex-align-end usa-memorable-date">
         {!hideMonth && (
           <TextInput
             value={month}
@@ -182,7 +267,7 @@ export const DateInput: React.FC<DateInputProps> = ({
             </div>
           </div>
         )}
-      </div>
+      </div> */}
     </FieldSet>
   );
 };
