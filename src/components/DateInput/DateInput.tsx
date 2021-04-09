@@ -115,13 +115,44 @@ export const DateInput: React.FC<DateInputProps> = ({
     year: hideYear,
     calendar: hideCalendar,
   } = hideField;
+  console.log(hideField);
+
+  const formatDate = `${hideMonth ? '' : 'm'}${hideDay ? '' : '/d'}${
+    hideYear ? '' : '/Y'
+  }`;
+  const placeHolder = `${hideMonth ? '' : 'mm'}${hideDay ? '' : '/dd'}${
+    hideYear ? '' : '/yyyy'
+  }`;
+
+  const simpleCalendar = hideMonth || hideDay || hideYear;
+
+  const formatDateInput = (date: string): string => {
+    let val = date;
+    if (!simpleCalendar) {
+      val = val.match(/^\d{8}$/gm)
+        ? `${val.substr(0, 2)}/${val.substr(2, 2)}/${val.substr(4, 4)}`
+        : val;
+      return val;
+    } else if (hideDay) {
+      val = val.match(/^\d{6}$/gm)
+        ? `${val.substr(0, 2)}/${val.substr(2, 4)}`
+        : val;
+      return val;
+    } else if (hideYear) {
+      val = val.match(/^\d{4}$/gm)
+        ? `${val.substr(0, 2)}/${val.substr(2, 2)}`
+        : val;
+      return val;
+    }
+    return val;
+  };
 
   return (
     <FieldSet
       legend={label}
       id={id}
       showLegend={!hideLegend}
-      hint={`For example: ${moment().format('MM/DD/YYYY')}`}
+      hint={placeHolder}
       className={className}
       status={status}
       optional={optional}
@@ -129,8 +160,10 @@ export const DateInput: React.FC<DateInputProps> = ({
       <CarbonDatePicker
         // value={date ? Date.parse(date.toString()) : undefined}
         value={`${initialDate}`}
-        datePickerType="single"
-        dateFormat="m/d/Y"
+        datePickerType={hideCalendar || simpleCalendar ? 'simple' : 'single'}
+        dateFormat={formatDate}
+        minDate="01/01/1900"
+        maxDate="01/01/2200"
         onChange={(d) => {
           console.log(d);
           const newDate = moment(
@@ -139,7 +172,7 @@ export const DateInput: React.FC<DateInputProps> = ({
               month: '2-digit',
               year: 'numeric',
             }),
-            'MM/DD/YYYY'
+            placeHolder.toUpperCase()
           );
           console.log('newDate', newDate);
           if (newDate.isValid()) {
@@ -149,32 +182,13 @@ export const DateInput: React.FC<DateInputProps> = ({
         }}
       >
         <CarbonDatePickerInput
-          placeholder="mm/dd/yyyy"
-          labelText="Date Picker - 4-5-21 -4:32"
+          placeholder={placeHolder}
+          labelText="Date Picker"
           id="date-picker-single"
-          type="date"
+          disabled={disabled}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            let val = event.target.value;
-            // val = val.replaceAll('/', '');
-            // console.log('val', val);
-            // console.log('vallength', val.length);
-            // if (val.length >= 5)
-            //   val = `${val.substr(0, 2)}/${val.substr(2, 2)}/${val.substr(4)}`;
-            // else if (val.length > 2)
-            //   val = `${val.substr(0, 2)}/${val.substr(2)}`;
-            // else if (val.length <= 2) val = `${val.substr(0)}`;
-            event.target.value = val.match(/\d{8}/)
-              ? `${val.substr(0, 2)}/${val.substr(2, 2)}/${val.substr(4, 4)}`
-              : val;
+            event.target.value = formatDateInput(event.target.value);
           }}
-          // onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-          //   const newDate = moment(event.target.value, 'MM/DD/YYYY');
-          //   console.log('newDate', newDate);
-          //   if (newDate.isValid()) {
-          //     setDate(newDate);
-          //     setCalendarDate(newDate);
-          //   }
-          // }}
         />
       </CarbonDatePicker>
       {/* <div className="flex-row flex-align-end usa-memorable-date">
