@@ -129,20 +129,15 @@ export const DateInput: React.FC<DateInputProps> = ({
   const formatDateInput = (date: string): string => {
     let val = date;
     if (!simpleCalendar) {
-      val = val.match(/^\d{8}$/gm)
-        ? `${val.substr(0, 2)}/${val.substr(2, 2)}/${val.substr(4, 4)}`
+      return val.match(/^\d{8}$/gm)
+        ? moment(val, 'MMDDYYYY').format('MM/DD/YYYY')
         : val;
-      return val;
     } else if (hideDay) {
-      val = val.match(/^\d{6}$/gm)
-        ? `${val.substr(0, 2)}/${val.substr(2, 4)}`
+      return val.match(/^\d{6}$/gm)
+        ? moment(val, 'MMYYYY').format('MM/YYYY')
         : val;
-      return val;
     } else if (hideYear) {
-      val = val.match(/^\d{4}$/gm)
-        ? `${val.substr(0, 2)}/${val.substr(2, 2)}`
-        : val;
-      return val;
+      return val.match(/^\d{4}$/gm) ? moment(val, 'MMDD').format('MM/DD') : val;
     }
     return val;
   };
