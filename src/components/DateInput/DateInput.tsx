@@ -61,7 +61,9 @@ export const DateInput: React.FC<DateInputProps> = ({
   );
 
   useEffect(() => {
-    onChange(date);
+    console.log('onchange date');
+    console.log(date);
+    onChange(disabled ? undefined : date);
   }, [onChange, date]);
 
   const {
