@@ -49,9 +49,11 @@ export const DateInput: React.FC<DateInputProps> = ({
 
   const _defaultValue = defaultValue ? moment.utc(defaultValue) : undefined;
 
-  const [initialDate, setInitialDate] = useState<string | undefined>(
-    !disabled && _defaultValue ? _defaultValue.format('MM/DD/YYYY') : undefined
-  );
+  // const [initialDate, setInitialDate] = useState<string | undefined>(
+  //   !disabled && _defaultValue ? _defaultValue.format('MM/DD/YYYY') : undefined
+  // );
+  const initialDate =
+    !disabled && _defaultValue ? _defaultValue.format('MM/DD/YYYY') : undefined;
 
   const [date, setDate] = useState<Moment | undefined | null>(
     !disabled ? _defaultValue : null
@@ -106,7 +108,7 @@ export const DateInput: React.FC<DateInputProps> = ({
       optional={optional}
     >
       <CarbonDatePicker
-        value={disabled ? undefined : initialDate}
+        value={initialDate}
         datePickerType={hideCalendar || simpleCalendar ? 'simple' : 'single'}
         dateFormat={formatStrftime}
         minDate="01/01/1900"
