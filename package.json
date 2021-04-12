@@ -1,6 +1,6 @@
 {
   "name": "@ctoec/component-library",
-  "version": "1.1.15",
+  "version": "1.1.14",
   "description": "React Component Library for OEC branded web applications",
   "homepage": "https://github.com/ctoec/component-library#readme",
   "repository": {
@@ -45,13 +45,10 @@
     ]
   },
   "dependencies": {
-    "@babel/core": "^7.13.14",
-    "@babel/preset-typescript": "^7.13.0",
     "@types/carbon-components": "^10.23.0",
     "@types/carbon-components-react": "^7.26.0",
     "@types/pluralize": "^0.0.29",
     "@types/react-modal": "^3.10.6",
-    "babel-loader": "^8.2.2",
     "carbon-components": "^10.25.0",
     "carbon-components-react": "^7.25.0",
     "carbon-icons": "^7.0.7",
