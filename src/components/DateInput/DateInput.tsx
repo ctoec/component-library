@@ -11,7 +11,7 @@ export type DateInputProps = {
   onChange: (newDate: Moment | undefined | null) => void;
   id: string;
   label: string;
-  defaultValue?: Date | Moment;
+  defaultValue?: Date | Moment | null;
   disabled?: boolean;
   optional?: boolean;
   status?: FormStatusProps;
