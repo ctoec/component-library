@@ -99,7 +99,7 @@ export const DateInput: React.FC<DateInputProps> = ({
       legend={label}
       id={id}
       showLegend={!hideLegend}
-      hint={placeHolder}
+      hint={`For example: ${placeHolder}`}
       className={className}
       status={status}
       optional={optional}
@@ -134,7 +134,6 @@ export const DateInput: React.FC<DateInputProps> = ({
           id="date-picker-single"
           disabled={disabled}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            console.log('disabled - datepickerinput', disabled);
             event.target.value = disabled
               ? ''
               : formatDateInput(event.target.value);
