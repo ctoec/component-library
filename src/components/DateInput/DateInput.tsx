@@ -37,16 +37,6 @@ export const DateInput: React.FC<DateInputProps> = ({
   hideLegend = false,
   hideField = {},
 }) => {
-  const commonDateInputProps = {
-    className: 'oec-date-input__input margin-right-1 margin-top-0',
-    disabled: disabled,
-    inline: true,
-    // Pass an undefined message to make text input show correct outline color, but not a redundant message
-    status: status ? { ...status, message: undefined } : undefined,
-    optional,
-    hideOptionalText: true,
-  };
-
   const _defaultValue = defaultValue ? moment.utc(defaultValue) : undefined;
 
   const initialDate =
