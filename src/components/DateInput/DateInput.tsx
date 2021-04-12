@@ -8,7 +8,7 @@ import { FieldSet, FormStatusProps } from '..';
 import 'react-dates/lib/css/_datepicker.css';
 
 export type DateInputProps = {
-  onChange: (newDate: Moment | undefined) => void;
+  onChange: (newDate: Moment | undefined | null) => void;
   id: string;
   label: string;
   defaultValue?: Date | Moment;
@@ -53,7 +53,7 @@ export const DateInput: React.FC<DateInputProps> = ({
     _defaultValue ? _defaultValue.format('MM/DD/YYYY') : undefined
   );
 
-  const [date, setDate] = useState<Moment | undefined>(_defaultValue);
+  const [date, setDate] = useState<Moment | undefined | null>(_defaultValue);
 
   // Calendar
   const [calendarDate, setCalendarDate] = useState<Moment | undefined>(
