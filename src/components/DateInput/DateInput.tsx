@@ -49,9 +49,6 @@ export const DateInput: React.FC<DateInputProps> = ({
 
   const _defaultValue = defaultValue ? moment.utc(defaultValue) : undefined;
 
-  // const [initialDate, setInitialDate] = useState<string | undefined>(
-  //   !disabled && _defaultValue ? _defaultValue.format('MM/DD/YYYY') : undefined
-  // );
   const initialDate =
     !disabled && _defaultValue ? _defaultValue.format('MM/DD/YYYY') : undefined;
 
