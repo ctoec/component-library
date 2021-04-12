@@ -55,18 +55,12 @@ export const DateInput: React.FC<DateInputProps> = ({
 
   const [date, setDate] = useState<Moment | undefined | null>(_defaultValue);
 
-  // Calendar
-  const [calendarDate, setCalendarDate] = useState<Moment | undefined>(
-    _defaultValue
-  );
-
   useEffect(() => {
     onChange(date);
   }, [onChange, date]);
 
   useEffect(() => {
     if (disabled) {
-      console.log('setting date to undefined');
       setDate(null);
     }
   });
@@ -122,7 +116,6 @@ export const DateInput: React.FC<DateInputProps> = ({
         minDate="01/01/1900"
         maxDate="01/01/2200"
         onChange={(d) => {
-          console.log(d);
           const newDate = moment(
             d[0].toLocaleDateString('en-US', {
               day: '2-digit',
@@ -132,13 +125,10 @@ export const DateInput: React.FC<DateInputProps> = ({
             momentFormat
           );
           if (newDate.isValid()) {
-            console.log('disabled', disabled);
             if (disabled) {
-              setDate(undefined);
-              setCalendarDate(undefined);
+              setDate(null);
             } else {
               setDate(newDate);
-              setCalendarDate(newDate);
             }
           }
         }}
