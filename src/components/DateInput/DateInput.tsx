@@ -130,7 +130,8 @@ export const DateInput: React.FC<DateInputProps> = ({
       >
         <CarbonDatePickerInput
           placeholder={placeHolder}
-          labelText="Date Picker"
+          labelText="Date picker"
+          hideLabel={true}
           id="date-picker-single"
           disabled={disabled}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
