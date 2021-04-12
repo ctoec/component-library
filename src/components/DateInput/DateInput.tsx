@@ -50,21 +50,16 @@ export const DateInput: React.FC<DateInputProps> = ({
   const _defaultValue = defaultValue ? moment.utc(defaultValue) : undefined;
 
   const [initialDate, setInitialDate] = useState<string | undefined>(
-    _defaultValue ? _defaultValue.format('MM/DD/YYYY') : undefined
+    !disabled && _defaultValue ? _defaultValue.format('MM/DD/YYYY') : undefined
   );
 
-  const [date, setDate] = useState<Moment | undefined | null>(_defaultValue);
+  const [date, setDate] = useState<Moment | undefined | null>(
+    !disabled ? _defaultValue : null
+  );
 
   useEffect(() => {
     onChange(date);
   }, [onChange, date]);
-
-  useEffect(() => {
-    if (disabled) {
-      setDate(null);
-      setInitialDate(undefined);
-    }
-  });
 
   const {
     month: hideMonth,
