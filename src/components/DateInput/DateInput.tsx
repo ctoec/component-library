@@ -86,6 +86,7 @@ export const DateInput: React.FC<DateInputProps> = ({
   };
 
   const formatCalendarValue = (date: string): string => {
+    console.log(`${date}/01/${moment().format('YYYY')}`);
     if (simpleCalendar) return date;
     if (date.includes('/')) return date;
     if (date.length === 2) return `${date}/01/${moment().format('YYYY')}`;
