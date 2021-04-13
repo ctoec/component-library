@@ -54,9 +54,6 @@ export const DateInput: React.FC<DateInputProps> = ({
 
   const _defaultValue = defaultValue ? moment.utc(defaultValue) : undefined;
 
-  // const initialDate =
-  //   !disabled && _defaultValue ? _defaultValue.format(momentFormat) : undefined;
-
   const [date, setDate] = useState<Moment | undefined | null>(
     !disabled ? _defaultValue : null
   );
@@ -86,6 +83,13 @@ export const DateInput: React.FC<DateInputProps> = ({
         momentFormat
       );
     else return date;
+  };
+
+  const formatCalendarValue = (date: string): string => {
+    if (simpleCalendar) return date;
+    if (date.includes('/')) return date;
+    if (date.length === 2) return `${date}/01/${moment().format('YYYY')}`;
+    return date;
   };
 
   return (
