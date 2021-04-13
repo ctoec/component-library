@@ -70,9 +70,9 @@ export const DateInput: React.FC<DateInputProps> = ({
 
   const simpleCalendar = hideMonth || hideDay || hideYear;
 
-  //Formats date string entered with `/` based on the type
-  //of date field. Text is only replaced if text string does
-  //not contain `/`'s already
+  // Formats date string entered with `/` based on the type
+  // of date field. Text is only replaced if text string does
+  // not contain `/`'s already
   const formatDateInput = (date: string): string => {
     if (
       (!simpleCalendar && date.match(/^\d{8}$/gm)) ||
