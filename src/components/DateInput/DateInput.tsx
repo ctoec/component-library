@@ -64,28 +64,29 @@ export const DateInput: React.FC<DateInputProps> = ({
       : undefined
   );
 
-  useEffect(() => {
-    console.log('onchange date', date);
-    onChange(date);
-  }, [onChange, date]);
+  // useEffect(() => {
+  //   console.log('onchange date', date);
+  //   onChange(date);
+  // }, [onChange, date]);
 
   const simpleCalendar = hideMonth || hideDay || hideYear;
 
-  const numericDate = (val: string): boolean => {
+  const isValidDateString = (val: string): boolean => {
+    const strip = val.replaceAll('/', '');
     if (
-      (!simpleCalendar && val.match(/^\d{8}$/gm)) ||
-      (hideDay && val.match(/^\d{6}$/gm)) ||
-      (hideYear && val.match(/^\d{4}$/gm))
+      (!simpleCalendar && strip.match(/^\d{8}$/gm)) ||
+      (hideDay && strip.match(/^\d{6}$/gm)) ||
+      (hideYear && strip.match(/^\d{4}$/gm))
     )
       return true;
-    else return false;
+    return false;
   };
 
   // Formats date string entered with `/` based on the type
   // of date field. Text is only replaced if text string does
   // not contain `/`'s already
   const formatDateInput = (val: string): string => {
-    if (numericDate(val))
+    if (isValidDateString(val))
       return moment(val, momentFormat.replaceAll('/', '')).format(momentFormat);
     else return val;
   };
@@ -96,6 +97,7 @@ export const DateInput: React.FC<DateInputProps> = ({
       const newDate = moment(val, momentFormat);
       if (newDate.isValid()) {
         setDate(newDate);
+        onChange(date);
       }
     }
   };
@@ -135,7 +137,13 @@ export const DateInput: React.FC<DateInputProps> = ({
           disabled={disabled}
           value={dateString}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            setDateString(formatDateInput(event.target.value));
+            const val = event.target.value;
+            const formatted = formatDateInput(val);
+
+            setDateString(formatted);
+            if (isValidDateString(val)) {
+              updateDate(formatted);
+            }
           }}
         />
       </CarbonDatePicker>
