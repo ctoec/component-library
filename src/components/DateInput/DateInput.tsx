@@ -8,10 +8,10 @@ import { FieldSet, FormStatusProps } from '..';
 import 'react-dates/lib/css/_datepicker.css';
 
 export type DateInputProps = {
-  onChange: (newDate: Moment | undefined | null) => void;
+  onChange: (newDate: Moment | null) => void;
   id: string;
   label: string;
-  defaultValue?: Date | Moment | null;
+  defaultValue?: Date | Moment;
   disabled?: boolean;
   optional?: boolean;
   status?: FormStatusProps;
@@ -45,44 +45,58 @@ export const DateInput: React.FC<DateInputProps> = ({
   } = hideField;
 
   const formatStrftime = `${hideMonth ? '' : 'm'}${hideDay ? '' : '/d'}${
-    hideYear ? '' : '/Y'
-  }`;
+    (!hideMonth || !hideDay) && !hideYear ? '/' : ''
+  }${hideYear ? '' : 'Y'}`;
 
   const momentFormat = `${hideMonth ? '' : 'MM'}${hideDay ? '' : '/DD'}${
-    hideYear ? '' : '/YYYY'
-  }`;
+    (!hideMonth || !hideDay) && !hideYear ? '/' : ''
+  }${hideYear ? '' : 'YYYY'}`;
 
-  const _defaultValue = defaultValue ? moment.utc(defaultValue) : undefined;
+  // const _defaultValue = defaultValue ? moment.utc(defaultValue) : undefined;
 
-  const [date, setDate] = useState<Moment | undefined | null>(
-    !disabled ? _defaultValue : null
+  const [date, setDate] = useState<Moment | null>(
+    !disabled && defaultValue ? moment.utc(defaultValue) : null
   );
 
-  const [dateString, setDateString] = useState<string | undefined>(
-    !disabled && _defaultValue ? _defaultValue.format(momentFormat) : undefined
-  );
+  // const [dateString, setDateString] = useState<string | undefined>(
+  //   !disabled && defaultValue
+  //     ? moment.utc(defaultValue).format(momentFormat)
+  //     : undefined
+  // );
 
-  useEffect(() => {
-    onChange(date);
-  }, [onChange, date]);
-
-  const placeHolder = `${momentFormat.toLocaleLowerCase()}`;
+  // useEffect(() => {
+  //   onChange(date);
+  // }, [onChange, date]);
 
   const simpleCalendar = hideMonth || hideDay || hideYear;
+
+  const numericDate = (val: string): boolean => {
+    if (
+      (!simpleCalendar && val.match(/^\d{8}$/gm)) ||
+      (hideDay && val.match(/^\d{6}$/gm)) ||
+      (hideYear && val.match(/^\d{4}$/gm))
+    )
+      return true;
+    else return false;
+  };
 
   // Formats date string entered with `/` based on the type
   // of date field. Text is only replaced if text string does
   // not contain `/`'s already
-  const formatDateInput = (date: string): string => {
-    if (
-      (!simpleCalendar && date.match(/^\d{8}$/gm)) ||
-      (hideDay && date.match(/^\d{6}$/gm)) ||
-      (hideYear && date.match(/^\d{4}$/gm))
-    )
-      return moment(date, momentFormat.replaceAll('/', '')).format(
-        momentFormat
-      );
-    else return date;
+  const formatDateInput = (val: string): string => {
+    if (numericDate(val))
+      return moment(val, momentFormat.replaceAll('/', '')).format(momentFormat);
+    else return val;
+  };
+
+  const updateDate = (val: string) => {
+    if (disabled) setDate(null);
+    else {
+      const newDate = moment(val, momentFormat);
+      if (newDate.isValid()) {
+        setDate(newDate);
+      }
+    }
   };
 
   return (
@@ -96,44 +110,31 @@ export const DateInput: React.FC<DateInputProps> = ({
       optional={optional}
     >
       <CarbonDatePicker
-        value={
-          !disabled && _defaultValue
-            ? _defaultValue.format(momentFormat)
-            : undefined
-        }
+        value={!disabled && date ? date.format(momentFormat) : undefined}
         datePickerType={hideCalendar || simpleCalendar ? 'simple' : 'single'}
         dateFormat={formatStrftime}
         minDate="01/01/1900"
         maxDate="01/01/2200"
         onChange={(d) => {
-          const newDate = moment(
+          updateDate(
             d[0].toLocaleDateString('en-US', {
               day: '2-digit',
               month: '2-digit',
               year: 'numeric',
-            }),
-            momentFormat
+            })
           );
-          if (newDate.isValid()) {
-            if (disabled) {
-              setDate(null);
-            } else {
-              setDate(newDate);
-            }
-          }
         }}
       >
         <CarbonDatePickerInput
-          placeholder={placeHolder}
+          placeholder={momentFormat.toLocaleLowerCase()}
           labelText="Date picker"
           hideLabel={true}
           id="date-picker-single"
           disabled={disabled}
-          value={dateString}
+          value={date ? date.format(momentFormat) : undefined}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            disabled
-              ? setDateString('')
-              : setDateString(formatDateInput(event.target.value));
+            if (numericDate(event.target.value))
+              updateDate(formatDateInput(event.target.value));
           }}
         />
       </CarbonDatePicker>

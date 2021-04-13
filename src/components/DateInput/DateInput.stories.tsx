@@ -46,6 +46,14 @@ storiesOf('Date input', module)
       <DateInput {...commonProps} hideField={{ year: true, calendar: true }} />
     );
   })
+  .add('Hidden field - month and day', () => {
+    return (
+      <DateInput
+        {...commonProps}
+        hideField={{ month: true, day: true, calendar: true }}
+      />
+    );
+  })
   .add('Success', () => {
     return <DateInput {...commonProps} status={success} />;
   })
