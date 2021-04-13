@@ -58,15 +58,15 @@ export const DateInput: React.FC<DateInputProps> = ({
     !disabled && defaultValue ? moment.utc(defaultValue) : null
   );
 
-  // const [dateString, setDateString] = useState<string | undefined>(
-  //   !disabled && defaultValue
-  //     ? moment.utc(defaultValue).format(momentFormat)
-  //     : undefined
-  // );
+  const [dateString, setDateString] = useState<string | undefined>(
+    !disabled && defaultValue
+      ? moment.utc(defaultValue).format(momentFormat)
+      : undefined
+  );
 
-  // useEffect(() => {
-  //   onChange(date);
-  // }, [onChange, date]);
+  useEffect(() => {
+    onChange(date);
+  }, [onChange, date]);
 
   const simpleCalendar = hideMonth || hideDay || hideYear;
 
@@ -131,10 +131,9 @@ export const DateInput: React.FC<DateInputProps> = ({
           hideLabel={true}
           id="date-picker-single"
           disabled={disabled}
-          value={date ? date.format(momentFormat) : undefined}
+          value={dateString}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            if (numericDate(event.target.value))
-              updateDate(formatDateInput(event.target.value));
+            setDateString(formatDateInput(event.target.value));
           }}
         />
       </CarbonDatePicker>
