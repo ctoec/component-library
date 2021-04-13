@@ -85,14 +85,6 @@ export const DateInput: React.FC<DateInputProps> = ({
     else return date;
   };
 
-  const formatCalendarValue = (date: string): string => {
-    console.log(`${date}/01/${moment().format('YYYY')}`);
-    if (simpleCalendar) return date;
-    if (date.includes('/')) return date;
-    if (date.length === 2) return `${date}/01/${moment().format('YYYY')}`;
-    return date;
-  };
-
   return (
     <FieldSet
       legend={label}
@@ -104,7 +96,11 @@ export const DateInput: React.FC<DateInputProps> = ({
       optional={optional}
     >
       <CarbonDatePicker
-        value={dateString ? formatCalendarValue(dateString) : ''}
+        value={
+          !disabled && _defaultValue
+            ? _defaultValue.format(momentFormat)
+            : undefined
+        }
         datePickerType={hideCalendar || simpleCalendar ? 'simple' : 'single'}
         dateFormat={formatStrftime}
         minDate="01/01/1900"
