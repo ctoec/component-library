@@ -46,6 +46,10 @@ export const DateInput: React.FC<DateInputProps> = ({
     !disabled ? _defaultValue : null
   );
 
+  const [inputDateString, setDateString] = useState<string | undefined>(
+    initialDate
+  );
+
   useEffect(() => {
     onChange(date);
   }, [onChange, date]);
@@ -124,10 +128,11 @@ export const DateInput: React.FC<DateInputProps> = ({
           hideLabel={true}
           id="date-picker-single"
           disabled={disabled}
+          value={inputDateString}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            event.target.value = disabled
-              ? ''
-              : formatDateInput(event.target.value);
+            disabled
+              ? setDateString('')
+              : setDateString(formatDateInput(event.target.value));
           }}
         />
       </CarbonDatePicker>
