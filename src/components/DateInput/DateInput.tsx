@@ -65,6 +65,7 @@ export const DateInput: React.FC<DateInputProps> = ({
   );
 
   useEffect(() => {
+    console.log('onchange date', date);
     onChange(date);
   }, [onChange, date]);
 
@@ -116,6 +117,7 @@ export const DateInput: React.FC<DateInputProps> = ({
         minDate="01/01/1900"
         maxDate="01/01/2200"
         onChange={(d) => {
+          console.log('carbon date picker');
           updateDate(
             d[0].toLocaleDateString('en-US', {
               day: '2-digit',
