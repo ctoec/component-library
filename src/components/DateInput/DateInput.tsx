@@ -37,23 +37,6 @@ export const DateInput: React.FC<DateInputProps> = ({
   hideLegend = false,
   hideField = {},
 }) => {
-  const _defaultValue = defaultValue ? moment.utc(defaultValue) : undefined;
-
-  const initialDate =
-    !disabled && _defaultValue ? _defaultValue.format('MM/DD/YYYY') : undefined;
-
-  const [date, setDate] = useState<Moment | undefined | null>(
-    !disabled ? _defaultValue : null
-  );
-
-  const [inputDateString, setDateString] = useState<string | undefined>(
-    initialDate
-  );
-
-  useEffect(() => {
-    onChange(date);
-  }, [onChange, date]);
-
   const {
     month: hideMonth,
     day: hideDay,
@@ -68,6 +51,23 @@ export const DateInput: React.FC<DateInputProps> = ({
   const momentFormat = `${hideMonth ? '' : 'MM'}${hideDay ? '' : '/DD'}${
     hideYear ? '' : '/YYYY'
   }`;
+
+  const _defaultValue = defaultValue ? moment.utc(defaultValue) : undefined;
+
+  // const initialDate =
+  //   !disabled && _defaultValue ? _defaultValue.format(momentFormat) : undefined;
+
+  const [date, setDate] = useState<Moment | undefined | null>(
+    !disabled ? _defaultValue : null
+  );
+
+  const [dateString, setDateString] = useState<string | undefined>(
+    !disabled && _defaultValue ? _defaultValue.format(momentFormat) : undefined
+  );
+
+  useEffect(() => {
+    onChange(date);
+  }, [onChange, date]);
 
   const placeHolder = `${momentFormat.toLocaleLowerCase()}`;
 
@@ -99,7 +99,7 @@ export const DateInput: React.FC<DateInputProps> = ({
       optional={optional}
     >
       <CarbonDatePicker
-        value={initialDate}
+        value={dateString}
         datePickerType={hideCalendar || simpleCalendar ? 'simple' : 'single'}
         dateFormat={formatStrftime}
         minDate="01/01/1900"
@@ -128,7 +128,7 @@ export const DateInput: React.FC<DateInputProps> = ({
           hideLabel={true}
           id="date-picker-single"
           disabled={disabled}
-          value={inputDateString}
+          value={dateString}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
             disabled
               ? setDateString('')
