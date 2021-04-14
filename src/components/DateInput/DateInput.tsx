@@ -127,15 +127,15 @@ export const DateInput: React.FC<DateInputProps> = ({
         dateFormat={formatStrftime}
         minDate="01/01/1900"
         maxDate="01/01/2200"
-        onChange={(d) => {
+        onChange={(d) =>
           updateDate(
             d[0]?.toLocaleDateString('en-US', {
               day: '2-digit',
               month: '2-digit',
               year: 'numeric',
             })
-          );
-        }}
+          )
+        }
       >
         <CarbonDatePickerInput
           placeholder={momentFormat.toLocaleLowerCase()}
@@ -144,9 +144,9 @@ export const DateInput: React.FC<DateInputProps> = ({
           id="date-picker-single"
           disabled={disabled}
           value={dateString}
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            updateDate(event.target.value);
-          }}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+            updateDate(event.target.value)
+          }
         />
       </CarbonDatePicker>
     </FieldSet>
