@@ -128,12 +128,13 @@ export const DateInput: React.FC<DateInputProps> = ({
         minDate="01/01/1900"
         maxDate="01/01/2200"
         onChange={(d) => {
-          const val = d[0]?.toLocaleDateString('en-US', {
-            day: '2-digit',
-            month: '2-digit',
-            year: 'numeric',
-          });
-          updateDate(val);
+          updateDate(
+            d[0]?.toLocaleDateString('en-US', {
+              day: '2-digit',
+              month: '2-digit',
+              year: 'numeric',
+            })
+          );
         }}
       >
         <CarbonDatePickerInput
