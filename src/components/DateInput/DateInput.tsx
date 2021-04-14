@@ -103,8 +103,11 @@ export const DateInput: React.FC<DateInputProps> = ({
   };
 
   const updateDate = (val: string) => {
-    if (disabled) setDate(null);
-    else {
+    if (disabled) {
+      console.log('disabled, setting null');
+      setDate(null);
+    } else {
+      console.log('not disabled, update date');
       const newDate = moment(val, momentFormat);
       if (newDate.isValid()) {
         setDate(newDate);
@@ -148,6 +151,7 @@ export const DateInput: React.FC<DateInputProps> = ({
           disabled={disabled}
           value={dateString}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+            console.log('datepickerinput on change', event);
             const val = event.target.value;
             const formatted = formatDateInput(val);
 
