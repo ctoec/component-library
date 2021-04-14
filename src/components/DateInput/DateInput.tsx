@@ -56,7 +56,7 @@ export const DateInput: React.FC<DateInputProps> = ({
     !disabled && defaultValue ? moment.utc(defaultValue) : null
   );
 
-  const [dateString, setDateString] = useState<string | undefined>(
+  const [dateString, setDateString] = useState<string>(
     !disabled && defaultValue
       ? moment.utc(defaultValue).format(momentFormat)
       : ''
@@ -94,10 +94,10 @@ export const DateInput: React.FC<DateInputProps> = ({
   };
 
   const updateDate = (val: string) => {
-    if (disabled) {
-      setDate(null);
-    } else {
-      const newDate = moment(val, momentFormat);
+    const formatted = formatDateInput(val);
+    setDateString(formatted);
+    if (isValidDateString(formatted)) {
+      const newDate = moment(formatted, momentFormat);
       if (newDate.isValid()) {
         setDate(newDate);
         onChange(date);
@@ -127,7 +127,7 @@ export const DateInput: React.FC<DateInputProps> = ({
             month: '2-digit',
             year: 'numeric',
           });
-          setDateString(val);
+          // setDateString(val);
           updateDate(val);
         }}
       >
@@ -139,12 +139,13 @@ export const DateInput: React.FC<DateInputProps> = ({
           disabled={disabled}
           value={dateString}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            const val = event.target.value;
-            const formatted = formatDateInput(val);
-            setDateString(formatted);
-            if (isValidDateString(val)) {
-              updateDate(formatted);
-            }
+            // const { value } = event.target;
+            updateDate(event.target.value);
+            // const formatted = formatDateInput(value);
+            // setDateString(formatted);
+            // if (isValidDateString(value)) {
+            //   updateDate(formatted);
+            // }
           }}
         />
       </CarbonDatePicker>
