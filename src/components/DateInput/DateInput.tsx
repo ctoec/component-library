@@ -52,7 +52,6 @@ export const DateInput: React.FC<DateInputProps> = ({
     (!hideMonth || !hideDay) && !hideYear ? '/' : ''
   }${hideYear ? '' : 'YYYY'}`;
 
-  // const _defaultValue = defaultValue ? moment.utc(defaultValue) : undefined;
   const initialDate =
     !disabled && defaultValue
       ? moment.utc(defaultValue).format('MM/DD/YYYY')
@@ -74,11 +73,6 @@ export const DateInput: React.FC<DateInputProps> = ({
       setDateString('');
     }
   }, [onChange, disabled]);
-
-  // useEffect(() => {
-  //   console.log('onchange date', date);
-  //   onChange(date);
-  // }, [onChange, date]);
 
   const simpleCalendar = hideMonth || hideDay || hideYear;
 
@@ -104,15 +98,13 @@ export const DateInput: React.FC<DateInputProps> = ({
 
   const updateDate = (val: string) => {
     if (disabled) {
-      console.log('disabled, setting null');
       setDate(null);
     } else {
-      console.log('not disabled, update date');
       const newDate = moment(val, momentFormat);
       if (newDate.isValid()) {
-        setDateString(val);
         setDate(newDate);
         onChange(date);
+        setDateString(val);
       }
     }
   };
@@ -134,7 +126,6 @@ export const DateInput: React.FC<DateInputProps> = ({
         minDate="01/01/1900"
         maxDate="01/01/2200"
         onChange={(d) => {
-          console.log('carbon date picker', d);
           updateDate(
             d[0].toLocaleDateString('en-US', {
               day: '2-digit',
@@ -152,13 +143,10 @@ export const DateInput: React.FC<DateInputProps> = ({
           disabled={disabled}
           value={dateString}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            console.log('datepickerinput on change', event);
             const val = event.target.value;
-            const formatted = formatDateInput(val);
 
-            setDateString(formatted);
             if (isValidDateString(val)) {
-              updateDate(formatted);
+              updateDate(formatDateInput(val));
             }
           }}
         />
