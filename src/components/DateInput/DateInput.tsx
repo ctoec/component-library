@@ -64,6 +64,7 @@ export const DateInput: React.FC<DateInputProps> = ({
 
   useEffect(() => {
     if (disabled) {
+      setDate(null);
       onChange(null);
       setDateString('');
     }
@@ -82,31 +83,35 @@ export const DateInput: React.FC<DateInputProps> = ({
     return false;
   };
 
-  // Formats date string entered with `/` based on the type
-  // of date field. Text is only replaced if text string does
-  // not contain `/`'s already.
-  // This is done because the carbon text input will parse
-  // a date string without /'s incorrectly.
-  const formatDateInput = (val: string): string => {
-    if (isValidDateString(val))
-      return moment(val, momentFormat.replaceAll('/', '')).format(momentFormat);
-    else return val;
-  };
+  // // Formats date string entered with `/` based on the type
+  // // of date field. Text is only replaced if text string does
+  // // not contain `/`'s already.
+  // // This is done because the carbon text input will parse
+  // // a date string without /'s incorrectly.
+  // const formatDateInput = (val: string): string => {
+  //   if (isValidDateString(val))
+  //     return moment(val, momentFormat.replaceAll('/', '')).format(momentFormat);
+  //   else return val;
+  // };
 
   const updateDate = (val: string | null) => {
     if (!val) {
       setDateString('');
       setDate(null);
-      onChange(date);
+      onChange(null);
     } else {
-      const formatted = formatDateInput(val);
-      setDateString(formatted);
-      if (isValidDateString(formatted)) {
-        const newDate = moment(formatted, momentFormat);
+      if (isValidDateString(val)) {
+        const newDate = moment(
+          val.replaceAll('/', ''),
+          momentFormat.replaceAll('/', '')
+        );
         if (newDate.isValid()) {
+          setDateString(newDate.format(momentFormat));
           setDate(newDate);
           onChange(date);
         }
+      } else {
+        setDateString(val);
       }
     }
   };
