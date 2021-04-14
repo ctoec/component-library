@@ -64,7 +64,7 @@ export const DateInput: React.FC<DateInputProps> = ({
   const [dateString, setDateString] = useState<string | undefined>(
     !disabled && defaultValue
       ? moment.utc(defaultValue).format(momentFormat)
-      : undefined
+      : ''
   );
 
   useEffect(() => {
@@ -104,7 +104,6 @@ export const DateInput: React.FC<DateInputProps> = ({
       if (newDate.isValid()) {
         setDate(newDate);
         onChange(date);
-        setDateString(val);
       }
     }
   };
@@ -126,13 +125,13 @@ export const DateInput: React.FC<DateInputProps> = ({
         minDate="01/01/1900"
         maxDate="01/01/2200"
         onChange={(d) => {
-          updateDate(
-            d[0].toLocaleDateString('en-US', {
-              day: '2-digit',
-              month: '2-digit',
-              year: 'numeric',
-            })
-          );
+          const val = d[0].toLocaleDateString('en-US', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+          });
+          setDateString(val);
+          updateDate(val);
         }}
       >
         <CarbonDatePickerInput
@@ -144,9 +143,10 @@ export const DateInput: React.FC<DateInputProps> = ({
           value={dateString}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
             const val = event.target.value;
-
+            const formatted = formatDateInput(val);
+            setDateString(formatted);
             if (isValidDateString(val)) {
-              updateDate(formatDateInput(val));
+              updateDate(formatted);
             }
           }}
         />
