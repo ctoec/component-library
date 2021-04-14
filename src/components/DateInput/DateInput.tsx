@@ -133,7 +133,6 @@ export const DateInput: React.FC<DateInputProps> = ({
             month: '2-digit',
             year: 'numeric',
           });
-          // setDateString(val);
           updateDate(val);
         }}
       >
@@ -145,13 +144,7 @@ export const DateInput: React.FC<DateInputProps> = ({
           disabled={disabled}
           value={dateString}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            // const { value } = event.target;
             updateDate(event.target.value);
-            // const formatted = formatDateInput(value);
-            // setDateString(formatted);
-            // if (isValidDateString(value)) {
-            //   updateDate(formatted);
-            // }
           }}
         />
       </CarbonDatePicker>
