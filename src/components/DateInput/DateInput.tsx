@@ -93,14 +93,20 @@ export const DateInput: React.FC<DateInputProps> = ({
     else return val;
   };
 
-  const updateDate = (val: string) => {
-    const formatted = formatDateInput(val);
-    setDateString(formatted);
-    if (isValidDateString(formatted)) {
-      const newDate = moment(formatted, momentFormat);
-      if (newDate.isValid()) {
-        setDate(newDate);
-        onChange(date);
+  const updateDate = (val: string | null) => {
+    if (!val) {
+      setDateString('');
+      setDate(null);
+      onChange(date);
+    } else {
+      const formatted = formatDateInput(val);
+      setDateString(formatted);
+      if (isValidDateString(formatted)) {
+        const newDate = moment(formatted, momentFormat);
+        if (newDate.isValid()) {
+          setDate(newDate);
+          onChange(date);
+        }
       }
     }
   };
@@ -122,7 +128,7 @@ export const DateInput: React.FC<DateInputProps> = ({
         minDate="01/01/1900"
         maxDate="01/01/2200"
         onChange={(d) => {
-          const val = d[0].toLocaleDateString('en-US', {
+          const val = d[0]?.toLocaleDateString('en-US', {
             day: '2-digit',
             month: '2-digit',
             year: 'numeric',
