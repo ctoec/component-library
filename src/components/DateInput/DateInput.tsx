@@ -110,6 +110,7 @@ export const DateInput: React.FC<DateInputProps> = ({
       console.log('not disabled, update date');
       const newDate = moment(val, momentFormat);
       if (newDate.isValid()) {
+        setDateString(val);
         setDate(newDate);
         onChange(date);
       }
