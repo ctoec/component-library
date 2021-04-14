@@ -84,7 +84,9 @@ export const DateInput: React.FC<DateInputProps> = ({
 
   // Formats date string entered with `/` based on the type
   // of date field. Text is only replaced if text string does
-  // not contain `/`'s already
+  // not contain `/`'s already.
+  // This is done because the carbon text input will parse
+  // a date string without /'s incorrectly.
   const formatDateInput = (val: string): string => {
     if (isValidDateString(val))
       return moment(val, momentFormat.replaceAll('/', '')).format(momentFormat);
