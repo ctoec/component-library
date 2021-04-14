@@ -100,16 +100,14 @@ export const DateInput: React.FC<DateInputProps> = ({
       setDate(null);
       onChange(null);
     } else {
-      if (isValidDateString(val)) {
-        const newDate = moment(
-          val.replaceAll('/', ''),
-          momentFormat.replaceAll('/', '')
-        );
-        if (newDate.isValid()) {
-          setDateString(newDate.format(momentFormat));
-          setDate(newDate);
-          onChange(date);
-        }
+      const newDate = moment(
+        val.replaceAll('/', ''),
+        momentFormat.replaceAll('/', '')
+      );
+      if (isValidDateString(val) && newDate.isValid()) {
+        setDateString(newDate.format(momentFormat));
+        setDate(newDate);
+        onChange(date);
       } else {
         setDateString(val);
       }
