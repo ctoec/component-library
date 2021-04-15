@@ -88,7 +88,7 @@ export const DateInput: React.FC<DateInputProps> = ({
       if (isValidDateString(val) && newDate.isValid()) {
         setDateString(newDate.format(momentFormat));
         setDate(newDate);
-        onChange(date);
+        onChange(newDate);
       } else {
         setDateString(val);
       }
