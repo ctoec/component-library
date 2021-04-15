@@ -62,14 +62,6 @@ export const DateInput: React.FC<DateInputProps> = ({
       : ''
   );
 
-  useEffect(() => {
-    if (disabled) {
-      setDate(null);
-      onChange(null);
-      setDateString('');
-    }
-  }, [onChange, disabled]);
-
   const simpleCalendar = hideMonth || hideDay || hideYear;
 
   const isValidDateString = (val: string): boolean => {
@@ -102,6 +94,10 @@ export const DateInput: React.FC<DateInputProps> = ({
       }
     }
   };
+
+  useEffect(() => {
+    if (disabled) updateDate(null);
+  }, [onChange, disabled]);
 
   return (
     <FieldSet
