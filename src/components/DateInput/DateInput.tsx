@@ -75,6 +75,8 @@ export const DateInput: React.FC<DateInputProps> = ({
     return false;
   };
 
+  // Set the three representations of "date": the date and dateString
+  // local states and the onChange external Form state
   const updateDate = (val: string | null) => {
     if (!val) {
       setDateString('');
@@ -113,6 +115,7 @@ export const DateInput: React.FC<DateInputProps> = ({
         value={date?.format(momentFormat)}
         datePickerType={hideCalendar || simpleCalendar ? 'simple' : 'single'}
         dateFormat={formatStrftime}
+        id={`${id}-picker`}
         minDate="01/01/1900"
         maxDate="01/01/2200"
         onChange={(d) =>
@@ -129,7 +132,7 @@ export const DateInput: React.FC<DateInputProps> = ({
           placeholder={momentFormat.toLocaleLowerCase()}
           labelText="Date picker"
           hideLabel={true}
-          id="date-picker-single"
+          id={`${id}-input`}
           disabled={disabled}
           value={dateString}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
