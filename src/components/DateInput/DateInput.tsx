@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import moment, { Moment } from 'moment';
-import { DayPickerSingleDateController } from 'react-dates';
-import { FieldSet, TextInput, FormStatusProps, Button } from '..';
-import { Calendar } from '../../assets/images';
+import {
+  DatePicker as CarbonDatePicker,
+  DatePickerInput as CarbonDatePickerInput,
+} from 'carbon-components-react';
+import { FieldSet, FormStatusProps } from '..';
 import 'react-dates/lib/css/_datepicker.css';
 
 export type DateInputProps = {
-  onChange: (newDate: Moment | undefined) => void;
+  onChange: (newDate: Moment | null) => void;
   id: string;
   label: string;
   defaultValue?: Date | Moment;
@@ -35,55 +37,6 @@ export const DateInput: React.FC<DateInputProps> = ({
   hideLegend = false,
   hideField = {},
 }) => {
-  const commonDateInputProps = {
-    className: 'oec-date-input__input margin-right-1 margin-top-0',
-    disabled: disabled,
-    inline: true,
-    // Pass an undefined message to make text input show correct outline color, but not a redundant message
-    status: status ? { ...status, message: undefined } : undefined,
-    optional,
-    hideOptionalText: true,
-  };
-
-  const _defaultValue = defaultValue ? moment.utc(defaultValue) : undefined;
-  const [date, setDate] = useState<Moment | undefined>(_defaultValue);
-
-  // Text input values
-  const [month, setMonth] = useState<number | string>(
-    _defaultValue?.format('M') || ''
-  );
-  const [day, setDay] = useState<number | string>(
-    _defaultValue?.format('D') || ''
-  );
-  const [year, setYear] = useState<number | string>(
-    _defaultValue?.format('YYYY') || ''
-  );
-
-  // Calendar
-  const [calendarOpen, setCalendarOpen] = useState<boolean>(false);
-  const [calendarDate, setCalendarDate] = useState<Moment | undefined>(
-    _defaultValue
-  );
-
-  useEffect(() => {
-    const newDate = moment.utc(`${year}-${month}-${day}`, 'YYYY-MM-DD');
-    if (newDate.isValid()) {
-      setDate(newDate);
-    }
-  }, [month, day, year]);
-
-  useEffect(() => {
-    if (!calendarDate) return;
-    setDate(calendarDate);
-    setMonth(calendarDate.format('M'));
-    setDay(calendarDate.format('D'));
-    setYear(calendarDate.format('YYYY'));
-  }, [calendarDate]);
-
-  useEffect(() => {
-    onChange(date);
-  }, [onChange, date]);
-
   const {
     month: hideMonth,
     day: hideDay,
@@ -91,98 +44,102 @@ export const DateInput: React.FC<DateInputProps> = ({
     calendar: hideCalendar,
   } = hideField;
 
+  const formatStrftime = `${hideMonth ? '' : 'm'}${hideDay ? '' : '/d'}${
+    (!hideMonth || !hideDay) && !hideYear ? '/' : ''
+  }${hideYear ? '' : 'Y'}`;
+
+  const momentFormat = `${hideMonth ? '' : 'MM'}${hideDay ? '' : '/DD'}${
+    (!hideMonth || !hideDay) && !hideYear ? '/' : ''
+  }${hideYear ? '' : 'YYYY'}`;
+
+  const [date, setDate] = useState<Moment | null>(
+    !disabled && defaultValue ? moment.utc(defaultValue) : null
+  );
+
+  const [dateString, setDateString] = useState<string>(
+    !disabled && defaultValue
+      ? moment.utc(defaultValue).format(momentFormat)
+      : ''
+  );
+
+  const simpleCalendar = hideMonth || hideDay || hideYear;
+
+  const isValidDateString = (val: string): boolean => {
+    const strip = val.replaceAll('/', '');
+    if (
+      (!simpleCalendar && strip.match(/^\d{8}$/gm)) ||
+      (hideDay && strip.match(/^\d{6}$/gm)) ||
+      (hideYear && strip.match(/^\d{4}$/gm))
+    )
+      return true;
+    return false;
+  };
+
+  // Set the three representations of "date": the date and dateString
+  // local states and the onChange external Form state
+  const updateDate = (val: string | null) => {
+    if (!val) {
+      setDateString('');
+      setDate(null);
+      onChange(null);
+    } else {
+      const newDate = moment(
+        val.replaceAll('/', ''),
+        momentFormat.replaceAll('/', '')
+      );
+      if (isValidDateString(val) && newDate.isValid()) {
+        setDateString(newDate.format(momentFormat));
+        setDate(newDate);
+        onChange(newDate);
+      } else {
+        setDateString(val);
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (disabled) updateDate(null);
+  }, [onChange, disabled]);
+
   return (
     <FieldSet
       legend={label}
       id={id}
       showLegend={!hideLegend}
-      hint={`For example: ${moment().format('M D YYYY')}`}
+      hint={`For example: ${moment().format(momentFormat)}`}
       className={className}
       status={status}
       optional={optional}
     >
-      <div className="flex-row flex-align-end usa-memorable-date">
-        {!hideMonth && (
-          <TextInput
-            value={month}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-              const newMonth = event.target.value;
-              setMonth(newMonth);
-            }}
-            id={`${id}-month`}
-            label="Month"
-            inputProps={{ min: 1, max: 12, type: 'number' }}
-            {...commonDateInputProps}
-          />
-        )}
-        {!hideDay && (
-          <TextInput
-            value={day}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-              const newDay = event.target.value;
-              setDay(newDay);
-            }}
-            id={`${id}-day`}
-            label="Day"
-            inputProps={{ min: 1, max: 31, type: 'number' }}
-            {...commonDateInputProps}
-          />
-        )}
-        {!hideYear && (
-          <TextInput
-            value={year}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-              const newYear = event.target.value;
-              setYear(newYear);
-            }}
-            id={`${id}-year`}
-            label="Year"
-            inputProps={{ min: 1000, max: 2200, type: 'number' }}
-            {...commonDateInputProps}
-          />
-        )}
-        {!hideCalendar && (
-          <div className="oec-calendar-dropdown oec-date-input__calendar-dropdown">
-            <Button
-              text={<Calendar className="oec-calendar-toggle__icon" />}
-              onClick={() => {
-                setCalendarOpen(!calendarOpen);
-              }}
-              title={`${calendarOpen ? 'close' : 'open'} calendar`}
-              className="oec-calendar-toggle oec-calendar-dropdown__toggle"
-            />
-            <div
-              className="oec-calendar-dropdown__calendar position-absolute z-top"
-              hidden={!calendarOpen}
-            >
-              <DayPickerSingleDateController
-                // Key forces re-render, which helps deal with bugs in this library-- see scss file
-                key={JSON.stringify({ calendarDate, calendarOpen })}
-                date={date || null}
-                onDateChange={(newDate) => {
-                  setCalendarDate(newDate || undefined);
-                }}
-                focused={calendarOpen}
-                // Annoyingly this does not do anything for keyboard users
-                onFocusChange={(f) => setCalendarOpen(f.focused || false)}
-                onBlur={() => setCalendarOpen(false)}
-                // TODO: IMPLEMENT ON TAB ONCE TYPES FOR THIS LIBRARY ARE UPDATED :/
-                // onTab={() => {}}
-                onOutsideClick={(e) => {
-                  const clickOnCalendarOrButton = e.target.closest(
-                    `#${id} .oec-calendar-dropdown`
-                  );
-                  // If a user clicks the button again, the button will handle closing it, and this would fire first and cause problems
-                  if (!clickOnCalendarOrButton) {
-                    setCalendarOpen(false);
-                  }
-                }}
-                initialVisibleMonth={() => date || moment()}
-              />
-            </div>
-          </div>
-        )}
-      </div>
+      <CarbonDatePicker
+        value={date?.format(momentFormat)}
+        datePickerType={hideCalendar || simpleCalendar ? 'simple' : 'single'}
+        dateFormat={formatStrftime}
+        id={`${id}-picker`}
+        minDate="01/01/1900"
+        maxDate="01/01/2200"
+        onChange={(d) =>
+          updateDate(
+            d[0]?.toLocaleDateString('en-US', {
+              day: '2-digit',
+              month: '2-digit',
+              year: 'numeric',
+            })
+          )
+        }
+      >
+        <CarbonDatePickerInput
+          placeholder={momentFormat.toLocaleLowerCase()}
+          labelText="Date picker"
+          hideLabel={true}
+          id={`${id}-input`}
+          disabled={disabled}
+          value={dateString}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+            updateDate(event.target.value)
+          }
+        />
+      </CarbonDatePicker>
     </FieldSet>
   );
 };

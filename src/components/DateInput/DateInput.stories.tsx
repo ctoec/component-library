@@ -36,9 +36,22 @@ storiesOf('Date input', module)
   .add('Disabled day input', () => {
     return <DateInput {...commonProps} disabled />;
   })
-  .add('Hidden field', () => {
+  .add('Hidden field - day', () => {
     return (
       <DateInput {...commonProps} hideField={{ day: true, calendar: true }} />
+    );
+  })
+  .add('Hidden field - year', () => {
+    return (
+      <DateInput {...commonProps} hideField={{ year: true, calendar: true }} />
+    );
+  })
+  .add('Hidden field - month and day', () => {
+    return (
+      <DateInput
+        {...commonProps}
+        hideField={{ month: true, day: true, calendar: true }}
+      />
     );
   })
   .add('Success', () => {
