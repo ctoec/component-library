@@ -41,6 +41,9 @@ export const Modal: React.FC<ModalProps> = ({
           maxHeight: '100%',
           overflowY: 'scroll',
         },
+        overlay: {
+          zIndex: 100000000
+        }
       }}
     >
       <div
