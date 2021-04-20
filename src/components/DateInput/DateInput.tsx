@@ -78,6 +78,7 @@ export const DateInput: React.FC<DateInputProps> = ({
   // Set the three representations of "date": the date and dateString
   // local states and the onChange external Form state
   const updateDate = (val: string | null) => {
+    console.log('update date: ', val);
     if (!val) {
       setDateString('');
       setDate(null);
