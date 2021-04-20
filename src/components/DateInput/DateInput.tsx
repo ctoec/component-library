@@ -89,6 +89,7 @@ export const DateInput: React.FC<DateInputProps> = ({
         momentFormat.replaceAll('/', '')
       );
       if (isValidDateString(val) && newDate.isValid()) {
+        console.log('valid date string');
         setDateString(newDate.format(momentFormat));
         setDate(newDate);
         onChange(newDate);
