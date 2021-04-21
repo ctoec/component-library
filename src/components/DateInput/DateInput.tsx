@@ -78,7 +78,6 @@ export const DateInput: React.FC<DateInputProps> = ({
   // Set the three representations of "date": the date and dateString
   // local states and the onChange external Form state
   const updateDate = (val: string | null) => {
-    console.log('update date: ', val);
     if (!val) {
       setDateString('');
       setDate(null);
@@ -106,14 +105,8 @@ export const DateInput: React.FC<DateInputProps> = ({
   }, [onChange, disabled]);
 
   useEffect(() => {
-    console.log('useeffect date changed', date);
     onChange(date);
-  }, [date]);
-
-  // useEffect(() => {
-  //   console.log('useeffect onchange changed', date);
-  //   onChange(date);
-  // }, [onChange]);
+  }, [onChange, date]);
 
   return (
     <FieldSet
