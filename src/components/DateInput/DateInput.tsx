@@ -82,16 +82,11 @@ export const DateInput: React.FC<DateInputProps> = ({
       setDateString('');
       setDate(null);
     } else {
-      const newDateSlash = moment(
+      const newDate = moment(
         val.replaceAll('/', ''),
         momentFormat.replaceAll('/', '')
       );
-      const newDate = moment.utc(
-        newDateSlash.format('YYYY-MM-DD'),
-        'YYYY-MM-DD'
-      );
       if (isValidDateString(val) && newDate.isValid()) {
-        console.log('valid date string');
         setDateString(newDate.format(momentFormat));
         setDate(newDate);
       } else {
