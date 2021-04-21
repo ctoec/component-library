@@ -56,6 +56,10 @@ export const DateInput: React.FC<DateInputProps> = ({
     !disabled && defaultValue ? moment.utc(defaultValue) : null
   );
 
+  const [calendarDate, setCalendarDate] = useState<Moment | null>(
+    !disabled && defaultValue ? moment.utc(defaultValue) : null
+  );
+
   const [dateString, setDateString] = useState<string>(
     !disabled && defaultValue
       ? moment.utc(defaultValue).format(momentFormat)
@@ -82,6 +86,7 @@ export const DateInput: React.FC<DateInputProps> = ({
     if (!val) {
       setDateString('');
       setDate(null);
+      setCalendarDate(null);
       onChange(null);
     } else {
       const newDateSlash = moment(
@@ -96,6 +101,7 @@ export const DateInput: React.FC<DateInputProps> = ({
         console.log('valid date string');
         setDateString(newDate.format(momentFormat));
         setDate(newDate);
+        setCalendarDate(newDate);
         onChange(newDate);
       } else {
         setDateString(val);
