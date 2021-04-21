@@ -110,10 +110,10 @@ export const DateInput: React.FC<DateInputProps> = ({
     onChange(date);
   }, [date]);
 
-  useEffect(() => {
-    console.log('useeffect onchange changed', date);
-    onChange(date);
-  }, [onChange]);
+  // useEffect(() => {
+  //   console.log('useeffect onchange changed', date);
+  //   onChange(date);
+  // }, [onChange]);
 
   return (
     <FieldSet
