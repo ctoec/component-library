@@ -87,7 +87,7 @@ export const DateInput: React.FC<DateInputProps> = ({
       setDateString('');
       setDate(null);
       setCalendarDate(null);
-      onChange(null);
+      // onChange(null);
     } else {
       const newDateSlash = moment(
         val.replaceAll('/', ''),
@@ -102,7 +102,7 @@ export const DateInput: React.FC<DateInputProps> = ({
         setDateString(newDate.format(momentFormat));
         setDate(newDate);
         setCalendarDate(newDate);
-        onChange(newDate);
+        // onChange(newDate);
       } else {
         setDateString(val);
       }
@@ -112,6 +112,10 @@ export const DateInput: React.FC<DateInputProps> = ({
   useEffect(() => {
     if (disabled) updateDate(null);
   }, [onChange, disabled]);
+
+  useEffect(() => {
+    onChange(date);
+  }, [onChange, date]);
 
   return (
     <FieldSet
