@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/ctoec/component-librarystatic/css/main.2ba39a53.chunk.css",
+    "main.js": "/ctoec/component-librarymain.460ce63672b15969a2eb.bundle.js",
+    "main.css.map": "/ctoec/component-librarystatic/css/main.2ba39a53.chunk.css.map",
+    "main.js.map": "/ctoec/component-librarymain.460ce63672b15969a2eb.bundle.js.map",
+    "runtime~main.js": "/ctoec/component-libraryruntime~main.460ce63672b15969a2eb.bundle.js",
+    "runtime~main.js.map": "/ctoec/component-libraryruntime~main.460ce63672b15969a2eb.bundle.js.map",
+    "vendors~main.css": "/ctoec/component-librarystatic/css/vendors~main.19b7558e.chunk.css",
+    "vendors~main.js": "/ctoec/component-libraryvendors~main.460ce63672b15969a2eb.bundle.js",
+    "vendors~main.css.map": "/ctoec/component-librarystatic/css/vendors~main.19b7558e.chunk.css.map",
+    "vendors~main.js.map": "/ctoec/component-libraryvendors~main.460ce63672b15969a2eb.bundle.js.map",
+    "iframe.html": "/ctoec/component-libraryiframe.html",
+    "precache-manifest.b312b77afbc16ac346883f2e9f9e9488.js": "/ctoec/component-libraryprecache-manifest.b312b77afbc16ac346883f2e9f9e9488.js",
+    "service-worker.js": "/ctoec/component-libraryservice-worker.js",
+    "static/media/index.scss": "/ctoec/component-librarystatic/media/youtube15.9d356b3b.svg",
+    "vendors~main.460ce63672b15969a2eb.bundle.js.LICENSE.txt": "/ctoec/component-libraryvendors~main.460ce63672b15969a2eb.bundle.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "runtime~main.460ce63672b15969a2eb.bundle.js",
+    "static/css/vendors~main.19b7558e.chunk.css",
+    "vendors~main.460ce63672b15969a2eb.bundle.js",
+    "static/css/main.2ba39a53.chunk.css",
+    "main.460ce63672b15969a2eb.bundle.js"
+  ]
+}
