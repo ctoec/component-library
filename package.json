@@ -64,6 +64,9 @@
     "typescript": "^3.9.0",
     "uswds": "2.9.0"
   },
+  "resolutions": {
+    "postcss": "^8.2.10"
+  },
   "eslintConfig": {
     "extends": "react-app"
   },
