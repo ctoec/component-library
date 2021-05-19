@@ -49,9 +49,6 @@
     "@types/carbon-components-react": "^7.26.0",
     "@types/pluralize": "^0.0.29",
     "@types/react-modal": "^3.10.6",
-    "carbon-components": "^10.25.0",
-    "carbon-components-react": "^7.25.0",
-    "carbon-icons": "^7.0.7",
     "dompurify": "^2.0.12",
     "html-react-parser": "^0.13.0",
     "lodash": "^4.17.15",
@@ -105,5 +102,10 @@
   },
   "engines": {
     "node": "^12"
+  },
+  "peerDependencies": {
+    "carbon-components": "^10.35.0",
+    "carbon-components-react": "^7.35.0",
+    "carbon-icons": "^7.0.7"
   }
 }
