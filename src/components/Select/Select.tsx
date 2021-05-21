@@ -93,7 +93,11 @@ export const Select: React.FC<SelectProps> = ({
           {unselectedText || '- Select -'}
         </option>
         {options.map((option) => (
-          <option value={option.value} key={`${id}-${option.value}-option`}>
+          <option
+            value={option.value}
+            key={`${id}-${option.value}-option`}
+            selected={option.value === selectedItem}
+          >
             {option.text}
           </option>
         ))}
