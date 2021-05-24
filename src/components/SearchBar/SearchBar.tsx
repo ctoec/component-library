@@ -15,11 +15,11 @@ export const SearchBar: React.FC<SearchProps> = ({
   labelText,
   placeholderText,
   onSearch,
-  className,
+  className = "",
 }) => {
   const [queryText, setQueryText] = useState("");
   return (
-    <div className={className || ""}>
+    <div className={className}>
       <Search
         id={id}
         labelText={labelText}
