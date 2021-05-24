@@ -98,7 +98,8 @@ export const Select: React.FC<SelectProps> = ({
             key={`${id}-${option.value}-option`}
             selected={option.value === selectedItem}
           >
-            {option.text} selected = {option.value === selectedItem}
+            {option.text} selected ={' '}
+            {option.value === selectedItem ? 'selected' : 'not selected'}
           </option>
         ))}
       </select>
