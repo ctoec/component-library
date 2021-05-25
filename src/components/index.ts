@@ -27,6 +27,7 @@ export * from './ProgressIndicator/ProgressIndicator';
 export * from './RadioButton/RadioButton';
 export * from './RadioButtonGroup/RadioButtonGroup';
 export * from './Select/Select';
+export * from './SearchBar/SearchBar';
 export * from './SideNav/SideNav';
 export * from './StepList/StepList';
 export * from './StepList/Step';
