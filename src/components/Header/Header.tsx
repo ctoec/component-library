@@ -2,35 +2,35 @@ import React, { useState, useEffect } from 'react';
 import { matchPath, useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
 import cx from 'classnames';
-import { NavLink, NavLinkProps } from './NavLink';
 import closeIcon from 'uswds/src/img/close.svg';
-import { NavDropdownProps, NavDropdown } from './NavDropdown';
+import { HeaderNavigation, HeaderMenuItem, HeaderMenu } from 'carbon-components-react';
 
 export type HeaderProps = {
   primaryTitle: string;
   secondaryTitle?: string;
-  navItems: (NavLinkProps | NavDropdownProps)[];
-  showPrimaryNavItems?: boolean;
+  navItems: HeaderItemProps[];
   loginPath?: string;
   logoutPath?: string;
   userFirstName?: string;
 };
 
-const setActiveStateOfNavLink = function (
-  item: NavLinkProps | NavDropdownProps,
+export type HeaderItemProps = {
+  label: string;
+  href?: string;
+  dropdownItems?: ({ label: string; path: string; target?: string; })[];
+}
+
+const isActiveNavItem = function (
+  item: HeaderItemProps,
   index: number,
   path: string
 ) {
-  let active: boolean;
-
   if (index === 0 && path === '/') {
     // By convention, the first section should be active when at the root path
-    active = true;
+    return true;
   } else {
-    active = !!matchPath(path, { path: item.path });
+    return !!matchPath(path, { path: item.href });
   }
-
-  return { ...item, active };
 };
 
 export const Header: React.FC<HeaderProps> = ({
@@ -39,7 +39,6 @@ export const Header: React.FC<HeaderProps> = ({
   navItems,
   logoutPath = '/logout',
   userFirstName,
-  showPrimaryNavItems = true,
 }) => {
   const [mobileMenuIsVisible, setMobileMenuIsVisible] = useState(false);
   const location = useLocation();
@@ -58,16 +57,6 @@ export const Header: React.FC<HeaderProps> = ({
   useEffect(() => {
     hideMenu();
   }, [location]);
-
-  const primaryNavItems = navItems
-    .filter((item) => item.type === 'primary')
-    .map((item, index) =>
-      setActiveStateOfNavLink(item, index, location.pathname)
-    );
-
-  const secondaryNavItems = navItems.filter(
-    (item) => item.type === 'secondary'
-  );
 
   return (
     <div
@@ -128,29 +117,37 @@ export const Header: React.FC<HeaderProps> = ({
             <button className="usa-nav__close" onClick={hideMenu}>
               <img src={closeIcon} alt="close" />
             </button>
-            {showPrimaryNavItems && (
-              <ul className="usa-nav__primary usa-accordion">
-                {primaryNavItems.map((item, index) =>
-                  item.children ? (
-                    <NavDropdown {...item} key={index} />
-                  ) : (
-                    <NavLink {...item} key={index} />
-                  )
-                )}
-              </ul>
-            )}
             <div className="usa-nav__secondary usa-nav__secondary--extended">
               <ul className="usa-nav__secondary-links">
-                {secondaryNavItems.map((item, index) =>
-                  item.children ? (
-                    <NavDropdown {...item} key={index} />
-                  ) : (
-                    <NavLink {...item} key={index} />
-                  )
-                )}
-                {userFirstName && (
-                  <NavLink type="secondary" text="Log out" path={logoutPath} />
-                )}
+                <HeaderNavigation>
+                  {navItems.map((item, index) =>
+                    item.dropdownItems ? (
+                      <HeaderMenu menuLinkName={item.label} key={index}>
+                        {item.dropdownItems.map((dropdown, dropIdx) => (
+                          <HeaderMenuItem
+                            href={dropdown.path}
+                            target={dropdown.target}
+                            key={index.toString + '-' + dropIdx.toString()}
+                          >
+                            {dropdown.label}
+                          </HeaderMenuItem>
+                        ))}
+                      </HeaderMenu>
+                    ) : (
+                      <HeaderMenuItem href={item.href} key={index}>
+                        <span className={
+                          cx("", isActiveNavItem(item, index, location.pathname) ? "active-page" : "")
+                        }>
+                          {item.label}</span>
+                      </HeaderMenuItem>
+                    )
+                  )}
+                  {userFirstName && (
+                    <HeaderMenuItem href={logoutPath}>
+                      Log out
+                    </HeaderMenuItem>
+                  )}
+                </HeaderNavigation>
               </ul>
             </div>
           </div>
