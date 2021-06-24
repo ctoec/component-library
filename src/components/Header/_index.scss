@@ -1,6 +1,13 @@
 /* Carbon styling modifications */
 .bx--header__nav::before {
-  border: none !important;
+  // This is hacky and weird, but Carbon INSISTS on creating a
+  // vertical bar before the start of its headers, and will only
+  // concede to let it fade 
+  display: none !important;
+  background-color: none !important;
+  width: 0rem !important;
+  height: 0rem !important;
+  content: none !important;
 }
 
 .bx--text-truncate--end {
