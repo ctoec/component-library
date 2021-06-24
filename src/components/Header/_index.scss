@@ -2,7 +2,8 @@
 .bx--header__nav::before {
   // This is hacky and weird, but Carbon INSISTS on creating a
   // vertical bar before the start of its headers, and will only
-  // concede to let it fade 
+  // concede to let it fade if we override literally all the
+  // style settings that make it display
   display: none !important;
   background-color: none !important;
   width: 0rem !important;
