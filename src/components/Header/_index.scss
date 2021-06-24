@@ -1,4 +1,8 @@
 /* Carbon styling modifications */
+.bx--header__nav::before {
+  border: none !important;
+}
+
 .bx--text-truncate--end {
   font-weight: bold !important;
 }

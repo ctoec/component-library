@@ -118,7 +118,7 @@ export const Header: React.FC<HeaderProps> = ({
               <img src={closeIcon} alt="close" />
             </button>
             <div className="usa-nav__secondary usa-nav__secondary--extended">
-              <ul className="usa-nav__secondary-links">
+              <div className="usa-nav__secondary-links">
                 <HeaderNavigation>
                   {navItems.map((item, index) =>
                     item.dropdownItems ? (
@@ -148,7 +148,7 @@ export const Header: React.FC<HeaderProps> = ({
                     </HeaderMenuItem>
                   )}
                 </HeaderNavigation>
-              </ul>
+              </div>
             </div>
           </div>
         </nav>
