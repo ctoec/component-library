@@ -22,15 +22,9 @@ export type HeaderItemProps = {
 
 const isActiveNavItem = function (
   item: HeaderItemProps,
-  index: number,
   path: string
 ) {
-  if (index === 0 && path === '/') {
-    // By convention, the first section should be active when at the root path
-    return true;
-  } else {
     return !!matchPath(path, { path: item.href });
-  }
 };
 
 export const Header: React.FC<HeaderProps> = ({
@@ -136,7 +130,7 @@ export const Header: React.FC<HeaderProps> = ({
                     ) : (
                       <HeaderMenuItem href={item.href} key={index}>
                         <span className={
-                          cx("", isActiveNavItem(item, index, location.pathname) ? "active-page" : "")
+                          cx("", isActiveNavItem(item, location.pathname) ? "active-page" : "")
                         }>
                           {item.label}</span>
                       </HeaderMenuItem>
