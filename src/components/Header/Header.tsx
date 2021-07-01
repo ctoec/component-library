@@ -22,15 +22,9 @@ export type HeaderItemProps = {
 
 const isActiveNavItem = function (
   item: HeaderItemProps,
-  index: number,
   path: string
 ) {
-  if (index === 0 && path === '/') {
-    // By convention, the first section should be active when at the root path
-    return true;
-  } else {
     return !!matchPath(path, { path: item.href });
-  }
 };
 
 export const Header: React.FC<HeaderProps> = ({
@@ -118,7 +112,7 @@ export const Header: React.FC<HeaderProps> = ({
               <img src={closeIcon} alt="close" />
             </button>
             <div className="usa-nav__secondary usa-nav__secondary--extended">
-              <ul className="usa-nav__secondary-links">
+              <div className="usa-nav__secondary-links">
                 <HeaderNavigation>
                   {navItems.map((item, index) =>
                     item.dropdownItems ? (
@@ -136,7 +130,7 @@ export const Header: React.FC<HeaderProps> = ({
                     ) : (
                       <HeaderMenuItem href={item.href} key={index}>
                         <span className={
-                          cx("", isActiveNavItem(item, index, location.pathname) ? "active-page" : "")
+                          cx("", isActiveNavItem(item, location.pathname) ? "active-page" : "")
                         }>
                           {item.label}</span>
                       </HeaderMenuItem>
@@ -148,7 +142,7 @@ export const Header: React.FC<HeaderProps> = ({
                     </HeaderMenuItem>
                   )}
                 </HeaderNavigation>
-              </ul>
+              </div>
             </div>
           </div>
         </nav>
